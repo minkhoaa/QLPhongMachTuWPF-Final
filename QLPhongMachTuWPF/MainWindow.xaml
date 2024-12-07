@@ -14,8 +14,195 @@
          TextOptions.TextRenderingMode="Auto"
          Background="{DynamicResource MaterialDesignPaper}"
          FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="720" Width="1080"
+        xmlns:vm="clr-namespace:QLPhongMachTuWPF.ViewModel">
+
+    <Window.DataContext>
+        <vm:Navigation/>
+    </Window.DataContext>
+
+
     <Grid>
-      
+        <!-- Định nghĩa hai cột cho Grid -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="SidebarColumn" Width="200"/>
+            <!-- Cột cho thanh điều hướng -->
+            <ColumnDefinition Width="*"/>
+            <!-- Cột cho nội dung chính -->
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Border>
+                <Border.Background>
+                    <LinearGradientBrush>
+                        <GradientStop Color="#1ca7ec" Offset="0.0"/>
+                        <GradientStop Color="#1f2f98" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+            <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 20 0 0">
+                <Image x:Name="img" Source="/Images/medical.png" Width="95" Height="90" RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-0.733"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <TextBlock x:Name="text1" Text="Good Vibes" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Foreground="White" FontWeight="Bold" FontFamily="Cambria" FontStyle="Italic"></TextBlock>
+                <TextBlock x:Name="text2" Text="Good Health" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Foreground="White" FontWeight="Bold" FontFamily="Cambria" FontStyle="Italic"></TextBlock>
+
+                <!-- Nút điều hướng: Homepage -->
+                <Button Background="Transparent" BorderThickness="0" HorizontalContentAlignment="Left" Margin="42,0,0,0" Padding="0,15,0,0" Command="{Binding HomePageCommand}">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="🏠" FontSize="11" Foreground="White" Margin="1,0,5,0"/>
+                        <TextBlock Text="Homepage" FontSize="14" Foreground="White" FontWeight="Bold"/>
+
+                    </StackPanel>
+                </Button>
+
+                <!-- TreeView cho các mục điều hướng -->
+                <TreeView Background="Transparent" BorderThickness="0" HorizontalContentAlignment="Left" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                    <TreeView.ItemContainerStyle>
+                        <Style TargetType="TreeViewItem">
+                            <Setter Property="Margin" Value="0,5"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="TreeViewItem">
+                                        <StackPanel>
+                                            <!-- Header hiển thị -->
+                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Background="Transparent">
+                                                <ContentPresenter ContentSource="Header"/>
+                                                <!-- ToggleButton (mũi tên mở rộng) ẩn khi không mở rộng -->
+                                                <ToggleButton x:Name="Expander" Visibility="Collapsed"/>
+                                            </StackPanel>
+
+                                            <!-- Presenter hiển thị các mục con -->
+                                            <ItemsPresenter x:Name="ItemsHost" Margin="10,0,0,0"/>
+                                        </StackPanel>
+
+                                        <ControlTemplate.Triggers>
+                                            <!-- Trigger để hiển thị ToggleButton (mũi tên) khi mở rộng -->
+                                            <Trigger Property="IsExpanded" Value="True">
+                                                <Setter TargetName="Expander" Property="Visibility" Value="Visible"/>
+                                            </Trigger>
+
+                                            <Trigger Property="IsExpanded" Value="False">
+                                                <Setter TargetName="Expander" Property="Visibility" Value="Collapsed"/>
+                                                <Setter TargetName="ItemsHost" Property="Visibility" Value="Collapsed"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </TreeView.ItemContainerStyle>
+
+
+                    <TreeView MinWidth="240">
+
+                        <!-- TreeViewItem chính cho Management -->
+                        <TreeViewItem x:Name="management" Header="👥 Management" Foreground="White" FontWeight="Bold" FontSize="13">
+                            <!-- TreeViewItem cho Patients -->
+                            <TreeViewItem>
+                                <TreeViewItem.Header>
+                                    <!-- Đặt Button vào Header để sử dụng Command -->
+                                    <Button Background="Transparent" BorderThickness="0" Command="{Binding PatientsCommand}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="👨‍⚕️ Patients" Foreground="White"/>
+                                        </StackPanel>
+                                    </Button>
+                                </TreeViewItem.Header>
+                            </TreeViewItem>
+
+                            <!-- TreeViewItem cho Staffs -->
+                            <TreeViewItem>
+                                <TreeViewItem.Header>
+                                    <!-- Đặt Button vào Header để sử dụng Command -->
+                                    <Button Background="Transparent" BorderThickness="0" Command="{Binding StaffsCommand}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="👩‍💼 Staffs" Foreground="White"/>
+                                        </StackPanel>
+                                    </Button>
+                                </TreeViewItem.Header>
+                            </TreeViewItem>
+                        </TreeViewItem>
+
+
+                        <!-- TreeViewItem chính cho Medicine -->
+                        <TreeViewItem x:Name="medicine" Header="💊 Medicine" Foreground="White" FontWeight="Bold" FontSize="13">
+                            <!-- TreeViewItem cho Diagnosis -->
+                            <TreeViewItem>
+                                <TreeViewItem.Header>
+                                    <!-- Đặt Button vào Header để sử dụng Command -->
+                                    <Button Background="Transparent" BorderThickness="0" Command="{Binding DiagnosisCommand}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="🧑‍⚕️ Diagnosis" Foreground="White"/>
+                                        </StackPanel>
+                                    </Button>
+                                </TreeViewItem.Header>
+                            </TreeViewItem>
+
+                            <!-- TreeViewItem cho List -->
+                            <TreeViewItem>
+                                <TreeViewItem.Header>
+                                    <!-- Đặt Button vào Header để sử dụng Command -->
+                                    <Button Background="Transparent" BorderThickness="0" Command="{Binding ListsCommand}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="📋 List" Foreground="White"/>
+                                        </StackPanel>
+                                    </Button>
+                                </TreeViewItem.Header>
+                            </TreeViewItem>
+                        </TreeViewItem>
+
+                    </TreeView>
+                </TreeView>
+
+                <!-- Các nút điều hướng khác -->
+                <Button Background="Transparent" BorderThickness="0" HorizontalContentAlignment="Left" Margin="42 0 0 0"  Padding="0,0,0,15" Command="{Binding ManageAppointmentCommand}">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="🗓" FontSize="11" Foreground="White" Margin="1,0,7,0"/>
+                        <TextBlock Text="Appointment" FontSize="14" Foreground="White" FontWeight="Bold"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Background="Transparent" BorderThickness="0" HorizontalContentAlignment="Left"  Margin="43 0 0 0" Padding="0,0,0,15" Width="190" Command="{Binding InvoiceCommand}">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="📃" FontSize="11" Foreground="White" Margin="1,0,7,0"/>
+                        <TextBlock Text="Invoice" FontSize="14" Foreground="White" FontWeight="Bold"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+
+            <!-- Nút điều hướng: Log out -->
+            <Button x:Name="logout" Background="Transparent" BorderThickness="0" VerticalAlignment="Bottom" Padding="5,0,0,10" Margin="0 0 25 10" HorizontalAlignment="Right" Width="130">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock  Text="🔓" FontSize="11" Foreground="White" Margin="0,0,10,0"/>
+                    <TextBlock Text="Log out" FontSize="14" Foreground="White" FontWeight="Bold"/>
+                </StackPanel>
+            </Button>
+
+        </Grid>
+
+        <!-- Nội dung chính nằm ở cột thứ hai -->
+        <Grid Grid.Column="1">
+            <Border CornerRadius="0 10 10 0" Background="#eff2f7">
+
+            </Border>
+            <ContentControl x:Name="Pages" Content="{Binding CurrentView}"/>
+
+            <Button Margin="20 28 0 35" Style="{StaticResource ListBtn}" Grid.Row="0" Click="ToggleSidebar_Click">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Images/burger-menu.png" Width="25" Height="25" Panel.ZIndex="1"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+
+
+        </Grid>
     </Grid>
 </Window>
