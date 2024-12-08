@@ -189,12 +189,10 @@
 
         <!-- Nội dung chính nằm ở cột thứ hai -->
         <Grid Grid.Column="1">
-            <Border CornerRadius="0 10 10 0" Background="#eff2f7">
-
-            </Border>
+          
             <ContentControl x:Name="Pages" Content="{Binding CurrentView}"/>
 
-            <Button Margin="20 28 0 35" Style="{StaticResource ListBtn}" Grid.Row="0" Click="ToggleSidebar_Click">
+            <Button Margin="20 28 0 35" Style="{StaticResource ListBtn}"  Click="ToggleSidebar_Click">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/Images/burger-menu.png" Width="25" Height="25" Panel.ZIndex="1"/>

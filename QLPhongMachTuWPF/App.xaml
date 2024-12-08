@@ -9,7 +9,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="DeepPurple" SecondaryColor="Lime" />
+                <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="Blue" SecondaryColor="Lime" />
                 <ResourceDictionary Source="ResourceXAML/UserControlStyles.xaml"/>
                 <ResourceDictionary Source="ViewModel/DataTemplate.xaml"/>
                 <ResourceDictionary Source="ResourceXAML/Page.xaml"/>
