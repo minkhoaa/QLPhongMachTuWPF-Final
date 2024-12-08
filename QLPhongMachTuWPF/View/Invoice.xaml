@@ -42,10 +42,8 @@
             </StackPanel>
         </Button>
 
-        <TextBlock Text="Invoice"  Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 10 0 10" Foreground="Black" HorizontalAlignment="Center"/>
 
-
-        <DataGrid Grid.Row="1" Background="#eeeeee" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle2}" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="patientsDatagrid" Margin="0,62,0,0"
+        <DataGrid Grid.Row="1" Background="#eeeeee" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle2}" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="patientsDatagrid" Margin="0,0,0,10"
           HorizontalScrollBarVisibility="Disabled" Grid.RowSpan="2" Width="870">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Invoice ID" IsReadOnly="True" CanUserResize="False" Width="0.8*" Binding="{Binding PatientID}" />
