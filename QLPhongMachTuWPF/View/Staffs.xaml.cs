@@ -24,5 +24,11 @@ namespace QLPhongMachTuWPF.View
         {
             InitializeComponent();
         }
+        private void AddStaffButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Mở cửa sổ AddPatientWindow
+            AddStaff addStaffWindow = new AddStaff();
+            addStaffWindow.ShowDialog(); 
+        }
     }
 }

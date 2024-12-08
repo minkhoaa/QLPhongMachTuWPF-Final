@@ -24,5 +24,11 @@ namespace QLPhongMachTuWPF.View
         {
             InitializeComponent();
         }
+        private void AddListButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Mở cửa sổ AddPatientWindow
+            AddMedicineList addMedicineWindow = new AddMedicineList();
+            addMedicineWindow.ShowDialog();
+        }
     }
 }

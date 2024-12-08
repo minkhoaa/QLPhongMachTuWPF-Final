@@ -39,5 +39,11 @@ namespace QLPhongMachTuWPF.View
             public string Gender { get; set; }
             public string Status { get; set; }
         }
+        private void AddPatientButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Mở cửa sổ AddPatientWindow
+            AddPatient addPatientWindow = new AddPatient();
+            addPatientWindow.ShowDialog(); 
+        }
     }
 }
