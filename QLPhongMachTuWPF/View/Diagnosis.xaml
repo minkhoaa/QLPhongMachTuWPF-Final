@@ -37,7 +37,7 @@
             <Image Source="/Images/search.png" Width="20" Height="20" HorizontalAlignment="Right" Margin="5"/>
         </Grid>
 
-        <Button Grid.Row="0" Margin="0 10 40 10"  Style="{StaticResource addBtn}">
+        <Button Grid.Row="0" Margin="0 10 40 10"  Style="{StaticResource addBtn}" Click="AddDiagnosisButton_Click">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Add Medicine" FontSize="15" FontWeight="Bold"/>
             </StackPanel>

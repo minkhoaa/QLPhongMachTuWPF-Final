@@ -25,7 +25,7 @@ namespace QLPhongMachTuWPF.View
         }
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current?.Shutdown();
+            this.Close();
         }
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
@@ -38,7 +38,7 @@ namespace QLPhongMachTuWPF.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Add!");
+            MessageBox.Show("Added!");
         }
     }
 }

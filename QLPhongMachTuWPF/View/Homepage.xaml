@@ -8,6 +8,6 @@
              d:DesignHeight="720" d:DesignWidth="880"
              Style="{StaticResource Page_Style}">
     <Grid Background="White">
-        
+        <Image Source="/Images/background.jpg" Stretch="UniformToFill"/>
     </Grid>
 </UserControl>
