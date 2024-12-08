@@ -27,6 +27,7 @@ namespace QLPhongMachTuWPF
 
             InitializeComponent();
             
+            
         }
         private void ToggleSidebar_Click(object sender, RoutedEventArgs e)
         {

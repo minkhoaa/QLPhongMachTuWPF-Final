@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QLPhongMachTuWPF.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,7 @@ namespace QLPhongMachTuWPF.View
     /// </summary>
     public partial class Staffs : UserControl
     {
+        DBSupport db;  
         public Staffs()
         {
             InitializeComponent();
@@ -29,6 +31,10 @@ namespace QLPhongMachTuWPF.View
             // Mở cửa sổ AddPatientWindow
             AddStaff addStaffWindow = new AddStaff();
             addStaffWindow.ShowDialog(); 
+        }
+        void LoadStaff()
+        {
+            
         }
     }
 }

@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:QLPhongMachTuWPF.ViewModel"
         mc:Ignorable="d"
         x:Name="FormLogin"
+        DataContext="{StaticResource MainVM}"
 Title="Login" Height="450" Width="800"
 Closing="FormLogin_Closing"
 WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
