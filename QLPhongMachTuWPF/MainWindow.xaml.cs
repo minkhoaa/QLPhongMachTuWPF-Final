@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using QLPhongMachTuWPF.View;
 
 namespace QLPhongMachTuWPF
 {
@@ -25,6 +26,7 @@ namespace QLPhongMachTuWPF
         {
 
             InitializeComponent();
+            
         }
         private void ToggleSidebar_Click(object sender, RoutedEventArgs e)
         {

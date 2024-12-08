@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="720" d:DesignWidth="880"
              Style="{StaticResource Page_Style}">
-    <Grid>
-        <Image Source="/Images/background.jpg" Stretch="UniformToFill"/>
+    <Grid Background="White">
+        
     </Grid>
 </UserControl>
