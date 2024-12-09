@@ -116,6 +116,7 @@
                 <Setter Property="GridLinesVisibility" Value="None"/>
                 <Setter Property="HorizontalContentAlignment" Value="Center"/>
                 <Setter Property="HorizontalAlignment" Value="Center"/>
+                
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type DataGrid}">
@@ -172,6 +173,7 @@
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
                 <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
                 <Setter Property="Margin" Value="15 0"/>
+                
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type DataGridCell}">
@@ -179,8 +181,11 @@
                                 <ContentPresenter 
   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
   VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
-  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                    
+                                </ContentPresenter>
                             </Border>
+                            
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
@@ -207,6 +212,7 @@
                 <Setter Property="Background" Value="White"/>
                 <Setter Property="Margin" Value="0 4 0 0"/>
                 <Setter Property="SnapsToDevicePixels" Value="true"/>
+                <Setter Property="Height" Value="auto"/>
                 <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
                 <Setter Property="ValidationErrorTemplate">
                     <Setter.Value>

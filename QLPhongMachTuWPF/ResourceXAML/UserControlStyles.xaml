@@ -183,4 +183,9 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style x:Key="textBlockDatagrid" TargetType="TextBlock">
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="TextAlignment" Value="Center" />
+    </Style>
 </ResourceDictionary>

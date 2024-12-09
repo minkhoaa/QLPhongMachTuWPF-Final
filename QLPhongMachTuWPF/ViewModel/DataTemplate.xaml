@@ -15,7 +15,6 @@
         <view:Staffs/>
     </DataTemplate>
 
-
     <DataTemplate DataType="{x:Type vm:ManageAppointmentsVM}">
         <view:ManageAppointments/>
     </DataTemplate>

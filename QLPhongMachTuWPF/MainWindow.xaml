@@ -55,7 +55,7 @@
                 <TextBlock x:Name="text2" Text="Good Health" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Foreground="White" FontWeight="Bold" FontFamily="Cambria" FontStyle="Italic"></TextBlock>
 
                 <!-- Nút điều hướng: Homepage -->
-                <Button Background="Transparent" BorderThickness="0" HorizontalContentAlignment="Left" Margin="42,0,0,0" Padding="0,15,0,0" Command="{Binding HomePageCommand}">
+                <Button Background="Transparent" BorderThickness="0" HorizontalContentAlignment="Left" Margin="42,50,0,0" Padding="0,15,0,0" Command="{Binding HomePageCommand}">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <TextBlock Text="🏠" FontSize="11" Foreground="White" Margin="1,0,5,0"/>
                         <TextBlock Text="Homepage" FontSize="14" Foreground="White" FontWeight="Bold"/>
