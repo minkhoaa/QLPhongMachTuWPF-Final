@@ -3,13 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:QLPhongMachTuWPF.ViewModel"
+          xmlns:vm="clr-namespace:QLPhongMachTuWPF.ViewModel"
+        xmlns:local="clr-namespace:QLPhongMachTuWPF.ViewModel" d:DataContext="{d:DesignInstance Type=local:LoginViewModel}"
         mc:Ignorable="d"
+        DataContext="{StaticResource LoginVM}"
         x:Name="FormLogin"
-        DataContext="{StaticResource MainVM}"
-Title="Login" Height="450" Width="800"
-Closing="FormLogin_Closing"
-WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
+         xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
+  
+        Title="Login" Height="450" Width="800"
+       
+        WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -96,6 +99,7 @@ WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True
                         <TextBox x:Name="txtUser" TextChanged="txtUser_TextChanged" 
                              FontSize="14"
                              Grid.Column="1"
+                             Text="{Binding Username}"
                              Margin="10,0,0,0"
                              Foreground="Black"
                              BorderBrush="Transparent"
@@ -115,16 +119,29 @@ WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True
                                 Panel.ZIndex="1"
                                 Margin="10 0 0 0"
                                 Foreground="#696969"/>
-                        <PasswordBox x:Name="txtPass" PasswordChanged="txtPass_TextChanged" FontSize="14"
+                        <PasswordBox x:Name="txtPass"  FontSize="14"
                                 Grid.Column="1"
                                 Margin="10 0 0 0"
                                 Foreground="Black"
                                 BorderBrush="Transparent"
-                                BorderThickness="0"/>
+                                BorderThickness="0"
+                          >
+                            <i:Interaction.Triggers >
+                                <i:EventTrigger EventName="PasswordChanged">
+                                    <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}" 
+                                                       CommandParameter="{Binding ElementName=txtPass}">
+
+                                    </i:InvokeCommandAction>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </PasswordBox>
+
                     </Grid>
                 </Border>
 
-                <Button Background="#1d6fc1"
+                <Button x:Name="btnLogin" Background="#1d6fc1"
+                    Command="{Binding LoginCommand}"
+                    CommandParameter="{Binding ElementName=FormLogin}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Width="170"
                     ToolTip="Resource name: MaterialDesignRaisedButton" Click="Button_Click">

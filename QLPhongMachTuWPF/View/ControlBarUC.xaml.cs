@@ -1,5 +1,4 @@
-﻿using QLPhongMachTuWPF.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,19 +16,13 @@ using System.Windows.Shapes;
 namespace QLPhongMachTuWPF.View
 {
     /// <summary>
-    /// Interaction logic for Staffs.xaml
+    /// Interaction logic for ControlBarUC.xaml
     /// </summary>
-    public partial class Staffs : UserControl
+    public partial class ControlBarUC : UserControl
     {
-        DataProvider db;  
-        public Staffs()
+        public ControlBarUC()
         {
             InitializeComponent();
-        }
-      
-        void LoadStaff()
-        {
-            
         }
     }
 }

@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace QLPhongMachTuWPF.ViewModel
 {
-    internal class Navigation : ViewModelBase
+    public class Navigation : ViewModelBase
     {
         private object _currentView;
 

@@ -80,19 +80,7 @@ namespace QLPhongMachTuWPF.ViewModel
 
 
 
-        private void FormLogin_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            MessageBoxResult result = MessageBox.Show(
-            "Are you sure you want to close the application?",
-            "Confirmation",
-            MessageBoxButton.YesNo,
-            MessageBoxImage.Warning);
-
-            if (result == MessageBoxResult.No)
-            {
-                e.Cancel = true;
-            }
-        }
+       
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {

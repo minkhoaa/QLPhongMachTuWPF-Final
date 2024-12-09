@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace QLPhongMachTuWPF.Model
 {
-    public class DBSupport
+    public class DataProvider
     {
-        private static DBSupport _ins;
-        public static DBSupport Ins { get { if (_ins == null) { _ins = new DBSupport(); } return _ins; } }
+        private static DataProvider _ins;
+        public static DataProvider Ins { get { if (_ins == null) { _ins = new DataProvider(); } return _ins; } }
         public QLPMTEntities db { get; set; }
-        private DBSupport()
+        private DataProvider()
         {
             db = new QLPMTEntities();
         }

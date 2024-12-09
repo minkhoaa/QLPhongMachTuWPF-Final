@@ -85,7 +85,7 @@
     <Compile Include="Model\CTTT.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\DBSupport.cs" />
+    <Compile Include="Model\DataProvider.cs" />
     <Compile Include="Model\HOADON.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -116,10 +116,12 @@
     <Compile Include="Model\THUOC.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\ControlBarViewModel.cs" />
     <Compile Include="ViewModel\DiagnosisVM.cs" />
     <Compile Include="ViewModel\HomepageVM.cs" />
     <Compile Include="ViewModel\InvoiceVM.cs" />
     <Compile Include="ViewModel\ListsVM.cs" />
+    <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="View\AddAppointment.xaml.cs">
       <DependentUpon>AddAppointment.xaml</DependentUpon>
     </Compile>
@@ -134,6 +136,9 @@
     </Compile>
     <Compile Include="View\AddStaff.xaml.cs">
       <DependentUpon>AddStaff.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ControlBarUC.xaml.cs">
+      <DependentUpon>ControlBarUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LoginModel.xaml.cs">
       <DependentUpon>LoginModel.xaml</DependentUpon>
@@ -215,6 +220,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AddStaff.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ControlBarUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

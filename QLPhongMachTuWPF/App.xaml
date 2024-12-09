@@ -13,7 +13,6 @@
                 <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="Blue" SecondaryColor="Lime" />
                 <ResourceDictionary Source="ResourceXAML/MainResource.xaml"/>
                 <ResourceDictionary Source="ResourceXAML/UserControlStyles.xaml"/>
-            
                 <ResourceDictionary Source="ViewModel/DataTemplate.xaml"/>
                 <ResourceDictionary Source="ResourceXAML/Page.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign2.Defaults.xaml" />

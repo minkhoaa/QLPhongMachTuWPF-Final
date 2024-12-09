@@ -15,13 +15,19 @@
          Background="{DynamicResource MaterialDesignPaper}"
          FontFamily="{DynamicResource MaterialDesignFont}"
         Title="MainWindow" Height="720" Width="1080"
-        xmlns:vm="clr-namespace:QLPhongMachTuWPF.ViewModel">
+        xmlns:vm="clr-namespace:QLPhongMachTuWPF.ViewModel" 
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
+        d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
+        DataContext="{StaticResource MainVM}"
+        Name="mainWindow"
+        >
 
-    <Window.DataContext>
-       <vm:Navigation/>
-    </Window.DataContext>
 
-
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command ="{Binding LoadedWindowCommand}" CommandParameter="{Binding ElementName=mainWindow}"></i:InvokeCommandAction>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <!-- Định nghĩa hai cột cho Grid -->
         <Grid.ColumnDefinitions>
