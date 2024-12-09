@@ -21,7 +21,7 @@ namespace QLPhongMachTuWPF.ViewModel
     {
         public LoginModel()
         {
-            InitializeComponent();
+            InitializeComponent(); 
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {

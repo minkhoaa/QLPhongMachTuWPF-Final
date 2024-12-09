@@ -48,10 +48,12 @@
 
 
         <DataGrid Grid.Row="1" Background="#eeeeee" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle2}" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="staffDatagrid" Margin="0,0,0,10"
-          HorizontalScrollBarVisibility="Disabled" Grid.RowSpan="2" Width="870">
+          HorizontalScrollBarVisibility="Disabled" Grid.RowSpan="2" 
+    HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+    Width="auto" Height="auto" VerticalScrollBarVisibility="Auto">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Staff ID" IsReadOnly="True" CanUserResize="False" Width="0.8*" Binding="{Binding PatientID}" />
-                <DataGridTextColumn Header="Name" IsReadOnly="True" CanUserResize="False" Width="1.5*" Binding="{Binding PatientName}"/>
+                <DataGridTextColumn Header="Name" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" Binding="{Binding PatientName}"/>
                 <DataGridTextColumn Header="Username" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding DOB}"/>
                 <DataGridTextColumn Header="Password" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding PatientAddress}"/>
                 <DataGridTextColumn Header="Type" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding PatientPhone}"/>
@@ -74,29 +76,6 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Border Grid.Row="3" HorizontalAlignment="Right" BorderBrush="#dee4ec" BorderThickness="1"
-Padding="5" Background="White" Margin="0 5 5 5" CornerRadius="5">
-            <StackPanel Orientation="Horizontal">
-                <Button Style="{StaticResource pagingBtn}" >
-                    <Image Source="/Images/back.png" Style="{StaticResource pagingBtnIcon}"/>
-                </Button>
-
-                <Rectangle Width="1" Fill="#dee4ec" Margin="3 7"/>
-
-                <Button Style="{StaticResource pagingBtn}" Content="1"/>
-                <Button Style="{StaticResource pagingBtn}" Content="2" Background="#3693ff" Foreground="White"/>
-                <Button Style="{StaticResource pagingBtn}" Content="3"/>
-
-                <TextBlock Text="..." Foreground="Black" VerticalAlignment="Center" FontSize="15" Margin="10 0"/>
-
-                <Button Style="{StaticResource pagingBtn}" Content="7"/>
-                <Button Style="{StaticResource pagingBtn}" Content="8"/>
-                <Button Style="{StaticResource pagingBtn}" Content="9"/>
-
-                <Button Style="{StaticResource pagingBtn}">
-                    <Image Source="/Images/next.png" Style="{StaticResource pagingBtnIcon}"/>
-                </Button>
-            </StackPanel>
-        </Border>
+        
     </Grid>
 </UserControl>
