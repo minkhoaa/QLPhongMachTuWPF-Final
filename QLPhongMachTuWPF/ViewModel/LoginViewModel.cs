@@ -34,8 +34,8 @@ namespace QLPhongMachTuWPF.ViewModel
         {
             isLogin = false;
 
-            /*  admin 0
-             *  employer 0
+            /*  admin admin
+             *  employer employer
              *  
              */
             LoginCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { Login(p); });
