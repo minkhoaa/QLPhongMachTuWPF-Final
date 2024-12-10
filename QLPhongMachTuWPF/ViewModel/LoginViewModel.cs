@@ -52,14 +52,15 @@ namespace QLPhongMachTuWPF.ViewModel
                 var count = DataProvider.Ins.db.ACCOUNTs.Where(x => x.UserName == Username && x.PassWord == Password).Count();
                 if (count > 0) 
                 { 
-                    isLogin = true; 
-                }
+                    isLogin = true;
+                    p.Close();
+            }
                 else
                 {
-                    isLogin = false ;
+                    isLogin = false;    
                     MessageBox.Show("Sai tài khoản hoặc mật khẩu");
                 }
-                p.Close(); 
+               
             }
           
         
