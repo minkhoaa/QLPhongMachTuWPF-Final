@@ -7,4 +7,5 @@
     <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
     <viewmodel:LoginViewModel x:Key="LoginVM"></viewmodel:LoginViewModel>
     <viewmodel:PatientsVM x:Key="PatientsVM" ></viewmodel:PatientsVM>
+    <viewmodel:StaffsVM x:Key="StaffsVM" ></viewmodel:StaffsVM>
 </ResourceDictionary> 

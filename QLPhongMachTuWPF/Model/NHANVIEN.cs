@@ -22,8 +22,9 @@ namespace QLPhongMachTuWPF.Model
     
         public int MaNV { get; set; }
         public string TenNV { get; set; }
-        public string TenDangNhap { get; set; }
-        public string MatKhau { get; set; }
+        public Nullable<System.DateTime> NgaySinh { get; set; }
+        public string DiaChi { get; set; }
+        public string DienThoai { get; set; }
         public Nullable<int> LoaiNV { get; set; }
         public Nullable<int> TrangThai { get; set; }
     

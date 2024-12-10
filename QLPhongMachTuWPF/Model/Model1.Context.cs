@@ -31,7 +31,6 @@ namespace QLPhongMachTuWPF.Model
         public virtual DbSet<HOADON> HOADONs { get; set; }
         public virtual DbSet<NHANVIEN> NHANVIENs { get; set; }
         public virtual DbSet<PHIEUKHAM> PHIEUKHAMs { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<THUOC> THUOCs { get; set; }
     }
 }
