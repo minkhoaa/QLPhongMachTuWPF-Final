@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="QLPMTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="QLPMTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ACCOUNT">
           <Key>
             <PropertyRef Name="UserName" />
@@ -176,46 +176,18 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
             <End Role="PHIEUKHAM" EntitySet="PHIEUKHAM" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="QLPMTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="QLPMTEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="ACCOUNTs" EntityType="QLPMTModel.ACCOUNT" />
-          <EntitySet Name="BENHNHANs" EntityType="QLPMTModel.BENHNHAN" />
-          <EntitySet Name="CTTTs" EntityType="QLPMTModel.CTTT" />
-          <EntitySet Name="HOADONs" EntityType="QLPMTModel.HOADON" />
-          <EntitySet Name="NHANVIENs" EntityType="QLPMTModel.NHANVIEN" />
-          <EntitySet Name="PHIEUKHAMs" EntityType="QLPMTModel.PHIEUKHAM" />
-          <EntitySet Name="THUOCs" EntityType="QLPMTModel.THUOC" />
-          <AssociationSet Name="PK_MaBN_FK" Association="QLPMTModel.PK_MaBN_FK">
-            <End Role="BENHNHAN" EntitySet="BENHNHANs" />
-            <End Role="PHIEUKHAM" EntitySet="PHIEUKHAMs" />
-          </AssociationSet>
-          <AssociationSet Name="CTTT_MaPK_FK" Association="QLPMTModel.CTTT_MaPK_FK">
-            <End Role="PHIEUKHAM" EntitySet="PHIEUKHAMs" />
-            <End Role="CTTT" EntitySet="CTTTs" />
-          </AssociationSet>
-          <AssociationSet Name="CTTT_TenThuoc_FK" Association="QLPMTModel.CTTT_TenThuoc_FK">
-            <End Role="THUOC" EntitySet="THUOCs" />
-            <End Role="CTTT" EntitySet="CTTTs" />
-          </AssociationSet>
-          <AssociationSet Name="HD_MaPK_FK" Association="QLPMTModel.HD_MaPK_FK">
-            <End Role="PHIEUKHAM" EntitySet="PHIEUKHAMs" />
-            <End Role="HOADON" EntitySet="HOADONs" />
-          </AssociationSet>
-          <AssociationSet Name="PK_MaNV_FK" Association="QLPMTModel.PK_MaNV_FK">
-            <End Role="NHANVIEN" EntitySet="NHANVIENs" />
-            <End Role="PHIEUKHAM" EntitySet="PHIEUKHAMs" />
-          </AssociationSet>
-        </EntityContainer>
         <EntityType Name="ACCOUNT">
           <Key>
             <PropertyRef Name="UserName" />
           </Key>
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="DisPlayName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="PassWord" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DisPlayName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PassWord" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Type" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="BENHNHAN">
@@ -229,7 +201,7 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
           <Property Name="DienThoai" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="GioiTinh" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="TrangThai" Type="Int32" />
-          <NavigationProperty Name="PHIEUKHAMs" Relationship="QLPMTModel.PK_MaBN_FK" FromRole="BENHNHAN" ToRole="PHIEUKHAM" />
+          <NavigationProperty Name="PHIEUKHAMs" Relationship="Self.PK_MaBN_FK" FromRole="BENHNHAN" ToRole="PHIEUKHAM" />
         </EntityType>
         <EntityType Name="CTTT">
           <Key>
@@ -237,13 +209,13 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
             <PropertyRef Name="TenThuoc" />
           </Key>
           <Property Name="MaPK" Type="Int32" Nullable="false" />
-          <Property Name="TenThuoc" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="TenThuoc" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="SoLuong" Type="Int32" />
           <Property Name="DonGia" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="CachDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="TrangThai" Type="Int32" />
-          <NavigationProperty Name="PHIEUKHAM" Relationship="QLPMTModel.CTTT_MaPK_FK" FromRole="CTTT" ToRole="PHIEUKHAM" />
-          <NavigationProperty Name="THUOC" Relationship="QLPMTModel.CTTT_TenThuoc_FK" FromRole="CTTT" ToRole="THUOC" />
+          <NavigationProperty Name="PHIEUKHAM" Relationship="Self.CTTT_MaPK_FK" FromRole="CTTT" ToRole="PHIEUKHAM" />
+          <NavigationProperty Name="THUOC" Relationship="Self.CTTT_TenThuoc_FK" FromRole="CTTT" ToRole="THUOC" />
         </EntityType>
         <EntityType Name="HOADON">
           <Key>
@@ -255,7 +227,7 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
           <Property Name="TienThuoc" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="TongTien" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="TrangThai" Type="Int32" />
-          <NavigationProperty Name="PHIEUKHAM" Relationship="QLPMTModel.HD_MaPK_FK" FromRole="HOADON" ToRole="PHIEUKHAM" />
+          <NavigationProperty Name="PHIEUKHAM" Relationship="Self.HD_MaPK_FK" FromRole="HOADON" ToRole="PHIEUKHAM" />
         </EntityType>
         <EntityType Name="NHANVIEN">
           <Key>
@@ -268,7 +240,7 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
           <Property Name="DienThoai" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="LoaiNV" Type="Int32" />
           <Property Name="TrangThai" Type="Int32" />
-          <NavigationProperty Name="PHIEUKHAMs" Relationship="QLPMTModel.PK_MaNV_FK" FromRole="NHANVIEN" ToRole="PHIEUKHAM" />
+          <NavigationProperty Name="PHIEUKHAMs" Relationship="Self.PK_MaNV_FK" FromRole="NHANVIEN" ToRole="PHIEUKHAM" />
         </EntityType>
         <EntityType Name="PHIEUKHAM">
           <Key>
@@ -281,24 +253,24 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
           <Property Name="TrieuChung" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
           <Property Name="KetQua" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
           <Property Name="TrangThai" Type="Int32" />
-          <NavigationProperty Name="BENHNHAN" Relationship="QLPMTModel.PK_MaBN_FK" FromRole="PHIEUKHAM" ToRole="BENHNHAN" />
-          <NavigationProperty Name="CTTTs" Relationship="QLPMTModel.CTTT_MaPK_FK" FromRole="PHIEUKHAM" ToRole="CTTT" />
-          <NavigationProperty Name="HOADONs" Relationship="QLPMTModel.HD_MaPK_FK" FromRole="PHIEUKHAM" ToRole="HOADON" />
-          <NavigationProperty Name="NHANVIEN" Relationship="QLPMTModel.PK_MaNV_FK" FromRole="PHIEUKHAM" ToRole="NHANVIEN" />
+          <NavigationProperty Name="BENHNHAN" Relationship="Self.PK_MaBN_FK" FromRole="PHIEUKHAM" ToRole="BENHNHAN" />
+          <NavigationProperty Name="CTTTs" Relationship="Self.CTTT_MaPK_FK" FromRole="PHIEUKHAM" ToRole="CTTT" />
+          <NavigationProperty Name="HOADONs" Relationship="Self.HD_MaPK_FK" FromRole="PHIEUKHAM" ToRole="HOADON" />
+          <NavigationProperty Name="NHANVIEN" Relationship="Self.PK_MaNV_FK" FromRole="PHIEUKHAM" ToRole="NHANVIEN" />
         </EntityType>
         <EntityType Name="THUOC">
           <Key>
             <PropertyRef Name="TenThuoc" />
           </Key>
-          <Property Name="TenThuoc" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="TenThuoc" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DonViTinh" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Gia" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="TrangThai" Type="Int32" />
-          <NavigationProperty Name="CTTTs" Relationship="QLPMTModel.CTTT_TenThuoc_FK" FromRole="THUOC" ToRole="CTTT" />
+          <NavigationProperty Name="CTTTs" Relationship="Self.CTTT_TenThuoc_FK" FromRole="THUOC" ToRole="CTTT" />
         </EntityType>
         <Association Name="PK_MaBN_FK">
-          <End Type="QLPMTModel.BENHNHAN" Role="BENHNHAN" Multiplicity="0..1" />
-          <End Type="QLPMTModel.PHIEUKHAM" Role="PHIEUKHAM" Multiplicity="*" />
+          <End Role="BENHNHAN" Type="Self.BENHNHAN" Multiplicity="0..1" />
+          <End Role="PHIEUKHAM" Type="Self.PHIEUKHAM" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BENHNHAN">
               <PropertyRef Name="MaBN" />
@@ -309,8 +281,8 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
           </ReferentialConstraint>
         </Association>
         <Association Name="CTTT_MaPK_FK">
-          <End Type="QLPMTModel.PHIEUKHAM" Role="PHIEUKHAM" Multiplicity="1" />
-          <End Type="QLPMTModel.CTTT" Role="CTTT" Multiplicity="*" />
+          <End Role="PHIEUKHAM" Type="Self.PHIEUKHAM" Multiplicity="1" />
+          <End Role="CTTT" Type="Self.CTTT" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PHIEUKHAM">
               <PropertyRef Name="MaPK" />
@@ -321,8 +293,8 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
           </ReferentialConstraint>
         </Association>
         <Association Name="CTTT_TenThuoc_FK">
-          <End Type="QLPMTModel.THUOC" Role="THUOC" Multiplicity="1" />
-          <End Type="QLPMTModel.CTTT" Role="CTTT" Multiplicity="*" />
+          <End Role="THUOC" Type="Self.THUOC" Multiplicity="1" />
+          <End Role="CTTT" Type="Self.CTTT" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="THUOC">
               <PropertyRef Name="TenThuoc" />
@@ -333,8 +305,8 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
           </ReferentialConstraint>
         </Association>
         <Association Name="HD_MaPK_FK">
-          <End Type="QLPMTModel.PHIEUKHAM" Role="PHIEUKHAM" Multiplicity="0..1" />
-          <End Type="QLPMTModel.HOADON" Role="HOADON" Multiplicity="*" />
+          <End Role="PHIEUKHAM" Type="Self.PHIEUKHAM" Multiplicity="0..1" />
+          <End Role="HOADON" Type="Self.HOADON" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PHIEUKHAM">
               <PropertyRef Name="MaPK" />
@@ -345,8 +317,8 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
           </ReferentialConstraint>
         </Association>
         <Association Name="PK_MaNV_FK">
-          <End Type="QLPMTModel.NHANVIEN" Role="NHANVIEN" Multiplicity="0..1" />
-          <End Type="QLPMTModel.PHIEUKHAM" Role="PHIEUKHAM" Multiplicity="*" />
+          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1" />
+          <End Role="PHIEUKHAM" Type="Self.PHIEUKHAM" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="NHANVIEN">
               <PropertyRef Name="MaNV" />
@@ -356,6 +328,35 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityContainer Name="QLPMTEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ACCOUNTs" EntityType="Self.ACCOUNT" />
+          <EntitySet Name="BENHNHANs" EntityType="Self.BENHNHAN" />
+          <EntitySet Name="CTTTs" EntityType="Self.CTTT" />
+          <EntitySet Name="HOADONs" EntityType="Self.HOADON" />
+          <EntitySet Name="NHANVIENs" EntityType="Self.NHANVIEN" />
+          <EntitySet Name="PHIEUKHAMs" EntityType="Self.PHIEUKHAM" />
+          <EntitySet Name="THUOCs" EntityType="Self.THUOC" />
+          <AssociationSet Name="PK_MaBN_FK" Association="Self.PK_MaBN_FK">
+            <End Role="BENHNHAN" EntitySet="BENHNHANs" />
+            <End Role="PHIEUKHAM" EntitySet="PHIEUKHAMs" />
+          </AssociationSet>
+          <AssociationSet Name="CTTT_MaPK_FK" Association="Self.CTTT_MaPK_FK">
+            <End Role="PHIEUKHAM" EntitySet="PHIEUKHAMs" />
+            <End Role="CTTT" EntitySet="CTTTs" />
+          </AssociationSet>
+          <AssociationSet Name="CTTT_TenThuoc_FK" Association="Self.CTTT_TenThuoc_FK">
+            <End Role="THUOC" EntitySet="THUOCs" />
+            <End Role="CTTT" EntitySet="CTTTs" />
+          </AssociationSet>
+          <AssociationSet Name="HD_MaPK_FK" Association="Self.HD_MaPK_FK">
+            <End Role="PHIEUKHAM" EntitySet="PHIEUKHAMs" />
+            <End Role="HOADON" EntitySet="HOADONs" />
+          </AssociationSet>
+          <AssociationSet Name="PK_MaNV_FK" Association="Self.PK_MaNV_FK">
+            <End Role="NHANVIEN" EntitySet="NHANVIENs" />
+            <End Role="PHIEUKHAM" EntitySet="PHIEUKHAMs" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -365,83 +366,83 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
           <EntitySetMapping Name="ACCOUNTs">
             <EntityTypeMapping TypeName="QLPMTModel.ACCOUNT">
               <MappingFragment StoreEntitySet="ACCOUNT">
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="PassWord" ColumnName="PassWord" />
-                <ScalarProperty Name="DisPlayName" ColumnName="DisPlayName" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="DisPlayName" ColumnName="DisPlayName" />
+                <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BENHNHANs">
             <EntityTypeMapping TypeName="QLPMTModel.BENHNHAN">
               <MappingFragment StoreEntitySet="BENHNHAN">
-                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
-                <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
-                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
-                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
-                <ScalarProperty Name="TenBN" ColumnName="TenBN" />
                 <ScalarProperty Name="MaBN" ColumnName="MaBN" />
+                <ScalarProperty Name="TenBN" ColumnName="TenBN" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CTTTs">
             <EntityTypeMapping TypeName="QLPMTModel.CTTT">
               <MappingFragment StoreEntitySet="CTTT">
-                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-                <ScalarProperty Name="CachDung" ColumnName="CachDung" />
-                <ScalarProperty Name="DonGia" ColumnName="DonGia" />
-                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
-                <ScalarProperty Name="TenThuoc" ColumnName="TenThuoc" />
                 <ScalarProperty Name="MaPK" ColumnName="MaPK" />
+                <ScalarProperty Name="TenThuoc" ColumnName="TenThuoc" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="DonGia" ColumnName="DonGia" />
+                <ScalarProperty Name="CachDung" ColumnName="CachDung" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="HOADONs">
             <EntityTypeMapping TypeName="QLPMTModel.HOADON">
               <MappingFragment StoreEntitySet="HOADON">
-                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
-                <ScalarProperty Name="TienThuoc" ColumnName="TienThuoc" />
-                <ScalarProperty Name="TienKham" ColumnName="TienKham" />
-                <ScalarProperty Name="MaPK" ColumnName="MaPK" />
                 <ScalarProperty Name="MaHD" ColumnName="MaHD" />
+                <ScalarProperty Name="MaPK" ColumnName="MaPK" />
+                <ScalarProperty Name="TienKham" ColumnName="TienKham" />
+                <ScalarProperty Name="TienThuoc" ColumnName="TienThuoc" />
+                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="NHANVIENs">
             <EntityTypeMapping TypeName="QLPMTModel.NHANVIEN">
               <MappingFragment StoreEntitySet="NHANVIEN">
-                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-                <ScalarProperty Name="LoaiNV" ColumnName="LoaiNV" />
-                <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
-                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
-                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
-                <ScalarProperty Name="TenNV" ColumnName="TenNV" />
                 <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="TenNV" ColumnName="TenNV" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
+                <ScalarProperty Name="LoaiNV" ColumnName="LoaiNV" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PHIEUKHAMs">
             <EntityTypeMapping TypeName="QLPMTModel.PHIEUKHAM">
               <MappingFragment StoreEntitySet="PHIEUKHAM">
-                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-                <ScalarProperty Name="KetQua" ColumnName="KetQua" />
-                <ScalarProperty Name="TrieuChung" ColumnName="TrieuChung" />
-                <ScalarProperty Name="NgayKham" ColumnName="NgayKham" />
-                <ScalarProperty Name="MaBN" ColumnName="MaBN" />
-                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
                 <ScalarProperty Name="MaPK" ColumnName="MaPK" />
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="MaBN" ColumnName="MaBN" />
+                <ScalarProperty Name="NgayKham" ColumnName="NgayKham" />
+                <ScalarProperty Name="TrieuChung" ColumnName="TrieuChung" />
+                <ScalarProperty Name="KetQua" ColumnName="KetQua" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="THUOCs">
             <EntityTypeMapping TypeName="QLPMTModel.THUOC">
               <MappingFragment StoreEntitySet="THUOC">
-                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-                <ScalarProperty Name="Gia" ColumnName="Gia" />
-                <ScalarProperty Name="DonViTinh" ColumnName="DonViTinh" />
                 <ScalarProperty Name="TenThuoc" ColumnName="TenThuoc" />
+                <ScalarProperty Name="DonViTinh" ColumnName="DonViTinh" />
+                <ScalarProperty Name="Gia" ColumnName="Gia" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
