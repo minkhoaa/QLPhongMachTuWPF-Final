@@ -38,7 +38,9 @@ namespace QLPhongMachTuWPF.ViewModel
              *  employer employer
              *  
              */
-            LoginCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { Login(p); });
+            LoginCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { Login(p);
+            
+            });
             PasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; }, (p) => { Password = p.Password; });
         } 
            
