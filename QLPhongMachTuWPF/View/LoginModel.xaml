@@ -145,8 +145,9 @@
                     CommandParameter="{Binding ElementName=FormLogin}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Width="170"
-                    ToolTip="Resource name: MaterialDesignRaisedButton" Click="Button_Click">
-                    SIGN IN
+                    ToolTip="Resource name: MaterialDesignRaisedButton" Click="Button_Click"
+                        Foreground="White">
+                    LOG IN
                 </Button>
 
 
