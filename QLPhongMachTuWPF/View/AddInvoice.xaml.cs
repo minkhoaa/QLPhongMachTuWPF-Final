@@ -24,6 +24,7 @@ namespace QLPhongMachTuWPF.View
             InitializeComponent();
         }
         private void btnClose_Click(object sender, RoutedEventArgs e)
+
 {
     this.Close();
 }
@@ -34,5 +35,6 @@ namespace QLPhongMachTuWPF.View
         this.DragMove();
     }
 }
+
     }
 }
