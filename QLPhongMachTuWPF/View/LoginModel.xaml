@@ -114,7 +114,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock x:Name="textPassword" MouseDown="textPassword_MouseDown" Text="Password"  FontSize="14"
+                        <TextBlock x:Name="textPassword"  MouseDown="textPassword_MouseDown" Text="Password"  FontSize="14"
                                 Grid.Column="1"
                                 Panel.ZIndex="1"
                                 Margin="10 0 0 0"
