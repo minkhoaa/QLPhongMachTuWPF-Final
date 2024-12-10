@@ -62,6 +62,7 @@ namespace QLPhongMachTuWPF.ViewModel
                 var isLogined = login.DataContext as LoginViewModel;
                 if (isLogined.isLogin)
                 {
+
                     p.Show(); 
                 }
                 else {

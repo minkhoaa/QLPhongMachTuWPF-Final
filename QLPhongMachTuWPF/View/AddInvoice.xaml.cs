@@ -24,21 +24,17 @@ namespace QLPhongMachTuWPF.View
             InitializeComponent();
         }
         private void btnClose_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
 
+{
+    this.Close();
+}
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == MouseButton.Left)
-            {
-                this.DragMove();
-            }
-        }
+{
+    if (e.ChangedButton == MouseButton.Left)
+    {
+        this.DragMove();
+    }
+}
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Added!");
-        }
     }
 }
