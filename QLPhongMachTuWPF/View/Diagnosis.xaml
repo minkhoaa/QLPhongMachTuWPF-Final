@@ -7,12 +7,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="720" d:DesignWidth="880"
              xmlns:vm="clr-namespace:QLPhongMachTuWPF.ViewModel"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" d:DataContext="{d:DesignInstance Type=vm:DiagnosisVM}"
+             DataContext="{StaticResource DiagnosisVM}"
              Style="{StaticResource Page_Style}">
-
-    <UserControl.DataContext>
-        <vm:DiagnosisVM/>
-    </UserControl.DataContext>
 
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
@@ -43,15 +40,18 @@
             </StackPanel>
         </Button>
 
-        <DataGrid Grid.Row="1" Background="#eeeeee" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle2}" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="patientsDatagrid" Margin="0,0,0,10"
+        <DataGrid Grid.Row="1" ItemsSource="{Binding DiagnosisList}" Background="#eeeeee" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle2}" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="patientsDatagrid" Margin="0,0,0,10"
           HorizontalScrollBarVisibility="Disabled" Grid.RowSpan="2" 
     HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
     Width="auto" Height="auto" VerticalScrollBarVisibility="Auto">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Medicine ID" IsReadOnly="True" CanUserResize="False" Width="0.8*" Binding="{Binding PatientID}" />
-                <DataGridTextColumn Header="Medicine" IsReadOnly="True" CanUserResize="False" Width="1.5*" Binding="{Binding PatientName}"/>
-                <DataGridTextColumn Header="Unit" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding DOB}"/>
-                <DataGridTextColumn Header="Price(VND)" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding PatientAddress}"/>
+                <DataGridTextColumn Header="Diagnosis ID" IsReadOnly="True" CanUserResize="False" Width="0.8*" Binding="{Binding MaPK}" />
+                <DataGridTextColumn Header="Staff ID" IsReadOnly="True" CanUserResize="False" Width="1.5*" Binding="{Binding MaNV}"/>
+                <DataGridTextColumn Header="Patient ID" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding MaBN}"/>
+                <DataGridTextColumn Header="Date" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding NgayKham}"/>
+                <DataGridTextColumn Header="Symtom" IsReadOnly="True" CanUserResize="False" Width="0.8*" Binding="{Binding TrieuChung}" />
+                <DataGridTextColumn Header ="Result" IsReadOnly="True" CanUserResize="False" Width="0.8*" Binding="{Binding KetQua}" />
+                <DataGridTextColumn Header="Status" IsReadOnly="True" CanUserResize="False" Width="1.5*" Binding="{Binding TrangThai}"/>
 
                 <DataGridTemplateColumn Header="Action" IsReadOnly="True" CanUserResize="False" Width="100">
                     <DataGridTemplateColumn.CellTemplate>

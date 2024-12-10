@@ -9,4 +9,6 @@
     <viewmodel:PatientsVM x:Key="PatientsVM" ></viewmodel:PatientsVM>
     <viewmodel:StaffsVM x:Key="StaffsVM" ></viewmodel:StaffsVM>
     <viewmodel:ListsVM x:Key="ListsVM" ></viewmodel:ListsVM>
+    <viewmodel:DiagnosisVM x:Key = "DiagnosisVM"></viewmodel:DiagnosisVM>
+    <viewmodel:InvoiceVM x:Key="InvoiceVM"></viewmodel:InvoiceVM>
 </ResourceDictionary> 
