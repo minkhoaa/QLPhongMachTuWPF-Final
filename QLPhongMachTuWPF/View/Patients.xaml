@@ -7,6 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="720" d:DesignWidth="880"
              xmlns:vm="clr-namespace:QLPhongMachTuWPF.ViewModel"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" d:DataContext="{d:DesignInstance Type=vm:PatientsVM}"
              DataContext="{StaticResource PatientsVM}"
              Style="{StaticResource Page_Style}">
@@ -29,8 +30,15 @@
             <TextBlock Margin="20,0,30,0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
        Panel.ZIndex="1" Text="Search" Visibility="{Binding ElementName=txtSearch, Path=Text.IsEmpty,Converter={StaticResource BoolToVis}}" FontSize="20"/>
 
-            <TextBox x:Name="txtSearch" Style="{StaticResource txtBoxSearch}"/>
-            <Image Source="/Images/search.png" Width="20" Height="20" HorizontalAlignment="Right" Margin="5"/>
+            <TextBox x:Name="txtSearch"
+                     Text ="{Binding SearchKeyword, UpdateSourceTrigger=PropertyChanged}"
+                     Style="{StaticResource txtBoxSearch}">
+                
+                
+                
+            </TextBox>
+
+                <Image Source="/Images/search.png" Width="20" Height="20" HorizontalAlignment="Right" Margin="5"/>
         </Grid>
 
         <Button Grid.Row="0" Margin="0 10 40 10" Command="{ Binding AddPatientCommand }"  Style="{StaticResource addBtn}">
@@ -39,7 +47,7 @@
             </StackPanel>
         </Button>
 
-        <DataGrid Grid.Row="1" Background="#eeeeee" ItemsSource="{Binding PatientsList}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle2}" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="patientsDatagrid" Margin="0,0,0,10"
+        <DataGrid Grid.Row="1" Background="#eeeeee" ItemsSource="{Binding FilteredPatients}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle2}" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="patientsDatagrid" Margin="0,0,0,10"
               HorizontalScrollBarVisibility="Disabled" Grid.RowSpan="2" 
                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                   Width="auto" Height="auto" VerticalScrollBarVisibility="Auto">
