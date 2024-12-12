@@ -85,7 +85,7 @@ namespace QLPhongMachTuWPF.ViewModel
                         // Gửi thông báo kèm bệnh nhân mới
                         Messenger.Default.Send(newStaff);
 
-                        MessageBox.Show("Thêm bệnh nhân thành công!");
+                        MessageBox.Show("Thêm nhân viên thành công!");
                     }
                     catch (Exception ex)
                     {

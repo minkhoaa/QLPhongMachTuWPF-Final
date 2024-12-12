@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QLPhongMachTuWPF.View"
         mc:Ignorable="d"
+        DataContext="{StaticResource AddMedicineVM}"
         Title="AddMedicineList" Height="600" Width="800"
-                        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent" AllowsTransparency="True">
+                        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodel="clr-namespace:QLPhongMachTuWPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:AddMedicineVM}"
+        WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent" AllowsTransparency="True">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -92,26 +93,35 @@ Grid.Column="1" Panel.ZIndex="1"
             <!--Input-->
 
             <Grid Grid.Row="1">
-                <Border CornerRadius="0 0 10 0" Background="White"/>
+                <Border CornerRadius="0 0 10 0" Background="White">
+                    <TextBox
+                        Text="{Binding Price}"
+                        materialDesign:HintAssist.Hint="Price"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+                        FontSize="16" Margin="382,50,88,415"/>
+                </Border>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 50 0 0">
                     <!--name-->
                     <TextBox
+                        Text="{Binding Name}"
                          VerticalAlignment="Center"
-                         materialDesign:HintAssist.Hint="Medicine"
+                         materialDesign:HintAssist.Hint="Name"
                          Style="{StaticResource MaterialDesignOutlinedTextBox}"
                          Width="250" FontSize="16"/>
 
-                    
+
                 </StackPanel>
+
 
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 150 0 0">
                     <StackPanel
  >
                         <TextBox
-    Height="100"
-                            Width="400"
-    materialDesign:HintAssist.Hint="User guide"
+                            Text="{Binding Unit}"
+    Height="73"
+                            Width="249"
+    materialDesign:HintAssist.Hint="Unit"
     AcceptsReturn="True"
     
     Style="{StaticResource MaterialDesignOutlinedTextBox}"
@@ -127,9 +137,9 @@ Grid.Column="1" Panel.ZIndex="1"
 
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 300 0 0">
-                    
+
                     <!--Status-->
-                    <ComboBox x:Name="cmbStatus" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox Text="{Binding Status}" x:Name="cmbStatus" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
          
            FontSize="16" Margin="0 0 0 0"/>
 
@@ -137,7 +147,9 @@ Grid.Column="1" Panel.ZIndex="1"
 
 
 
-                <Button Content="Add medicine"  Style="{StaticResource btnAdd}">
+                <Button
+                    Command="{Binding AddMedicineCommand}"
+                    Content="Add medicine"  Style="{StaticResource btnAdd}">
 
                 </Button>
 

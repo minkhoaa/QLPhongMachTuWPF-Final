@@ -20,7 +20,7 @@ namespace QLPhongMachTuWPF.ViewModel
             DiagnosisList = new ObservableCollection<PHIEUKHAM>(DataProvider.Ins.db.PHIEUKHAMs);
             AddStaffCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                AddStaff add = new AddStaff();
+                AddMedicineDiagnosis add = new AddMedicineDiagnosis();
                 add.ShowDialog();
 
             }

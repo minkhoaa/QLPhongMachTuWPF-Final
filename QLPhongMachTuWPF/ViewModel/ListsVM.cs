@@ -1,4 +1,5 @@
-﻿using QLPhongMachTuWPF.Model;
+﻿using GalaSoft.MvvmLight.Messaging;
+using QLPhongMachTuWPF.Model;
 using QLPhongMachTuWPF.View;
 using System;
 using System.Collections.Generic;
@@ -18,9 +19,13 @@ namespace QLPhongMachTuWPF.ViewModel
         public ListsVM()
         {
             MedicineList = new ObservableCollection<THUOC>(DataProvider.Ins.db.THUOCs);
+            Messenger.Default.Register<THUOC>(this, (newMedicine) =>
+            {
+                MedicineList.Add(newMedicine);
+            });
             AddStaffCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                AddStaff add = new AddStaff();
+                AddMedicineList add = new AddMedicineList();
                 add.ShowDialog();
 
             }
