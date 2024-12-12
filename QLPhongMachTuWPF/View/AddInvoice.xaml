@@ -12,8 +12,8 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" d:DataContext="{d:DesignInstance Type=vm:AddInvoiceVM}"
         x:Name="addInvoiceForm"
         WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent" AllowsTransparency="True">
-        
-        
+
+
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -23,110 +23,131 @@
     </Window.Resources>
 
     <Grid>
-        <!-- Định nghĩa 3 hàng để chia ra 3 phần-->
-        <Grid.RowDefinitions>
-            <!-- Phần đầu gồm Add Staff và nút close -->
-            <RowDefinition Height="0.5*"></RowDefinition>
-            <!-- Phần 2 là gồm các name, username ... và các textbox-->
-            <RowDefinition Height="3*"></RowDefinition>
-            <!-- Phần 3 là button để add staff-->
-            <RowDefinition Height="*" ></RowDefinition>
-        </Grid.RowDefinitions>
-        <Border Grid.Row="0" CornerRadius="10 10 0 0" MouseDown="Border_MouseDown">
-            <Border.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#3693ff"></GradientStop>
-                </LinearGradientBrush>
-            </Border.Background>
-            <!--Thêm TextBlock Add Staff-->
-            <TextBlock Text="Add invoice" Style="{StaticResource TitleText}" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80"></ColumnDefinition>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-        </Border>
-        <!--Button close để đóng form-->
-        <Grid Grid.Row="0" >
-            <Button x:Name="btnClose"
- BorderBrush="#3693ff"
-Grid.Column="1" Panel.ZIndex="1"
-   Width="30"
-   Height="30"
-   VerticalAlignment="Top"
-   HorizontalAlignment="Right"
-   Margin="0 15 15 0"
-   Click="btnClose_Click"
-    BorderThickness="0">
-                <Button.Background >
-                    <ImageBrush ImageSource="/Images/image.png"
-                Stretch="Fill"
-                />
-                </Button.Background>
-            </Button>
-        </Grid>
-        <!--Phần 2 để thêm các phần Name username....-->
-        <Grid Grid.Row="1" Background="White">
+        <Grid Grid.Column="0">
 
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-                </Grid.RowDefinitions>
-                <!--Name-->
-                <Grid Grid.Row="0">
-                    <TextBlock Text="Examination fee" Style="{StaticResource textBlock}" Margin="150 0 0 0" VerticalAlignment="Center"/>
-                    <TextBox Name="txbAddExaminationFee"
-                                    VerticalAlignment="Center"
-                             Text="{Binding Examination }"
-                                    materialDesign:HintAssist.Hint="Name"
-                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                    HorizontalAlignment="Center" Width="300" Margin="150 0 0 10"
-                                    FontSize="16"
-                                    
-                             />
+            <!--Logo-->
+            <Grid Grid.Row="0">
+                <Border CornerRadius="10 0 0 0" Background="#1ca7ec">
 
-                </Grid>
-                <!--Address-->
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="409*"/>
-                        <ColumnDefinition Width="391*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="Pharmancy fee" Style="{StaticResource anotherTextBlock}" VerticalAlignment="Center"/>
-                    <TextBox
-                    x:Name="txbAddPharmacyFee"
-                    VerticalAlignment="Center"
-                        Text="{Binding Pharmancy}"
-                    materialDesign:HintAssist.Hint="Address"
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                    HorizontalAlignment="Center" Width="300" Margin="150,0,0,0"
-                    FontSize="16" Grid.ColumnSpan="2"
-            
-     />
-                </Grid>
+                </Border>
+                <materialDesign:PackIcon Kind="InvoiceLineItems" Style="{StaticResource icon}"/>
 
 
-                <!--Gender-->
-                <Grid Grid.Row="2">
-                    <TextBlock Text="Status"  Style="{StaticResource anotherTextBlock}"/>
-                    <StackPanel Style="{StaticResource StckPanel}">
-                        <RadioButton Content="Paid" IsChecked="True" Style="{StaticResource radioBtnAdd}" Margin="0 25 0 0"/>
-                        <RadioButton Content="Unpaid" Style="{StaticResource radioBtnAdd}"  Margin="20 25 0 0"/>
-                    </StackPanel>
-                </Grid>
+
 
             </Grid>
+            <!--chu-->
+            <Grid Grid.Row="1">
+                <Border CornerRadius="0 0 0 10">
+                    <Border.Background>
+                        <LinearGradientBrush>
+                            <GradientStop Color="#1ca7ec" Offset="0.0"/>
+                            <GradientStop Color="#1f2f98" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Text="I" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
+                    <TextBlock Text="N" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
+                    <TextBlock Text="V" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
+                    <TextBlock Text="O" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
+                    <TextBlock Text="I" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
+                    <TextBlock Text="C" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
+                    <TextBlock Text="E" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
+
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Column="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="11*"/>
+                <ColumnDefinition Width="349*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!--Chu-->
+            <Grid Grid.Row="0" MouseDown="Border_MouseDown" Grid.ColumnSpan="2">
+                <Button x:Name="btnClose"
+         BorderBrush="#3693ff"
+        Grid.Column="1" Panel.ZIndex="1"
+           Width="30"
+           Height="30"
+           VerticalAlignment="Top"
+           HorizontalAlignment="Right"
+           Margin="0 13 13 0"
+           Click="btnClose_Click"
+            BorderThickness="0">
+                    <Button.Background >
+                        <ImageBrush ImageSource="/Images/image.png"
+                        Stretch="Fill"
+                        />
+                    </Button.Background>
+                </Button>
+                <Border CornerRadius="0 10 0 0" Background="White"/>
+                <TextBlock Text="ADD INVOICE" Style="{StaticResource titleText}"/>
+            </Grid>
+
+            <!--Input-->
+
+            <Grid Grid.Row="1" Grid.ColumnSpan="2">
+
+                <Border CornerRadius="0 0 10 0" Background="White"/>
 
 
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 100 0 0">
+                    <!--examiantion-->
+                    <TextBox
+         VerticalAlignment="Center"
+         materialDesign:HintAssist.Hint="Examination fee"
+         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+         Width="250" FontSize="16"/>
+
+
+                </StackPanel>
+
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 180 0 0">
+
+
+                    <!--pharmancy fee-->
+                    <TextBox VerticalAlignment="Center"
+                                materialDesign:HintAssist.Hint="Pharmancy fee"
+                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                Width="250" Margin="0 0 0 0" FontSize="16"/>
+                </StackPanel>
+
+                <TextBlock Text="Status" Margin="80 20 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontSize="16" Foreground="Gray"/>
+
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 280 0 0">
+                    <ComboBox x:Name="cmbStatus" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+          materialDesign:HintAssist.Hint="Paid"
+           FontSize="16"/>
+
+                </StackPanel>
+
+
+
+                <Button Content="Add invoice"  Style="{StaticResource btnAdd}">
+
+                </Button>
+
+            </Grid>
         </Grid>
-        <!-- Phần bên dưới Add Staff-->
-        <Grid Grid.Row="2" Background="White" >
-            <Button Command="{Binding addCommand}" CommandParameter="{Binding ElementName=addInvoiceForm}" Content="Add invoice" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10 10" 
-                Background="#3693ff" Foreground="White"
-                Width="250"
-              Height="50"
-                FontSize="20" >
-            </Button>
-        </Grid>
+
     </Grid>
 </Window>

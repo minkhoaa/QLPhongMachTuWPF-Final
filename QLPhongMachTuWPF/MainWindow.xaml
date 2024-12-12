@@ -22,7 +22,7 @@
         Name="mainWindow"
          WindowStyle="None"
         MouseDown="Window_MouseDown"
-        >
+        AllowsTransparency="True">
 
 
     <Window.Resources>

@@ -22,6 +22,13 @@ namespace QLPhongMachTuWPF.View
         public AddMedicineList()
         {
             InitializeComponent();
+            var status = new List<string>
+            {
+                "Available", "Unavailable"
+            };
+
+            cmbStatus.ItemsSource = status;
+
         }
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
