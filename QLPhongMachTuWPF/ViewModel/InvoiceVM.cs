@@ -3,6 +3,7 @@ using QLPhongMachTuWPF.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Activation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;

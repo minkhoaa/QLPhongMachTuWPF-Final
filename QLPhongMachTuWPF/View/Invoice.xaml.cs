@@ -24,5 +24,10 @@ namespace QLPhongMachTuWPF.View
         {
             InitializeComponent();
         }
+
+        private void patientsDatagrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        {
+
+        }
     }
 }

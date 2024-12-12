@@ -25,9 +25,9 @@ namespace QLPhongMachTuWPF.View
         }
         private void btnClose_Click(object sender, RoutedEventArgs e)
 
-{
-    this.Close();
-}
+        {
+            this.Close();
+        }
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
 {
     if (e.ChangedButton == MouseButton.Left)

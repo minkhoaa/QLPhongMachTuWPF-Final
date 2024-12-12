@@ -38,7 +38,7 @@ namespace QLPhongMachTuWPF.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Added!");
+          
         }
     }
 }
