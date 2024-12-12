@@ -530,7 +530,7 @@ Style="{StaticResource tt_style}"/>
                 <Button Width="25" Height="25"  Click="MinimizeWindow_Click" Background="#3693ff">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
-                            <Border Background="{TemplateBinding Background}" CornerRadius="10">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="7">
                                 <Grid>
                                     <Image Width="16" Source="/Images/minus.png" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Grid>
@@ -543,7 +543,7 @@ Style="{StaticResource tt_style}"/>
                 <Button Width="25" Height="25" Margin="7 0" Click="MaximizeWindow_Click" Background="#3693ff">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
-                            <Border Background="{TemplateBinding Background}" CornerRadius="10">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="7">
                                 <Grid>
                                     <Image Width="16" Source="/Images/max.png" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Grid>
@@ -558,7 +558,7 @@ Style="{StaticResource tt_style}"/>
                 <Button Width="25" Height="25" Click="CloseWindow_Click" Background="#FF6347" Margin="0 0 3 0">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
-                            <Border Background="{TemplateBinding Background}" CornerRadius="10">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="7">
                                 <Grid>
                                     <Image Width="16" Source="/Images/close.png" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Grid>
