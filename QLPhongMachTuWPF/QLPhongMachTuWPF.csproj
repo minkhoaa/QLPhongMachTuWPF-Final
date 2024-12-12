@@ -91,6 +91,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters.cs" />
     <Compile Include="Model\ACCOUNT.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
