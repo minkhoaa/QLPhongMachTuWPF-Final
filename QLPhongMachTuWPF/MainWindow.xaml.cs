@@ -29,33 +29,30 @@ namespace QLPhongMachTuWPF
             
             
         }
-        private void ToggleSidebar_Click(object sender, RoutedEventArgs e)
+        private void ListViewItem_MouseEnter(object sender, MouseEventArgs e)
         {
-            if (isSidebarCollapsed)
+            if (Tg_Btn.IsChecked == true)
             {
-                // Mở rộng Sidebar
-                SidebarColumn.Width = new GridLength(200);
-                text1.Visibility = Visibility.Visible;
-                text2.Visibility = Visibility.Visible;
-                logout.Visibility = Visibility.Visible;
-                management.IsEnabled = true;
-                medicine.IsEnabled = true;
-                img.Visibility = Visibility.Visible;
-
+                tt_home.Visibility = Visibility.Collapsed;
+                tt_patients.Visibility = Visibility.Collapsed;
+                tt_staffs.Visibility = Visibility.Collapsed;
+                tt_appoinntments.Visibility = Visibility.Collapsed;
+                tt_diagnosis.Visibility = Visibility.Collapsed;
+                tt_lists.Visibility = Visibility.Collapsed;
+                tt_invoice.Visibility = Visibility.Collapsed;
+                tt_logout.Visibility = Visibility.Collapsed;
             }
             else
             {
-                // Thu nhỏ Sidebar
-                SidebarColumn.Width = new GridLength(60);
-                text1.Visibility = Visibility.Collapsed;
-                text2.Visibility = Visibility.Collapsed;
-                logout.Visibility = Visibility.Collapsed;
-                management.IsEnabled = false;
-                medicine.IsEnabled = false;
-                img.Visibility = Visibility.Collapsed;
+                tt_home.Visibility = Visibility.Visible;
+                tt_patients.Visibility = Visibility.Visible;
+                tt_staffs.Visibility = Visibility.Visible;
+                tt_appoinntments.Visibility = Visibility.Visible;
+                tt_diagnosis.Visibility = Visibility.Visible;
+                tt_lists.Visibility = Visibility.Visible;
+                tt_invoice.Visibility = Visibility.Visible;
+                tt_logout.Visibility = Visibility.Visible;
             }
-
-            isSidebarCollapsed = !isSidebarCollapsed; // Cập nhật trạng thái
         }
     }
 }
