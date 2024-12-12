@@ -120,15 +120,15 @@ Grid.Column="1" Panel.ZIndex="1"
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 200 0 0">
                     <!--Date of birth-->
                     <ComboBox x:Name="cmbDay" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                              materialDesign:HintAssist.Hint="1"
+                             
                                FontSize="16"/>
 
                     <ComboBox x:Name="cmbMonth" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-          materialDesign:HintAssist.Hint="1"
+         
           FontSize="16" Margin="10 0 0 0"/>
 
                     <ComboBox x:Name="cmbYear" Width="110" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-materialDesign:HintAssist.Hint="2000"
+
  FontSize="16" Margin="10 0 0 0"/>
 
                     <!--Address-->
@@ -145,19 +145,19 @@ materialDesign:HintAssist.Hint="2000"
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 300 0 0">
                     <!--Day appointment-->
                     <ComboBox x:Name="cmbDayapp" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                              materialDesign:HintAssist.Hint="1"
+                             
                                FontSize="16"/>
 
                     <ComboBox x:Name="cmbMonthapp" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-          materialDesign:HintAssist.Hint="1"
+         
           FontSize="16" Margin="10 0 0 0"/>
 
                     <ComboBox x:Name="cmbYearapp" Width="110" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-materialDesign:HintAssist.Hint="2000"
+
  FontSize="16" Margin="10 0 0 0"/>
                     <!--Gender-->
                     <ComboBox x:Name="cmbGender" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-          materialDesign:HintAssist.Hint="Male"
+         
            FontSize="16" Margin="60 0 0 0"/>
 
                 </StackPanel>

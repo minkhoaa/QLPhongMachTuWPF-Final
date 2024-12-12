@@ -35,7 +35,7 @@
                 <Border CornerRadius="10 0 0 0" Background="#1ca7ec">
 
                 </Border>
-                <materialDesign:PackIcon Kind="Account" Style="{StaticResource icon}"/>
+                <materialDesign:PackIcon Kind="AccountInjuryOutline" Style="{StaticResource icon}"/>
 
 
 
@@ -141,10 +141,10 @@ materialDesign:HintAssist.Hint="2000"
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 300 0 0">
                     <ComboBox x:Name="cmbGender" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-          materialDesign:HintAssist.Hint="Male"
+         
            FontSize="16"/>
                     <ComboBox x:Name="cmbType" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-materialDesign:HintAssist.Hint="Discharged"
+
  FontSize="16" Margin="60 0 0 0"/>
                 </StackPanel>
 

@@ -47,7 +47,7 @@ namespace QLPhongMachTuWPF.View
 
             var type = new List<string>
             {
-                "Under treatment", "Discharged"
+                "Admin", "User"
             };
 
             cmbType.ItemsSource = type;

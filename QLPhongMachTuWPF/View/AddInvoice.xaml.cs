@@ -22,6 +22,12 @@ namespace QLPhongMachTuWPF.View
         public AddInvoice()
         {
             InitializeComponent();
+            var status = new List<string>
+            {
+                "Paid", "Unpaid"
+            };
+
+            cmbStatus.ItemsSource = status;
         }
         private void btnClose_Click(object sender, RoutedEventArgs e)
 
