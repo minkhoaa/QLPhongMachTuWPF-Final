@@ -12,7 +12,7 @@
          TextElement.FontSize="13"
          TextOptions.TextFormattingMode="Ideal"
          TextOptions.TextRenderingMode="Auto"
-         Background="{DynamicResource MaterialDesignPaper}"
+         Background="Transparent"
          FontFamily="{DynamicResource MaterialDesignFont}"
         Title="MainWindow" Height="720" Width="1080"
         xmlns:vm="clr-namespace:QLPhongMachTuWPF.ViewModel" 
@@ -20,8 +20,101 @@
         d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
         DataContext="{StaticResource MainVM}"
         Name="mainWindow"
+         WindowStyle="None"
+        MouseDown="Window_MouseDown"
         >
 
+
+    <Window.Resources>
+
+        <Style TargetType="ToolTip" x:Key="tt_style">
+
+            <Setter Property="Placement" Value="Right"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Margin" Value="20,0,0,0"/>
+            <Setter Property="Background" Value="#4A5668"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Fonts/Roboto-Light.ttf #Roboto"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="PlacementRectangle" Value="60,0,0,0"/>
+            <Setter Property="HorizontalOffset" Value="15"/>
+            <Setter Property="VerticalOffset" Value="6"/>
+            <Setter Property="HasDropShadow" Value="True"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+
+        </Style>
+
+        <Style x:Key="font_style" TargetType="TextBlock">
+
+            <Setter Property="FontFamily"
+        Value="Fonts/Roboto-Light.ttf #Roboto"/>
+
+            <Setter Property="VerticalAlignment"
+        Value="Center"/>
+
+            <Setter Property="HorizontalAlignment"
+        Value="Left"/>
+
+            <Setter Property="Foreground"
+        Value="White"/>
+
+            <Setter Property="FontSize"
+        Value="20"/>
+
+        </Style>
+
+        <Style x:Key="tb_style" TargetType="{x:Type ToggleButton}">
+
+            <Setter Property="Template">
+
+                <Setter.Value>
+
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+
+                        <Border Name="border"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}"
+                                SnapsToDevicePixels="True"></Border>
+
+                        <ControlTemplate.Triggers>
+
+                            <Trigger Property="IsMouseOver" Value="True">
+
+                                <Setter Property="Background"
+                                        TargetName="border"
+                                        Value="{DataTemplateKey tb_mouse_over}"/>
+
+                                <Setter Property="BorderBrush"
+                                        TargetName="border"
+                                        Value="{StaticResource tb_mouse_over}"/>
+
+                            </Trigger>
+
+                            <Trigger Property="IsChecked" Value="true">
+
+                                <Setter Property="Background"
+                                        TargetName="border"
+                                        Value="{StaticResource tb_mouse_over}"/>
+
+                                <Setter Property="BorderBrush"
+                                        TargetName="border"
+                                        Value="{StaticResource tb_mouse_over}"/>
+
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+
+                </Setter.Value>
+
+            </Setter>
+
+        </Style>
+
+    </Window.Resources>
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -29,16 +122,23 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid>
-        <!-- Định nghĩa hai cột cho Grid -->
+
+
+        <!-- Định nghĩa 2 cột: 1 cho Sidebar, 1 cho Nội dung chính -->
         <Grid.ColumnDefinitions>
-            <ColumnDefinition x:Name="SidebarColumn" Width="200"/>
-            <!-- Cột cho thanh điều hướng -->
-            <ColumnDefinition Width="*"/>
-            <!-- Cột cho nội dung chính -->
+            <ColumnDefinition Width="Auto" />
+            <!-- Sidebar -->
+            <ColumnDefinition Width="*" />
+            <!-- Nội dung chính -->
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0">
-            <Border>
+
+        <Grid x:Name="nav_pnl"
+              HorizontalAlignment="Left"
+              Width="65" Panel.ZIndex="1"
+              Grid.Column="0">
+
+            <Border CornerRadius="10 0 0 10">
                 <Border.Background>
                     <LinearGradientBrush>
                         <GradientStop Color="#1ca7ec" Offset="0.0"/>
@@ -46,166 +146,427 @@
                     </LinearGradientBrush>
                 </Border.Background>
             </Border>
-            <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 20 0 0">
-                <Image x:Name="img" Source="/Images/medical.png" Width="95" Height="90" RenderTransformOrigin="0.5,0.5">
-                    <Image.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="-0.733"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Image.RenderTransform>
-                </Image>
-                <TextBlock x:Name="text1" Text="Good Vibes" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Foreground="White" FontWeight="Bold" FontFamily="Cambria" FontStyle="Italic"></TextBlock>
-                <TextBlock x:Name="text2" Text="Good Health" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Foreground="White" FontWeight="Bold" FontFamily="Cambria" FontStyle="Italic"></TextBlock>
 
-                <!-- Nút điều hướng: Homepage -->
-                <Button Background="Transparent" BorderThickness="0" HorizontalContentAlignment="Left" Margin="42,50,0,0" Padding="0,15,0,0" Command="{Binding HomePageCommand}">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <TextBlock Text="🏠" FontSize="11" Foreground="White" Margin="1,0,5,0"/>
-                        <TextBlock Text="Homepage" FontSize="14" Foreground="White" FontWeight="Bold"/>
+            <StackPanel x:Name="stk_pnl">
+                <Grid Height="90">
 
-                    </StackPanel>
-                </Button>
+                    <!--Show name-->
 
-                <!-- TreeView cho các mục điều hướng -->
-                <TreeView Background="Transparent" BorderThickness="0" HorizontalContentAlignment="Left" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden">
-                    <TreeView.ItemContainerStyle>
-                        <Style TargetType="TreeViewItem">
-                            <Setter Property="Margin" Value="0,5"/>
+                    <TextBlock Grid.Row="1"
+           Grid.Column="0"
+           Margin="73 -20 0 0"
+           Text="M E N U"
+           Foreground="White"
+           FontSize="22"
+           Background="Transparent"
+           HorizontalAlignment="Left"
+           VerticalAlignment="Center">
+    
+    <!--Shadow Effect-->
+                        <TextBlock.Effect>
+
+                            <DropShadowEffect  BlurRadius="10"
+                        ShadowDepth="1"
+                        Direction="-90"
+                        Color="White"/>
+
+                        </TextBlock.Effect>
+
+                    </TextBlock>
+
+                    <ToggleButton x:Name="Tg_Btn"
+                                  Grid.Column="0"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Left"
+                                  Margin="18 -20 0 0"
+                                  Width="30"
+                                  Height="30"
+                                  BorderThickness="0" 
+                                  >
+                        <ToggleButton.Content>
+                            <Image Source="Images/burger-menu.png" Stretch="None" />
+                        </ToggleButton.Content>
+
+
+                        <ToggleButton.Triggers>
+                            <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+
+                                <BeginStoryboard>
+
+                                    <Storyboard x:Name="HideStackPael">
+
+                                        <DoubleAnimation Storyboard.TargetName="nav_pnl"
+                                                         Storyboard.TargetProperty="Width"
+                                                         BeginTime="0:0:0"
+                                                         From="200" To="65"
+                                                         Duration="0:0:0.2">
+
+
+
+                                        </DoubleAnimation>
+
+                                    </Storyboard>
+
+                                </BeginStoryboard>
+
+                            </EventTrigger>
+
+                            <EventTrigger RoutedEvent="ToggleButton.Checked">
+
+                                <BeginStoryboard>
+
+                                    <Storyboard Name="ShowStackPanel">
+
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="nav_pnl"
+                                            Storyboard.TargetProperty="Width"
+                                            BeginTime="0:0:0"
+                                            From="65" To="200"
+                                            Duration="0:0:0.3">
+
+
+
+                                        </DoubleAnimation>
+
+                                    </Storyboard>
+
+                                </BeginStoryboard>
+
+                            </EventTrigger>
+
+                        </ToggleButton.Triggers>
+                    </ToggleButton>
+
+
+                </Grid>
+
+                <!--ListView-->
+
+                <ListView x:Name="LV"
+                          Background="Transparent"
+                          BorderBrush="Transparent"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+
+                    <!-- Homepage-->
+
+                    <ListViewItem HorizontalAlignment="Left"
+                                  Margin="0 0 0 10" MouseEnter="ListViewItem_MouseEnter" >
+                        <Button Background="Transparent" BorderBrush="Transparent" Padding="0" Command="{Binding HomePageCommand}">
+                            <StackPanel Orientation="Horizontal"
+                                    Width="200">
+
+                                <materialDesign:PackIcon Kind="Home" Width="30" Height="30" Foreground="White" Margin="12 0 0 0"/>
+
+
+                                <TextBlock Text="Home"
+                                       Margin="25 0 0 0"
+                                       Style="{StaticResource font_style}"/>
+                            </StackPanel>
+                        </Button>
+                        <!--ToolTip-->
+                        <ListViewItem.ToolTip>
+
+                            <ToolTip x:Name="tt_home"
+             Content="Home"
+             Style="{StaticResource tt_style}"/>
+
+                        </ListViewItem.ToolTip>
+
+                    </ListViewItem>
+
+                    <!--Patients-->
+                    <ListViewItem HorizontalAlignment="Left"
+                     Margin="0 0 0 10" MouseEnter="ListViewItem_MouseEnter">
+                        <Button Background="Transparent" BorderBrush="Transparent" Padding="0" Command="{Binding PatientsCommand}">
+                            <StackPanel Orientation="Horizontal"
+                       Width="200">
+
+                                <materialDesign:PackIcon Kind="Account" Width="30" Height="30" Foreground="White" Margin="12 0 0 0"/>
+
+
+                                <TextBlock Text="Patients"
+                          Margin="25 0 0 0"
+                          Style="{StaticResource font_style}"/>
+                            </StackPanel>
+                        </Button>
+                        <!--ToolTip-->
+                        <ListViewItem.ToolTip>
+
+                            <ToolTip x:Name="tt_patients"
+                                    Content="Patients"
+                                    Style="{StaticResource tt_style}"/>
+
+                        </ListViewItem.ToolTip>
+
+                    </ListViewItem>
+
+                    <!--Staffs-->
+                    <ListViewItem HorizontalAlignment="Left"
+                     Margin="0 0 0 10" MouseEnter="ListViewItem_MouseEnter" >
+                        <Button Background="Transparent" BorderBrush="Transparent" Padding="0" Command="{Binding StaffsCommand}">
+                            <StackPanel Orientation="Horizontal"
+                       Width="200">
+
+                                <materialDesign:PackIcon Kind="AccountHardHat" Width="30" Height="30" Foreground="White" Margin="12 0 0 0"/>
+
+
+                                <TextBlock Text="Staffs"
+                          Margin="25 0 0 0"
+                          Style="{StaticResource font_style}"/>
+                            </StackPanel>
+                        </Button>
+                        <!--ToolTip-->
+                        <ListViewItem.ToolTip>
+
+                            <ToolTip x:Name="tt_staffs"
+                                    Content="Staffs"
+                                    Style="{StaticResource tt_style}"/>
+
+                        </ListViewItem.ToolTip>
+
+                    </ListViewItem>
+
+                    <!--Diagnosis-->
+                    <ListViewItem HorizontalAlignment="Left"
+                                    Margin="0 0 0 10" MouseEnter="ListViewItem_MouseEnter">
+                        <Button Background="Transparent" BorderBrush="Transparent" Padding="0" Command="{Binding DiagnosisCommand}">
+                            <StackPanel Orientation="Horizontal"
+                                     Width="200">
+
+                                <materialDesign:PackIcon Kind="ClipboardEdit" Width="30" Height="30" Foreground="White" Margin="12 0 0 0"/>
+
+
+                                <TextBlock Text="Diagnosis"
+                                        Margin="25 0 0 0"
+                                        Style="{StaticResource font_style}"/>
+                            </StackPanel>
+                        </Button>
+                        <!--ToolTip-->
+                        <ListViewItem.ToolTip>
+
+                            <ToolTip x:Name="tt_diagnosis"
+                Content="Staffs"
+                Style="{StaticResource tt_style}"/>
+
+                        </ListViewItem.ToolTip>
+
+                    </ListViewItem>
+
+                    <!--List-->
+
+                    <ListViewItem HorizontalAlignment="Left"
+                    Margin="0 0 0 10" MouseEnter="ListViewItem_MouseEnter">
+                        <Button Background="Transparent" BorderBrush="Transparent" Padding="0" Command="{Binding ListsCommand}">
+                            <StackPanel Orientation="Horizontal"
+                     Width="200">
+
+                                <materialDesign:PackIcon Kind="ClipboardText" Width="30" Height="30" Foreground="White" Margin="12 0 0 0"/>
+
+
+                                <TextBlock Text="List"
+                        Margin="25 0 0 0"
+                        Style="{StaticResource font_style}"/>
+                            </StackPanel>
+                        </Button>
+                        <!--ToolTip-->
+                        <ListViewItem.ToolTip>
+
+                            <ToolTip x:Name="tt_lists"
+Content="List"
+Style="{StaticResource tt_style}"/>
+
+                        </ListViewItem.ToolTip>
+
+                    </ListViewItem>
+
+                    <!--Appointment-->
+                    <ListViewItem HorizontalAlignment="Left"
+                    Margin="0 0 0 10" MouseEnter="ListViewItem_MouseEnter">
+                        <Button Background="Transparent" BorderBrush="Transparent" Padding="0" Command="{Binding ManageAppointmentCommand}">
+                            <StackPanel Orientation="Horizontal"
+                     Width="200">
+
+                                <materialDesign:PackIcon Kind="Calendar" Width="30" Height="30" Foreground="White" Margin="12 0 0 0"/>
+
+
+                                <TextBlock Text="Appointment"
+                        Margin="25 0 0 0"
+                        Style="{StaticResource font_style}" />
+                            </StackPanel>
+                        </Button>
+                        <!--ToolTip-->
+                        <ListViewItem.ToolTip>
+
+                            <ToolTip x:Name="tt_appoinntments"
+Content="Appointment"
+Style="{StaticResource tt_style}" Width="130"/>
+
+                        </ListViewItem.ToolTip>
+
+                    </ListViewItem>
+
+                    <!--Invoice-->
+
+                    <ListViewItem HorizontalAlignment="Left"
+                    Margin="0 0 0 0" MouseEnter="ListViewItem_MouseEnter">
+                        <Button Background="Transparent" BorderBrush="Transparent" Padding="0" Command="{Binding InvoiceCommand}">
+                            <StackPanel Orientation="Horizontal"
+                     Width="200">
+
+                                <materialDesign:PackIcon Kind="InvoiceLineItems"  Width="30" Height="30" Foreground="White" Margin="12 0 0 0"/>
+
+
+                                <TextBlock Text="Invoice"
+                        Margin="25 0 0 0"
+                        Style="{StaticResource font_style}"/>
+                            </StackPanel>
+                        </Button>
+                        <!--ToolTip-->
+                        <ListViewItem.ToolTip>
+
+                            <ToolTip x:Name="tt_invoice"
+Content="Invoice"
+Style="{StaticResource tt_style}"/>
+
+                        </ListViewItem.ToolTip>
+
+                    </ListViewItem>
+                    <!--Log out-->
+
+                    <ListViewItem HorizontalAlignment="Left"
+                    Margin="0 150 0 0" MouseEnter="ListViewItem_MouseEnter">
+                        <Button Background="Transparent" BorderBrush="Transparent" Padding="0">
+                            <StackPanel Orientation="Horizontal"
+                     Width="200">
+
+                                <materialDesign:PackIcon Kind="LockOpen"  Width="30" Height="30" Foreground="White" Margin="12 0 0 0"/>
+
+
+                                <TextBlock Text="Logout"
+                        Margin="25 0 0 0"
+                        Style="{StaticResource font_style}"/>
+                            </StackPanel>
+                        </Button>
+                        <!--ToolTip-->
+                        <ListViewItem.ToolTip>
+
+                            <ToolTip x:Name="tt_logout"
+Content="Logout"
+Style="{StaticResource tt_style}"/>
+
+                        </ListViewItem.ToolTip>
+
+                    </ListViewItem>
+                    <!--ListView items style template-->
+                    <ListView.ItemContainerStyle>
+                        <Style  TargetType="ListViewItem">
+
                             <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="TreeViewItem">
-                                        <StackPanel>
-                                            <!-- Header hiển thị -->
-                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Background="Transparent">
-                                                <ContentPresenter ContentSource="Header"/>
-                                                <!-- ToggleButton (mũi tên mở rộng) ẩn khi không mở rộng -->
-                                                <ToggleButton x:Name="Expander" Visibility="Collapsed"/>
-                                            </StackPanel>
 
-                                            <!-- Presenter hiển thị các mục con -->
-                                            <ItemsPresenter x:Name="ItemsHost" Margin="10,0,0,0"/>
-                                        </StackPanel>
+                                <Setter.Value>
+
+                                    <ControlTemplate TargetType="{x:Type ListViewItem}">
+
+                                        <Border Name="Bd"
+                                                Height="50"
+                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                BorderThickness="{TemplateBinding BorderThickness}"
+                                                Background="{TemplateBinding Background}"
+                                                Padding="{TemplateBinding Padding}"
+                                                SnapsToDevicePixels="True">
+
+                                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+
+                                        </Border>
 
                                         <ControlTemplate.Triggers>
-                                            <!-- Trigger để hiển thị ToggleButton (mũi tên) khi mở rộng -->
-                                            <Trigger Property="IsExpanded" Value="True">
-                                                <Setter TargetName="Expander" Property="Visibility" Value="Visible"/>
-                                            </Trigger>
 
-                                            <Trigger Property="IsExpanded" Value="False">
-                                                <Setter TargetName="Expander" Property="Visibility" Value="Collapsed"/>
-                                                <Setter TargetName="ItemsHost" Property="Visibility" Value="Collapsed"/>
-                                            </Trigger>
+                                            <MultiTrigger>
+
+                                                <MultiTrigger.Conditions>
+
+                                                    <Condition Property="IsMouseOver" Value="True"/>
+
+                                                </MultiTrigger.Conditions>
+
+                                                <Setter Property="Background"
+                                                        TargetName="Bd"
+                                                        Value="#404D5B"/>
+
+                                                <Setter Property="BorderBrush"
+                                                        TargetName="Bd"
+                                                        Value="#404D5B"/>
+
+                                            </MultiTrigger>
+
                                         </ControlTemplate.Triggers>
+
                                     </ControlTemplate>
+
                                 </Setter.Value>
+
                             </Setter>
+
                         </Style>
-                    </TreeView.ItemContainerStyle>
+                    </ListView.ItemContainerStyle>
+
+                </ListView>
 
 
-                    <TreeView MinWidth="240">
-
-                        <!-- TreeViewItem chính cho Management -->
-                        <TreeViewItem x:Name="management" Header="👥 Management" Foreground="White" FontWeight="Bold" FontSize="13">
-                            <!-- TreeViewItem cho Patients -->
-                            <TreeViewItem>
-                                <TreeViewItem.Header>
-                                    <!-- Đặt Button vào Header để sử dụng Command -->
-                                    <Button Background="Transparent" BorderThickness="0" Command="{Binding PatientsCommand}">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="👨‍⚕️ Patients" Foreground="White"/>
-                                        </StackPanel>
-                                    </Button>
-                                </TreeViewItem.Header>
-                            </TreeViewItem>
-
-                            <!-- TreeViewItem cho Staffs -->
-                            <TreeViewItem>
-                                <TreeViewItem.Header>
-                                    <!-- Đặt Button vào Header để sử dụng Command -->
-                                    <Button Background="Transparent" BorderThickness="0" Command="{Binding StaffsCommand}">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="👩‍💼 Staffs" Foreground="White"/>
-                                        </StackPanel>
-                                    </Button>
-                                </TreeViewItem.Header>
-                            </TreeViewItem>
-                        </TreeViewItem>
 
 
-                        <!-- TreeViewItem chính cho Medicine -->
-                        <TreeViewItem x:Name="medicine" Header="💊 Medicine" Foreground="White" FontWeight="Bold" FontSize="13">
-                            <!-- TreeViewItem cho Diagnosis -->
-                            <TreeViewItem>
-                                <TreeViewItem.Header>
-                                    <!-- Đặt Button vào Header để sử dụng Command -->
-                                    <Button Background="Transparent" BorderThickness="0" Command="{Binding DiagnosisCommand}">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="🧑‍⚕️ Diagnosis" Foreground="White"/>
-                                        </StackPanel>
-                                    </Button>
-                                </TreeViewItem.Header>
-                            </TreeViewItem>
-
-                            <!-- TreeViewItem cho List -->
-                            <TreeViewItem>
-                                <TreeViewItem.Header>
-                                    <!-- Đặt Button vào Header để sử dụng Command -->
-                                    <Button Background="Transparent" BorderThickness="0" Command="{Binding ListsCommand}">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="📋 List" Foreground="White"/>
-                                        </StackPanel>
-                                    </Button>
-                                </TreeViewItem.Header>
-                            </TreeViewItem>
-                        </TreeViewItem>
-
-                    </TreeView>
-                </TreeView>
-
-                <!-- Các nút điều hướng khác -->
-                <Button Background="Transparent" BorderThickness="0" HorizontalContentAlignment="Left" Margin="42 0 0 0"  Padding="0,0,0,15" Command="{Binding ManageAppointmentCommand}">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <TextBlock Text="🗓" FontSize="11" Foreground="White" Margin="1,0,7,0"/>
-                        <TextBlock Text="Appointment" FontSize="14" Foreground="White" FontWeight="Bold"/>
-                    </StackPanel>
-                </Button>
-
-                <Button Background="Transparent" BorderThickness="0" HorizontalContentAlignment="Left"  Margin="43 0 0 0" Padding="0,0,0,15" Width="190" Command="{Binding InvoiceCommand}">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <TextBlock Text="📃" FontSize="11" Foreground="White" Margin="1,0,7,0"/>
-                        <TextBlock Text="Invoice" FontSize="14" Foreground="White" FontWeight="Bold"/>
-                    </StackPanel>
-                </Button>
             </StackPanel>
-
-            <!-- Nút điều hướng: Log out -->
-            <Button x:Name="logout" Background="Transparent" BorderThickness="0" VerticalAlignment="Bottom" Padding="5,0,0,10" Margin="0 0 50 10" HorizontalAlignment="Right" Width="130">
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <TextBlock  Text="🔓" FontSize="11" Foreground="White" Margin="0,0,5,0"/>
-                    <TextBlock Text="Log out" FontSize="14" Foreground="White" FontWeight="Bold"/>
-                </StackPanel>
-            </Button>
-
         </Grid>
 
         <!-- Nội dung chính nằm ở cột thứ hai -->
-        <Grid Grid.Column="1">
-          
+        <Grid Grid.Column="1" >
             <ContentControl x:Name="Pages" Content="{Binding CurrentView}"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 3 0 0"  Panel.ZIndex="10">
 
-            <Button Margin="20 28 0 35" Style="{StaticResource ListBtn}"  Click="ToggleSidebar_Click">
-                <Button.Content>
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="/Images/burger-menu.png" Width="25" Height="25" Panel.ZIndex="1"/>
-                    </StackPanel>
-                </Button.Content>
-            </Button>
+                <!-- Nút Phóng to -->
+                <Button Width="25" Height="25"  Click="MinimizeWindow_Click" Background="#3693ff">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="10">
+                                <Grid>
+                                    <Image Width="16" Source="/Images/minus.png" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Grid>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
 
+                <!-- Nút Thu nhỏ -->
+                <Button Width="25" Height="25" Margin="7 0" Click="MaximizeWindow_Click" Background="#3693ff">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="10">
+                                <Grid>
+                                    <Image Width="16" Source="/Images/max.png" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Grid>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+
+
+                <!-- Nút Đóng -->
+                <Button Width="25" Height="25" Click="CloseWindow_Click" Background="#FF6347" Margin="0 0 3 0">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="10">
+                                <Grid>
+                                    <Image Width="16" Source="/Images/close.png" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Grid>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
 
         </Grid>
     </Grid>

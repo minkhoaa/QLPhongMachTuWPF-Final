@@ -31,11 +31,14 @@ CREATE TABLE NHANVIEN
 (
 	MaNV int IDENTITY(1,1)not null,
 	TenNV nvarchar(40),
-	TenDangNhap varchar(40),
-	MatKhau varchar(40),
+	NgaySinh smalldatetime, 
+	DiaChi nvarchar(100),
+	DienThoai varchar(20),
 	LoaiNV int,
 	TrangThai int
 )
+
+
 ALTER TABLE NHANVIEN ADD
 CONSTRAINT NV_MaNV_PK PRIMARY KEY (MaNV)
 
@@ -126,16 +129,14 @@ VALUES(N'Trần Vân',	'07/07/1995',	N'484 Lê Văn Việt, Tăng Nhơn Phú A, 
 INSERT INTO BENHNHAN (TenBN, NgaySinh, DiaChi, DienThoai, GioiTinh, TrangThai)
 VALUES(N'Nguyễn Song Nguyên',	'03/08/1992',	N'121 Nguyễn Xí, phường 26, Bình Thạnh, Hồ Chí Minh',	'1256172123',	N'Nam', '1')
 
-INSERT INTO NHANVIEN (TenNV, TenDangNhap, MatKhau, LoaiNV, TrangThai)
-VALUES(N'Nguyễn Thi',	'admin',	'123', '1', '1')
-INSERT INTO NHANVIEN (TenNV, TenDangNhap, MatKhau, LoaiNV, TrangThai)
-VALUES(N'Trần Văn Kim',	'tranvankim',	'212', '2', '1')	
-INSERT INTO NHANVIEN (TenNV, TenDangNhap, MatKhau, LoaiNV, TrangThai)
-VALUES(N'Ngô Bảo Kim',	'ngobaokim',	'126', '2', '1')
-INSERT INTO NHANVIEN (TenNV, TenDangNhap, MatKhau, LoaiNV, TrangThai)
-VALUES(N'Võ Thụy',	'vothuy',	'324', '2', '1')
-INSERT INTO NHANVIEN (TenNV, TenDangNhap, MatKhau, LoaiNV, TrangThai)
-VALUES(N'Tống Trinh',	'tongtrinh',	'541', '2', '1')
+INSERT INTO NHANVIEN (TenNV, NgaySinh, DiaChi, DienThoai ,  LoaiNV, TrangThai)
+VALUES(N'Nguyễn Minh',	'07/07/1995',	N'133/123C Tô Hiến Thành, Phường 13, Quận 10, Hồ Chí Minh', '976287165',  '1', '1')
+INSERT INTO NHANVIEN (TenNV, NgaySinh, DiaChi, DienThoai ,  LoaiNV, TrangThai)
+VALUES(N'Văn Dũng',	'07/02/1985',	N'121 Nguyễn Xí, phường 26, Bình Thạnh, Hồ Chí Minh', '976287165',  '1', '1')
+INSERT INTO NHANVIEN (TenNV, NgaySinh, DiaChi, DienThoai ,  LoaiNV, TrangThai)
+VALUES(N'Nguyễn Hạnh',	'07/07/1955',	N'133/123C Tô Hiến Thành, Phường 13, Quận 10, Hồ Chí Minh', '976287165',  '1', '1')
+INSERT INTO NHANVIEN (TenNV, NgaySinh, DiaChi, DienThoai ,  LoaiNV, TrangThai)
+VALUES(N'Minh Khang',	'07/02/1998',	N'484 Lê Văn Việt, Tăng Nhơn Phú A, Quận 9, Hồ Chí Minh', '976287165',  '1', '1')
 
 INSERT INTO PHIEUKHAM (MaNV, MaBN, NgayKham, TrieuChung, KetQua, TrangThai)
 VALUES('1',	'1',	'01/01/2018',	N'Dị ứng theo mùa như hắt hơi, chảy nước mũi, ngứa họng hoặc ngứa, chảy nước mắt',	N'Viêm Xoan.', '1')

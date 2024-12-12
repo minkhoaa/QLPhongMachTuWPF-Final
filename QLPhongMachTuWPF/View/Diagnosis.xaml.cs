@@ -30,5 +30,10 @@ namespace QLPhongMachTuWPF.View
             AddMedicineDiagnosis addDiagnosisWindow = new AddMedicineDiagnosis();
             addDiagnosisWindow.ShowDialog();
         }
+
+        private void patientsDatagrid_SourceUpdated(object sender, DataTransferEventArgs e)
+        {
+
+        }
     }
 }

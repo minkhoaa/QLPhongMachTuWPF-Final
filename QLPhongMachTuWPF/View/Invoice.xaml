@@ -7,11 +7,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="720" d:DesignWidth="880"
               xmlns:vm="clr-namespace:QLPhongMachTuWPF.ViewModel"
-                xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             DataContext="{StaticResource InvoiceVM}"
+                xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" d:DataContext="{d:DesignInstance Type=vm:InvoiceVM}"
              Style="{StaticResource Page_Style}">
-    <UserControl.DataContext>
-        <vm:InvoiceVM/>
-    </UserControl.DataContext>
+   
 
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
@@ -43,17 +42,17 @@
         </Button>
 
 
-        <DataGrid Grid.Row="1" Background="#eeeeee" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle2}" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="patientsDatagrid" Margin="0,0,0,10"
+        <DataGrid Grid.Row="1" ItemsSource="{Binding InvoiceList}" Background="#eeeeee" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle2}" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="patientsDatagrid" Margin="0,0,0,10"
          HorizontalScrollBarVisibility="Disabled" Grid.RowSpan="2" 
     HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
     Width="auto" Height="auto" VerticalScrollBarVisibility="Auto">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Invoice ID" IsReadOnly="True" CanUserResize="False" Width="0.8*" Binding="{Binding PatientID}" />
-                <DataGridTextColumn Header="Exam form ID" IsReadOnly="True" CanUserResize="False" Width="1*" Binding="{Binding PatientName}"/>
-                <DataGridTextColumn Header="Examination fee" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding DOB}"/>
-                <DataGridTextColumn Header="Pharmancy fee" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding PatientAddress}"/>
-                <DataGridTextColumn Header="Total fee" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding PatientPhone}"/>
-
+                <DataGridTextColumn Header="Invoice ID" IsReadOnly="True" CanUserResize="False" Width="0.8*" Binding="{Binding MaHD}" />
+                <DataGridTextColumn Header="Exam form ID" IsReadOnly="True" CanUserResize="False" Width="1*" Binding="{Binding MaPK}"/>
+                <DataGridTextColumn Header="Examination fee" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding TienKham}"/>
+                <DataGridTextColumn Header="Pharmancy fee" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding TienThuoc}"/>
+                <DataGridTextColumn Header="Total fee" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding TongTien}"/>
+                <DataGridTextColumn Header="Status" IsReadOnly="True" CanUserResize="False" Width="0.8*" Binding="{Binding TrangThai}" />
                 <DataGridTemplateColumn Header="Action" IsReadOnly="True" CanUserResize="False" Width="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

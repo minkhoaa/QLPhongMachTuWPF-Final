@@ -1,7 +1,9 @@
 ﻿using MaterialDesignThemes.Wpf;
+using QLPhongMachTuWPF.Model;
 using QLPhongMachTuWPF.View;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.Remoting.Activation;
 using System.Text;
@@ -12,21 +14,24 @@ using System.Windows.Input;
 namespace QLPhongMachTuWPF.ViewModel
 {
 
-    public class InvoiceVM : ViewModelBase
-    {
-        public ICommand AddInvoiceCommand { get; set; }
-
-        public InvoiceVM()
+   
+        public class InvoiceVM : ViewModelBase
         {
-
-            AddInvoiceCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            public ICommand AddStaffCommand { get; set; }
+            private ObservableCollection<HOADON> _invoice;
+            public ObservableCollection<HOADON> InvoiceList { get => _invoice; set { _invoice = value; OnPropertyChanged(); } }
+            public InvoiceVM()
             {
-                MessageBox.Show("thêm page addInvoice"); 
+                InvoiceList = new ObservableCollection<HOADON>(DataProvider.Ins.db.HOADONs );
+                AddStaffCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+                {
+                    AddStaff add = new AddStaff();
+                    add.ShowDialog();
+
+                }
+                );
             }
-            );
-
-
         }
-    }
+    
 }
 
