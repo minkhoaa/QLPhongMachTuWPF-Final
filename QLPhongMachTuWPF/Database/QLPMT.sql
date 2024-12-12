@@ -1,5 +1,4 @@
-﻿
-create database QLPMT
+﻿create database QLPMT
 go
 use QLPMT
 go
@@ -38,6 +37,8 @@ CREATE TABLE NHANVIEN
 	LoaiNV int,
 	TrangThai int
 )
+
+
 ALTER TABLE NHANVIEN ADD
 CONSTRAINT NV_MaNV_PK PRIMARY KEY (MaNV)
 
