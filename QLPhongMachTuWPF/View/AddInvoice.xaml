@@ -77,6 +77,7 @@ Grid.Column="1" Panel.ZIndex="1"
                     <TextBlock Text="Examination fee" Style="{StaticResource textBlock}" Margin="150 0 0 0" VerticalAlignment="Center"/>
                     <TextBox Name="txbAddExaminationFee"
                                     VerticalAlignment="Center"
+                             Text="{Binding Examination }"
                                     materialDesign:HintAssist.Hint="Name"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                     HorizontalAlignment="Center" Width="300" Margin="150 0 0 10"
@@ -95,6 +96,7 @@ Grid.Column="1" Panel.ZIndex="1"
                     <TextBox
                     x:Name="txbAddPharmacyFee"
                     VerticalAlignment="Center"
+                        Text="{Binding Pharmancy}"
                     materialDesign:HintAssist.Hint="Address"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                     HorizontalAlignment="Center" Width="300" Margin="150,0,0,0"
@@ -119,7 +121,7 @@ Grid.Column="1" Panel.ZIndex="1"
         </Grid>
         <!-- Phần bên dưới Add Staff-->
         <Grid Grid.Row="2" Background="White" >
-            <Button   Content="Add invoice" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10 10" 
+            <Button Command="{Binding addCommand}" CommandParameter="{Binding ElementName=addInvoiceForm}" Content="Add invoice" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10 10" 
                 Background="#3693ff" Foreground="White"
                 Width="250"
               Height="50"

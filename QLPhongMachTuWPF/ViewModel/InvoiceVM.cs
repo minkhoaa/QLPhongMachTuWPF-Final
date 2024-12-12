@@ -17,15 +17,15 @@ namespace QLPhongMachTuWPF.ViewModel
    
         public class InvoiceVM : ViewModelBase
         {
-            public ICommand AddStaffCommand { get; set; }
+            public ICommand AddInvoiceCommand { get; set; }
             private ObservableCollection<HOADON> _invoice;
             public ObservableCollection<HOADON> InvoiceList { get => _invoice; set { _invoice = value; OnPropertyChanged(); } }
             public InvoiceVM()
             {
                 InvoiceList = new ObservableCollection<HOADON>(DataProvider.Ins.db.HOADONs );
-                AddStaffCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+                AddInvoiceCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
                 {
-                    AddStaff add = new AddStaff();
+                    AddInvoice add = new AddInvoice(); 
                     add.ShowDialog();
 
                 }

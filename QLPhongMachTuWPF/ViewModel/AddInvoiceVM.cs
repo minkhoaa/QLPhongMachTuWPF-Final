@@ -5,6 +5,7 @@ using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace QLPhongMachTuWPF.ViewModel
@@ -16,8 +17,8 @@ namespace QLPhongMachTuWPF.ViewModel
             addCommand = new RelayCommand<object>((p) => {
                 return true;
             }, (p) => {
-                MessageBox.Show(p.ToString()); 
-
+                
+                MessageBox.Show("thêm chức năng button này"); 
             });
 
 
