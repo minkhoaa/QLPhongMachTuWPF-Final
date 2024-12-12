@@ -18,105 +18,130 @@ WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent"
     </Window.Resources>
 
     <Grid>
-        <!-- Định nghĩa 3 hàng để chia ra 3 phần-->
-        <Grid.RowDefinitions>
-            <!-- Phần đầu gồm Add Staff và nút close -->
-            <RowDefinition Height="0.5*"></RowDefinition>
-            <!-- Phần 2 là gồm các name, username ... và các textbox-->
-            <RowDefinition Height="3*"></RowDefinition>
-            <!-- Phần 3 là button để add staff-->
-            <RowDefinition Height="*" ></RowDefinition>
-        </Grid.RowDefinitions>
-        <Border Grid.Row="0" CornerRadius="10 10 0 0" MouseDown="Border_MouseDown">
-            <Border.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#3693ff"></GradientStop>
-                </LinearGradientBrush>
-            </Border.Background>
-            <!--Thêm TextBlock Add Staff-->
-            <TextBlock Text="Add medicine" Style="{StaticResource TitleText}" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80"></ColumnDefinition>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-        </Border>
-        <!--Button close để đóng form-->
-        <Grid Grid.Row="0" >
-            <Button x:Name="btnClose"
+        <Grid Grid.Column="0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!--Logo-->
+            <Grid Grid.Row="0">
+                <Border CornerRadius="10 0 0 0" Background="#1ca7ec">
+
+                </Border>
+                <materialDesign:PackIcon Kind="ClipboardText" Style="{StaticResource icon}"/>
+
+
+
+
+            </Grid>
+            <!--chu-->
+            <Grid Grid.Row="1">
+                <Border CornerRadius="0 0 0 10">
+                    <Border.Background>
+                        <LinearGradientBrush>
+                            <GradientStop Color="#1ca7ec" Offset="0.0"/>
+                            <GradientStop Color="#1f2f98" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Text="L" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
+                    <TextBlock Text="I" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
+                    <TextBlock Text="S" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
+                    <TextBlock Text="T" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
+
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Column="1" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!--Chu-->
+            <Grid Grid.Row="0" MouseDown="Border_MouseDown">
+                <Button x:Name="btnClose"
  BorderBrush="#3693ff"
 Grid.Column="1" Panel.ZIndex="1"
    Width="30"
    Height="30"
    VerticalAlignment="Top"
    HorizontalAlignment="Right"
-   Margin="0 15 15 0"
+   Margin="0 13 13 0"
    Click="btnClose_Click"
     BorderThickness="0">
-                <Button.Background >
-                    <ImageBrush ImageSource="/Images/image.png"
+                    <Button.Background >
+                        <ImageBrush ImageSource="/Images/image.png"
                 Stretch="Fill"
                 />
-                </Button.Background>
-            </Button>
-        </Grid>
-        <!--Phần 2 để thêm các phần Name username....-->
-        <Grid Grid.Row="1" Background="White">
-
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="2*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-
-
-                </Grid.RowDefinitions>
-                <!--Name-->
-                <Grid Grid.Row="0">
-                    <TextBlock Text="Medicine" Style="{StaticResource textBlock}" Margin="150 20 0 0"/>
-                    <TextBox
-                                    VerticalAlignment="Center"
-                                    materialDesign:HintAssist.Hint="Name"
-                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                    HorizontalAlignment="Center" Width="300" Margin="50 0 0 10"
-                                    FontSize="16"
-                                    
-                             />
-
-                </Grid>
-                <!--Address-->
-                <Grid Grid.Row="1">
-                    <TextBlock Text="User guide" Style="{StaticResource anotherTextBlock}" VerticalAlignment="Top" Margin="118,70,0,0"/>
-                    <TextBox
-  Height="80"
-  MinWidth="280"
-  materialDesign:HintAssist.Hint="User guide"
-  AcceptsReturn="True"
-  SpellCheck.IsEnabled="True"
-  TextWrapping="Wrap"
-  VerticalScrollBarVisibility="Auto"
-  Width="500" Margin="254,70,46,50"
- FontSize="16"
-  />
-                    <!--Phone-->
-                </Grid>
-
-                <!--Gender-->
-                <Grid Grid.Row="3">
-                    <TextBlock Text="Status"  Style="{StaticResource anotherTextBlock}"/>
-                    <StackPanel Style="{StaticResource StckPanel}">
-                        <RadioButton Content="Available" IsChecked="True" Style="{StaticResource radioBtnAdd}" Margin="0 25 0 0"/>
-                        <RadioButton Content="Unavailable" Style="{StaticResource radioBtnAdd}"  Margin="20 25 0 0"/>
-                    </StackPanel>
-                </Grid>
-
+                    </Button.Background>
+                </Button>
+                <Border CornerRadius="0 10 0 0" Background="White"/>
+                <TextBlock Text="ADD MEDICINE" Style="{StaticResource titleText}"/>
             </Grid>
 
+            <!--Input-->
 
-        </Grid>
-        <!-- Phần bên dưới Add Staff-->
-        <Grid Grid.Row="2" Background="White" >
-            <Button Content="Add medicine" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10 10"
-                Background="#3693ff" Foreground="White"
-                Width="250"
-              Height="50"
-                FontSize="20" ></Button>
+            <Grid Grid.Row="1">
+                <Border CornerRadius="0 0 10 0" Background="White"/>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 50 0 0">
+                    <!--name-->
+                    <TextBox
+                         VerticalAlignment="Center"
+                         materialDesign:HintAssist.Hint="Medicine"
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         Width="250" FontSize="16"/>
+
+                    
+                </StackPanel>
+
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 150 0 0">
+                    <StackPanel
+ >
+                        <TextBox
+    Height="100"
+                            Width="400"
+    materialDesign:HintAssist.Hint="User guide"
+    AcceptsReturn="True"
+    
+    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+    TextWrapping="Wrap"
+    VerticalScrollBarVisibility="Auto"
+                            FontSize="16"
+                            
+    />
+                    </StackPanel>
+                </StackPanel>
+
+                <TextBlock Text="Status" Margin="80 50 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" FontSize="16" Foreground="Gray"/>
+
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 300 0 0">
+                    
+                    <!--Status-->
+                    <ComboBox x:Name="cmbStatus" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+          materialDesign:HintAssist.Hint="Available"
+           FontSize="16" Margin="0 0 0 0"/>
+
+                </StackPanel>
+
+
+
+                <Button Content="Add medicine"  Style="{StaticResource btnAdd}">
+
+                </Button>
+
+            </Grid>
         </Grid>
     </Grid>
 </Window>
