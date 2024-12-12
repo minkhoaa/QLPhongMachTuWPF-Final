@@ -20,7 +20,8 @@
         d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
         DataContext="{StaticResource MainVM}"
         Name="mainWindow"
-        
+         WindowStyle="None"
+        MouseDown="Window_MouseDown"
         >
 
 
@@ -441,7 +442,7 @@ Style="{StaticResource tt_style}"/>
                                 <materialDesign:PackIcon Kind="LockOpen"  Width="30" Height="30" Foreground="White" Margin="12 0 0 0"/>
 
 
-                                <TextBlock Text="Invoice"
+                                <TextBlock Text="Logout"
                         Margin="25 0 0 0"
                         Style="{StaticResource font_style}"/>
                             </StackPanel>
@@ -450,7 +451,7 @@ Style="{StaticResource tt_style}"/>
                         <ListViewItem.ToolTip>
 
                             <ToolTip x:Name="tt_logout"
-Content="Invoice"
+Content="Logout"
 Style="{StaticResource tt_style}"/>
 
                         </ListViewItem.ToolTip>
@@ -523,6 +524,50 @@ Style="{StaticResource tt_style}"/>
         <!-- Nội dung chính nằm ở cột thứ hai -->
         <Grid Grid.Column="1" >
             <ContentControl x:Name="Pages" Content="{Binding CurrentView}"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 3 0 0"  Panel.ZIndex="10">
+
+                <!-- Nút Phóng to -->
+                <Button Width="25" Height="25"  Click="MinimizeWindow_Click" Background="#3693ff">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="10">
+                                <Grid>
+                                    <Image Width="16" Source="/Images/minus.png" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Grid>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <!-- Nút Thu nhỏ -->
+                <Button Width="25" Height="25" Margin="7 0" Click="MaximizeWindow_Click" Background="#3693ff">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="10">
+                                <Grid>
+                                    <Image Width="16" Source="/Images/max.png" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Grid>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+
+
+                <!-- Nút Đóng -->
+                <Button Width="25" Height="25" Click="CloseWindow_Click" Background="#FF6347" Margin="0 0 3 0">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="10">
+                                <Grid>
+                                    <Image Width="16" Source="/Images/close.png" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Grid>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
+
         </Grid>
     </Grid>
 </Window>
