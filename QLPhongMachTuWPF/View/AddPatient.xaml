@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:QLPhongMachTuWPF.View"
         mc:Ignorable="d"
         Title="AddPatient" Height="600" Width="800"
-                xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodel="clr-namespace:QLPhongMachTuWPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:AddPatientVM}"
+        DataContext="{StaticResource AddPatientVM}"
     WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent" AllowsTransparency="True">
 
     <Window.Resources>
@@ -99,14 +100,17 @@
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 100 0 0">
                     <!--name-->
                     <TextBox
+                        
                          VerticalAlignment="Center"
                          materialDesign:HintAssist.Hint="Name"
+                        Text="{Binding TenBN}"
                          Style="{StaticResource MaterialDesignOutlinedTextBox}"
                          Width="250" FontSize="16"/>
 
                     <!--Phone-->
                     <TextBox
                     VerticalAlignment="Center"
+                    Text="{Binding DienThoai}"
                     materialDesign:HintAssist.Hint="Phone"
                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
                     Width="250" Margin="60 0 0 0" FontSize="16"/>
@@ -119,19 +123,24 @@
                     <ComboBox x:Name="cmbDay" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
                               materialDesign:HintAssist.Hint="1"
                               IsEditable="True"
+                              Text="{Binding Ngay}"
                                FontSize="16"/>
 
-                    <ComboBox x:Name="cmbMonth" IsEditable="True" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox
+                        Text="{Binding Thang}"
+                        x:Name="cmbMonth" IsEditable="True" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
           materialDesign:HintAssist.Hint="1"
+                       
           FontSize="16" Margin="10 0 0 0"/>
 
-                    <ComboBox x:Name="cmbYear" Width="110" IsEditable="True" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox Text ="{Binding Nam}"  x:Name="cmbYear" Width="110" IsEditable="True" Style="{StaticResource MaterialDesignOutlinedComboBox}"
 materialDesign:HintAssist.Hint="2000"
  FontSize="16" Margin="10 0 0 0"/>
 
                     <!--Address-->
                     <TextBox VerticalAlignment="Center"
                                 materialDesign:HintAssist.Hint="Address"
+                             Text="{Binding DiaChi}"
                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                 Width="250" Margin="60 0 0 0" FontSize="16"/>
                 </StackPanel>
@@ -141,18 +150,20 @@ materialDesign:HintAssist.Hint="2000"
 
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 300 0 0">
-                    <ComboBox x:Name="cmbGender" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox Text="{Binding Gender}" x:Name="cmbGender" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
           materialDesign:HintAssist.Hint="Male"
            FontSize="16"/>
-                    <ComboBox x:Name="cmbType" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox Text="{Binding Charged}" x:Name="cmbType" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
 materialDesign:HintAssist.Hint="Discharged"
  FontSize="16" Margin="60 0 0 0"/>
                 </StackPanel>
 
 
 
-                <Button Content="Add patient"  Style="{StaticResource btnAdd}">
-
+                <Button
+                    Command="{Binding AddPatientCommand}"
+                    Content="Add patient"  Style="{StaticResource btnAdd}">
+                    
                 </Button>
 
             </Grid>

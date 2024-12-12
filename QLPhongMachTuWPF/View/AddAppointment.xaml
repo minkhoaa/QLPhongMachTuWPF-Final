@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="AddAppointment" Height="600" Width="800"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        
 WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent" AllowsTransparency="True">
     <Window.Resources>
         <ResourceDictionary>
@@ -174,8 +175,10 @@ materialDesign:HintAssist.Hint="2000"
 
 
 
-                <Button Content="Add appointment"  Style="{StaticResource btnAdd}">
-
+                <Button 
+                    Command="{Binding }"
+                    Content="Add appointment"  Style="{StaticResource btnAdd}">
+                    
                 </Button>
 
             </Grid>
