@@ -1,4 +1,4 @@
-﻿<Window x:Class="QLPhongMachTuWPF.View.AddAppointment"
+<Window x:Class="QLPhongMachTuWPF.View.AddAppointment"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,7 +7,6 @@
         mc:Ignorable="d"
         Title="AddAppointment" Height="600" Width="800"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        
 WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent" AllowsTransparency="True">
     <Window.Resources>
         <ResourceDictionary>
@@ -120,20 +119,16 @@ Grid.Column="1" Panel.ZIndex="1"
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 200 0 0">
                     <!--Date of birth-->
-                    <ComboBox x:Name="cmbDay"
-                              IsEditable="True"
-                              Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                              materialDesign:HintAssist.Hint="1"
+                    <ComboBox x:Name="cmbDay" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                             
                                FontSize="16"/>
 
-                    <ComboBox x:Name="cmbMonth"
-                              IsEditable="True"
-                              Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-          materialDesign:HintAssist.Hint="1"
+                    <ComboBox x:Name="cmbMonth" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+         
           FontSize="16" Margin="10 0 0 0"/>
 
-                    <ComboBox x:Name="cmbYear" IsEditable="True" Width="110" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-materialDesign:HintAssist.Hint="2000"
+                    <ComboBox x:Name="cmbYear" Width="110" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+
  FontSize="16" Margin="10 0 0 0"/>
 
                     <!--Address-->
@@ -149,36 +144,28 @@ materialDesign:HintAssist.Hint="2000"
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 300 0 0">
                     <!--Day appointment-->
-                    <ComboBox x:Name="cmbDayapp"
-                              IsEditable="True"
-                              Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                              materialDesign:HintAssist.Hint="1"
+                    <ComboBox x:Name="cmbDayapp" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                             
                                FontSize="16"/>
 
-                    <ComboBox x:Name="cmbMonthapp"
-                              IsEditable="True"
-                              Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-          materialDesign:HintAssist.Hint="1"
+                    <ComboBox x:Name="cmbMonthapp" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+         
           FontSize="16" Margin="10 0 0 0"/>
 
-                    <ComboBox x:Name="cmbYearapp"
-                              IsEditable="True"
-                              Width="110" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-materialDesign:HintAssist.Hint="2000"
+                    <ComboBox x:Name="cmbYearapp" Width="110" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+
  FontSize="16" Margin="10 0 0 0"/>
                     <!--Gender-->
                     <ComboBox x:Name="cmbGender" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-          materialDesign:HintAssist.Hint="Male"
+         
            FontSize="16" Margin="60 0 0 0"/>
 
                 </StackPanel>
 
 
 
-                <Button 
-                    Command="{Binding }"
-                    Content="Add appointment"  Style="{StaticResource btnAdd}">
-                    
+                <Button Content="Add appointment"  Style="{StaticResource btnAdd}">
+
                 </Button>
 
             </Grid>

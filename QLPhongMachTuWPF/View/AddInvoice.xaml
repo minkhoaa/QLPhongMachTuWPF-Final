@@ -135,7 +135,7 @@
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 280 0 0">
                     <ComboBox x:Name="cmbStatus" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-          materialDesign:HintAssist.Hint="Paid"
+      
            FontSize="16"/>
 
                 </StackPanel>

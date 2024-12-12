@@ -1,6 +1,4 @@
-﻿
-
-create database QLPMT
+﻿create database QLPMT
 go
 use QLPMT
 go
