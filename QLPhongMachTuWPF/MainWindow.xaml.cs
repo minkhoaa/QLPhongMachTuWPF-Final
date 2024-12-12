@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -26,8 +27,9 @@ namespace QLPhongMachTuWPF
         {
 
             InitializeComponent();
-            
-            
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
+
         }
         private void ListViewItem_MouseEnter(object sender, MouseEventArgs e)
         {
@@ -54,5 +56,69 @@ namespace QLPhongMachTuWPF
                 tt_logout.Visibility = Visibility.Visible;
             }
         }
+        private void MinimizeWindow_Click(object sender, RoutedEventArgs e)
+        {
+            // Directly minimize the window without animation
+            WindowState = WindowState.Minimized;
+        }
+
+        private void MaximizeWindow_Click(object sender, RoutedEventArgs e)
+        {
+            if (WindowState == WindowState.Maximized)
+            {
+                WindowState = WindowState.Normal;
+                WindowStyle = WindowStyle.None;
+                WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
+                // Optional: Add a smooth transition if desired
+                var animation = new DoubleAnimation
+                {
+                    From = 0,
+                    To = 1,
+                    Duration = TimeSpan.FromSeconds(0.3)
+                };
+
+                var storyboard = new Storyboard();
+                storyboard.Children.Add(animation);
+                Storyboard.SetTarget(animation, this);
+                Storyboard.SetTargetProperty(animation, new PropertyPath("Opacity"));
+                storyboard.Begin();
+            }
+            else
+            {
+                // Maximize the window to the center of the screen
+                WindowState = WindowState.Maximized;
+                WindowStyle = WindowStyle.None;
+                WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
+                // Optional: Add a smooth transition if desired
+                var animation = new DoubleAnimation
+                {
+                    From = 0,
+                    To = 1,
+                    Duration = TimeSpan.FromSeconds(0.3)
+                };
+
+                var storyboard = new Storyboard();
+                storyboard.Children.Add(animation);
+                Storyboard.SetTarget(animation, this);
+                Storyboard.SetTargetProperty(animation, new PropertyPath("Opacity"));
+                storyboard.Begin();
+            }
+        }
+
+
+        private void CloseWindow_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                this.DragMove();
+            }
+        }
     }
+
 }
