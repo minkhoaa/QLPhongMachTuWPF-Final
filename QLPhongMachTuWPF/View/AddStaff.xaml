@@ -130,17 +130,22 @@ WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent"
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 200 0 0">
                     <!--Date of birth-->
-                    <ComboBox x:Name="cmbDay" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox x:Name="cmbDay" Width="60" 
+                              IsReadOnly="False"
+                              IsEditable="True"
+                              Style="{StaticResource MaterialDesignOutlinedComboBox}"
                               materialDesign:HintAssist.Hint="1"
                                FontSize="16"/>
 
-                    <ComboBox x:Name="cmbMonth" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox x:Name="cmbMonth"
+                              IsEditable="True"
+                              Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
           materialDesign:HintAssist.Hint="1"
           FontSize="16" Margin="10 0 0 0"/>
 
-                    <ComboBox x:Name="cmbYear" Width="110" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox x:Name="cmbYear"  Width="110" Style="{StaticResource MaterialDesignOutlinedComboBox}"
 materialDesign:HintAssist.Hint="2000"
- FontSize="16" Margin="10 0 0 0"/>
+ FontSize="16" Margin="10 0 0 0" IsEditable="True"/>
 
                     <!--Address-->
                     <TextBox VerticalAlignment="Center"
