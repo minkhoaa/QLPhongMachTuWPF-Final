@@ -1,4 +1,6 @@
-﻿create database QLPMT
+﻿
+
+create database QLPMT
 go
 use QLPMT
 go
@@ -64,6 +66,7 @@ CREATE TABLE HOADON
 	TienKham money,
 	TienThuoc money,
 	TongTien money,
+	NgayHD smalldatetime,
 	TrangThai int
 )
 ALTER TABLE HOADON ADD
@@ -167,30 +170,30 @@ VALUES('5',	'14',	'09/05/2018',	N'Đau nhói vùng sau gáy',	 N'Co thắt cơ.'
 INSERT INTO PHIEUKHAM (MaNV, MaBN, NgayKham, TrieuChung, KetQua, TrangThai)
 VALUES('5',	'1',	'09/05/2018',	N'Dị ứng theo mùa như hắt hơi, chảy nước mũi, ngứa họng hoặc ngứa, chảy nước mắt.',	 N'Viêm Xoan.', '1')
 
-INSERT INTO HOADON (MaPK, TienKham, TienThuoc, TongTien, TrangThai)
-VALUES('1',	100000,	400000,	500000, '1')
-INSERT INTO HOADON (MaPK, TienKham, TienThuoc, TongTien, TrangThai)
-VALUES('2',	100000,	100000,	200000, '1')
-INSERT INTO HOADON (MaPK, TienKham, TienThuoc, TongTien, TrangThai)
-VALUES('10',	100000,	1000000,	1100000, '1')
-INSERT INTO HOADON (MaPK, TienKham, TienThuoc, TongTien, TrangThai)
-VALUES('12',	100000,	500000,	600000, '1')
-INSERT INTO HOADON (MaPK, TienKham, TienThuoc, TongTien, TrangThai)
-VALUES('13',	100000,	2000000,	2100000, '1')
-INSERT INTO HOADON (MaPK, TienKham, TienThuoc, TongTien, TrangThai)
-VALUES('14',	100000,	1000000,	1100000, '1')
-INSERT INTO HOADON (MaPK, TienKham, TienThuoc, TongTien, TrangThai)
-VALUES('15',	100000,	500000,	600000, '1')
-INSERT INTO HOADON (MaPK, TienKham, TienThuoc, TongTien, TrangThai)
-VALUES('16',	100000,	500000,	600000, '1')
-INSERT INTO HOADON (MaPK, TienKham, TienThuoc, TongTien, TrangThai)
-VALUES('17',	150000,	500000,	600000, '1')
-INSERT INTO HOADON (MaPK, TienKham, TienThuoc, TongTien, TrangThai)
-VALUES('18',	300000,	500000,	600000, '1')
-INSERT INTO HOADON (MaPK, TienKham, TienThuoc, TongTien, TrangThai)
-VALUES('19',	200000,	500000,	600000, '1')
-INSERT INTO HOADON (MaPK, TienKham, TienThuoc, TongTien, TrangThai)
-VALUES('20',	190000,	500000,	200000, '1')
+INSERT INTO HOADON (MaPK, TienKham, TienThuoc, TongTien,NgayHD, TrangThai)
+VALUES('1',	100000,	400000,	500000, '11/12/1970',  '1')
+INSERT INTO HOADON (MaPK, TienKham, TienThuoc, TongTien,NgayHD, TrangThai)
+VALUES('2',	100000,	100000,	200000, '11/12/1970',  '1')
+INSERT INTO HOADON (MaPK, TienKham, TienThuoc, TongTien,NgayHD, TrangThai)
+VALUES('10',	100000,	1000000,	1100000, '11/12/1970',  '1')
+INSERT INTO HOADON (MaPK, TienKham, TienThuoc, TongTien,NgayHD, TrangThai)
+VALUES('12',	100000,	500000,	600000, '11/12/1970',  '1')
+INSERT INTO HOADON (MaPK, TienKham, TienThuoc, TongTien,NgayHD, TrangThai)
+VALUES('13',	100000,	2000000,	2100000, '11/12/1970',  '1')
+INSERT INTO HOADON (MaPK, TienKham, TienThuoc, TongTien, NgayHD, TrangThai)
+VALUES('14',	100000,	1000000,	1100000, '11/12/1970',  '1')
+INSERT INTO HOADON (MaPK, TienKham, TienThuoc, TongTien,  TongTien, TrangThai,TrangThai)
+VALUES('15',	100000,	500000,	600000, '11/12/1970',  '1') 
+INSERT INTO HOADON (MaPK, TienKham, TienThuoc, TongTien,  TongTien, TrangThai,  TrangThai)
+VALUES('16',	100000,	500000,	600000, '11/12/1970',  '1')
+INSERT INTO HOADON (MaPK, TienKham, TienThuoc, TongTien,  TongTien,  TongTien, TrangThai)
+VALUES('17',	150000,	500000,	600000, '11/12/1970',  '1')
+INSERT INTO HOADON (MaPK, TienKham, TienThuoc, TongTien,  TongTien,  TongTien, TrangThai)
+VALUES('18',	300000,	500000,	600000, '11/12/1970',  '1')
+INSERT INTO HOADON (MaPK, TienKham, TienThuoc, TongTien,  TongTien, TrangThai,  TrangThai)
+VALUES('19',	200000,	500000,	600000, '11/12/1970',  '1')
+INSERT INTO HOADON (MaPK, TienKham, TienThuoc, TongTien,  TongTien, TrangThai,  TrangThai)
+VALUES('20',	190000,	500000,	200000, '11/12/1970',  '1')
 
 INSERT INTO THUOC (TenThuoc, DonViTinh, Gia, TrangThai)
 VALUES('Telfast',	N'Hộp',	200000, '1')
