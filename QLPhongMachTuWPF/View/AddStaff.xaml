@@ -71,7 +71,8 @@ Grid.Column="1" Panel.ZIndex="1"
                 <!--Name-->
                 <Grid Grid.Row="0">
                     <TextBlock Text="Staff" Style="{StaticResource textBlock}" Margin="150 20 0 0"/>
-                    <TextBox
+                    <TextBox        
+                                    
                                     VerticalAlignment="Center"
                                     materialDesign:HintAssist.Hint="Name"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"

@@ -11,7 +11,7 @@
     <viewmodel:ListsVM x:Key="ListsVM" ></viewmodel:ListsVM>
     <viewmodel:DiagnosisVM x:Key = "DiagnosisVM"></viewmodel:DiagnosisVM>
     <viewmodel:InvoiceVM x:Key="InvoiceVM"></viewmodel:InvoiceVM>
-
+    <viewmodel:AddPatientVM x:Key="AddPatientVM"></viewmodel:AddPatientVM>
     <viewmodel:AddInvoiceVM x:Key="AddInvoiceVM"></viewmodel:AddInvoiceVM>
     
 

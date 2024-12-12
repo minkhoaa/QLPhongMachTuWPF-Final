@@ -6,8 +6,10 @@
         xmlns:local="clr-namespace:QLPhongMachTuWPF.View"
         mc:Ignorable="d"
         Title="AddPatient" Height="600" Width="800"
-                xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent" AllowsTransparency="True">
+        DataContext="{StaticResource AddPatientVM}"
+                xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodel="clr-namespace:QLPhongMachTuWPF.ViewModel"
+        d:DataContext="{d:DesignInstance Type=viewmodel:AddPatientVM}"
+        WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent" AllowsTransparency="True">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -73,6 +75,7 @@ Grid.Column="1" Panel.ZIndex="1"
                 <Grid Grid.Row="0">
                     <TextBlock Text="Patient" Style="{StaticResource textBlock}" Margin="150 20 0 0"/>
                     <TextBox
+                                    Text="{Binding TenBN, Mode=TwoWay}" 
                                     VerticalAlignment="Center"
                                     materialDesign:HintAssist.Hint="Name"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -86,6 +89,7 @@ Grid.Column="1" Panel.ZIndex="1"
                 <Grid Grid.Row="1">
                     <TextBlock Text="Address" Style="{StaticResource anotherTextBlock}"/>
                     <TextBox
+                       Text="{Binding DiaChi}"
             VerticalAlignment="Center"
             materialDesign:HintAssist.Hint="Address"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -98,11 +102,12 @@ Grid.Column="1" Panel.ZIndex="1"
                 <Grid Grid.Row="2">
                     <TextBlock Text="Phone"  Style="{StaticResource anotherTextBlock}"/>
                     <TextBox
-       VerticalAlignment="Center"
-       materialDesign:HintAssist.Hint="Phone number"
-       Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-       HorizontalAlignment="Center" Width="300" Margin="50 0 0 0"
-       FontSize="16"
+                        Text="{Binding DienThoai}"
+                       VerticalAlignment="Center"
+                       materialDesign:HintAssist.Hint="Phone number"
+                       Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                       HorizontalAlignment="Center" Width="300" Margin="50 0 0 0"
+                       FontSize="16"
        
 />
                 </Grid>
@@ -111,6 +116,7 @@ Grid.Column="1" Panel.ZIndex="1"
                 <Grid Grid.Row="3">
                     <TextBlock Text="DOB"  Style="{StaticResource anotherTextBlock}"/>
                     <DatePicker materialDesign:HintAssist.Hint="Date"
+                                    Text="{Binding NgaySinh}"
                                     materialDesign:TextFieldAssist.HasClearButton="True"
                                     Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
                                     HorizontalAlignment="Center" Width="300" Margin="50 5 0 30"
@@ -132,7 +138,7 @@ Grid.Column="1" Panel.ZIndex="1"
         </Grid>
         <!-- Phần bên dưới Add Staff-->
         <Grid Grid.Row="2" Background="White" >
-            <Button Content="Add patient" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10 10"
+            <Button Command="{Binding AddPatientCommand}"  Content="Add patient" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10 10"
                 Background="#3693ff" Foreground="White"
                 Width="250"
               Height="50"
