@@ -11,4 +11,8 @@
     <viewmodel:ListsVM x:Key="ListsVM" ></viewmodel:ListsVM>
     <viewmodel:DiagnosisVM x:Key = "DiagnosisVM"></viewmodel:DiagnosisVM>
     <viewmodel:InvoiceVM x:Key="InvoiceVM"></viewmodel:InvoiceVM>
+
+    <viewmodel:AddInvoiceVM x:Key="AddInvoiceVM"></viewmodel:AddInvoiceVM>
+    
+
 </ResourceDictionary> 
