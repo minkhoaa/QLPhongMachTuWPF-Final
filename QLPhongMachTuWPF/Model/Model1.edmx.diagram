@@ -5,18 +5,18 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="427e6ceac36b476c897bc938e9c754ca" Name="Diagram1">
-        <EntityTypeShape EntityType="QLPMTModel.ACCOUNT" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLPMTModel.BENHNHAN" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLPMTModel.CTTT" Width="1.5" PointX="5.25" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLPMTModel.HOADON" Width="1.5" PointX="5.25" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLPMTModel.NHANVIEN" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLPMTModel.PHIEUKHAM" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLPMTModel.THUOC" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
-        <AssociationConnector Association="QLPMTModel.PK_MaBN_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="QLPMTModel.CTTT_MaPK_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="QLPMTModel.CTTT_TenThuoc_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="QLPMTModel.HD_MaPK_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="QLPMTModel.PK_MaNV_FK" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="QLPMTModel.ACCOUNT" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="QLPMTModel.BENHNHAN" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="QLPMTModel.CTTT" Width="1.5" PointX="5.25" PointY="4.75" />
+        <EntityTypeShape EntityType="QLPMTModel.HOADON" Width="1.5" PointX="5.25" PointY="8" />
+        <EntityTypeShape EntityType="QLPMTModel.NHANVIEN" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="QLPMTModel.PHIEUKHAM" Width="1.5" PointX="3" PointY="4.5" />
+        <EntityTypeShape EntityType="QLPMTModel.THUOC" Width="1.5" PointX="3" PointY="1" />
+        <AssociationConnector Association="QLPMTModel.PK_MaBN_FK" />
+        <AssociationConnector Association="QLPMTModel.CTTT_MaPK_FK" />
+        <AssociationConnector Association="QLPMTModel.CTTT_TenThuoc_FK" />
+        <AssociationConnector Association="QLPMTModel.HD_MaPK_FK" />
+        <AssociationConnector Association="QLPMTModel.PK_MaNV_FK" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

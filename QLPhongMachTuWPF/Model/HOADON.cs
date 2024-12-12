@@ -19,6 +19,7 @@ namespace QLPhongMachTuWPF.Model
         public Nullable<decimal> TienKham { get; set; }
         public Nullable<decimal> TienThuoc { get; set; }
         public Nullable<decimal> TongTien { get; set; }
+        public Nullable<System.DateTime> NgayHD { get; set; }
         public Nullable<int> TrangThai { get; set; }
     
         public virtual PHIEUKHAM PHIEUKHAM { get; set; }
