@@ -300,6 +300,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Database\QLPMT.sql" />
+    <Resource Include="Images\minus.png" />
+    <Resource Include="Images\max.png" />
+    <Resource Include="Images\close.png" />
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -321,14 +324,10 @@
     <Resource Include="Images\burger-menu.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\cac.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\delete.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\image.png" />
-    <Resource Include="Images\medical.png" />
     <Resource Include="Images\next.png" />
     <Resource Include="Images\pen.png" />
     <Resource Include="Images\search.png" />

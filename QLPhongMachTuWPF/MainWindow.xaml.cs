@@ -58,7 +58,7 @@ namespace QLPhongMachTuWPF
         }
         private void MinimizeWindow_Click(object sender, RoutedEventArgs e)
         {
-            // Directly minimize the window without animation
+         
             WindowState = WindowState.Minimized;
         }
 
@@ -70,7 +70,7 @@ namespace QLPhongMachTuWPF
                 WindowStyle = WindowStyle.None;
                 WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
-                // Optional: Add a smooth transition if desired
+             
                 var animation = new DoubleAnimation
                 {
                     From = 0,
@@ -86,12 +86,12 @@ namespace QLPhongMachTuWPF
             }
             else
             {
-                // Maximize the window to the center of the screen
+           
                 WindowState = WindowState.Maximized;
                 WindowStyle = WindowStyle.None;
                 WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
-                // Optional: Add a smooth transition if desired
+               
                 var animation = new DoubleAnimation
                 {
                     From = 0,
