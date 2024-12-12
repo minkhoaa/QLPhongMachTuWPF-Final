@@ -130,6 +130,7 @@
     </Compile>
     <Compile Include="ViewModel\AddInvoiceVM.cs" />
     <Compile Include="ViewModel\AddPatientVM.cs" />
+    <Compile Include="ViewModel\AddStaffsVM.cs" />
     <Compile Include="ViewModel\ControlBarViewModel.cs" />
     <Compile Include="ViewModel\DiagnosisVM.cs" />
     <Compile Include="ViewModel\HomepageVM.cs" />

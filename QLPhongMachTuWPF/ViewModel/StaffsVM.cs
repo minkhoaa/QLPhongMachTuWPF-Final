@@ -1,4 +1,5 @@
-﻿using QLPhongMachTuWPF.Model;
+﻿using GalaSoft.MvvmLight.Messaging;
+using QLPhongMachTuWPF.Model;
 using QLPhongMachTuWPF.View;
 using System;
 using System.Collections.Generic;
@@ -38,11 +39,15 @@ namespace QLPhongMachTuWPF.ViewModel
 
             FilteredStaffs = CollectionViewSource.GetDefaultView(_staff);
 
+            Messenger.Default.Register<NHANVIEN>(this, (newStaff) =>
+            {
+                StaffList.Add(newStaff);
+            });
+
             AddStaffCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                AddStaff add = new AddStaff(); 
-                add.ShowDialog();
-
+                AddStaff add = new AddStaff();
+                add.ShowDialog(); 
             }
             ); 
         }

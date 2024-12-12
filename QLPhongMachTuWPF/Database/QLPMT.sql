@@ -1,4 +1,6 @@
-﻿create database QLPMT
+﻿
+
+create database QLPMT
 go
 use QLPMT
 go
@@ -34,6 +36,7 @@ CREATE TABLE NHANVIEN
 	NgaySinh smalldatetime, 
 	DiaChi nvarchar(100),
 	DienThoai varchar(20),
+	GioiTinh nvarchar(20), 
 	LoaiNV int,
 	TrangThai int
 )
@@ -130,14 +133,14 @@ VALUES(N'Trần Vân',	'07/07/1995',	N'484 Lê Văn Việt, Tăng Nhơn Phú A, 
 INSERT INTO BENHNHAN (TenBN, NgaySinh, DiaChi, DienThoai, GioiTinh, TrangThai)
 VALUES(N'Nguyễn Song Nguyên',	'03/08/1992',	N'121 Nguyễn Xí, phường 26, Bình Thạnh, Hồ Chí Minh',	'1256172123',	N'Nam', '1')
 
-INSERT INTO NHANVIEN (TenNV, NgaySinh, DiaChi, DienThoai ,  LoaiNV, TrangThai)
-VALUES(N'Nguyễn Minh',	'07/07/1995',	N'133/123C Tô Hiến Thành, Phường 13, Quận 10, Hồ Chí Minh', '976287165',  '1', '1')
-INSERT INTO NHANVIEN (TenNV, NgaySinh, DiaChi, DienThoai ,  LoaiNV, TrangThai)
-VALUES(N'Văn Dũng',	'07/02/1985',	N'121 Nguyễn Xí, phường 26, Bình Thạnh, Hồ Chí Minh', '976287165',  '1', '1')
-INSERT INTO NHANVIEN (TenNV, NgaySinh, DiaChi, DienThoai ,  LoaiNV, TrangThai)
-VALUES(N'Nguyễn Hạnh',	'07/07/1955',	N'133/123C Tô Hiến Thành, Phường 13, Quận 10, Hồ Chí Minh', '976287165',  '1', '1')
-INSERT INTO NHANVIEN (TenNV, NgaySinh, DiaChi, DienThoai ,  LoaiNV, TrangThai)
-VALUES(N'Minh Khang',	'07/02/1998',	N'484 Lê Văn Việt, Tăng Nhơn Phú A, Quận 9, Hồ Chí Minh', '976287165',  '1', '1')
+INSERT INTO NHANVIEN (TenNV, NgaySinh, DiaChi, DienThoai ,GioiTinh,  LoaiNV, TrangThai)
+VALUES(N'Nguyễn Minh',	'07/07/1995',	N'133/123C Tô Hiến Thành, Phường 13, Quận 10, Hồ Chí Minh' , '976287165', N'Nam' , '1', '1')
+INSERT INTO NHANVIEN (TenNV, NgaySinh, DiaChi, DienThoai ,GioiTinh,  LoaiNV, TrangThai)
+VALUES(N'Văn Dũng',	'07/02/1985',	N'121 Nguyễn Xí, phường 26, Bình Thạnh, Hồ Chí Minh', '976287165', N'Nam', '1', '1')
+INSERT INTO NHANVIEN (TenNV, NgaySinh, DiaChi, DienThoai ,GioiTinh,  LoaiNV, TrangThai)
+VALUES(N'Nguyễn Hạnh',	'07/07/1955',	N'133/123C Tô Hiến Thành, Phường 13, Quận 10, Hồ Chí Minh','976287165',N'Nữ',   '1', '1')
+INSERT INTO NHANVIEN (TenNV, NgaySinh, DiaChi, DienThoai ,GioiTinh,  LoaiNV, TrangThai)
+VALUES(N'Minh Khang',	'07/02/1998',	N'484 Lê Văn Việt, Tăng Nhơn Phú A, Quận 9, Hồ Chí Minh', '976287165', N'Nam' ,'1', '1')
 
 INSERT INTO PHIEUKHAM (MaNV, MaBN, NgayKham, TrieuChung, KetQua, TrangThai)
 VALUES('1',	'1',	'01/01/2018',	N'Dị ứng theo mùa như hắt hơi, chảy nước mũi, ngứa họng hoặc ngứa, chảy nước mắt',	N'Viêm Xoan.', '1')
@@ -149,8 +152,7 @@ INSERT INTO PHIEUKHAM (MaNV, MaBN, NgayKham, TrieuChung, KetQua, TrangThai)
 VALUES('2',	'3',	'15/3/2018',	N'Bỏng da', 	N'Viêm da.', '1')
 INSERT INTO PHIEUKHAM (MaNV, MaBN, NgayKham, TrieuChung, KetQua, TrangThai)
 VALUES('4',	'4',	'22/3/2018',	N'Đau khớp, sưng và cứng khớp,  viêm khớp',	 N'Thiếu canxi.', '1')
-INSERT INTO PHIEUKHAM (MaNV, MaBN, NgayKham, TrieuChung, KetQua, TrangThai)
-VALUES('5',	'6',	'24/3/2018',	N'Nhói tim.',	N'Cholesterol trong máu cao vì ăn quá nhiều đồ ăn dầu mỡ.', '1')
+
 INSERT INTO PHIEUKHAM (MaNV, MaBN, NgayKham, TrieuChung, KetQua, TrangThai)
 VALUES('1',	'8',	'25/3/2018',	N'Đau khớp',	N'Sụn khớp và thiếu canxi trầm trọng.', '1')
 INSERT INTO PHIEUKHAM (MaNV, MaBN, NgayKham, TrieuChung, KetQua, TrangThai)
@@ -163,10 +165,8 @@ INSERT INTO PHIEUKHAM (MaNV, MaBN, NgayKham, TrieuChung, KetQua, TrangThai)
 VALUES('3',	'12',	'04/05/2018',	N'Vết thương không ngừng chảy máu',	N'Máu khó đông.', '1')
 INSERT INTO PHIEUKHAM (MaNV, MaBN, NgayKham, TrieuChung, KetQua, TrangThai)
 VALUES('2',	'13',	'08/05/2018',	N'Không thụ thai trong 4 năm',	N'Viêm nang buồng trứng.', '1')
-INSERT INTO PHIEUKHAM (MaNV, MaBN, NgayKham, TrieuChung, KetQua, TrangThai)
-VALUES('5',	'14',	'09/05/2018',	N'Đau nhói vùng sau gáy',	 N'Co thắt cơ.', '1')
-INSERT INTO PHIEUKHAM (MaNV, MaBN, NgayKham, TrieuChung, KetQua, TrangThai)
-VALUES('5',	'1',	'09/05/2018',	N'Dị ứng theo mùa như hắt hơi, chảy nước mũi, ngứa họng hoặc ngứa, chảy nước mắt.',	 N'Viêm Xoan.', '1')
+
+
 
 INSERT INTO HOADON (MaPK, TienKham, TienThuoc, TongTien,NgayHD, TrangThai)
 VALUES('1',	100000,	400000,	500000, '11/12/1970',  '1')
@@ -174,29 +174,12 @@ INSERT INTO HOADON (MaPK, TienKham, TienThuoc, TongTien,NgayHD, TrangThai)
 VALUES('2',	100000,	100000,	200000, '11/12/1970',  '1')
 INSERT INTO HOADON (MaPK, TienKham, TienThuoc, TongTien,NgayHD, TrangThai)
 VALUES('10',	100000,	1000000,	1100000, '11/12/1970',  '1')
-INSERT INTO HOADON (MaPK, TienKham, TienThuoc, TongTien,NgayHD, TrangThai)
-VALUES('12',	100000,	500000,	600000, '11/12/1970',  '1')
-INSERT INTO HOADON (MaPK, TienKham, TienThuoc, TongTien,NgayHD, TrangThai)
-VALUES('13',	100000,	2000000,	2100000, '11/12/1970',  '1')
-INSERT INTO HOADON (MaPK, TienKham, TienThuoc, TongTien, NgayHD, TrangThai)
-VALUES('14',	100000,	1000000,	1100000, '11/12/1970',  '1')
-INSERT INTO HOADON (MaPK, TienKham, TienThuoc, TongTien,  TongTien, TrangThai,TrangThai)
-VALUES('15',	100000,	500000,	600000, '11/12/1970',  '1') 
-INSERT INTO HOADON (MaPK, TienKham, TienThuoc, TongTien,  TongTien, TrangThai,  TrangThai)
-VALUES('16',	100000,	500000,	600000, '11/12/1970',  '1')
-INSERT INTO HOADON (MaPK, TienKham, TienThuoc, TongTien,  TongTien,  TongTien, TrangThai)
-VALUES('17',	150000,	500000,	600000, '11/12/1970',  '1')
-INSERT INTO HOADON (MaPK, TienKham, TienThuoc, TongTien,  TongTien,  TongTien, TrangThai)
-VALUES('18',	300000,	500000,	600000, '11/12/1970',  '1')
-INSERT INTO HOADON (MaPK, TienKham, TienThuoc, TongTien,  TongTien, TrangThai,  TrangThai)
-VALUES('19',	200000,	500000,	600000, '11/12/1970',  '1')
-INSERT INTO HOADON (MaPK, TienKham, TienThuoc, TongTien,  TongTien, TrangThai,  TrangThai)
-VALUES('20',	190000,	500000,	200000, '11/12/1970',  '1')
 
-INSERT INTO THUOC (TenThuoc, DonViTinh, Gia, TrangThai)
-VALUES('Telfast',	N'Hộp',	200000, '1')
-INSERT INTO THUOC (TenThuoc, DonViTinh, Gia, TrangThai)
-VALUES('Fexofenadine',	N'Hộp',	100000, '1')
+
+
+
+
+
 INSERT INTO THUOC (TenThuoc, DonViTinh, Gia, TrangThai)
 VALUES('Augmentin',	N'Hộp', 	250000, '1')
 INSERT INTO THUOC (TenThuoc, DonViTinh, Gia, TrangThai)

@@ -59,6 +59,7 @@
           <Property Name="NgaySinh" Type="smalldatetime" />
           <Property Name="DiaChi" Type="nvarchar" MaxLength="100" />
           <Property Name="DienThoai" Type="varchar" MaxLength="20" />
+          <Property Name="GioiTinh" Type="nvarchar" MaxLength="20" />
           <Property Name="LoaiNV" Type="int" />
           <Property Name="TrangThai" Type="int" />
         </EntityType>
@@ -268,6 +269,7 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
           <Property Name="NgaySinh" Type="DateTime" Precision="0" />
           <Property Name="DiaChi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="DienThoai" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="GioiTinh" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="LoaiNV" Type="Int32" />
           <Property Name="TrangThai" Type="Int32" />
           <NavigationProperty Name="PHIEUKHAMs" Relationship="QLPMTModel.PK_MaNV_FK" FromRole="NHANVIEN" ToRole="PHIEUKHAM" />
@@ -358,7 +360,7 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -417,6 +419,7 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
               <MappingFragment StoreEntitySet="NHANVIEN">
                 <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
                 <ScalarProperty Name="LoaiNV" ColumnName="LoaiNV" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
                 <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
                 <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
                 <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
