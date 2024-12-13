@@ -251,18 +251,15 @@
 
                     <ListViewItem HorizontalAlignment="Left"
                                   Margin="0 0 0 10" MouseEnter="ListViewItem_MouseEnter" >
-                        <Button Background="Transparent" BorderBrush="Transparent" Padding="0" Command="{Binding HomePageCommand}">
-                            <StackPanel Orientation="Horizontal"
-                                    Width="200">
+                        <Border Background="{Binding HomeBackground}" CornerRadius="10">
+                            <Button Background="Transparent" BorderBrush="Transparent" Height="45" Width="200" Padding="0" Command="{Binding HomePageCommand}">
+                                <StackPanel Orientation="Horizontal" Width="200">
+                                    <materialDesign:PackIcon Kind="Home" Width="30" Height="30" Foreground="White" Margin="12 0 0 0"/>
+                                    <TextBlock Text="Home" Margin="25 0 0 0" Style="{StaticResource font_style}"/>
+                                </StackPanel>
+                            </Button>
+                        </Border>
 
-                                <materialDesign:PackIcon Kind="Home" Width="30" Height="30" Foreground="White" Margin="12 0 0 0"/>
-
-
-                                <TextBlock Text="Home"
-                                       Margin="25 0 0 0"
-                                       Style="{StaticResource font_style}"/>
-                            </StackPanel>
-                        </Button>
                         <!--ToolTip-->
                         <ListViewItem.ToolTip>
 
@@ -277,18 +274,16 @@
                     <!--Patients-->
                     <ListViewItem HorizontalAlignment="Left"
                      Margin="0 0 0 10" MouseEnter="ListViewItem_MouseEnter">
-                        <Button Background="Transparent" BorderBrush="Transparent" Padding="0" Command="{Binding PatientsCommand}">
-                            <StackPanel Orientation="Horizontal"
-                       Width="200">
+                        <Border Background="{Binding PatientBackground}" CornerRadius="10">
+                            <Button Background="Transparent" BorderBrush="Transparent" Height="45" Width="200" Padding="0" Command="{Binding PatientsCommand}">
+                                <StackPanel Orientation="Horizontal" Width="200">
+                                    <materialDesign:PackIcon Kind="AccountInjuryOutline" Width="30" Height="30" Foreground="White" Margin="12 0 0 0"/>
+                                    <TextBlock Text="Patients" Margin="25 0 0 0" Style="{StaticResource font_style}"/>
+                                </StackPanel>
+                            </Button>
+                        </Border>
 
-                                <materialDesign:PackIcon Kind="AccountInjuryOutline" Width="30" Height="30" Foreground="White" Margin="12 0 0 0"/>
 
-
-                                <TextBlock Text="Patients"
-                          Margin="25 0 0 0"
-                          Style="{StaticResource font_style}"/>
-                            </StackPanel>
-                        </Button>
                         <!--ToolTip-->
                         <ListViewItem.ToolTip>
 
@@ -303,18 +298,15 @@
                     <!--Staffs-->
                     <ListViewItem HorizontalAlignment="Left"
                      Margin="0 0 0 10" MouseEnter="ListViewItem_MouseEnter" >
-                        <Button Background="Transparent" BorderBrush="Transparent" Padding="0" Command="{Binding StaffsCommand}">
-                            <StackPanel Orientation="Horizontal"
-                       Width="200">
+                        <Border Background="{Binding StaffBackground}" CornerRadius="10">
+                            <Button Background="Transparent" BorderBrush="Transparent" Height="45" Width="200" Padding="0" Command="{Binding StaffsCommand}">
+                                <StackPanel Orientation="Horizontal" Width="200">
+                                    <materialDesign:PackIcon Kind="Doctor" Width="30" Height="30" Foreground="White" Margin="12 0 0 0"/>
+                                    <TextBlock Text="Staffs" Margin="25 0 0 0" Style="{StaticResource font_style}"/>
+                                </StackPanel>
+                            </Button>
+                        </Border>
 
-                                <materialDesign:PackIcon Kind="Doctor" Width="30" Height="30" Foreground="White" Margin="12 0 0 0"/>
-
-
-                                <TextBlock Text="Staffs"
-                          Margin="25 0 0 0"
-                          Style="{StaticResource font_style}"/>
-                            </StackPanel>
-                        </Button>
                         <!--ToolTip-->
                         <ListViewItem.ToolTip>
 
@@ -329,18 +321,15 @@
                     <!--Diagnosis-->
                     <ListViewItem HorizontalAlignment="Left"
                                     Margin="0 0 0 10" MouseEnter="ListViewItem_MouseEnter">
-                        <Button Background="Transparent" BorderBrush="Transparent" Padding="0" Command="{Binding DiagnosisCommand}">
-                            <StackPanel Orientation="Horizontal"
-                                     Width="200">
+                        <Border Background="{Binding DiagnosisBackground}" CornerRadius="10">
+                            <Button Background="Transparent" BorderBrush="Transparent" Height="45" Width="200" Padding="0" Command="{Binding DiagnosisCommand}">
+                                <StackPanel Orientation="Horizontal" Width="200">
+                                    <materialDesign:PackIcon Kind="ClipboardEdit" Width="30" Height="30" Foreground="White" Margin="12 0 0 0"/>
+                                    <TextBlock Text="Diagnosis" Margin="25 0 0 0" Style="{StaticResource font_style}"/>
+                                </StackPanel>
+                            </Button>
+                        </Border>
 
-                                <materialDesign:PackIcon Kind="ClipboardEdit" Width="30" Height="30" Foreground="White" Margin="12 0 0 0"/>
-
-
-                                <TextBlock Text="Diagnosis"
-                                        Margin="25 0 0 0"
-                                        Style="{StaticResource font_style}"/>
-                            </StackPanel>
-                        </Button>
                         <!--ToolTip-->
                         <ListViewItem.ToolTip>
 
@@ -356,18 +345,15 @@
 
                     <ListViewItem HorizontalAlignment="Left"
                     Margin="0 0 0 10" MouseEnter="ListViewItem_MouseEnter">
-                        <Button Background="Transparent" BorderBrush="Transparent" Padding="0" Command="{Binding ListsCommand}">
-                            <StackPanel Orientation="Horizontal"
-                     Width="200">
+                        <Border Background="{Binding ListsBackground}" CornerRadius="10">
+                            <Button Background="Transparent" BorderBrush="Transparent" Height="45" Width="200" Padding="0" Command="{Binding ListsCommand}">
+                                <StackPanel Orientation="Horizontal" Width="200">
+                                    <materialDesign:PackIcon Kind="ClipboardText" Width="30" Height="30" Foreground="White" Margin="12 0 0 0"/>
+                                    <TextBlock Text="List" Margin="25 0 0 0" Style="{StaticResource font_style}"/>
+                                </StackPanel>
+                            </Button>
+                        </Border>
 
-                                <materialDesign:PackIcon Kind="ClipboardText" Width="30" Height="30" Foreground="White" Margin="12 0 0 0"/>
-
-
-                                <TextBlock Text="List"
-                        Margin="25 0 0 0"
-                        Style="{StaticResource font_style}"/>
-                            </StackPanel>
-                        </Button>
                         <!--ToolTip-->
                         <ListViewItem.ToolTip>
 
@@ -382,18 +368,15 @@ Style="{StaticResource tt_style}"/>
                     <!--Appointment-->
                     <ListViewItem HorizontalAlignment="Left"
                     Margin="0 0 0 10" MouseEnter="ListViewItem_MouseEnter">
-                        <Button Background="Transparent" BorderBrush="Transparent" Padding="0" Command="{Binding ManageAppointmentCommand}">
-                            <StackPanel Orientation="Horizontal"
-                     Width="200">
+                        <Border Background="{Binding AppointmentBackground}" CornerRadius="10">
+                            <Button Background="Transparent" BorderBrush="Transparent" Height="45" Width="200" Padding="0" Command="{Binding ManageAppointmentCommand}">
+                                <StackPanel Orientation="Horizontal" Width="200">
+                                    <materialDesign:PackIcon Kind="Calendar" Width="30" Height="30" Foreground="White" Margin="12 0 0 0"/>
+                                    <TextBlock Text="Appointment" Margin="25 0 0 0" Style="{StaticResource font_style}"/>
+                                </StackPanel>
+                            </Button>
+                        </Border>
 
-                                <materialDesign:PackIcon Kind="Calendar" Width="30" Height="30" Foreground="White" Margin="12 0 0 0"/>
-
-
-                                <TextBlock Text="Appointment"
-                        Margin="25 0 0 0"
-                        Style="{StaticResource font_style}" />
-                            </StackPanel>
-                        </Button>
                         <!--ToolTip-->
                         <ListViewItem.ToolTip>
 
@@ -409,18 +392,15 @@ Style="{StaticResource tt_style}" Width="130"/>
 
                     <ListViewItem HorizontalAlignment="Left"
                     Margin="0 0 0 0" MouseEnter="ListViewItem_MouseEnter">
-                        <Button Background="Transparent" BorderBrush="Transparent" Padding="0" Command="{Binding InvoiceCommand}">
-                            <StackPanel Orientation="Horizontal"
-                     Width="200">
+                        <Border Background="{Binding InvoiceBackground}" CornerRadius="10">
+                            <Button Background="Transparent" BorderBrush="Transparent" Height="45" Width="200" Padding="0" Command="{Binding InvoiceCommand}">
+                                <StackPanel Orientation="Horizontal" Width="200">
+                                    <materialDesign:PackIcon Kind="InvoiceLineItems" Width="30" Height="30" Foreground="White" Margin="12 0 0 0"/>
+                                    <TextBlock Text="Invoice" Margin="25 0 0 0" Style="{StaticResource font_style}"/>
+                                </StackPanel>
+                            </Button>
+                        </Border>
 
-                                <materialDesign:PackIcon Kind="InvoiceLineItems"  Width="30" Height="30" Foreground="White" Margin="12 0 0 0"/>
-
-
-                                <TextBlock Text="Invoice"
-                        Margin="25 0 0 0"
-                        Style="{StaticResource font_style}"/>
-                            </StackPanel>
-                        </Button>
                         <!--ToolTip-->
                         <ListViewItem.ToolTip>
 
@@ -435,7 +415,7 @@ Style="{StaticResource tt_style}"/>
 
                     <ListViewItem HorizontalAlignment="Left"
                     Margin="0 150 0 0" MouseEnter="ListViewItem_MouseEnter">
-                        <Button Background="Transparent" BorderBrush="Transparent" Padding="0">
+                        <Button Background="Transparent" BorderBrush="Transparent" Height="45" Width="55" Padding="0">
                             <StackPanel Orientation="Horizontal"
                      Width="200">
 
