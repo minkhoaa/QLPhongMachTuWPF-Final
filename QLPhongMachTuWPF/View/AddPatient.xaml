@@ -5,10 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QLPhongMachTuWPF.View"
         mc:Ignorable="d"
+        DataContext="{StaticResource AddPatientVM}"
         Title="AddPatient" Height="600" Width="800"
-                xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent" AllowsTransparency="True">
-
+                xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodel="clr-namespace:QLPhongMachTuWPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:AddPatientVM}"
+        WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent" AllowsTransparency="True">
+    
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -99,6 +100,7 @@
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 100 0 0">
                     <!--name-->
                     <TextBox
+                        Text="{Binding TenBN}"
                          VerticalAlignment="Center"
                          materialDesign:HintAssist.Hint="Name"
                          Style="{StaticResource MaterialDesignOutlinedTextBox}"
@@ -106,6 +108,7 @@
 
                     <!--Phone-->
                     <TextBox
+                    Text="{Binding DienThoai}"
                     VerticalAlignment="Center"
                     materialDesign:HintAssist.Hint="Phone"
                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
@@ -116,17 +119,18 @@
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 200 0 0">
                     <!--Date of birth-->
-                    <ComboBox x:Name="cmbDay" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox Text="{Binding Ngay}" x:Name="cmbDay" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                FontSize="16"/>
 
-                    <ComboBox x:Name="cmbMonth" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox Text="{Binding Thang}" x:Name="cmbMonth" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
           FontSize="16" Margin="10 0 0 0"/>
 
-                    <ComboBox x:Name="cmbYear" Width="110" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox Text="{Binding Nam}" x:Name="cmbYear" Width="110" Style="{StaticResource MaterialDesignOutlinedComboBox}"
  FontSize="16" Margin="10 0 0 0"/>
 
                     <!--Address-->
                     <TextBox VerticalAlignment="Center"
+                             Text="{Binding DiaChi}"
                                 materialDesign:HintAssist.Hint="Address"
                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                 Width="250" Margin="60 0 0 0" FontSize="16"/>
@@ -137,17 +141,19 @@
 
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 300 0 0">
-                    <ComboBox x:Name="cmbGender" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox Text="{Binding Gender}" x:Name="cmbGender" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
          
            FontSize="16"/>
-                    <ComboBox x:Name="cmbType" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox Text="{Binding Charged}" x:Name="cmbType" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
 
  FontSize="16" Margin="60 0 0 0"/>
                 </StackPanel>
+                
 
 
-
-                <Button Content="Add patient"  Style="{StaticResource btnAdd}">
+                <Button
+                    Command="{Binding AddPatientCommand }"
+                    Content="Add patient"  Style="{StaticResource btnAdd}">
 
                 </Button>
 

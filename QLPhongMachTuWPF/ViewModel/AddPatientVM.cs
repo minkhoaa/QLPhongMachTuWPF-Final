@@ -51,10 +51,44 @@ namespace QLPhongMachTuWPF.ViewModel
 
         public string Charged { get => _Charged; set { _Charged = value; OnPropertyChanged(); } }
 
+        int Month;
 
         public ICommand AddPatientCommand { get; set; }
+        public int CheckMonth(string Thang)
+        {
+            switch (Thang)
+            {
+                case "January":
+                   return 1;
+                case "February":
+                    return 2;
+                case "March":
+                    return 3;
+                case "April":
+                    return 4;
+                case "May":
+                    return 5;
+                case "June":
+                    return 6;
+                case "July":
+                    return 7;
+                case "August":
+                    return 8;
+                case "September":
+                    return 9;
+                case "October":
+                    return 10;
+                case "November":
+                    return 11;
+                case "December":
+                    return 12;
+                default:
+                    return -1; 
+            }
+        }
         public AddPatientVM()
         {
+            CheckMonth(Thang); 
             AddPatientCommand = new RelayCommand<object>((p)=>  
             {
                 if(string.IsNullOrEmpty(TenBN)) return false;
@@ -68,7 +102,7 @@ namespace QLPhongMachTuWPF.ViewModel
                     TenBN = TenBN,
                     DiaChi = DiaChi,
                     DienThoai = DienThoai,
-                    NgaySinh = new DateTime(int.Parse(Nam), int.Parse(Thang), int.Parse(Ngay)),
+                    NgaySinh = new DateTime(int.Parse(Nam), CheckMonth(Thang), int.Parse(Ngay)),
                     GioiTinh = Gender,
                     TrangThai = (Charged == "Discharged") ? 1 : 0
                 }; 
@@ -90,34 +124,7 @@ namespace QLPhongMachTuWPF.ViewModel
                 }
             });
         }
-        public AddPatientVM(ObservableCollection<BENHNHAN> patientsList)
-        {
-            Patients = patientsList;
-
-            AddPatientCommand = new RelayCommand<object>((p) =>
-            {
-                if (string.IsNullOrEmpty(TenBN)) return false;
-                return true;
-            }, (p) =>
-            {
-          //      var normalizedNgaySinh = NormalizeDateTime(NgaySinh); // Chuẩn hóa giá trị
-
-                var newPatient = new BENHNHAN()
-                {
-                    TenBN = TenBN,
-                    DiaChi = DiaChi,
-                    DienThoai = DienThoai,
-                    NgaySinh = new DateTime(int.Parse(Nam), int.Parse(Thang), int.Parse(Ngay)),
-                    GioiTinh = Gender,
-                    TrangThai = (Charged == "Discharged") ? 1 : 0, 
-                };
-
-                DataProvider.Ins.db.BENHNHANs.Add(newPatient);
-                DataProvider.Ins.db.SaveChanges();
-
-                // Thêm bệnh nhân mới vào danh sách
-                Patients.Add(newPatient);
-            });
-        }
+       
+      
     }
 }
