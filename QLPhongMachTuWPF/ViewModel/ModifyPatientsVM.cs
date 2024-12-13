@@ -52,12 +52,12 @@ namespace QLPhongMachTuWPF.ViewModel
         private string _Charged { get; set; }
         public string Charged { get => _Charged; set { _Charged = value; OnPropertyChanged(); } }
 
-            public DateTime? date { get; set; }
-            private ObservableCollection<BENHNHAN> _patients { get; set; }
+        public DateTime? date { get; set; }
+        private ObservableCollection<BENHNHAN> _patients { get; set; }
 
-            public ObservableCollection<BENHNHAN> Patients { get { return _patients; } set { _patients = value; OnPropertyChanged(); } }
+        public ObservableCollection<BENHNHAN> Patients { get { return _patients; } set { _patients = value; OnPropertyChanged(); } }
        
-            private BENHNHAN BenhNhan { get; set; }
+        private BENHNHAN BenhNhan { get; set; }
 
         public int CheckMonth(string Thang)
         {
@@ -139,13 +139,10 @@ namespace QLPhongMachTuWPF.ViewModel
                     DienThoai = patient.DienThoai;
                     Gender = patient.GioiTinh;
                     Charged = (patient.TrangThai == 1) ? "Discharged" : "Under treatment" ;
-
-                    
-                        DateTime dateOfBirth = patient.NgaySinh.Value;
-                        Ngay = dateOfBirth.Day.ToString();
+                    DateTime dateOfBirth = patient.NgaySinh.Value;
+                    Ngay = dateOfBirth.Day.ToString();
                     Thang = MonthToString(dateOfBirth.Month);
-                        Nam = dateOfBirth.Year.ToString();
-                    
+                    Nam = dateOfBirth.Year.ToString();
                 });
             });
 

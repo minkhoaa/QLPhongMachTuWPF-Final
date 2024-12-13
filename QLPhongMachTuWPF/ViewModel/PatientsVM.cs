@@ -20,9 +20,7 @@ namespace QLPhongMachTuWPF.ViewModel
         private ObservableCollection<BENHNHAN> _patients;
         public ObservableCollection<BENHNHAN> PatientsList { get => _patients; set { _patients = value; OnPropertyChanged();  } }
 
-        private string _name { get; set; }
-        public string name { get => _name; set { _name = value; OnPropertyChanged(); } }
-
+       
         private BENHNHAN _SelectedItemCommand { get; set; }
 
         public BENHNHAN SelectedItemCommand {  
@@ -33,7 +31,7 @@ namespace QLPhongMachTuWPF.ViewModel
                     {
                         _SelectedItemCommand = value;
                         OnPropertyChanged();
-                    name = SelectedItemCommand.TenBN;
+                    
                 }
                 }
             } 
