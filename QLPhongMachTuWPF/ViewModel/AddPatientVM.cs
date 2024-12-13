@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 using QLPhongMachTuWPF.Model;
+using QLPhongMachTuWPF.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -123,7 +124,6 @@ namespace QLPhongMachTuWPF.ViewModel
                 }
             });
         }
-       
-      
+
     }
 }

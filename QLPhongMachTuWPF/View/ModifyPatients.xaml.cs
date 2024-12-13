@@ -1,7 +1,6 @@
-﻿using System;
+﻿using QLPhongMachTuWPF.ViewModel;
+using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,30 +11,24 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace QLPhongMachTuWPF.View
 {
     /// <summary>
-    /// Interaction logic for Patients.xaml
+    /// Interaction logic for ModifyPatients.xaml
     /// </summary>
-    /// 
-  
-    public partial class Patients : UserControl
+    public partial class ModifyPatients : Window
     {
-        public static Patients InstancePatients { get; set; } 
-        public Patients()
+        public ModifyPatients()
         {
             InitializeComponent();
-            InstancePatients = this; 
-           
+            this.DataContext = new ModifyPatientsVM();
         }
-        
-      
 
-      
-
-       
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
