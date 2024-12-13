@@ -81,6 +81,20 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Action" IsReadOnly="True" CanUserResize="False" Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Style="{StaticResource gridEditBtn}">
+                                    <materialDesign:PackIcon Kind="Pencil" Width="20" Height="20"/>
+                                </Button>
+                                <Button Style="{StaticResource gridRemoveBtn}" Margin="5 0 0 0" >
+                                    <materialDesign:PackIcon Kind="Delete" Width="20" Height="20"/>
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
 
 
             </DataGrid.Columns>
