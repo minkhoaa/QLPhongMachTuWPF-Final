@@ -88,12 +88,16 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <Button  Command="{Binding Mo}" Style="{StaticResource gridRemoveBtn}" Margin="5 0 0 0" >
-                                    <materialDesign:PackIcon Kind="Pencil" Width="20" Height="20"/>
+                                <Button x:Name="btnEdit"   
+                                        Command="{Binding }"
+                                        Style="{StaticResource gridEditBtn}" 
+                                        Margin="5 0 0 0" >
+                                    <materialDesign:PackIcon  Kind="Pencil" Width="20" Height="20"/>
 
                                 </Button>
                                 <Button
-                                    Command="{Binding DeletePatientCommand}"
+                                    x:Name="btnDelete"
+                                    Command="{Binding }"
                                     Style="{StaticResource gridRemoveBtn}" Margin="5 0 0 0" >
                                     <materialDesign:PackIcon Kind="Delete" Width="20" Height="20"/>
                                 </Button>
@@ -110,7 +114,6 @@
                 <TextBlock Text="Modify Patient" FontSize="15" FontWeight="Bold"/>
             </StackPanel>
         </Button>
-        <TextBox Text="{Binding name, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="10,81,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-
+       
     </Grid>
 </UserControl>

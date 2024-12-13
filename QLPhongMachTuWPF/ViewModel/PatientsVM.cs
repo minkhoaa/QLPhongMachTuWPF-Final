@@ -31,7 +31,6 @@ namespace QLPhongMachTuWPF.ViewModel
                     {
                         _SelectedItemCommand = value;
                         OnPropertyChanged();
-                    
                 }
                 }
             } 
@@ -49,8 +48,6 @@ namespace QLPhongMachTuWPF.ViewModel
 
         public string DienThoai { get => _DienThoai; set { _DienThoai = value; OnPropertyChanged(); } }
 
-
-     
         private DateTime _NgaySinh { get; set; }
         public DateTime NgaySinh { get => _NgaySinh; set { _NgaySinh = value; OnPropertyChanged(); } }
 
