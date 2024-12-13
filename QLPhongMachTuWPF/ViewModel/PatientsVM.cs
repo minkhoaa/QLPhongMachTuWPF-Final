@@ -111,7 +111,7 @@ namespace QLPhongMachTuWPF.ViewModel
                         existingPatient.DienThoai = patient.DienThoai;
                         existingPatient.NgaySinh = patient.NgaySinh;
                         existingPatient.TrangThai = patient.TrangThai;
-                        DataProvider.Ins.db.SaveChanges();
+                     
                     });
                 }
                 else
@@ -120,10 +120,12 @@ namespace QLPhongMachTuWPF.ViewModel
                     {
                         // Thêm bệnh nhân mới
                         PatientsList.Add(patient);
+                      
                     });
                 }
 
                 // Làm mới view
+                DataProvider.Ins.db.SaveChanges();
                 FilteredPatients?.Refresh();
             });
 
@@ -145,6 +147,7 @@ namespace QLPhongMachTuWPF.ViewModel
                 ModifyPatients modifyWindow = new ModifyPatients();
                 Messenger.Default.Send(SelectedItemCommand); // Gửi bệnh nhân đã chọn
                 modifyWindow.ShowDialog();
+
             });
         }
         private void FilterPatients()
