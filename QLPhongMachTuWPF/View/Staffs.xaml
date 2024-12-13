@@ -57,20 +57,24 @@
                 <DataGridTextColumn Header="Birthday" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding NgaySinh}"/>
                 <DataGridTextColumn Header="Address" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding DiaChi}"/>
                 <DataGridTextColumn Header="Phone" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding DienThoai}"/>
-                <DataGridTextColumn Header="Type" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding LoaiNV}"/>
-
-                <DataGridTextColumn Header="Status" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding TrangThai}"/>
-                <DataGridTemplateColumn Header="Action" IsReadOnly="True" CanUserResize="False" Width="100">
+                <DataGridTemplateColumn Header="Type" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <Button Style="{StaticResource gridEditBtn}">
-                                    <materialDesign:PackIcon Kind="Pencil" Width="20" Height="20"/>
-                                </Button>
-                                <Button Style="{StaticResource gridRemoveBtn}" Margin="5 0 0 0" >
-                                    <materialDesign:PackIcon Kind="Delete" Width="20" Height="20"/>
-                                </Button>
-                            </StackPanel>
+                            <TextBlock>
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Text" Value="Unknown" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding LoaiNV}" Value="0">
+                                                <Setter Property="Text" Value="Admin" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding LoaiNV}" Value="1">
+                                                <Setter Property="Text" Value="Staff" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

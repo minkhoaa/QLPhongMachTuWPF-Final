@@ -55,22 +55,29 @@
                 <DataGridTextColumn Header="Total fee" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding TongTien}"/>
                 <DataGridTextColumn Header="Date" IsReadOnly="True" CanUserResize="False" Width="0.8*" Binding="{Binding NgayHD}" />
 
-                <DataGridTextColumn Header="Status" IsReadOnly="True" CanUserResize="False" Width="0.8*" Binding="{Binding TrangThai}" />
-                <DataGridTemplateColumn Header="Action" IsReadOnly="True" CanUserResize="False" Width="100">
+                <DataGridTemplateColumn Header="Status" Width="1.2*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <Button Style="{StaticResource gridEditBtn}">
-                                    <materialDesign:PackIcon Kind="Pencil" Width="20" Height="20"/>
-                                </Button>
-                                <Button Style="{StaticResource gridRemoveBtn}" Margin="5 0 0 0" >
-                                    <materialDesign:PackIcon Kind="Delete" Width="20" Height="20"/>
-                                </Button>
-                            </StackPanel>
+                            <TextBlock>
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Text" Value="Unknown" />
+                                        <Style.Triggers>
+                                            <!-- Nếu TrangThai = 1 -->
+                                            <DataTrigger Binding="{Binding TrangThai}" Value="1">
+                                                <Setter Property="Text" Value="Paid" />
+                                            </DataTrigger>
+                                            <!-- Nếu TrangThai = 0 -->
+                                            <DataTrigger Binding="{Binding TrangThai}" Value="0">
+                                                <Setter Property="Text" Value="Unpaid" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-
             </DataGrid.Columns>
         </DataGrid>
 

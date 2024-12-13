@@ -25,9 +25,8 @@ namespace QLPhongMachTuWPF.ViewModel
                 InvoiceList = new ObservableCollection<HOADON>(DataProvider.Ins.db.HOADONs );
                 AddInvoiceCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
                 {
-                    AddInvoice add = new AddInvoice(); 
-                    add.ShowDialog();
-
+                    AddInvoice add = new AddInvoice();
+                    add.ShowDialog(); 
                 }
                 );
             }
