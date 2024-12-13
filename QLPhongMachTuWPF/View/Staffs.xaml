@@ -54,7 +54,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Staff ID" IsReadOnly="True" CanUserResize="False" Width="0.8*" Binding="{Binding MaNV}" />
                 <DataGridTextColumn Header="Name" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" Binding="{Binding TenNV}"/>
-                <DataGridTextColumn Header="Birthday" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding NgaySinh}"/>
+                <DataGridTextColumn Header="Birthday" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding NgaySinh, StringFormat='dd/MM/yyyy'}"/>
                 <DataGridTextColumn Header="Address" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding DiaChi}"/>
                 <DataGridTextColumn Header="Phone" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding DienThoai}"/>
                 <DataGridTemplateColumn Header="Type" Width="*">

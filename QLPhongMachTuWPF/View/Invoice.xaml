@@ -53,7 +53,7 @@
                 <DataGridTextColumn Header="Examination fee" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding TienKham}"/>
                 <DataGridTextColumn Header="Pharmancy fee" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding TienThuoc}"/>
                 <DataGridTextColumn Header="Total fee" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding TongTien}"/>
-                <DataGridTextColumn Header="Date" IsReadOnly="True" CanUserResize="False" Width="0.8*" Binding="{Binding NgayHD}" />
+                <DataGridTextColumn Header="Date" IsReadOnly="True" CanUserResize="False" Width="0.8*" Binding="{Binding NgayHD, StringFormat='dd/MM/yyyy'}" />
 
                 <DataGridTemplateColumn Header="Status" Width="1.2*">
                     <DataGridTemplateColumn.CellTemplate>

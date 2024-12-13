@@ -48,7 +48,7 @@
                 <DataGridTextColumn Header="Diagnosis ID" IsReadOnly="True" CanUserResize="False" Width="0.8*" Binding="{Binding MaPK}" />
                 <DataGridTextColumn Header="Staff ID" IsReadOnly="True" CanUserResize="False" Width="1.5*" Binding="{Binding MaNV}"/>
                 <DataGridTextColumn Header="Patient ID" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding MaBN}"/>
-                <DataGridTextColumn Header="Date" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding NgayKham}"/>
+                <DataGridTextColumn Header="Date" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding NgayKham, StringFormat='dd/MM/yyyy'}"/>
                 <DataGridTextColumn Header="Symtom" IsReadOnly="True" CanUserResize="False" Width="0.8*" Binding="{Binding TrieuChung}" />
                 <DataGridTextColumn Header ="Result" IsReadOnly="True" CanUserResize="False" Width="0.8*" Binding="{Binding KetQua}" />
                 <DataGridTemplateColumn Header="Status" Width="1.5*">
