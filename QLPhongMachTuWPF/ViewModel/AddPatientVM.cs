@@ -51,8 +51,7 @@ namespace QLPhongMachTuWPF.ViewModel
 
         public string Charged { get => _Charged; set { _Charged = value; OnPropertyChanged(); } }
 
-        int Month;
-
+        
         public ICommand AddPatientCommand { get; set; }
         public int CheckMonth(string Thang)
         {

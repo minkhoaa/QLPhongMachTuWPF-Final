@@ -14,7 +14,7 @@ namespace QLPhongMachTuWPF.ViewModel
 {
     public class AddStaffsVM : ViewModelBase
     {
-
+        #region ThuocTinh
         private ObservableCollection<NHANVIEN> _Staff { get; set; }
 
         public ICommand AddStaffsCommand { get; set; } 
@@ -54,7 +54,39 @@ namespace QLPhongMachTuWPF.ViewModel
         private string _Status { get; set; }
 
         public string Status { get => _Status; set { _Status = value; OnPropertyChanged(); } }
-
+        public int CheckMonth(string Thang)
+        {
+            switch (Thang)
+            {
+                case "January":
+                    return 1;
+                case "February":
+                    return 2;
+                case "March":
+                    return 3;
+                case "April":
+                    return 4;
+                case "May":
+                    return 5;
+                case "June":
+                    return 6;
+                case "July":
+                    return 7;
+                case "August":
+                    return 8;
+                case "September":
+                    return 9;
+                case "October":
+                    return 10;
+                case "November":
+                    return 11;
+                case "December":
+                    return 12;
+                default:
+                    return -1;
+            }
+        }
+        #endregion 
         public AddStaffsVM() {
 
 
@@ -68,13 +100,13 @@ namespace QLPhongMachTuWPF.ViewModel
                 var newStaff = new NHANVIEN()
                 {
                     TenNV = Ten,
-                    NgaySinh = new DateTime(int.Parse(Nam), int.Parse(Thang), int.Parse(Ngay)),
+                    NgaySinh = new DateTime(int.Parse(Nam), CheckMonth(Thang), int.Parse(Ngay)),
                     DiaChi = DiaChi,
                     DienThoai = DienThoai,
                     LoaiNV = (Type == "Admin") ? 0 : 1,
                     GioiTinh = Gender,
-                    TrangThai = 1
-                };
+                    TrangThai = (Status == "Onboarđ") ? 1 : 0
+                }; 
 
                     try
                     {
