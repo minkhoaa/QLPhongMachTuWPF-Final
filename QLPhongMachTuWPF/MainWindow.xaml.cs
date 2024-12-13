@@ -107,6 +107,7 @@ namespace QLPhongMachTuWPF
             }
         }
 
+        
 
         private void CloseWindow_Click(object sender, RoutedEventArgs e)
         {

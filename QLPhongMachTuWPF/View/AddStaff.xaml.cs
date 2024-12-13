@@ -51,6 +51,12 @@ namespace QLPhongMachTuWPF.View
             };
 
             cmbType.ItemsSource = type;
+
+            var status = new List<string>
+            {
+                "Onboard", "Rejected"
+            };
+            cmbStatus.ItemsSource = status;
         }
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {

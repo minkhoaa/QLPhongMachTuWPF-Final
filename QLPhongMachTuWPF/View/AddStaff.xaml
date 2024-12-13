@@ -95,7 +95,7 @@
             <Grid Grid.Row="1">
 
                 <Border CornerRadius="0 0 10 0" Background="White"/>
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 90 0 0">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 60 0 0">
                     <!--name-->
                     <TextBox
                         Text="{Binding Ten}"
@@ -115,29 +115,26 @@
 
                 
 
-                <TextBlock Text="Date of birth" Margin="80 -150 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontSize="16" Foreground="Gray"/>
+                <TextBlock Text="Date of birth" Margin="80 -250 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontSize="16" Foreground="Gray"/>
 
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 200 0 0">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 150 0 0">
                     <!--Date of birth-->
                     <ComboBox x:Name="cmbDay" Width="60" 
                               Text ="{Binding Ngay}"
                               IsReadOnly="False"
                               IsEditable="True"
                               Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                              materialDesign:HintAssist.Hint="1"
                                FontSize="16"/>
 
                     <ComboBox x:Name="cmbMonth"
                               Text="{Binding Thang}"
                               IsEditable="True"
                               Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-          materialDesign:HintAssist.Hint="1"
           FontSize="16" Margin="10 0 0 0"/>
 
                     <ComboBox x:Name="cmbYear" 
                               Text="{Binding Nam}"
                               Width="110" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-materialDesign:HintAssist.Hint="2000"
  FontSize="16" Margin="10 0 0 0" IsEditable="True"/>
 
                     <!--Address-->
@@ -148,18 +145,27 @@ materialDesign:HintAssist.Hint="2000"
                                 Width="250" Margin="60 0 0 0" FontSize="16"/>
                 </StackPanel>
 
-                <TextBlock Text="Gender" Margin="80 50 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontSize="16" Foreground="Gray"/>
-                <TextBlock Text="Type" Margin="390 50 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontSize="16" Foreground="Gray"/>
+                <TextBlock Text="Gender" Margin="80 -70 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontSize="16" Foreground="Gray"/>
+                <TextBlock Text="Type" Margin="390 -70 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontSize="16" Foreground="Gray"/>
 
 
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 300 0 0">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 240 0 0">
                     <ComboBox Text="{Binding Gender}" x:Name="cmbGender" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-           FontSize="16"/>
+                     FontSize="16"/>
                     <ComboBox Text="{Binding Type}" x:Name="cmbType" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    FontSize="16" Margin="60 0 0 0"/>
 
- FontSize="16" Margin="60 0 0 0"/>
+                </StackPanel >
+                <TextBlock Text="Status" Margin="80 100 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontSize="16" Foreground="Gray"/>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="20 323 0 0">
+                    <ComboBox Text="{Binding Status}" x:Name="cmbStatus" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+FontSize="16" Margin="60 0 0 0"/>
                 </StackPanel>
+
+
                 
+
+
 
 
                 <Button
