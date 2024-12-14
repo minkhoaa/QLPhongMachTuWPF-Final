@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,6 +19,28 @@ namespace QLPhongMachTuWPF.ViewModel
     public class StaffsVM : ViewModelBase
     { 
         public ICommand AddStaffCommand { get; set ; }
+
+        public ICommand ModifyStaffsCommand { get; set; }
+
+
+
+
+        private NHANVIEN _SelectedItemCommand { get; set; }
+
+        public NHANVIEN SelectedItemCommand
+        {
+            get => _SelectedItemCommand;
+            set
+            {
+                if (_SelectedItemCommand != value)
+                {
+                    _SelectedItemCommand = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+
         private ObservableCollection<NHANVIEN> _staff;
         
         private string _SearchKeyword {  get; set; }
@@ -37,11 +60,34 @@ namespace QLPhongMachTuWPF.ViewModel
         {
             StaffList = new ObservableCollection<NHANVIEN>(DataProvider.Ins.db.NHANVIENs);
 
-            FilteredStaffs = CollectionViewSource.GetDefaultView(_staff);
+            FilteredStaffs = CollectionViewSource.GetDefaultView(StaffList);
 
-            Messenger.Default.Register<NHANVIEN>(this, (newStaff) =>
+            Messenger.Default.Register<NHANVIEN>(this, (staff) =>
             {
-                StaffList.Add(newStaff);
+                if (staff == null) return;
+
+                // Tìm đối tượng trong danh sách hiện tại
+                var existingStaff = StaffList.FirstOrDefault(p => p.MaNV == staff.MaNV);
+                if (existingStaff != null)
+                {
+                    // Cập nhật thông tin
+                    existingStaff.TenNV = staff.TenNV;
+                    existingStaff.DiaChi = staff.DiaChi;
+                    existingStaff.GioiTinh = staff.GioiTinh;
+                    existingStaff.DienThoai = staff.DienThoai;
+                    existingStaff.NgaySinh = staff.NgaySinh;
+                    existingStaff.TrangThai = staff.TrangThai;
+                    existingStaff.LoaiNV = staff.LoaiNV;
+                }
+                else
+                {
+                    // Thêm nhân viên mới
+                    StaffList.Add(staff);
+                }
+
+                // Ghi thay đổi vào database
+                DataProvider.Ins.db.SaveChanges();
+                FilteredStaffs?.Refresh();
             });
 
             AddStaffCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
@@ -49,7 +95,26 @@ namespace QLPhongMachTuWPF.ViewModel
                 AddStaff add = new AddStaff();
                 add.ShowDialog(); 
             }
-            ); 
+            );
+
+            ModifyStaffsCommand = new RelayCommand<object>((p) => SelectedItemCommand != null, (p) =>
+            {
+                if (SelectedItemCommand == null)
+                {
+                    MessageBox.Show("Vui lòng chọn một nhân viên để sửa.");
+                    return;
+                }
+
+                ModifyStaff modifyWindow = new ModifyStaff();
+                Messenger.Default.Send(SelectedItemCommand); // Gửi bệnh nhân đã chọn
+                modifyWindow.ShowDialog();
+
+            });
+
+
+
+
+
         }
         void FilterStaffs()
         {

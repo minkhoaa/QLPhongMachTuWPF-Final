@@ -141,6 +141,7 @@
     <Compile Include="ViewModel\ListsVM.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\ModifyPatientsVM.cs" />
+    <Compile Include="ViewModel\ModifyStaffVM.cs" />
     <Compile Include="View\AddAppointment.xaml.cs">
       <DependentUpon>AddAppointment.xaml</DependentUpon>
     </Compile>
@@ -189,6 +190,9 @@
     </Compile>
     <Compile Include="View\ModifyPatients.xaml.cs">
       <DependentUpon>ModifyPatients.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ModifyStaff.xaml.cs">
+      <DependentUpon>ModifyStaff.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Patients.xaml.cs">
       <DependentUpon>Patients.xaml</DependentUpon>
@@ -281,6 +285,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ModifyPatients.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ModifyStaff.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -7,7 +7,9 @@
         mc:Ignorable="d"
        DataContext="{StaticResource ModifyPatientsVM}"
         Title="ModifyPatients" Height="600" Width="800"
-                xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodel="clr-namespace:QLPhongMachTuWPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ModifyPatientsVM}"
+                xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:viewmodel="clr-namespace:QLPhongMachTuWPF.ViewModel" 
+        d:DataContext="{d:DesignInstance Type=viewmodel:ModifyPatientsVM}"
         WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent" AllowsTransparency="True">
 
     <Window.Resources>
@@ -150,10 +152,8 @@
  FontSize="16" Margin="60 0 0 0"/>
                 </StackPanel>
 
-
-
                 <Button
-                    Command="{Binding SaveChangesCommand}"
+                    Command="{Binding SaveChangesCommand }"
                     Content="SaveChanges"  Style="{StaticResource btnAdd}">
 
                 </Button>

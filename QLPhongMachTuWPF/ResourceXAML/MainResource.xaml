@@ -17,5 +17,6 @@
     <viewmodel:AddDiagnosis x:Key="AddDiagnosis"></viewmodel:AddDiagnosis>
     <viewmodel:AddMedicineVM x:Key="AddMedicineVM"></viewmodel:AddMedicineVM>
     <viewmodel:ModifyPatientsVM x:Key="ModifyPatientsVM" ></viewmodel:ModifyPatientsVM>
+    <viewmodel:ModifyStaffVM x:Key="ModifyStaffVM"></viewmodel:ModifyStaffVM>
 </ResourceDictionary> 
     

@@ -53,9 +53,7 @@ namespace QLPhongMachTuWPF.ViewModel
         public string Charged { get => _Charged; set { _Charged = value; OnPropertyChanged(); } }
 
         public DateTime? date { get; set; }
-        private ObservableCollection<BENHNHAN> _patients { get; set; }
-
-        public ObservableCollection<BENHNHAN> Patients { get { return _patients; } set { _patients = value; OnPropertyChanged(); } }
+      
        
         private BENHNHAN BenhNhan { get; set; }
 
