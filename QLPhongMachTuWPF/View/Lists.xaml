@@ -35,14 +35,14 @@
             <Image Source="/Images/search.png" Width="20" Height="20" HorizontalAlignment="Right" Margin="5"/>
         </Grid>
 
-        <Button Grid.Row="0" Margin="0 10 40 10"  Style="{StaticResource addBtn}" Click="AddListButton_Click">
+        <Button Command="{Binding AddMedicineCommand}" Grid.Row="0" Margin="0,30,226,36"  Style="{StaticResource addBtn}" >
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Add Medicine" FontSize="15" FontWeight="Bold"/>
             </StackPanel>
         </Button>
 
 
-        <DataGrid Grid.Row="1" ItemsSource="{Binding MedicineList }" Background="#eeeeee" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle2}" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="patientsDatagrid" Margin="0,0,0,10"
+        <DataGrid Grid.Row="1" SelectedItem="{Binding SelectedItemCommand}" ItemsSource="{Binding FilteredMedicine }" Background="#eeeeee" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle2}" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="patientsDatagrid" Margin="0,0,0,10"
           HorizontalScrollBarVisibility="Disabled" Grid.RowSpan="2" 
     HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
     Width="auto" Height="auto" VerticalScrollBarVisibility="Auto">
@@ -89,7 +89,12 @@
 
             </DataGrid.Columns>
         </DataGrid>
+        <Button  Command="{Binding ModifyMedicineCommand}" Grid.Row="0" Margin="0,30,40,36"  Style="{StaticResource addBtn}" >
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Modify Medicine" FontSize="15" FontWeight="Bold"/>
+            </StackPanel>
+        </Button>
 
-        
+
     </Grid>
 </UserControl>

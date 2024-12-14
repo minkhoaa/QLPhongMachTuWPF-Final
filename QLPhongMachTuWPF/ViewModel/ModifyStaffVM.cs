@@ -54,10 +54,7 @@ namespace QLPhongMachTuWPF.ViewModel
         private string _Type { get; set; }
         public string Type { get => _Type; set { _Type = value; OnPropertyChanged(); } }
         public DateTime? date { get; set; }
-        private ObservableCollection<NHANVIEN> _staff { get; set; }
-
-        public ObservableCollection<NHANVIEN> Staff { get { return _staff; } set { _staff = value; OnPropertyChanged(); } }
-
+   
         private NHANVIEN NhanVien { get; set; }
         public int CheckMonth(string Thang)
         {

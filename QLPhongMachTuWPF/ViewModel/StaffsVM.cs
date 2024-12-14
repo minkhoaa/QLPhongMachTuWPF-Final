@@ -23,8 +23,6 @@ namespace QLPhongMachTuWPF.ViewModel
         public ICommand ModifyStaffsCommand { get; set; }
 
 
-
-
         private NHANVIEN _SelectedItemCommand { get; set; }
 
         public NHANVIEN SelectedItemCommand

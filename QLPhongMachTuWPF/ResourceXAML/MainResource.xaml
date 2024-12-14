@@ -18,5 +18,6 @@
     <viewmodel:AddMedicineVM x:Key="AddMedicineVM"></viewmodel:AddMedicineVM>
     <viewmodel:ModifyPatientsVM x:Key="ModifyPatientsVM" ></viewmodel:ModifyPatientsVM>
     <viewmodel:ModifyStaffVM x:Key="ModifyStaffVM"></viewmodel:ModifyStaffVM>
+    <viewmodel:ModifyMedicineVM x:Key="ModifyMedicineVM"></viewmodel:ModifyMedicineVM>
 </ResourceDictionary> 
     
