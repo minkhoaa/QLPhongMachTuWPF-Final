@@ -20,6 +20,7 @@ namespace QLPhongMachTuWPF.Model
             this.CTTTs = new HashSet<CTTT>();
         }
     
+        public int MaThuoc { get; set; }
         public string TenThuoc { get; set; }
         public string DonViTinh { get; set; }
         public Nullable<decimal> Gia { get; set; }

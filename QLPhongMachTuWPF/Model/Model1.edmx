@@ -29,10 +29,10 @@
         <EntityType Name="CTTT">
           <Key>
             <PropertyRef Name="MaPK" />
-            <PropertyRef Name="TenThuoc" />
+            <PropertyRef Name="MaThuoc" />
           </Key>
           <Property Name="MaPK" Type="int" Nullable="false" />
-          <Property Name="TenThuoc" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="MaThuoc" Type="int" Nullable="false" />
           <Property Name="SoLuong" Type="int" />
           <Property Name="DonGia" Type="money" />
           <Property Name="CachDung" Type="nvarchar(max)" />
@@ -82,9 +82,10 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
         </EntityType>-->
         <EntityType Name="THUOC">
           <Key>
-            <PropertyRef Name="TenThuoc" />
+            <PropertyRef Name="MaThuoc" />
           </Key>
-          <Property Name="TenThuoc" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="MaThuoc" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenThuoc" Type="nvarchar" MaxLength="40" />
           <Property Name="DonViTinh" Type="nvarchar" MaxLength="20" />
           <Property Name="Gia" Type="money" />
           <Property Name="TrangThai" Type="int" />
@@ -106,10 +107,10 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
           <End Role="CTTT" Type="Self.CTTT" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="THUOC">
-              <PropertyRef Name="TenThuoc" />
+              <PropertyRef Name="MaThuoc" />
             </Principal>
             <Dependent Role="CTTT">
-              <PropertyRef Name="TenThuoc" />
+              <PropertyRef Name="MaThuoc" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -236,10 +237,10 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
         <EntityType Name="CTTT">
           <Key>
             <PropertyRef Name="MaPK" />
-            <PropertyRef Name="TenThuoc" />
+            <PropertyRef Name="MaThuoc" />
           </Key>
           <Property Name="MaPK" Type="Int32" Nullable="false" />
-          <Property Name="TenThuoc" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="MaThuoc" Type="Int32" Nullable="false" />
           <Property Name="SoLuong" Type="Int32" />
           <Property Name="DonGia" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="CachDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -292,9 +293,10 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
         </EntityType>
         <EntityType Name="THUOC">
           <Key>
-            <PropertyRef Name="TenThuoc" />
+            <PropertyRef Name="MaThuoc" />
           </Key>
-          <Property Name="TenThuoc" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="MaThuoc" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenThuoc" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Name="DonViTinh" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Gia" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="TrangThai" Type="Int32" />
@@ -329,10 +331,10 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
           <End Type="QLPMTModel.CTTT" Role="CTTT" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="THUOC">
-              <PropertyRef Name="TenThuoc" />
+              <PropertyRef Name="MaThuoc" />
             </Principal>
             <Dependent Role="CTTT">
-              <PropertyRef Name="TenThuoc" />
+              <PropertyRef Name="MaThuoc" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -396,7 +398,7 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
                 <ScalarProperty Name="CachDung" ColumnName="CachDung" />
                 <ScalarProperty Name="DonGia" ColumnName="DonGia" />
                 <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
-                <ScalarProperty Name="TenThuoc" ColumnName="TenThuoc" />
+                <ScalarProperty Name="MaThuoc" ColumnName="MaThuoc" />
                 <ScalarProperty Name="MaPK" ColumnName="MaPK" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -448,6 +450,7 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
                 <ScalarProperty Name="Gia" ColumnName="Gia" />
                 <ScalarProperty Name="DonViTinh" ColumnName="DonViTinh" />
                 <ScalarProperty Name="TenThuoc" ColumnName="TenThuoc" />
+                <ScalarProperty Name="MaThuoc" ColumnName="MaThuoc" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

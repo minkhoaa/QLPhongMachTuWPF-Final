@@ -15,7 +15,7 @@ namespace QLPhongMachTuWPF.Model
     public partial class CTTT
     {
         public int MaPK { get; set; }
-        public string TenThuoc { get; set; }
+        public int MaThuoc { get; set; }
         public Nullable<int> SoLuong { get; set; }
         public Nullable<decimal> DonGia { get; set; }
         public string CachDung { get; set; }

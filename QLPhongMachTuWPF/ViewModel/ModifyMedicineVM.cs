@@ -66,66 +66,21 @@ namespace QLPhongMachTuWPF.ViewModel
 
             SaveChangesCommand = new RelayCommand<object>((p) =>
             {
-                // Kiểm tra dữ liệu hợp lệ
-                if (string.IsNullOrWhiteSpace(Name))
-                    return false;
-
-                // Kiểm tra xem khóa chính mới có tồn tại không
-                var existingMedicine = DataProvider.Ins.db.THUOCs.FirstOrDefault(t => t.TenThuoc == Name);
-                if (existingMedicine != null && existingMedicine.TenThuoc != Thuoc.TenThuoc)
-                    return false;
-
                 return true;
-            }, (p) =>
-            {
-                try
-                {
-                    using (var transaction = DataProvider.Ins.db.Database.BeginTransaction())
-                    {
-                        // Cập nhật thông tin các bản ghi liên quan trong bảng CTTT
-                        var relatedRecords = DataProvider.Ins.db.CTTTs.Where(c => c.TenThuoc == Thuoc.TenThuoc).ToList();
-                        foreach (var record in relatedRecords)
-                        {
-                            record.TenThuoc = Name;
-                        }
+            }, (p) => {
 
-                        // Tạo thực thể mới với giá trị mới
-                        var newMedicine = new THUOC
-                        {
-                            TenThuoc = Name,
-                            Gia = decimal.Parse(Price),
-                            DonViTinh = Unit,
-                            TrangThai = (Status == "Available") ? 1 : 0
-                        };
+                Thuoc.TrangThai = (Status == "Available") ? 1 : 0;
+                Thuoc.Gia = decimal.Parse(Price);
+                Thuoc.TenThuoc = Name.ToString(); 
+                Thuoc.DonViTinh = Unit.ToString();
 
-                        // Thêm thực thể mới vào database
-                        DataProvider.Ins.db.THUOCs.Add(newMedicine);
-
-                        // Xóa thực thể cũ
-                        DataProvider.Ins.db.THUOCs.Remove(Thuoc);
-
-                        // Lưu thay đổi
-                        DataProvider.Ins.db.SaveChanges();
-
-                        // Cam kết giao dịch
-                        transaction.Commit();
-
-                        // Gửi thông báo cập nhật
-                        Messenger.Default.Send(newMedicine);
-
-                        // Đóng cửa sổ
-                        Application.Current.Windows
-                            .OfType<Window>()
-                            .SingleOrDefault(w => w.IsActive)
-                            ?.Close();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error updating medicine: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                DataProvider.Ins.db.SaveChanges();
+                Messenger.Default.Send(Thuoc);
+                Application.Current.Windows
+                .OfType<Window>()
+                .SingleOrDefault(w => w.IsActive)
+                ?.Close();
             });
-
         }
 
 

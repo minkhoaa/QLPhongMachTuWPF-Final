@@ -1,11 +1,9 @@
 ﻿
-
-create database QLPMT
+create  database QLPMT
 go
 use QLPMT
 go
 set dateformat DMY
-
 	CREATE TABLE ACCOUNT ( 
 	UserName NVARCHAR(100) PRIMARY KEY, 
 	DisPlayName nvarchar(100) not null default 'Account',
@@ -76,27 +74,28 @@ CONSTRAINT HD_MaPK_FK FOREIGN KEY (MaPK) REFERENCES PHIEUKHAM(MaPK)
 
 CREATE TABLE THUOC
 (
-	TenThuoc nvarchar(40)not null,
+	MaThuoc int IDENTITY(1,1)not null,
+	TenThuoc nvarchar(40),
 	DonViTinh nvarchar(20),
 	Gia money,
 	TrangThai int
 )
 ALTER TABLE THUOC ADD
-CONSTRAINT TH_TenThuoc_PK PRIMARY KEY (TenThuoc)
+CONSTRAINT TH_TenThuoc_PK PRIMARY KEY (MaThuoc)
 
 CREATE TABLE CTTT
 (
 	MaPK int not null,
-	TenThuoc nvarchar(40)not null,
+	MaThuoc int not null,
 	SoLuong int,
 	DonGia money,
 	CachDung nvarchar(max),
 	TrangThai int
 )
 ALTER TABLE CTTT ADD
-CONSTRAINT CTTT_MaPK_TenThuoc_PK PRIMARY KEY (MaPK, TenThuoc),
+CONSTRAINT CTTT_MaPK_TenThuoc_PK PRIMARY KEY (MaPK, MaThuoc),
 CONSTRAINT CTTT_MaPK_FK FOREIGN KEY (MaPK) REFERENCES PHIEUKHAM(MaPK),
-CONSTRAINT CTTT_TenThuoc_FK FOREIGN KEY (TenThuoc) REFERENCES THUOC(TenThuoc)
+CONSTRAINT CTTT_TenThuoc_FK FOREIGN KEY (MaThuoc) REFERENCES THUOC(MaThuoc)
 
 
 
@@ -157,8 +156,7 @@ INSERT INTO PHIEUKHAM (MaNV, MaBN, NgayKham, TrieuChung, KetQua, TrangThai)
 VALUES('1',	'8',	'25/3/2018',	N'Đau khớp',	N'Sụn khớp và thiếu canxi trầm trọng.', '1')
 INSERT INTO PHIEUKHAM (MaNV, MaBN, NgayKham, TrieuChung, KetQua, TrangThai)
 VALUES('3',	'9',	'04/01/2018',	N'Da nổi mẩn đỏ.',	N'Thủy đậu.', '1')
-INSERT INTO PHIEUKHAM (MaNV, MaBN, NgayKham, TrieuChung, KetQua, TrangThai)
-VALUES('4',	'10',	'04/03/2018',	N'Đau vùng gối thường xuyên',	N'Tổn thương tủy sống.', '1')
+
 INSERT INTO PHIEUKHAM (MaNV, MaBN, NgayKham, TrieuChung, KetQua, TrangThai)
 VALUES('1',	'11',	'04/04/2018',	N'Sưng và đau nhức ở cánh tay.', N'Vết thương bị nhiềm trùng.', '1')
 INSERT INTO PHIEUKHAM (MaNV, MaBN, NgayKham, TrieuChung, KetQua, TrangThai)
@@ -178,74 +176,52 @@ VALUES('10',	100000,	1000000,	1100000, '11/12/1970',  '1')
 
 
 
+INSERT INTO THUOC (TenThuoc, DonViTinh, Gia, TrangThai)
+VALUES 
+(N'Paracetamol', N'Viên', 20000, 1),
+(N'Amoxicillin', N'Viên', 15000, 1),
+(N'Aspirin', N'Viên', 25000, 1),
+(N'Vitamin C', N'Lọ', 50000, 1),
+(N'Ceftriaxone', N'Ống', 100000, 1),
+(N'Ibuprofen', N'Viên', 30000, 1),
+(N'Loratadine', N'Viên', 18000, 1),
+(N'Prednisolone', N'Viên', 22000, 1),
+(N'Omeprazole', N'Viên', 25000, 1),
+(N'Diclofenac', N'Viên', 26000, 1),
+(N'Metformin', N'Viên', 20000, 1),
+(N'Simvastatin', N'Viên', 28000, 1),
+(N'Ciprofloxacin', N'Viên', 35000, 1),
+(N'Doxycycline', N'Viên', 24000, 1),
+(N'Azithromycin', N'Viên', 50000, 1),
+(N'Chlorpheniramine', N'Viên', 15000, 1),
+(N'Ranitidine', N'Viên', 18000, 1),
+(N'Albendazole', N'Viên', 12000, 1),
+(N'Clarithromycin', N'Viên', 48000, 1),
+(N'Ketorolac', N'Ống', 75000, 1);
 
 
-INSERT INTO THUOC (TenThuoc, DonViTinh, Gia, TrangThai)
-VALUES('Augmentin',	N'Hộp', 	250000, '1')
-INSERT INTO THUOC (TenThuoc, DonViTinh, Gia, TrangThai)
-VALUES('TENOFOVIR',	N'Hộp', 	500000, '1')
-INSERT INTO THUOC (TenThuoc, DonViTinh, Gia, TrangThai)
-VALUES('Minoxidil',	N'Hộp',	500000, '1')
-INSERT INTO THUOC (TenThuoc, DonViTinh, Gia, TrangThai)
-VALUES(N'Bạc nitrat',	N'Hộp',	300000, '1')
-INSERT INTO THUOC (TenThuoc, DonViTinh, Gia, TrangThai)
-VALUES('Feldene',	N'Hộp',	300000, '1')
-INSERT INTO THUOC (TenThuoc, DonViTinh, Gia, TrangThai)
-VALUES('Fenofibrat',	N'Hộp',	500000, '1')
-INSERT INTO THUOC (TenThuoc, DonViTinh, Gia, TrangThai)
-VALUES('Fenoprofen',	N'Hộp',	300000, '1')
-INSERT INTO THUOC (TenThuoc, DonViTinh, Gia, TrangThai)
-VALUES('Dacarbazine',	N'Hộp',	1000000, '1')
-INSERT INTO THUOC (TenThuoc, DonViTinh, Gia, TrangThai)
-VALUES('Dantrolene',	N'Hộp',	300000, '1')
-INSERT INTO THUOC (TenThuoc, DonViTinh, Gia, TrangThai)
-VALUES('Daptomycin',	N'Hộp',	500000, '1')
-INSERT INTO THUOC (TenThuoc, DonViTinh, Gia, TrangThai)
-VALUES('Heparin',	N'Hộp',	2000000, '1')
-INSERT INTO THUOC (TenThuoc, DonViTinh, Gia, TrangThai)
-VALUES('Ganirelix',	N'Hộp',	1000000, '1')
-INSERT INTO THUOC (TenThuoc, DonViTinh, Gia, TrangThai)
-VALUES('Kaleorid',	N'Hộp',	500000, '1')
-INSERT INTO THUOC (TenThuoc, DonViTinh, Gia, TrangThai)
-VALUES('Panadol',	N'Hộp',	500000, '1')
-INSERT INTO THUOC (TenThuoc, DonViTinh, Gia, TrangThai)
-VALUES('Migrin',	N'Hộp',	150000, '1')
-INSERT INTO THUOC (TenThuoc, DonViTinh, Gia, TrangThai)
-VALUES('Methylen',	N'Chai',150000, '1')
-
-
-INSERT INTO CTTT (MaPK, TenThuoc, SoLuong, DonGia, CachDung, TrangThai)
-VALUES('1',	'Telfast',	'2',	400000,	N'Bạn có thể dùng thuốc fexofenadine bằng cách uống kèm hoặc không kèm với thức ăn. Khi dùng thuốc fexofenadine, bạn nên uống một ly nước đầy và không uống cùng với nước trái cây vì có thể làm giảm tác dụng của thuốc', '1')
-INSERT INTO CTTT (MaPK, TenThuoc, SoLuong, DonGia, CachDung, TrangThai)
-VALUES('2',	'Fexofenadine',	'1',	100000,	N'Dùng 30 mg cho trẻ uống hai lần một ngày', '1')
-INSERT INTO CTTT (MaPK, TenThuoc, SoLuong, DonGia, CachDung, TrangThai)
-VALUES('3',	'Augmentin',	'3',	750000,	N'Uống thuốc với một cốc nước đầy. Uống ở đầu bữa ăn để tránh gây rối loạn tiêu hóa và dùng thuốc trong thời điểm cố định mỗi ngày và nhai trước khi nuốt, không nuốt cả viên khi chưa nhai.', '1')
-INSERT INTO CTTT (MaPK, TenThuoc, SoLuong, DonGia, CachDung, TrangThai)
-VALUES('4',	'Minoxidil',	'2',	1000000,	N'Liều lượng ban đầu: uống 5 mg một lần một ngày; Liều lượng duy trì: dùng 10-40 mg, chia thành 1-2 liều.', '1')
-INSERT INTO CTTT (MaPK, TenThuoc, SoLuong, DonGia, CachDung, TrangThai)
-VALUES('5',	N'Migrin',	'1',	150000,	N'Uống 2-3 lần một ngày sau bữa ăn.', '1')
-INSERT INTO CTTT (MaPK, TenThuoc, SoLuong, DonGia, CachDung, TrangThai)
-VALUES('6',	N'Bạc nitrat',	'1',	300000,	N'Thoa lên các vết bỏng  2-3 lần một tuần.', '1')
-INSERT INTO CTTT (MaPK, TenThuoc, SoLuong, DonGia, CachDung, TrangThai)
-VALUES('7',	'Feldene',	'1',	300000,	N'Dùng 20 mg, uống một lần mỗi ngày hoặc 10 mg, uống hai lần mỗi ngày. Liều tối đa hàng ngày là 20 mg.', '1')
-INSERT INTO CTTT (MaPK, TenThuoc, SoLuong, DonGia, CachDung, TrangThai)
-VALUES('8',	'Fenofibrat',	'2',	1000000,	N'Bạn uống 1 viên nén 145 mg 1 lần mỗi ngày. Những người đã sử dụng viên nang fenofibrat 200 mg hoặc viên nén 160 mg thời gian gần đây có thể chuyển sang uống viên nén 145 mg mà không cần hiệu chỉnh liều.', '1')
-INSERT INTO CTTT (MaPK, TenThuoc, SoLuong, DonGia, CachDung, TrangThai)
-VALUES('9',	'Fenoprofen',	'1',	300000,	N'Dùng thuốc này bằng đường uống với một ly nước đầy (240 ml), trừ khi bác sĩ của bạn có chỉ dẫn khác. Đừng nằm xuống trong ít nhất 10 phút sau khi uống thuốc này. Nếu bạn bị khó chịu ở dạ dày trong khi dùng thuốc này, hãy uống thuốc với thực phẩm, sữa, hoặc thuốc kháng axit', '1')
-INSERT INTO CTTT (MaPK, TenThuoc, SoLuong, DonGia, CachDung, TrangThai)
-VALUES('10',	'Dacarbazine',	'1',	1000000,	N'Tiêm tĩnh mạch 2-4,5 mg/kg mỗi ngày một lần trong 10 ngày, lặp lại mỗi 4 tuần hoặc tiêm tĩnh mạch 250 mg/mÂ²  một lần mỗi ngày trong 5 ngày, lặp lại mỗi 3 tuần.', '1')
-INSERT INTO CTTT (MaPK, TenThuoc, SoLuong, DonGia, CachDung, TrangThai)
-VALUES('11', 'Dantrolene',	'1',	300000,	N'Tiêm truyền tĩnh mạch: 2,5 mg/kg, bắt đầu khoảng 75 phút trước khi gây mê và truyền tĩnh mạch trong khoảng 1 giờ. Uống: 4-8 mg/kg/ngày uống chia thành ba hoặc bốn liều trong 1 hoặc 2 ngày trước khi phẫu thuật, liều cuối cùng uống với lượng nước tối thiểu khoảng 3-4 giờ trước khi phẫu thuật.', '1')
-INSERT INTO CTTT (MaPK, TenThuoc, SoLuong, DonGia, CachDung, TrangThai)
-VALUES('12',	'Daptomycin',	'1',	500000,	N'Tiêm tĩnh mạch 6 mg/kg mỗi 24 tiếng trong 2 đến 6 tuần.', '1')
-INSERT INTO CTTT (MaPK, TenThuoc, SoLuong, DonGia, CachDung, TrangThai)
-VALUES('13',	'Heparin',	'1',	2000000,	N'Đối với dạng thuốc truyền tĩnh mạch, bạn dùng khoảng 5000 đơn vị một lần, tiếp theo truyền tĩnh mạch liên tục 1300 đơn vị/giờ. Ngoài ra, bạn có thể tiêm tĩnh mạch một liều 80 đơn vị một lần. Sau đó, bạn có thể cần tiêm truyền tĩnh mạch liên tục 18 đơn vị/kg/giờ', '1')
-INSERT INTO CTTT (MaPK, TenThuoc, SoLuong, DonGia, CachDung, TrangThai)
-VALUES('14',	'Ganirelix',	'1',	1000000,	N'25 mg tiêm dưới da 1 lần/ngày. Ganirelix được dùng thuận tiện nhất ở vùng bụng quanh rốn hoặc đùi trên. Thông thường, nang hormone kích thích (FSH) ngoại sinh được tiêm trong ngày kinh thứ 2 hoặc 3. Ganirelix được bắt đầu tiêm vào ngày 7 hoặc 8 (ngày thứ 6 trong điều trị FSH). Trị liệu Ganirelix được tiếp tục cho đến khi nang trưởng thành đầy đủ, thời điểm đó sẽ bắt đầu tiêm hCG', '1')
-INSERT INTO CTTT (MaPK, TenThuoc, SoLuong, DonGia, CachDung, TrangThai)
-VALUES('15',	'Kaleorid',	'1',	500000,	N'Uống cả viên thuốc với 1 ly nước đầy.', '1')
-INSERT INTO CTTT (MaPK, TenThuoc, SoLuong, DonGia, CachDung, TrangThai)	
-VALUES('16',	'Panadol',	'1',	500000,	N'Uống ba bữa trong ngày và sau khi ăn.', '1')
+INSERT INTO CTTT (MaPK, MaThuoc, SoLuong, DonGia, CachDung, TrangThai)
+VALUES 
+(1, 1, 2, 20000, N'Uống sau ăn', 1),
+(1, 2, 1, 15000, N'Uống trước khi ngủ', 1),
+(1, 3, 1, 25000, N'Uống mỗi sáng', 1),
+(2, 4, 1, 50000, N'Uống sau khi ăn', 1),
+(2, 5, 1, 100000, N'Tiêm theo hướng dẫn bác sĩ', 1),
+(3, 6, 2, 30000, N'Uống mỗi sáng và tối', 1),
+(3, 7, 1, 18000, N'Uống trước khi ăn sáng', 1),
+(4, 8, 3, 22000, N'Uống sau khi ăn', 1),
+(4, 9, 1, 25000, N'Uống trước khi ăn sáng', 1),
+(5, 10, 1, 26000, N'Uống buổi tối', 1),
+(5, 11, 2, 20000, N'Uống sau khi ăn', 1),
+(6, 12, 1, 28000, N'Uống buổi tối', 1),
+(6, 13, 2, 35000, N'Uống sau bữa sáng', 1),
+(7, 14, 1, 24000, N'Uống buổi tối', 1),
+(7, 15, 1, 50000, N'Uống trước khi ăn', 1),
+(8, 16, 1, 15000, N'Uống vào buổi tối', 1),
+(8, 17, 2, 18000, N'Uống trước khi ngủ', 1),
+(9, 18, 1, 12000, N'Uống vào buổi sáng', 1),
+(9, 19, 1, 48000, N'Uống sau ăn', 1),
+(10, 20, 1, 75000, N'Tiêm theo chỉ dẫn bác sĩ', 1);
 
 INSERT INTO QUIDINH (TienKham)
 VALUES (100000)
