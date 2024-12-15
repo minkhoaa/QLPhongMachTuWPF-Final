@@ -8,9 +8,7 @@
              d:DesignHeight="720" d:DesignWidth="880"
              xmlns:vm="clr-namespace:QLPhongMachTuWPF.ViewModel"
              DataContext="{StaticResource StaffsVM}"
-            xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" d:DataContext="{d:DesignInstance Type=vm:StaffsVM}"
-             Style="{StaticResource Page_Style}"
-              >
+            xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" d:DataContext="{d:DesignInstance Type=vm:StaffsVM}">
 
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
@@ -19,9 +17,6 @@
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-
-
-
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
@@ -30,17 +25,14 @@
         <Grid Grid.Row="0" Width="250" HorizontalAlignment="Left" Margin="100 30 400 35">
             <TextBlock Margin="20,0,30,0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
    Panel.ZIndex="1" Text="Search" Visibility="{Binding ElementName=txtSearch, Path=Text.IsEmpty,Converter={StaticResource BoolToVis}}" FontSize="20"/>
-
+        <!--Search-->
             <TextBox x:Name="txtSearch"
                      Text="{Binding SearchKeyword, UpdateSourceTrigger=PropertyChanged}"
-                  Style="{StaticResource txtBoxSearch}"
-                     
-                     
-                     />
+                  Style="{StaticResource txtBoxSearch}"/>
             <Image Source="/Images/search.png" Width="20" Height="20" HorizontalAlignment="Right" Margin="5"/>
         </Grid>
 
-        <Button Command="{Binding AddStaffCommand}" Grid.Row="0" Margin="455,33,0,33"  Style="{StaticResource addBtn}" HorizontalAlignment="Left" >
+        <Button Command="{Binding AddStaffCommand}" Grid.Row="0" Style="{StaticResource addBtn}"  >
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Add Staff" FontSize="15" FontWeight="Bold"/>
             </StackPanel>
@@ -78,25 +70,12 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Action" IsReadOnly="True" CanUserResize="False" Width="100">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <Button Style="{StaticResource gridEditBtn}">
-                                    <materialDesign:PackIcon Kind="Pencil" Width="20" Height="20"/>
-                                </Button>
-                                <Button Style="{StaticResource gridRemoveBtn}" Margin="5 0 0 0" >
-                                    <materialDesign:PackIcon Kind="Delete" Width="20" Height="20"/>
-                                </Button>
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                
 
 
             </DataGrid.Columns>
         </DataGrid>
-        <Button Command="{Binding ModifyStaffsCommand }" Grid.Row="0" Margin="647,33,0,33"  Style="{StaticResource addBtn}" HorizontalAlignment="Left" >
+        <Button Command="{Binding ModifyStaffsCommand }" Grid.Row="0"  Style="{StaticResource anotherAddBtn}"  >
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Modify Staff" FontSize="15" FontWeight="Bold"/>
             </StackPanel>

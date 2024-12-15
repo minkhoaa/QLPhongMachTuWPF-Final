@@ -15,15 +15,14 @@ using System.Windows.Shapes;
 namespace QLPhongMachTuWPF.View
 {
     /// <summary>
-    /// Interaction logic for ModifyStaff.xaml
+    /// Interaction logic for ModifyInvoice.xaml
     /// </summary>
-    public partial class ModifyStaff : Window
+    public partial class ModifyInvoice : Window
     {
-        public ModifyStaff()
+        public ModifyInvoice()
         {
             InitializeComponent();
         }
-
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

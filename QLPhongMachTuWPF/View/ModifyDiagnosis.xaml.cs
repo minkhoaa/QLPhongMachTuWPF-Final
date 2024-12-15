@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace QLPhongMachTuWPF.View
 {
     /// <summary>
-    /// Interaction logic for ModifyStaff.xaml
+    /// Interaction logic for ModifyDiagnosis.xaml
     /// </summary>
-    public partial class ModifyStaff : Window
+    public partial class ModifyDiagnosis : Window
     {
-        public ModifyStaff()
+        public ModifyDiagnosis()
         {
             InitializeComponent();
         }
