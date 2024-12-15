@@ -22,7 +22,7 @@ namespace QLPhongMachTuWPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        private bool isSidebarCollapsed = false;
+        
         public MainWindow()
         {
 

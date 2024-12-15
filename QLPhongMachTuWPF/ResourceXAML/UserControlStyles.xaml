@@ -63,7 +63,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="addBtn" TargetType="Button">
+    <Style x:Key="anotherAddBtn" TargetType="Button">
         <Setter Property="Background">
             <Setter.Value>
                 <LinearGradientBrush>
@@ -79,6 +79,8 @@
         <Setter Property="HorizontalAlignment" Value="Right"/>
         <Setter Property="Margin" Value="0 20 0 0"/>
         <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Margin" Value="708,33,0,33"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
 
         <Setter Property="Template">
             <Setter.Value>
@@ -121,11 +123,45 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="pagingBtnIcon" TargetType="Image">
-        <Setter Property="Width" Value="20"/>
-        <Setter Property="Height" Value="20"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Style x:Key="addBtn" TargetType="Button">
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush>
+                    <GradientStop Color="#1ca7ec" Offset="0.0"/>
+                    <GradientStop Color="#0e67a8" Offset="1"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Width" Value="150"/>
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Margin" Value="0 20 0 0"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Margin" Value="534,33,0,33"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="7">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#3693ff"/>
+                <Setter Property="Foreground" Value="#dcdcdc"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
+
+    
+
+   
 
 
     <!--datagrid-->

@@ -10,8 +10,7 @@
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
              
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" d:DataContext="{d:DesignInstance Type=vm:PatientsVM}"
-             DataContext="{StaticResource PatientsVM}"
-             Style="{StaticResource Page_Style}">
+             DataContext="{StaticResource PatientsVM}">
 
 
 
@@ -43,7 +42,7 @@
             <Image Source="/Images/search.png" Width="20" Height="20" HorizontalAlignment="Right" Margin="5"/>
         </Grid>
 
-        <Button Grid.Row="0" Margin="534,33,0,33" Command="{ Binding AddPatientCommand }"  Style="{StaticResource addBtn}" HorizontalAlignment="Left" >
+        <Button Grid.Row="0" Command="{ Binding AddPatientCommand }"  Style="{StaticResource addBtn}" >
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Add Patient" FontSize="15" FontWeight="Bold"/>
             </StackPanel>
@@ -84,32 +83,12 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Action" IsReadOnly="True" CanUserResize="False" Width="100">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <Button x:Name="btnEdit"   
-                                        Command="{Binding }"
-                                        Style="{StaticResource gridEditBtn}" 
-                                        Margin="5 0 0 0" >
-                                    <materialDesign:PackIcon  Kind="Pencil" Width="20" Height="20"/>
 
-                                </Button>
-                                <Button
-                                    x:Name="btnDelete"
-                                    Command="{Binding }"
-                                    Style="{StaticResource gridRemoveBtn}" Margin="5 0 0 0" >
-                                    <materialDesign:PackIcon Kind="Delete" Width="20" Height="20"/>
-                                </Button>
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
 
 
             </DataGrid.Columns>
         </DataGrid>
-        <Button Grid.Row="0" Margin="708,33,0,33" Command="{Binding ModifyPatientCommand}"  Style="{StaticResource addBtn}" HorizontalAlignment="Left" >
+        <Button Grid.Row="0" Command="{Binding ModifyPatientCommand}"  Style="{StaticResource anotherAddBtn}">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Modify Patient" FontSize="15" FontWeight="Bold"/>
             </StackPanel>
