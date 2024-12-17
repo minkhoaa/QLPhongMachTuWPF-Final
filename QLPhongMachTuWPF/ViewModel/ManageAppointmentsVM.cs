@@ -1,4 +1,5 @@
-﻿using QLPhongMachTuWPF.Model;
+﻿using GalaSoft.MvvmLight.Messaging;
+using QLPhongMachTuWPF.Model;
 using QLPhongMachTuWPF.View;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 
@@ -42,13 +44,49 @@ namespace QLPhongMachTuWPF.ViewModel
         public ICollectionView FilteredAppointment{ get; set; }
 
         private ObservableCollection<LICHHEN> _Appointment;
-        public ObservableCollection<LICHHEN> Appointment { get => _Appointment; set { _Appointment = value; OnPropertyChanged(); } }
+        public ObservableCollection<LICHHEN> AppointmentList { get => _Appointment; set { _Appointment = value; OnPropertyChanged(); } }
 
         public ManageAppointmentsVM()
         {
 
-            Appointment = new ObservableCollection<LICHHEN>(DataProvider.Ins.db.LICHHENs);
-            FilteredAppointment = CollectionViewSource.GetDefaultView(Appointment); 
+            AppointmentList = new ObservableCollection<LICHHEN>(DataProvider.Ins.db.LICHHENs);
+            FilteredAppointment = CollectionViewSource.GetDefaultView(AppointmentList);
+            Messenger.Default.Register<LICHHEN>(this, (Appointment) =>
+            {
+                if (Appointment == null) return;
+
+                // Kiểm tra nếu bệnh nhân đã tồn tại
+                var existingAppointment = AppointmentList.FirstOrDefault(p => p.MaLH == Appointment.MaLH);
+                if (existingAppointment != null)
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        // Cập nhật thông tin bệnh nhân
+                        existingAppointment.TenBN = Appointment.TenBN;
+                        existingAppointment.DiaChi = Appointment.DiaChi;
+                        existingAppointment.GioiTinh = Appointment.GioiTinh;
+                        existingAppointment.DienThoai = Appointment.DienThoai;
+                        existingAppointment.NgaySinh = Appointment.NgaySinh;
+                        existingAppointment.TrangThai = Appointment.TrangThai;
+                        existingAppointment.TenNV = Appointment.TenNV;
+                        existingAppointment.NgayKham = Appointment.NgayKham;
+
+                    });
+                }
+                else
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        // Thêm bệnh nhân mới
+                        AppointmentList.Add(Appointment);
+
+                    });
+                }
+
+                // Làm mới view
+                DataProvider.Ins.db.SaveChanges();
+                FilteredAppointment?.Refresh();
+            });
 
 
             AddAppointmentCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
