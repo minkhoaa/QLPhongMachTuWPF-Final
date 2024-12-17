@@ -7,7 +7,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="720" d:DesignWidth="880"
              xmlns:vm="clr-namespace:QLPhongMachTuWPF.ViewModel"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" d:DataContext="{d:DesignInstance Type=vm:DiagnosisVM}"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             d:DataContext="{d:DesignInstance Type=vm:DiagnosisVM}"
              DataContext="{StaticResource DiagnosisVM}"
             >
 
@@ -18,9 +19,6 @@
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-
-
-
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
 
@@ -40,17 +38,17 @@
             </StackPanel>
         </Button>
 
-        <DataGrid Grid.Row="1" ItemsSource="{Binding DiagnosisList}" Background="#eeeeee" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle2}" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="patientsDatagrid" Margin="0,0,0,10"
+        <DataGrid Grid.Row="1" ItemsSource="{Binding FilteredDiagnosis, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="#eeeeee" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle2}" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="patientsDatagrid" Margin="0,0,0,10"
           HorizontalScrollBarVisibility="Disabled" Grid.RowSpan="2" 
     HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
     Width="auto" Height="auto" VerticalScrollBarVisibility="Auto">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Diagnosis ID" IsReadOnly="True" CanUserResize="False" Width="0.8*" Binding="{Binding MaPK}" />
-                <DataGridTextColumn Header="Staff ID" IsReadOnly="True" CanUserResize="False" Width="0.8*" Binding="{Binding MaNV}"/>
-                <DataGridTextColumn Header="Patient ID" IsReadOnly="True" CanUserResize="False" Width="0.8*" Binding="{Binding MaBN}"/>
-                <DataGridTextColumn Header="Date" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding NgayKham, StringFormat='dd/MM/yyyy'}"/>
-                <DataGridTextColumn Header="Symptom" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="2*" Binding="{Binding TrieuChung}" />
-                <DataGridTextColumn Header ="Result" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding KetQua}" />
+                <DataGridTextColumn Header="Diagnosis ID" IsReadOnly="True" CanUserResize="False" Width="0.8*" Binding="{Binding MaPK , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Staff ID" IsReadOnly="True" CanUserResize="False" Width="0.8*" Binding="{Binding MaNV, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Patient ID" IsReadOnly="True" CanUserResize="False" Width="0.8*" Binding="{Binding MaBN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Date" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding NgayKham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='dd/MM/yyyy'}"/>
+                <DataGridTextColumn Header="Symptom" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="2*" Binding="{Binding TrieuChung, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header ="Result" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding KetQua, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTemplateColumn Header="Status" Width="1.5*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

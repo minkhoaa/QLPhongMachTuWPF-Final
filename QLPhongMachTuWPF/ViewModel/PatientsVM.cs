@@ -95,7 +95,7 @@ namespace QLPhongMachTuWPF.ViewModel
 
                 // Kiểm tra nếu bệnh nhân đã tồn tại
                 var existingPatient = PatientsList.FirstOrDefault(p => ( p.MaBN == patient.MaBN) || 
-                (p.TenBN == patient.TenBN && p.NgaySinh == patient.NgaySinh && p.DiaChi == patient.DiaChi && p.GioiTinh == patient.GioiTinh));
+                (p.TenBN == patient.TenBN && p.NgaySinh == patient.NgaySinh));
                 if (existingPatient != null)
                 {
                     Application.Current.Dispatcher.Invoke(() =>

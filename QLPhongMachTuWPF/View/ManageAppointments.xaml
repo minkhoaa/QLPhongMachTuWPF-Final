@@ -47,11 +47,11 @@
     HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
     Width="auto" Height="auto" VerticalScrollBarVisibility="Auto">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding MaLH}" IsReadOnly="True" CanUserResize="False" Width="0.8*"/>
-                <DataGridTextColumn Header="Staff Name" Binding="{Binding TenBN}" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" />
-                <DataGridTextColumn Header="Patient Name" Binding="{Binding TenNV}" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" />
-                <DataGridTextColumn Header="Due date" Binding="{Binding NgayKham}" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" />
-                <DataGridTextColumn Header="Status" Binding="{Binding TrangThai}" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" />
+                <DataGridTextColumn Header="ID" Binding="{Binding MaLH, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" CanUserResize="False" Width="0.8*"/>
+                <DataGridTextColumn Header="Staff Name" Binding="{Binding TenNV, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" />
+                <DataGridTextColumn Header="Patient Name" Binding="{Binding TenBN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" />
+                <DataGridTextColumn Header="Due date" Binding="{Binding NgayKham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" />
+                <DataGridTextColumn Header="Status" Binding="{Binding TrangThai, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" />
                 <DataGridTemplateColumn Header="" Width="0.5*" CanUserResize="False">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

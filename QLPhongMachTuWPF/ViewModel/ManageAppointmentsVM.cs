@@ -32,14 +32,7 @@ namespace QLPhongMachTuWPF.ViewModel
                 }
             }
         }
-
-
-
-
         public ICommand AddAppointmentCommand { get; set; }
-
-
-
 
         public ICollectionView FilteredAppointment{ get; set; }
 

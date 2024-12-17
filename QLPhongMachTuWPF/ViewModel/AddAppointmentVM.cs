@@ -3,8 +3,10 @@ using Microsoft.Xaml.Behaviors.Core;
 using QLPhongMachTuWPF.Model;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -101,24 +103,26 @@ namespace QLPhongMachTuWPF.ViewModel
         public ICommand AddAppointmentCommand { get; set; }
 
 
-        public AddAppointmentVM() {
+        public AddAppointmentVM()
+        {
             AddAppointmentCommand = new RelayCommand<object>((p) =>
             {
                 if (string.IsNullOrEmpty(TenBN)) return false;
                 return true;
             }, (p) => {
-                //  var normalizedNgaySinh = NormalizeDateTime(NgaySinh); // Chuẩn hóa giá trị
-
-
+                // Khởi tạo đối tượng mới
                 var newPatient = new BENHNHAN()
                 {
                     TenBN = TenBN,
                     DiaChi = DiaChi,
                     DienThoai = DienThoai,
                     NgaySinh = new DateTime(int.Parse(Nam), CheckMonth(Thang), int.Parse(Ngay)),
-                    GioiTinh = (Gender == "Male") ? "Nam" :  "Nữ",
+                    GioiTinh = (Gender == "Male") ? "Nam" : "Nữ",
                     TrangThai = (Status == "Discharged") ? 1 : 0
                 };
+
+           
+                // Tạo lịch hẹn mới
                 var newAppointment = new LICHHEN()
                 {
                     TenBN = TenBN,
@@ -130,18 +134,51 @@ namespace QLPhongMachTuWPF.ViewModel
                     TenNV = TenNV,
                     NgayKham = new DateTime(int.Parse(NamKham), CheckMonth(ThangKham), int.Parse(NgayKham))
                 };
+                DataProvider.Ins.db.BENHNHANs.Add(newPatient);
+                DataProvider.Ins.db.SaveChanges();
+                Messenger.Default.Send(newPatient);
+
+                var nhanVien = DataProvider.Ins.db.NHANVIENs.FirstOrDefault(nv => nv.TenNV == TenNV);
+                if (nhanVien == null)
+                {
+                    MessageBox.Show("Không tìm thấy nhân viên với tên này.");
+                    return;
+                }
+
+                var benhNhan = DataProvider.Ins.db.BENHNHANs.FirstOrDefault(bn => bn.TenBN == TenBN);
+                if (benhNhan == null)
+                {
+                    MessageBox.Show("Không tìm thấy bệnh nhân với tên này.");
+                    return;
+                }
+
+                // Tạo đối tượng PHIEUKHAM và gửi
+                PHIEUKHAM newDiagnosis = new PHIEUKHAM()
+                {
+                    MaNV = nhanVien.MaNV,
+                    MaBN = benhNhan.MaBN,
+                    NgayKham = new DateTime(int.Parse(NamKham), CheckMonth(ThangKham), int.Parse(NgayKham)),
+                    TrieuChung = "",
+                    KetQua = "",
+                    TrangThai = 1
+                };
 
                 try
                 {
-                    // Lưu vào cơ sở dữ liệu
-                    DataProvider.Ins.db.LICHHENs.Add(newAppointment);
-                    DataProvider.Ins.db.BENHNHANs.Add(newPatient); 
+                    // Đảm bảo Messenger đã được đăng ký và đối tượng DiagnosisVM đã sẵn sàng
+                    DataProvider.Ins.db.PHIEUKHAMs.Add(newDiagnosis);
                     DataProvider.Ins.db.SaveChanges();
+                    Messenger.Default.Send(newDiagnosis);
 
-                    // Gửi thông báo kèm bệnh nhân mới
-                    //Messenger.Default.Send(newPatient);
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message);  }  
+                try
+                {
+                    // Lưu vào cơ sở dữ liệu
+                    
+                    DataProvider.Ins.db.LICHHENs.Add(newAppointment);
+                    DataProvider.Ins.db.SaveChanges();
                     Messenger.Default.Send(newAppointment);
-
                     MessageBox.Show("Thêm lịch hẹn thành công!");
                 }
                 catch (Exception ex)
@@ -149,7 +186,7 @@ namespace QLPhongMachTuWPF.ViewModel
                     MessageBox.Show($"Lỗi khi thêm lịch hẹn: {ex.Message}");
                 }
             });
-
         }
+
     }
 }

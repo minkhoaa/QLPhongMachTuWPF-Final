@@ -97,8 +97,7 @@ namespace QLPhongMachTuWPF.ViewModel
                 //  var normalizedNgaySinh = NormalizeDateTime(NgaySinh); // Chuẩn hóa giá trị
 
                 var newPatient = new BENHNHAN()
-                {
-                    
+                {  
                     TenBN = TenBN,
                     DiaChi = DiaChi,
                     DienThoai = DienThoai,
