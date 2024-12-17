@@ -39,7 +39,7 @@ namespace QLPhongMachTuWPF.ViewModel
         }
 
 
-        private ObservableCollection<NHANVIEN> _staff;
+       
         
         private string _SearchKeyword {  get; set; }
 
@@ -52,7 +52,10 @@ namespace QLPhongMachTuWPF.ViewModel
             }
         }
 
-        public ICollectionView FilteredStaffs { get; set; }
+        public ICollectionView FilteredStaffs { get; set; } 
+        
+        
+        private ObservableCollection<NHANVIEN> _staff;
         public ObservableCollection<NHANVIEN> StaffList { get => _staff; set { _staff = value; OnPropertyChanged(); } }
         public StaffsVM()
         {

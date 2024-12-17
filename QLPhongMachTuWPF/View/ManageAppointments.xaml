@@ -5,13 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QLPhongMachTuWPF.View"
              mc:Ignorable="d" 
+             DataContext="{StaticResource ManageAppointmentsVM}"
              d:DesignHeight="720" d:DesignWidth="880"
               xmlns:vm="clr-namespace:QLPhongMachTuWPF.ViewModel"
- xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+ xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" d:DataContext="{d:DesignInstance Type=vm:ManageAppointmentsVM}">
 
-    <UserControl.DataContext>
-        <vm:ManageAppointmentsVM/>
-    </UserControl.DataContext>
 
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
@@ -42,16 +40,18 @@
             </StackPanel>
         </Button>
 
-        <DataGrid Grid.Row="1" Background="#eeeeee" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle2}" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="patientsDatagrid" Margin="0,0,0,10"
+        <DataGrid Grid.Row="1" ItemsSource="{Binding FilteredAppointment}"
+                  SelectedItem="{Binding SelectedItemCommand}"
+                  Background="#eeeeee" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle2}" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="patientsDatagrid" Margin="0,0,0,10"
           HorizontalScrollBarVisibility="Disabled" Grid.RowSpan="2" 
     HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
     Width="auto" Height="auto" VerticalScrollBarVisibility="Auto">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Patient ID" IsReadOnly="True" CanUserResize="False" Width="0.8*" Binding="{Binding PatientID}" />
-                <DataGridTextColumn Header="Staff Name" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" Binding="{Binding PatientName}"/>
-                <DataGridTextColumn Header="Patient Name" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" Binding="{Binding PatientName}"/>
-                <DataGridTextColumn Header="Due date" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" Binding="{Binding PatientName}"/>
-                <DataGridTextColumn Header="Status" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" Binding="{Binding PatientName}"/>
+                <DataGridTextColumn Header="ID" Binding="{Binding MaLH}" IsReadOnly="True" CanUserResize="False" Width="0.8*"/>
+                <DataGridTextColumn Header="Staff Name" Binding="{Binding TenBN}" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" />
+                <DataGridTextColumn Header="Patient Name" Binding="{Binding TenNV}" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" />
+                <DataGridTextColumn Header="Due date" Binding="{Binding NgayKham}" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" />
+                <DataGridTextColumn Header="Status" Binding="{Binding TrangThai}" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" />
 
 
 
