@@ -229,3 +229,17 @@ VALUES (100000)
 
 INSERT INTO ACCOUNT( UserName, DisPlayName, PassWord, Type) values ('admin' , 'admin', 'admin', 0)
 INSERT INTO ACCOUNT( UserName, DisPlayName, PassWord, Type) values ('employer' , 'employer', 'employer', 1)
+create table LICHHEN (
+	MaLH int identity(1,1) not null, 
+	TenBN nvarchar(40),
+	NgaySinh smalldatetime,
+	DiaChi nvarchar(80),
+	DienThoai varchar(20),
+	GioiTinh nvarchar(20),
+	TrangThai int,
+	TenNV nvarchar(40),
+	NgayKham smalldatetime 
+)
+alter table LICHHEN add primary key(MaLH)
+INSERT INTO LICHHEN (TenBN, NgaySinh, DiaChi, DienThoai, GioiTinh, TrangThai, TenNV, NgayKham)
+VALUES(N'Hồ Thị Thu Thủy',	'05/01/1997', N'100 Lý Thường Kiệt, Phường 14, Quận 10, Hồ Chí Minh', '998623462', N'Nữ', '1', N'Nguyễn Minh', '11/12/1970' )
