@@ -19,7 +19,7 @@ namespace QLPhongMachTuWPF.ViewModel
     {
         public bool isLogin { get ; set; }
         public ICommand LoginCommand { get; set; }
-
+        public ICommand EnterKeyCommand { get; set; }
         public ICommand PasswordChangedCommand { get; set; }
 
         private string _username;
@@ -42,11 +42,19 @@ namespace QLPhongMachTuWPF.ViewModel
             
             });
             PasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; }, (p) => { Password = p.Password; });
-        } 
-           
-             
-           
-            void Login( Window p)
+        }
+
+
+        private void OnEnterKeyPressed()
+        {
+            // Kiểm tra điều kiện và gọi lệnh LoginCommand khi Enter được nhấn
+            if (!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password))
+            {
+                // Gọi LoginCommand
+                Login(null);
+            }
+        }
+        void Login( Window p)
             {
                 if (p == null) return;
                 var count = DataProvider.Ins.db.ACCOUNTs.Where(x => x.UserName == Username && x.PassWord == Password).Count();
@@ -62,13 +70,6 @@ namespace QLPhongMachTuWPF.ViewModel
                 }
                
             }
-          
-        
-
-    
-        
-
-       
-      
+ 
     }
 }

@@ -47,6 +47,11 @@ namespace QLPhongMachTuWPF.View
             };
 
             cmbGender.ItemsSource = gender;
+            var status = new List<string>
+            {
+                "Checked", "Uncheck"
+            };
+            cmbStatus.ItemsSource = status; 
 
             
         }

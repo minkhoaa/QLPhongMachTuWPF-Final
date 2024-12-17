@@ -99,7 +99,7 @@ Grid.Column="1" Panel.ZIndex="1"
 
             <Grid Grid.Row="1">
                 <Border CornerRadius="0 0 10 0" Background="White"/>
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 100 0 0">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 50 0 0">
                     <!--name-->
                     <TextBox
                          VerticalAlignment="Center"
@@ -115,9 +115,9 @@ Grid.Column="1" Panel.ZIndex="1"
                     Width="250" Margin="60 0 0 0" FontSize="16"/>
                 </StackPanel>
 
-                <TextBlock Text="Date of birth" Margin="80 -150 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontSize="16" Foreground="Gray"/>
+                <TextBlock Text="Date of birth" Margin="80 -250 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontSize="16" Foreground="Gray"/>
 
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 200 0 0">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 150 0 0">
                     <!--Date of birth-->
                     <ComboBox x:Name="cmbDay" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
                              
@@ -138,11 +138,11 @@ Grid.Column="1" Panel.ZIndex="1"
                                 Width="250" Margin="60 0 0 0" FontSize="16"/>
                 </StackPanel>
 
-                <TextBlock Text="Appointment day" Margin="80 50 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" FontSize="16" Foreground="Gray"/>
-                <TextBlock Text="Gender" Margin="390 50 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontSize="16" Foreground="Gray"/>
+                <TextBlock Text="Appointment day" Margin="80 -50 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" FontSize="16" Foreground="Gray"/>
+                <TextBlock Text="Gender" Margin="390 -50 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontSize="16" Foreground="Gray"/>
 
 
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 300 0 0">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 250 0 0">
                     <!--Day appointment-->
                     <ComboBox x:Name="cmbDayapp" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
                              
@@ -161,10 +161,25 @@ Grid.Column="1" Panel.ZIndex="1"
            FontSize="16" Margin="60 0 0 0"/>
 
                 </StackPanel>
+                <TextBlock Text="Status" Margin="390 150 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontSize="16" Foreground="Gray"/>
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 350 0 0">
+                    <!--Day appointment-->
+                    <TextBox VerticalAlignment="Center"
+            materialDesign:HintAssist.Hint="Staff Name"
+            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+            Width="250" FontSize="16"/>
+
+                    <ComboBox x:Name="cmbStatus" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+         
+FontSize="16" Margin="60 0 0 0"/>
+
+
+                </StackPanel>
 
 
 
-                <Button Content="Add appointment"  Style="{StaticResource btnAdd}">
+                <Button Content="Add appointment" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Margin=" 80 0 0 50" Style="{StaticResource btnAdd}">
 
                 </Button>
 
