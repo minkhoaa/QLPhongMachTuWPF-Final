@@ -51,7 +51,7 @@ namespace QLPhongMachTuWPF.ViewModel
             if (!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password))
             {
                 // Gọi LoginCommand
-                Login(null);
+                LoginCommand.Execute(null); 
             }
         }
         void Login( Window p)

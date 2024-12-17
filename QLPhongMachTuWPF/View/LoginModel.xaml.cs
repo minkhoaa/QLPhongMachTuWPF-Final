@@ -97,5 +97,7 @@ namespace QLPhongMachTuWPF.ViewModel
         {
             Application.Current?.Shutdown();
         }
+
+        
     }
 }

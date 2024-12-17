@@ -6,7 +6,11 @@
              xmlns:local="clr-namespace:QLPhongMachTuWPF.View"
              mc:Ignorable="d" 
              d:DesignHeight="720" d:DesignWidth="880"
-            xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+            xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             DataContext="{Binding Source={StaticResource HomepageVM}}">
+
+    
 
 
     <Grid Background="#ebedf5">
@@ -24,25 +28,9 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Dashboard" Style="{StaticResource titleTextBlocl}" Margin="10 0 0 0"/>
+                    <TextBlock Text="Dashboard" Style="{StaticResource titleTextBlocl}" Margin="20 0 0 0"/>
                 </StackPanel>
 
-                <ComboBox
-  Width="100"
-                    Height="40"
- HorizontalAlignment="Right"
-                    Margin="0 0 20 0"
-  Style="{StaticResource MaterialDesignOutlinedComboBox}"
-        Foreground="Black" 
-                    Background="White"
-                    BorderThickness="0">
-                    <ComboBoxItem
-    Content="This week" />
-                    <ComboBoxItem
-    Content="This month" />
-                    <ComboBoxItem
-    Content="This year" />
-                </ComboBox>
             </Grid>
 
             <!--metrics-->
@@ -99,36 +87,50 @@
                     </Border>
                 </StackPanel>
             </Grid>
+            
+            <!--Chart-->
+            <Grid Grid.Row="2" Margin="10">
+                <Border Background="White" CornerRadius="10" Padding="10">
+                    <lvc:CartesianChart Series="{Binding ChartData}">
+                        <lvc:CartesianChart.AxisX>
+                            <lvc:Axis Title="Time" Labels="{Binding TimeLabels}" />
+                        </lvc:CartesianChart.AxisX>
+                        <lvc:CartesianChart.AxisY>
+                            <lvc:Axis Title="Number of Patients" />
+                        </lvc:CartesianChart.AxisY>
+                    </lvc:CartesianChart>
+                </Border>
+            </Grid>
 
 
             <!--Patient data-->
 
 
-            <Grid Grid.Row="3" Background="White">
-                
+            <Grid Grid.Row="3" Background="White" Margin="10">
+
                 <TextBlock Text="Last patient data" Style="{StaticResource textblock}" Grid.Row="3" VerticalAlignment="Top" Margin="10"/>
 
             </Grid>
 
-                        <DataGrid x:Name="Patientdatagrid" Grid.Row="3" Margin="0 50 0 0"
+            <DataGrid x:Name="Patientdatagrid" Grid.Row="3" Margin="10 50 10 10"
          ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle3}" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  RowStyle="{DynamicResource DataGridRowStyle1}" 
          HorizontalScrollBarVisibility="Disabled" Grid.RowSpan="2" 
     HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
     Width="auto" Height="auto" VerticalScrollBarVisibility="Auto" >
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="#" Binding="{Binding ID}" Width="0.5*" />
-                                <DataGridTextColumn Header="Date In" Binding="{Binding DateIn}" Width="*" />
-                                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*" />
-                                <DataGridTextColumn Header="DOB" Binding="{Binding DOB}" Width="*" />
-                                <DataGridTextColumn Header="Gender" Binding="{Binding Gender}" Width="*" />
-                                
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    
-               
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="#" Binding="{Binding ID}" Width="0.5*" />
+                    <DataGridTextColumn Header="Date In" Binding="{Binding DateIn}" Width="*" />
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*" />
+                    <DataGridTextColumn Header="DOB" Binding="{Binding DOB}" Width="*" />
+                    <DataGridTextColumn Header="Gender" Binding="{Binding Gender}" Width="*" />
+
+                </DataGrid.Columns>
+            </DataGrid>
 
 
-            
+
+
+
         </Grid>
 
         <Grid Grid.Column="1">
@@ -216,7 +218,9 @@
                     </StackPanel>
                 </Border>
             </Grid>
-
+            
+            
+            
         </Grid>
     </Grid>
 </UserControl>
