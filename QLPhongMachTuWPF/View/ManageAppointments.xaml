@@ -52,12 +52,17 @@
                 <DataGridTextColumn Header="Patient Name" Binding="{Binding TenNV}" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" />
                 <DataGridTextColumn Header="Due date" Binding="{Binding NgayKham}" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" />
                 <DataGridTextColumn Header="Status" Binding="{Binding TrangThai}" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" />
-
-
-
-
-
-
+                <DataGridTemplateColumn Header="" Width="0.5*" CanUserResize="False">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Style="{StaticResource gridRemoveBtn}" Background="Green">
+                                    <materialDesign:PackIcon Kind="CheckBold" Width="20" Height="20" Foreground="White"/>
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
 
