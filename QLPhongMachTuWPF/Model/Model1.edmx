@@ -50,6 +50,20 @@
           <Property Name="NgayHD" Type="smalldatetime" />
           <Property Name="TrangThai" Type="int" />
         </EntityType>
+        <EntityType Name="LICHHEN">
+          <Key>
+            <PropertyRef Name="MaLH" />
+          </Key>
+          <Property Name="MaLH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenBN" Type="nvarchar" MaxLength="40" />
+          <Property Name="NgaySinh" Type="smalldatetime" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="80" />
+          <Property Name="DienThoai" Type="varchar" MaxLength="20" />
+          <Property Name="GioiTinh" Type="nvarchar" MaxLength="20" />
+          <Property Name="TrangThai" Type="int" />
+          <Property Name="TenNV" Type="nvarchar" MaxLength="40" />
+          <Property Name="NgayKham" Type="smalldatetime" />
+        </EntityType>
         <EntityType Name="NHANVIEN">
           <Key>
             <PropertyRef Name="MaNV" />
@@ -155,6 +169,7 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
           <EntitySet Name="BENHNHAN" EntityType="Self.BENHNHAN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CTTT" EntityType="Self.CTTT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HOADON" EntityType="Self.HOADON" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LICHHEN" EntityType="Self.LICHHEN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NHANVIEN" EntityType="Self.NHANVIEN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PHIEUKHAM" EntityType="Self.PHIEUKHAM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="THUOC" EntityType="Self.THUOC" Schema="dbo" store:Type="Tables" />
@@ -211,6 +226,7 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
             <End Role="NHANVIEN" EntitySet="NHANVIENs" />
             <End Role="PHIEUKHAM" EntitySet="PHIEUKHAMs" />
           </AssociationSet>
+          <EntitySet Name="LICHHENs" EntityType="QLPMTModel.LICHHEN" />
         </EntityContainer>
         <EntityType Name="ACCOUNT">
           <Key>
@@ -362,6 +378,20 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="LICHHEN">
+          <Key>
+            <PropertyRef Name="MaLH" />
+          </Key>
+          <Property Name="MaLH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenBN" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="NgaySinh" Type="DateTime" Precision="0" />
+          <Property Name="DiaChi" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="DienThoai" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="GioiTinh" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TrangThai" Type="Int32" />
+          <Property Name="TenNV" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="NgayKham" Type="DateTime" Precision="0" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -451,6 +481,21 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
                 <ScalarProperty Name="DonViTinh" ColumnName="DonViTinh" />
                 <ScalarProperty Name="TenThuoc" ColumnName="TenThuoc" />
                 <ScalarProperty Name="MaThuoc" ColumnName="MaThuoc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LICHHENs">
+            <EntityTypeMapping TypeName="QLPMTModel.LICHHEN">
+              <MappingFragment StoreEntitySet="LICHHEN">
+                <ScalarProperty Name="NgayKham" ColumnName="NgayKham" />
+                <ScalarProperty Name="TenNV" ColumnName="TenNV" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="TenBN" ColumnName="TenBN" />
+                <ScalarProperty Name="MaLH" ColumnName="MaLH" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

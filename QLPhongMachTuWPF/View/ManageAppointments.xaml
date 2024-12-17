@@ -48,13 +48,15 @@
     Width="auto" Height="auto" VerticalScrollBarVisibility="Auto">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Patient ID" IsReadOnly="True" CanUserResize="False" Width="0.8*" Binding="{Binding PatientID}" />
-                <DataGridTextColumn Header="Name" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" Binding="{Binding PatientName}"/>
-                <DataGridTextColumn Header="Appointment" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding DOB}"/>
-                <DataGridTextColumn Header="Address" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding PatientAddress}"/>
-                <DataGridTextColumn Header="Phone" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding PatientPhone}"/>
-                <DataGridTextColumn Header="Gender" IsReadOnly="True" CanUserResize="False" Width="0.8*" Binding="{Binding Gender}"/>
+                <DataGridTextColumn Header="Staff Name" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" Binding="{Binding PatientName}"/>
+                <DataGridTextColumn Header="Patient Name" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" Binding="{Binding PatientName}"/>
+                <DataGridTextColumn Header="Due date" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" Binding="{Binding PatientName}"/>
+                <DataGridTextColumn Header="Status" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" Binding="{Binding PatientName}"/>
 
-                
+
+
+
+
 
             </DataGrid.Columns>
         </DataGrid>
