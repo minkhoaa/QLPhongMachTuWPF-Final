@@ -114,7 +114,8 @@ namespace QLPhongMachTuWPF.ViewModel
                 {
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        // Thêm bệnh nhân mới
+                        // Thêm bệnh nhân 
+                        DataProvider.Ins.db.SaveChanges(); 
                         PatientsList.Add(patient);
                       
                     });

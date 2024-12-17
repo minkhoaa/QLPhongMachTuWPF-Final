@@ -134,10 +134,21 @@ namespace QLPhongMachTuWPF.ViewModel
                     TenNV = TenNV,
                     NgayKham = new DateTime(int.Parse(NamKham), CheckMonth(ThangKham), int.Parse(NgayKham))
                 };
-                DataProvider.Ins.db.BENHNHANs.Add(newPatient);
-                DataProvider.Ins.db.SaveChanges();
-                Messenger.Default.Send(newPatient);
-
+                try
+                {
+                    var existingPatients = DataProvider.Ins.db.BENHNHANs.FirstOrDefault(a => a.TenBN == newPatient.TenBN && a.NgaySinh == newPatient.NgaySinh);
+                    if (existingPatients == null)
+                    {
+                        DataProvider.Ins.db.BENHNHANs.Add(newPatient);
+                    }
+                    DataProvider.Ins.db.SaveChanges();
+                    Messenger.Default.Send(newPatient);
+                }
+                catch
+                (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
                 var nhanVien = DataProvider.Ins.db.NHANVIENs.FirstOrDefault(nv => nv.TenNV == TenNV);
                 if (nhanVien == null)
                 {

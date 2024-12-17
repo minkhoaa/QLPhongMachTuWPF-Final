@@ -111,7 +111,6 @@ namespace QLPhongMachTuWPF.ViewModel
                     // Lưu vào cơ sở dữ liệu
                     DataProvider.Ins.db.BENHNHANs.Add(newPatient);
                     DataProvider.Ins.db.SaveChanges();
-
                     // Gửi thông báo kèm bệnh nhân mới
                     Messenger.Default.Send(newPatient);
 
