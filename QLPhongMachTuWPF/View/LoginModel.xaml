@@ -127,6 +127,7 @@
                                 BorderBrush="Transparent"
                                 BorderThickness="0"
                                 PasswordChanged="txtPass_TextChanged"
+                                KeyDown="PasswordBox_KeyDown"
                           >
                             <i:Interaction.Triggers >
                                 <i:EventTrigger EventName="PasswordChanged">

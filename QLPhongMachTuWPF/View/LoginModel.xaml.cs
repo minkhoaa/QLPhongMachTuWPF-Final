@@ -27,6 +27,17 @@ namespace QLPhongMachTuWPF.ViewModel
         {
 
         }
+        private void PasswordBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                var enterCommand = (this.DataContext as LoginViewModel)?.EnterKeyCommand;
+                if (enterCommand?.CanExecute(null) == true)
+                {
+                    enterCommand.Execute(null);  // Thực thi Command khi Enter được nhấn
+                }
+            }
+        }
 
         private void textUser_MouseDown(object sender, MouseButtonEventArgs e)
         {
