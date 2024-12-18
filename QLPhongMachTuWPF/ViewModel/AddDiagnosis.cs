@@ -32,7 +32,7 @@ namespace QLPhongMachTuWPF.ViewModel
 
                 var newDiagnosis = new PHIEUKHAM()
                 {
-                    
+
                 };
 
                 try
@@ -56,4 +56,4 @@ namespace QLPhongMachTuWPF.ViewModel
         }
     }
 
-} 
+}

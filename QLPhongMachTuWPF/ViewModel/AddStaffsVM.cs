@@ -118,6 +118,7 @@ namespace QLPhongMachTuWPF.ViewModel
                         Messenger.Default.Send(newStaff);
 
                         MessageBox.Show("Thêm nhân viên thành công!");
+                        ResetFields();
                     }
                     catch (Exception ex)
                     {
@@ -125,7 +126,20 @@ namespace QLPhongMachTuWPF.ViewModel
                     }
                 });
             }
+        private void ResetFields()
+        {
+            Ten = string.Empty;
+            DiaChi = string.Empty;
+            DienThoai = string.Empty;
+            Ngay = string.Empty;
+            Thang = string.Empty;
+            Nam = string.Empty;
+            Gender = string.Empty;
+            Type = string.Empty;
+            Status = string.Empty;
         }
+
     }
+}
 
 
