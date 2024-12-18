@@ -115,12 +115,24 @@ namespace QLPhongMachTuWPF.ViewModel
                     Messenger.Default.Send(newPatient);
 
                     MessageBox.Show("Thêm bệnh nhân thành công!");
+                    ResetFields();
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show($"Lỗi khi thêm bệnh nhân: {ex.Message}");
                 }
             });
+        }
+        private void ResetFields()
+        {
+            TenBN = string.Empty;
+            DiaChi = string.Empty;
+            DienThoai = string.Empty;
+            Ngay = string.Empty;
+            Thang = string.Empty;
+            Nam = string.Empty;
+            Gender = string.Empty;
+            Charged = string.Empty;
         }
 
     }

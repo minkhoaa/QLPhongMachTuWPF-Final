@@ -191,12 +191,28 @@ namespace QLPhongMachTuWPF.ViewModel
                     DataProvider.Ins.db.SaveChanges();
                     Messenger.Default.Send(newAppointment);
                     MessageBox.Show("Thêm lịch hẹn thành công!");
+                    ResetFields();
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show($"Lỗi khi thêm lịch hẹn: {ex.Message}");
                 }
             });
+        }
+        private void ResetFields()
+        {
+            TenBN = string.Empty;
+            DiaChi = string.Empty;
+            DienThoai = string.Empty;
+            Ngay = string.Empty;
+            Thang = string.Empty;
+            Nam = string.Empty;
+            Gender = string.Empty;
+            Status = string.Empty;
+            TenNV = string.Empty;
+            NgayKham = string.Empty;
+            ThangKham = string.Empty;
+            NamKham = string.Empty;
         }
 
     }

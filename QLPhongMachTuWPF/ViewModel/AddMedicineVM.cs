@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace QLPhongMachTuWPF.ViewModel
 {
@@ -58,6 +59,7 @@ namespace QLPhongMachTuWPF.ViewModel
                     Messenger.Default.Send(newMedicine);
 
                     MessageBox.Show("Thêm thuốc thành công!");
+                    ResetFields();
                 }
                 catch (Exception ex)
                 {
@@ -65,6 +67,13 @@ namespace QLPhongMachTuWPF.ViewModel
                 }
             });
 
+        }
+        private void ResetFields()
+        {
+            Name = string.Empty;
+            Price =0;
+            Unit = string.Empty;
+            Status = string.Empty;
         }
     }
 }
