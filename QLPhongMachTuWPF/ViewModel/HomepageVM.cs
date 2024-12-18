@@ -1,67 +1,92 @@
 ﻿using System;
-using System.ComponentModel;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Windows.Input;
 using LiveCharts;
-using LiveCharts.Wpf;
+using QLPhongMachTuWPF.Model;
 
 namespace QLPhongMachTuWPF.ViewModel
 {
-    public class HomepageVM : INotifyPropertyChanged
+    public class HomepageVM : ViewModelBase
     {
-        private SeriesCollection _chartData;
-        private string[] _timeLabels;
-        private string _selectedTimeline;
+        // Thuộc tính dữ liệu
+        private ChartValues<int> _customerCounts;
+        private List<string> _dayLabels;
+
+        public ChartValues<int> CustomerCounts
+        {
+            get { return _customerCounts; }
+            set { _customerCounts = value; OnPropertyChanged(); }
+        }
+
+        public List<string> DayLabels
+        {
+            get { return _dayLabels; }
+            set { _dayLabels = value; OnPropertyChanged(); }
+        }
+
+        // Lệnh để tải dữ liệu
+        public ICommand LoadChartDataCommand { get; set; }
 
         public HomepageVM()
         {
-            // Dummy data for the chart
-            ChartData = new SeriesCollection
-            {
-                new ColumnSeries { Title = "Patients", Values = new ChartValues<int> { 10, 20, 30, 40, 50, 60, 70 } }
-            };
+            // Khởi tạo lệnh
+            LoadChartDataCommand = new RelayCommand<object>(CanLoadChartData, LoadChartData);
 
-            TimeLabels = new[] { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
-
-
-
-            // Default timeline is "This week"
+            
+            // Khởi tạo giá trị mặc định cho các thuộc tính
+            CustomerCounts = new ChartValues<int>();
+            DayLabels = new List<string>();
         }
 
-        public SeriesCollection ChartData
+        private bool CanLoadChartData(object parameter)
         {
-            get => _chartData;
-            set
+            return true; // Có thể tải dữ liệu nếu cần thiết
+        }
+
+        // Hàm tải dữ liệu và cập nhật biểu đồ
+        private void LoadChartData(object parameter)
+        {
+            var (startOfWeek, endOfWeek) = GetCurrentWeekRange();
+            var customerCounts = GetCustomerCountsPerDay(startOfWeek, endOfWeek);
+
+            // Cập nhật dữ liệu biểu đồ
+            CustomerCounts.Clear();
+            DayLabels.Clear();
+
+            for (int i = 0; i < 5; i++) // Từ Thứ Hai đến Thứ Sáu
             {
-                _chartData = value;
-                OnPropertyChanged(nameof(ChartData));
+                var date = startOfWeek.AddDays(i);
+                DayLabels.Add(date.ToString("dd/MM"));
+                CustomerCounts.Add(customerCounts.ContainsKey(date) ? customerCounts[date] : 0);
             }
         }
 
-        public string[] TimeLabels
+        // Hàm truy vấn số lượng khách hàng từ cơ sở dữ liệu
+        private Dictionary<DateTime, int> GetCustomerCountsPerDay(DateTime startOfWeek, DateTime endOfWeek)
         {
-            get => _timeLabels;
-            set
-            {
-                _timeLabels = value;
-                OnPropertyChanged(nameof(TimeLabels));
-            }
+            var customerCounts = DataProvider.Ins.db.PHIEUKHAMs
+                .Where(pk => pk.NgayKham >= startOfWeek && pk.NgayKham < endOfWeek) // Lọc các ngày khám trong tuần
+                .GroupBy(pk => DbFunctions.TruncateTime(pk.NgayKham)) // Group theo ngày (TruncateTime)
+                .Select(g => new
+                {
+                    Date = g.Key,
+                    Count = g.Count()
+                })
+                .ToDictionary(g => g.Date.Value, g => g.Count); // Chuyển thành Dictionary
+
+            return customerCounts;
         }
 
-        public string SelectedTimeline
+        // Hàm tính ngày đầu tuần (Thứ Hai) và cuối tuần (Thứ Sáu)
+        private (DateTime, DateTime) GetCurrentWeekRange()
         {
-            get => _selectedTimeline;
-            set
-            {
-                _selectedTimeline = value;
-                OnPropertyChanged(nameof(SelectedTimeline));
-                // Không cần cập nhật dữ liệu khi thay đổi SelectedTimeline
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            DateTime today = DateTime.Today;
+            int daysToMonday = ((int)today.DayOfWeek + 6) % 7;
+            DateTime startOfWeek = today.AddDays(-daysToMonday);
+            DateTime endOfWeek = startOfWeek.AddDays(5); // Thứ Sáu là ngày cuối tuần
+            return (startOfWeek, endOfWeek);
         }
     }
 }

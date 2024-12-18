@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QLPhongMachTuWPF.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace QLPhongMachTuWPF.View
         public Homepage()
         {
             InitializeComponent();
+            this.DataContext = new HomepageVM();
             var patients = new List<Patient>
             {
                 new Patient { ID = 1, DateIn = "8/16/21", Name = "Jane Cooper", DOB = 60,  Gender = "Male" },

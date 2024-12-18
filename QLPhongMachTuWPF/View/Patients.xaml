@@ -27,7 +27,7 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Width="250" HorizontalAlignment="Left" Margin="100,30,0,35">
+        <Grid Grid.Row="0" Width="250" HorizontalAlignment="Left" Margin="10,30,0,35">
             <TextBlock Margin="20,0,30,0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
        Panel.ZIndex="1" Text="Search" Visibility="{Binding ElementName=txtSearch, Path=Text.IsEmpty,Converter={StaticResource BoolToVis}}" FontSize="20"/>
 
@@ -45,6 +45,12 @@
         <Button Grid.Row="0" Command="{ Binding AddPatientCommand }"  Style="{StaticResource addBtn}" >
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Add Patient" FontSize="15" FontWeight="Bold"/>
+            </StackPanel>
+        </Button>
+
+        <Button Grid.Row="0" Command="{Binding DeletePatientCommand}"  Margin="355,33,0,33"  Style="{StaticResource addBtn}" >
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Delete Patient" FontSize="15" FontWeight="Bold"/>
             </StackPanel>
         </Button>
 
@@ -93,6 +99,6 @@
                 <TextBlock Text="Modify Patient" FontSize="15" FontWeight="Bold"/>
             </StackPanel>
         </Button>
-       
+
     </Grid>
 </UserControl>
