@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
 using System.Windows.Input;
@@ -10,6 +11,14 @@ namespace QLPhongMachTuWPF.ViewModel
 {
     public class HomepageVM : ViewModelBase
     {
+        //Patient with diagnosis
+        private ObservableCollection<PatientWithDiagnosis> _patientsWithDiagnosis;
+        public ObservableCollection<PatientWithDiagnosis> PatientsWithDiagnosis
+        {
+            get => _patientsWithDiagnosis;
+            set { _patientsWithDiagnosis = value; OnPropertyChanged(); }
+        }
+
         // Thuộc tính dữ liệu
         private ChartValues<int> _customerCounts;
         private List<string> _dayLabels;
@@ -38,6 +47,9 @@ namespace QLPhongMachTuWPF.ViewModel
             // Khởi tạo giá trị mặc định cho các thuộc tính
             CustomerCounts = new ChartValues<int>();
             DayLabels = new List<string>();
+
+            //Load datagrid
+            LoadCombinedData();
         }
 
         private bool CanLoadChartData(object parameter)
@@ -88,5 +100,42 @@ namespace QLPhongMachTuWPF.ViewModel
             DateTime endOfWeek = startOfWeek.AddDays(5); // Thứ Sáu là ngày cuối tuần
             return (startOfWeek, endOfWeek);
         }
+
+        //Load combined data
+        public void LoadCombinedData()
+        {
+            var combinedData = from bn in DataProvider.Ins.db.BENHNHANs
+                               join pk in DataProvider.Ins.db.PHIEUKHAMs
+                               on bn.MaBN equals pk.MaBN
+                               select new PatientWithDiagnosis
+                               {
+                                   MaBN = bn.MaBN,
+                                   TenBN = bn.TenBN,
+                                   DOB = (DateTime)bn.NgaySinh,
+                                   Phone = bn.DienThoai,
+                                   Gender = bn.GioiTinh,
+                                   NgayKham = (DateTime)pk.NgayKham
+                               };
+
+            PatientsWithDiagnosis = new ObservableCollection<PatientWithDiagnosis>(combinedData);
+        }
+
+    }
+
+
+
+
+
+    public class PatientWithDiagnosis
+    {
+        public int MaBN { get; set; }
+        public string TenBN { get; set; }
+
+        public DateTime DOB { get; set; }
+        public string Phone {  get; set; }
+        public string Gender {  get; set; }
+        public DateTime NgayKham { get; set; }
+
+
     }
 }
