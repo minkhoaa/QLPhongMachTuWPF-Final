@@ -122,7 +122,7 @@
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 200 0 0">
                     <!--Date of birth-->
-                    <ComboBox IsEditable="True" Text="{Binding Ngay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbDay" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox IsEditable="True"  Text="{Binding Ngay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbDay" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                FontSize="16"/>
 
                     <ComboBox IsEditable="True" Text="{Binding Thang, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbMonth" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
@@ -154,7 +154,7 @@
 
                 <Button
                     Command="{Binding SaveChangesCommand }"
-                    Content="SaveChanges"  Style="{StaticResource btnAdd}">
+                    Content="Save changes"  Style="{StaticResource btnAdd}">
 
                 </Button>
 

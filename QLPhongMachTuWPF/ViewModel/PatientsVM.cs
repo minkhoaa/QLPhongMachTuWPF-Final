@@ -132,6 +132,8 @@ namespace QLPhongMachTuWPF.ViewModel
                 addPatientWindow.ShowDialog();
             });
 
+
+
             ModifyPatientCommand = new RelayCommand<object>((p) => SelectedItemCommand != null, (p) =>
             {
                 if (SelectedItemCommand == null)
