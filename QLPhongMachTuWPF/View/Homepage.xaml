@@ -29,6 +29,8 @@
             <Grid Grid.Row="0">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Dashboard" Style="{StaticResource titleTextBlocl}" Margin="20 0 0 0"/>
+                    <Button x:Name="btnLoad" FontSize="16" Content="Load chart" Foreground="White" Margin="310 0 0 0" Command="{Binding LoadChartDataCommand}" HorizontalAlignment="Right"/>
+
                 </StackPanel>
 
             </Grid>
@@ -91,12 +93,15 @@
             <!--Chart-->
             <Grid Grid.Row="2" Margin="10">
                 <Border Background="White" CornerRadius="10" Padding="10">
-                    <lvc:CartesianChart Series="{Binding ChartData}">
+                    <lvc:CartesianChart Name="CustomerChart" Margin="10,50,10,10">
+                        <lvc:CartesianChart.Series>
+                            <lvc:ColumnSeries Title="Number of customers" Values="{Binding CustomerCounts}" />
+                        </lvc:CartesianChart.Series>
                         <lvc:CartesianChart.AxisX>
-                            <lvc:Axis Title="Time" Labels="{Binding TimeLabels}" />
+                            <lvc:Axis Title="Date" Labels="{Binding DayLabels}" />
                         </lvc:CartesianChart.AxisX>
                         <lvc:CartesianChart.AxisY>
-                            <lvc:Axis Title="Number of Patients" />
+                            <lvc:Axis Title="Numbers" />
                         </lvc:CartesianChart.AxisY>
                     </lvc:CartesianChart>
                 </Border>
