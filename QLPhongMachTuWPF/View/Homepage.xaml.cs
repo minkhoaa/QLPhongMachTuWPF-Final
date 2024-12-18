@@ -23,53 +23,9 @@ namespace QLPhongMachTuWPF.View
         public Homepage()
         {
             InitializeComponent();
-            var patients = new List<Patient>
-            {
-                new Patient { ID = 1, DateIn = "8/16/21", Name = "Jane Cooper", DOB = 60,  Gender = "Male" },
-                new Patient { ID = 2, DateIn = "9/23/21", Name = "Esther Howard", DOB = 24,  Gender = "Female" },
-                new Patient { ID = 3, DateIn = "1/31/21", Name = "Guy Hawkins", DOB = 30, Gender = "Male" },
-                new Patient { ID = 4, DateIn = "11/7/21", Name = "Robert Fox", DOB = 71,  Gender = "Female" },
-                new Patient { ID = 4, DateIn = "11/7/21", Name = "Robert Fox", DOB = 71,  Gender = "Female" },
-                new Patient { ID = 4, DateIn = "11/7/21", Name = "Robert Fox", DOB = 71,  Gender = "Female" },
-                new Patient { ID = 4, DateIn = "11/7/21", Name = "Robert Fox", DOB = 71,  Gender = "Female" },
-                new Patient { ID = 4, DateIn = "11/7/21", Name = "Robert Fox", DOB = 71,  Gender = "Female" },
-                new Patient { ID = 4, DateIn = "11/7/21", Name = "Robert Fox", DOB = 71,  Gender = "Female" },
-                new Patient { ID = 4, DateIn = "11/7/21", Name = "Robert Fox", DOB = 71,  Gender = "Female" },new Patient { ID = 4, DateIn = "11/7/21", Name = "Robert Fox", DOB = 71,  Gender = "Female" },
-                new Patient { ID = 4, DateIn = "11/7/21", Name = "Robert Fox", DOB = 71,  Gender = "Female" },
-                new Patient { ID = 4, DateIn = "11/7/21", Name = "Robert Fox", DOB = 71,  Gender = "Female" },
-                new Patient { ID = 4, DateIn = "11/7/21", Name = "Robert Fox", DOB = 71,  Gender = "Female" },
-                new Patient { ID = 4, DateIn = "11/7/21", Name = "Robert Fox", DOB = 71,  Gender = "Female" },
-                new Patient { ID = 4, DateIn = "11/7/21", Name = "Robert Fox", DOB = 71,  Gender = "Female" },
-                new Patient { ID = 4, DateIn = "11/7/21", Name = "Robert Fox", DOB = 71,  Gender = "Female" },
-                new Patient { ID = 4, DateIn = "11/7/21", Name = "Robert Fox", DOB = 71,  Gender = "Female" },
-                new Patient { ID = 4, DateIn = "11/7/21", Name = "Robert Fox", DOB = 71,  Gender = "Female" },
-                new Patient { ID = 4, DateIn = "11/7/21", Name = "Robert Fox", DOB = 71,  Gender = "Female" },
-                new Patient { ID = 4, DateIn = "11/7/21", Name = "Robert Fox", DOB = 71,  Gender = "Female" },
-                new Patient { ID = 4, DateIn = "11/7/21", Name = "Robert Fox", DOB = 71,  Gender = "Female" },
-                new Patient { ID = 4, DateIn = "11/7/21", Name = "Robert Fox", DOB = 71,  Gender = "Female" },
-                new Patient { ID = 4, DateIn = "11/7/21", Name = "Robert Fox", DOB = 71,  Gender = "Female" },new Patient { ID = 4, DateIn = "11/7/21", Name = "Robert Fox", DOB = 71,  Gender = "Female" },
-                new Patient { ID = 4, DateIn = "11/7/21", Name = "Robert Fox", DOB = 71,  Gender = "Female" },
-                new Patient { ID = 4, DateIn = "11/7/21", Name = "Robert Fox", DOB = 71,  Gender = "Female" },
-                new Patient { ID = 4, DateIn = "11/7/21", Name = "Robert Fox", DOB = 71,  Gender = "Female" },
-                new Patient { ID = 4, DateIn = "11/7/21", Name = "Robert Fox", DOB = 71,  Gender = "Female" },
-            };
-
-            Patientdatagrid.ItemsSource = patients;
+            
         }
     }
 
-    public class Patient
-    {
-        public int ID { get; set; }
-        public string DateIn { get; set; }
-        public string Name { get; set; }
-        public int DOB { get; set; }
-        public string Gender { get; set; }
-    }
-
-    public class Appointment
-    {
-        public string Time { get; set; }
-        public string PatientName { get; set; }
-    }
+    
 }
