@@ -17,7 +17,10 @@ namespace QLPhongMachTuWPF.ViewModel
     public class DiagnosisVM : ViewModelBase
     {
 
-        public ICommand AddStaffCommand { get; set; }
+        public ICommand AddDiagnosisCommand { get; set; }
+
+        public ICommand  ModifyDiagnosisCommand { get; set; }
+
         private ObservableCollection<PHIEUKHAM> _DiagnosisList;
         public ICollectionView FilteredDiagnosis{ get; set; }
         public ObservableCollection<PHIEUKHAM> DiagnosisList { get => _DiagnosisList; set { _DiagnosisList = value; OnPropertyChanged(); } }
@@ -28,7 +31,7 @@ namespace QLPhongMachTuWPF.ViewModel
             FilteredDiagnosis = CollectionViewSource.GetDefaultView(DiagnosisList);
             Messenger.Default.Register<PHIEUKHAM>(this, (diagnosis) =>
             {
-                Console.WriteLine("Messenger received: " + (diagnosis?.TrieuChung ?? "null"));
+              
                 if (diagnosis == null) return;
 
                 Application.Current.Dispatcher.Invoke(() =>
@@ -43,12 +46,16 @@ namespace QLPhongMachTuWPF.ViewModel
             });
 
 
-
-            AddStaffCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            AddDiagnosisCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 AddMedicineDiagnosis add = new AddMedicineDiagnosis();
                 add.ShowDialog();
 
+            }
+            );
+            ModifyDiagnosisCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                   
             }
             );
         }

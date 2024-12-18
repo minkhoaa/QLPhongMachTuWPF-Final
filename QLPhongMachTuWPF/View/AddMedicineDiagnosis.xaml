@@ -35,7 +35,7 @@ WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent"
                 <Border CornerRadius="10 0 0 0" Background="#1ca7ec">
 
                 </Border>
-                <materialDesign:PackIcon Kind="ClipboardEdit" Style="{StaticResource icon}"/>
+                <materialDesign:PackIcon Kind="Calendar" Style="{StaticResource icon}"/>
 
 
 
@@ -52,15 +52,17 @@ WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent"
                     </Border.Background>
                 </Border>
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <TextBlock Text="D" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
-                    <TextBlock Text="I" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
                     <TextBlock Text="A" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
-                    <TextBlock Text="G" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
-                    <TextBlock Text="N" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
+                    <TextBlock Text="P" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
+                    <TextBlock Text="P" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
                     <TextBlock Text="O" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
-                    <TextBlock Text="S" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
                     <TextBlock Text="I" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
-                    <TextBlock Text="S" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
+                    <TextBlock Text="N" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
+                    <TextBlock Text="T" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
+                    <TextBlock Text="M" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
+                    <TextBlock Text="E" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
+                    <TextBlock Text="N" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
+                    <TextBlock Text="T" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
 
                 </StackPanel>
             </Grid>
@@ -98,73 +100,96 @@ Grid.Column="1" Panel.ZIndex="1"
 
             <Grid Grid.Row="1">
                 <Border CornerRadius="0 0 10 0" Background="White"/>
-                <TextBlock Text="Date" Margin="80 -450 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontSize="16" Foreground="Gray"/>
-                <TextBlock Text="Status" Margin="390 -450 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" FontSize="16" Foreground="Gray"/>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 50 0 0">
+                    <!--name-->
 
-                    <!--Date-->
-                    <ComboBox x:Name="cmbDay" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                            
-                              FontSize="16"/>
+                    <!--Phone-->
+                    <!--name-->
+                    <TextBox
+                         Text="{Binding TenBN}"
+                         materialDesign:HintAssist.Hint="Name"
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         Width="250" FontSize="16"/>
 
-                    <ComboBox x:Name="cmbMonth" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-        
-         FontSize="16" Margin="10 0 0 0"/>
-
-                    <ComboBox x:Name="cmbYear" Width="110" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-
-FontSize="16" Margin="10 0 0 0"/>
-
-                    <!--Status-->
-                    <ComboBox Text="{Binding Status}" x:Name="cmbStatus" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-         
-FontSize="16" Margin="60 0 0 0"/>
-
+                    <!--Phone-->
+                    <TextBox
+                        Text="{Binding DienThoai}"
+                    VerticalAlignment="Center"
+                    materialDesign:HintAssist.Hint="Phone"
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    Width="250" Margin="60 0 0 0" FontSize="16"/>
                 </StackPanel>
 
-
-
+                <TextBlock Text="Date of birth" Margin="80 -250 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontSize="16" Foreground="Gray"/>
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 150 0 0">
-                    <!--symptom-->
-                    <TextBox
-                        Text="{Binding Unit}"
-Height="73"
-                        Width="249"
-materialDesign:HintAssist.Hint="Symptom"
-AcceptsReturn="True"
+                    <!--Date of birth-->
+                    <ComboBox Text="{Binding Ngay}" x:Name="cmbDay" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                             
+                               FontSize="16"/>
 
-Style="{StaticResource MaterialDesignOutlinedTextBox}"
-TextWrapping="Wrap"
-VerticalScrollBarVisibility="Auto"
-                        FontSize="16"
-                        
-/>
+                    <ComboBox Text="{Binding Thang}" x:Name="cmbMonth" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+         
+          FontSize="16" Margin="10 0 0 0"/>
+
+                    <ComboBox Text="{Binding Nam}" x:Name="cmbYear" Width="110" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+
+ FontSize="16" Margin="10 0 0 0"/>
+
+                    <!--Address-->
+                    <TextBox 
+                        Text="{Binding DiaChi}"
+                        VerticalAlignment="Center"
+                                materialDesign:HintAssist.Hint="Address"
+                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                Width="250" Margin="60 0 0 0" FontSize="16"/>
                 </StackPanel>
+
+                <TextBlock Text="Appointment day" Margin="80 -50 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" FontSize="16" Foreground="Gray"/>
+                <TextBlock Text="Gender" Margin="390 -50 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontSize="16" Foreground="Gray"/>
 
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 250 0 0">
-                    <!--Result-->
-                    <TextBox
-                        Text="{Binding Unit}"
-Height="73"
-                        Width="249"
-materialDesign:HintAssist.Hint="Result"
-AcceptsReturn="True"
+                    <!--Day appointment-->
+                    <ComboBox Text="{Binding NgayKham}" x:Name="cmbDayapp" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                             
+                               FontSize="16"/>
 
-Style="{StaticResource MaterialDesignOutlinedTextBox}"
-TextWrapping="Wrap"
-VerticalScrollBarVisibility="Auto"
-                        FontSize="16"
-                        
-/>
+                    <ComboBox Text="{Binding ThangKham}" x:Name="cmbMonthapp" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+         
+          FontSize="16" Margin="10 0 0 0"/>
+
+                    <ComboBox Text="{Binding NamKham}" x:Name="cmbYearapp" Width="110" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+
+ FontSize="16" Margin="10 0 0 0"/>
+                    <!--Gender-->
+                    <ComboBox
+                        Text="{Binding Gender}" x:Name="cmbGender" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+         
+           FontSize="16" Margin="60 0 0 0"/>
+
+                </StackPanel>
+                <TextBlock Text="Status" Margin="80,324,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" FontSize="16" Foreground="Gray"/>
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 350 0 0">
+                    <ComboBox Text="{Binding Status}"  x:Name="cmbStatus" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+         
+FontSize="16"/>
+                    <!--Day appointment-->
+                    <TextBox
+                        Text="{Binding TenNV}"
+                        VerticalAlignment="Center"
+            materialDesign:HintAssist.Hint="Staff Name"
+            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+            Width="250" FontSize="16"/>
+
+
                 </StackPanel>
 
 
 
-
-
-                <Button Content="Add Diagnosis"  Style="{StaticResource btnAdd}">
+                <Button Command="{Binding AddAppointmentCommand}" 
+                    Content="Add appointment" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Margin=" 80 0 0 50" Style="{StaticResource btnAdd}">
 
                 </Button>
 
