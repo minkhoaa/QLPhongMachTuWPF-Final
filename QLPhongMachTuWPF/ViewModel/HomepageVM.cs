@@ -74,7 +74,6 @@ namespace QLPhongMachTuWPF.ViewModel
                 CustomerCounts.Add(customerCounts.ContainsKey(date) ? customerCounts[date] : 0);
             }
         }
-
         // Hàm truy vấn số lượng khách hàng từ cơ sở dữ liệu
         private Dictionary<DateTime, int> GetCustomerCountsPerDay(DateTime startOfWeek, DateTime endOfWeek)
         {
@@ -87,7 +86,6 @@ namespace QLPhongMachTuWPF.ViewModel
                     Count = g.Count()
                 })
                 .ToDictionary(g => g.Date.Value, g => g.Count); // Chuyển thành Dictionary
-
             return customerCounts;
         }
 

@@ -93,7 +93,7 @@ Grid.Column="1" Panel.ZIndex="1"
                     </Button.Background>
                 </Button>
                 <Border CornerRadius="0 10 0 0" Background="White"/>
-                <TextBlock Text="ADD DIAGNOSIS" Style="{StaticResource titleText}"/>
+                <TextBlock Text="ADD APPOINTMENT" Style="{StaticResource titleText}"/>
             </Grid>
 
             <!--Input-->
@@ -102,11 +102,9 @@ Grid.Column="1" Panel.ZIndex="1"
                 <Border CornerRadius="0 0 10 0" Background="White"/>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 50 0 0">
                     <!--name-->
-
-                    <!--Phone-->
-                    <!--name-->
                     <TextBox
                          Text="{Binding TenBN}"
+                         VerticalAlignment="Center"
                          materialDesign:HintAssist.Hint="Name"
                          Style="{StaticResource MaterialDesignOutlinedTextBox}"
                          Width="250" FontSize="16"/>
@@ -169,12 +167,9 @@ Grid.Column="1" Panel.ZIndex="1"
            FontSize="16" Margin="60 0 0 0"/>
 
                 </StackPanel>
-                <TextBlock Text="Status" Margin="80,324,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" FontSize="16" Foreground="Gray"/>
+                <TextBlock Text="Status" Margin="390 150 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontSize="16" Foreground="Gray"/>
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 350 0 0">
-                    <ComboBox Text="{Binding Status}"  x:Name="cmbStatus" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-         
-FontSize="16"/>
                     <!--Day appointment-->
                     <TextBox
                         Text="{Binding TenNV}"
@@ -182,6 +177,10 @@ FontSize="16"/>
             materialDesign:HintAssist.Hint="Staff Name"
             Style="{StaticResource MaterialDesignOutlinedTextBox}"
             Width="250" FontSize="16"/>
+
+                    <ComboBox Text="{Binding Status}"  x:Name="cmbStatus" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+         
+FontSize="16" Margin="60 0 0 0"/>
 
 
                 </StackPanel>
