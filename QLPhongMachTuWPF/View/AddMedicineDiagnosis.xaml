@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:QLPhongMachTuWPF.View"
         mc:Ignorable="d"
         Title="AddMedicineDiagnosis" Height="700" Width="800"
-                xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent" AllowsTransparency="True">
+        DataContext="{StaticResource AddDiagnosis}"
+                xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodel="clr-namespace:QLPhongMachTuWPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:AddDiagnosis}"
+        WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent" AllowsTransparency="True">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -164,7 +165,7 @@ Grid.Column="1" Panel.ZIndex="1"
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 290 0 0">
                     <!--Day appointment-->
                     <TextBox
-                        Text="{Binding TenNV}"
+                        Text="{Binding TenNV, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         VerticalAlignment="Center"
             materialDesign:HintAssist.Hint="Staff Name"
             Style="{StaticResource MaterialDesignOutlinedTextBox}"
@@ -181,7 +182,7 @@ FontSize="16" Margin="60 0 0 0"/>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 370 0 0">
                   
                     <TextBox
-                        
+                        Text="{Binding Symtoms}"
                         VerticalAlignment="Center"
             materialDesign:HintAssist.Hint="Symptom"
             Style="{StaticResource MaterialDesignOutlinedTextBox}"
@@ -190,7 +191,7 @@ FontSize="16" Margin="60 0 0 0"/>
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 450 0 0">
                     <TextBox
-            
+                    Text="{Binding Result}"
             VerticalAlignment="Center"
 materialDesign:HintAssist.Hint="Result"
 Style="{StaticResource MaterialDesignOutlinedTextBox}"

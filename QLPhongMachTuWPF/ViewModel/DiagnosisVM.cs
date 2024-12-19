@@ -50,7 +50,6 @@ namespace QLPhongMachTuWPF.ViewModel
             {
                 AddMedicineDiagnosis add = new AddMedicineDiagnosis();
                 add.ShowDialog();
-
             }
             );
             ModifyDiagnosisCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
