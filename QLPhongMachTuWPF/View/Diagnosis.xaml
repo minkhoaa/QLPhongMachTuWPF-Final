@@ -32,7 +32,7 @@
             <Image Source="/Images/search.png" Width="20" Height="20" HorizontalAlignment="Right" Margin="5"/>
         </Grid>
 
-        <Button Grid.Row="0" Command="{Binding AddDiagnosisCommand}"  Style="{StaticResource addBtn}" Click="AddDiagnosisButton_Click">
+        <Button Grid.Row="0" Command="{Binding AddDiagnosisCommand}"  Style="{StaticResource addBtn}" >
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Add Diagnosis" FontSize="15" FontWeight="Bold"/>
             </StackPanel>
@@ -49,32 +49,18 @@
                 <DataGridTextColumn Header="Date" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding NgayKham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='dd/MM/yyyy'}"/>
                 <DataGridTextColumn Header="Symptom" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="2*" Binding="{Binding TrieuChung, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Header ="Result" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding KetQua, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <DataGridTemplateColumn Header="Status" Width="1.5*">
+                <DataGridTextColumn Header="Status" Binding="{Binding TrangThai, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="0.51*" />
+                <DataGridTemplateColumn Header="" Width="0.5*" CanUserResize="False">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock>
-                                <TextBlock.Style>
-                                    <Style TargetType="TextBlock">
-                                        <!-- Giá trị mặc định -->
-                                        <Setter Property="Text" Value="Unknown" />
-                                        <Style.Triggers>
-                                            <!-- Nếu TrangThai = 1 -->
-                                            <DataTrigger Binding="{Binding TrangThai}" Value="1">
-                                                <Setter Property="Text" Value="Printed" />
-                                            </DataTrigger>
-                                            <!-- Nếu TrangThai = 0 -->
-                                            <DataTrigger Binding="{Binding TrangThai}" Value="0">
-                                                <Setter Property="Text" Value="Unprint" />
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </TextBlock.Style>
-                            </TextBlock>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Style="{StaticResource gridRemoveBtn}" Background="Green">
+                                    <materialDesign:PackIcon Kind="CheckBold" Width="20" Height="20" Foreground="White"/>
+                                </Button>
+                            </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-
-                
 
             </DataGrid.Columns>
         </DataGrid>
