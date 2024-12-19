@@ -168,6 +168,32 @@ namespace QLPhongMachTuWPF.ViewModel
                     
                 });
             });
+            Messenger.Default.Register<PHIEUKHAM>(this, (diagnosis) =>
+            {
+                var Staff = DataProvider.Ins.db.NHANVIENs.FirstOrDefault(a => a.MaNV == diagnosis.MaNV);
+                var Patient = DataProvider.Ins.db.BENHNHANs.FirstOrDefault(a => a.MaBN == diagnosis.MaBN);
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    TenNV = Staff.TenNV;
+                    TenBN = Patient.TenBN;
+                    DateTime dateOfBirth = Patient.NgaySinh.Value;
+                    Ngay = dateOfBirth.Day.ToString();
+                    Thang = MonthToString(dateOfBirth.Month);
+                    Nam = dateOfBirth.Year.ToString();
+                    DateTime dateTreat = diagnosis.NgayKham.Value;
+                    NgayKham = dateTreat.Day.ToString();
+                    ThangKham = MonthToString(dateTreat.Month);
+                    NamKham = dateTreat.Year.ToString();
+
+                    DiaChi = Patient.DiaChi;
+                    DienThoai = Patient.DienThoai;
+                    Gender =Patient.GioiTinh;
+                    Status = (Patient.TrangThai == 1) ? "Available" : "Unavailable";
+                    Symtoms = diagnosis.TrieuChung;
+                    Result = diagnosis.KetQua; 
+
+                });
+            });
 
         }
     }

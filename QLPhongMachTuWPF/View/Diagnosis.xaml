@@ -39,7 +39,8 @@
         </Button>
 
         <DataGrid Grid.Row="1" ItemsSource="{Binding FilteredDiagnosis, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="#eeeeee" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle2}" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="patientsDatagrid" Margin="0,0,0,10"
-          HorizontalScrollBarVisibility="Disabled" Grid.RowSpan="2" 
+                    SelectedItem="{Binding SelectedItemCommand}"
+                  HorizontalScrollBarVisibility="Disabled" Grid.RowSpan="2" 
     HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
     Width="auto" Height="auto" VerticalScrollBarVisibility="Auto">
             <DataGrid.Columns>
@@ -54,7 +55,10 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <Button Style="{StaticResource gridRemoveBtn}" Background="Green">
+                                <Button 
+                                     Command="{Binding DataContext.VerifyCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                        CommandParameter="{Binding}"
+                                    Style="{StaticResource gridRemoveBtn}" Background="Green">
                                     <materialDesign:PackIcon Kind="CheckBold" Width="20" Height="20" Foreground="White"/>
                                 </Button>
                             </StackPanel>

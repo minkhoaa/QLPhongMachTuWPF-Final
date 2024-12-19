@@ -188,7 +188,7 @@ FontSize="16" Margin="60 0 0 0"/>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 370 0 0">
 
                     <TextBox
-                        
+                        Text="{Binding Symtoms}"
                         VerticalAlignment="Center"
             materialDesign:HintAssist.Hint="Symptom"
             Style="{StaticResource MaterialDesignOutlinedTextBox}"
@@ -197,7 +197,7 @@ FontSize="16" Margin="60 0 0 0"/>
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 450 0 0">
                     <TextBox
-            
+                    Text="{Binding Result}"
             VerticalAlignment="Center"
 materialDesign:HintAssist.Hint="Result"
 Style="{StaticResource MaterialDesignOutlinedTextBox}"

@@ -16,10 +16,11 @@ namespace QLPhongMachTuWPF.ViewModel
 {
     public class DiagnosisVM : ViewModelBase
     {
-
+        private PHIEUKHAM _SelectedItemCommand {  get; set; }
+        public PHIEUKHAM SelectedItemCommand { get => _SelectedItemCommand; set { _SelectedItemCommand = value; OnPropertyChanged(); }  }
         public ICommand AddDiagnosisCommand { get; set; }
 
-        public ICommand  ModifyDiagnosisCommand { get; set; }
+        public ICommand VerifyCommand { get; set; }
 
         private ObservableCollection<PHIEUKHAM> _DiagnosisList;
         public ICollectionView FilteredDiagnosis{ get; set; }
@@ -52,11 +53,20 @@ namespace QLPhongMachTuWPF.ViewModel
                 add.ShowDialog();
             }
             );
-            ModifyDiagnosisCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            VerifyCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                   
+                //if (SelectedItemCommand.NgayKham.HasValue)
+                //{
+                //    DateTime dateOfBirth = SelectedItemCommand.NgayKham.Value;
+
+                //    SelectedItemCommand.NgaySinh = new DateTime(int.Parse(dateOfBirth.ToString("yyyy")), int.Parse(dateOfBirth.ToString("dd")), int.Parse(dateOfBirth.ToString("MM")));
+                //}
+                ModifyDiagnosis diagnosis = new ModifyDiagnosis();
+                Messenger.Default.Send(SelectedItemCommand);
+                diagnosis.ShowDialog();
             }
             );
+
         }
     }
 }
