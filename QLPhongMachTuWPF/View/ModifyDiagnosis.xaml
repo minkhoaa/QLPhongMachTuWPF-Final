@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QLPhongMachTuWPF.View"
         mc:Ignorable="d"
-        Title="ModifyDiagnosis" Height="700" Width="800"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent" AllowsTransparency="True">
+        Title="ModifyDiagnosis" Height="700" Width="800" 
+        DataContext="{StaticResource ModifyDiagnosisVM}"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodel="clr-namespace:QLPhongMachTuWPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ModifyDiagnosisVM}"
+        WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent" AllowsTransparency="True">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -100,7 +101,7 @@ Grid.Column="1" Panel.ZIndex="1"
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 50 0 0">
                     <!--name-->
                     <TextBox
-                         Text="{Binding TenBN}"
+                         Text="{Binding TenBN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          VerticalAlignment="Center"
                          materialDesign:HintAssist.Hint="Name"
                          Style="{StaticResource MaterialDesignOutlinedTextBox}"
@@ -108,7 +109,7 @@ Grid.Column="1" Panel.ZIndex="1"
 
                     <!--Phone-->
                     <TextBox
-                        Text="{Binding DienThoai}"
+                        Text="{Binding DienThoai, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     VerticalAlignment="Center"
                     materialDesign:HintAssist.Hint="Phone"
                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
@@ -119,21 +120,21 @@ Grid.Column="1" Panel.ZIndex="1"
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 130 0 0">
                     <!--Date of birth-->
-                    <ComboBox Text="{Binding Ngay}" x:Name="cmbDay" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox IsEditable="True" Text="{Binding Ngay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbDay" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
                              
                                FontSize="16"/>
 
-                    <ComboBox Text="{Binding Thang}" x:Name="cmbMonth" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox IsEditable="True" Text="{Binding Thang, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbMonth" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
          
           FontSize="16" Margin="10 0 0 0"/>
 
-                    <ComboBox Text="{Binding Nam}" x:Name="cmbYear" Width="110" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox IsEditable="True" Text="{Binding Nam, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbYear" Width="110" Style="{StaticResource MaterialDesignOutlinedComboBox}"
 
  FontSize="16" Margin="10 0 0 0"/>
 
                     <!--Address-->
                     <TextBox 
-                        Text="{Binding DiaChi}"
+                        Text="{Binding DiaChi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         VerticalAlignment="Center"
                                 materialDesign:HintAssist.Hint="Address"
                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
@@ -146,20 +147,21 @@ Grid.Column="1" Panel.ZIndex="1"
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 210 0 0">
                     <!--Day appointment-->
-                    <ComboBox Text="{Binding NgayKham}" x:Name="cmbDayapp" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox IsEditable="True" Text="{Binding NgayKham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbDayapp" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
                              
                                FontSize="16"/>
 
-                    <ComboBox Text="{Binding ThangKham}" x:Name="cmbMonthapp" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox IsEditable="True" Text="{Binding ThangKham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbMonthapp" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
          
           FontSize="16" Margin="10 0 0 0"/>
 
-                    <ComboBox Text="{Binding NamKham}" x:Name="cmbYearapp" Width="110" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox IsEditable="True" Text="{Binding NamKham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbYearapp" Width="110" Style="{StaticResource MaterialDesignOutlinedComboBox}"
 
  FontSize="16" Margin="10 0 0 0"/>
                     <!--Gender-->
                     <ComboBox
-                        Text="{Binding Gender}" x:Name="cmbGender" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                        IsEditable="True"
+                        Text="{Binding Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbGender" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
          
            FontSize="16" Margin="60 0 0 0"/>
 
@@ -169,13 +171,13 @@ Grid.Column="1" Panel.ZIndex="1"
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 290 0 0">
                     <!--Day appointment-->
                     <TextBox
-                        Text="{Binding TenNV}"
+                        Text="{Binding TenNV, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         VerticalAlignment="Center"
             materialDesign:HintAssist.Hint="Staff Name"
             Style="{StaticResource MaterialDesignOutlinedTextBox}"
             Width="250" FontSize="16"/>
 
-                    <ComboBox Text="{Binding Status}"  x:Name="cmbStatus" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox IsEditable="True" Text="{Binding Status, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  x:Name="cmbStatus" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
          
 FontSize="16" Margin="60 0 0 0"/>
 

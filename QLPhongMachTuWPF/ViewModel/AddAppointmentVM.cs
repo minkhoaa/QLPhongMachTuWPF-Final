@@ -18,6 +18,7 @@ namespace QLPhongMachTuWPF.ViewModel
 {
     public class AddAppointmentVM : ViewModelBase
     {
+        #region ThuocTinh
         private string _TenBN { get; set; }
 
         public string TenBN { get => _TenBN; set { _TenBN = value; OnPropertyChanged(); } }
@@ -66,7 +67,7 @@ namespace QLPhongMachTuWPF.ViewModel
         private string _NamKham { get; set; }
 
         public string NamKham { get => _NamKham; set { _NamKham = value; OnPropertyChanged(); } }
-
+        #endregion
 
         public int CheckMonth(string Thang)
         {

@@ -17,7 +17,7 @@ namespace QLPhongMachTuWPF.ViewModel
     public class ModifyPatientsVM : ViewModelBase
     {
        public ICommand SaveChangesCommand {  get; set; }
-
+        #region ThuocTinh
         private string _TenBN {  get; set; }
         public string TenBN
         {
@@ -53,8 +53,8 @@ namespace QLPhongMachTuWPF.ViewModel
         public string Charged { get => _Charged; set { _Charged = value; OnPropertyChanged(); } }
 
         public DateTime? date { get; set; }
-      
-       
+
+        #endregion
         private BENHNHAN BenhNhan { get; set; }
 
         public int CheckMonth(string Thang)

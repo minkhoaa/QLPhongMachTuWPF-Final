@@ -25,10 +25,8 @@ namespace QLPhongMachTuWPF.View
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            AddAppointment addAppointmentWindow= new AddAppointment();
-            addAppointmentWindow.ShowDialog();
-        }
+       
+
+       
     }
 }

@@ -32,6 +32,8 @@ namespace QLPhongMachTuWPF.ViewModel
                 }
             }
         }
+
+        public ICommand VerifyCommand { get; set; }
         public ICommand AddAppointmentCommand { get; set; }
 
         public ICollectionView FilteredAppointment{ get; set; }
@@ -86,6 +88,21 @@ namespace QLPhongMachTuWPF.ViewModel
             {
                 AddAppointment add = new AddAppointment();
                 add.ShowDialog(); 
+            }
+            );
+
+            VerifyCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                if (SelectedItemCommand.NgaySinh.HasValue)
+                {
+                    DateTime dateOfBirth = SelectedItemCommand.NgaySinh.Value;
+                   
+                    SelectedItemCommand.NgaySinh = new DateTime(int.Parse(dateOfBirth.ToString("yyyy")), int.Parse(dateOfBirth.ToString("dd")), int.Parse(dateOfBirth.ToString("MM"))); 
+                }
+                ModifyDiagnosis diagnosis   = new ModifyDiagnosis(); 
+                Messenger.Default.Send(SelectedItemCommand);
+                diagnosis.ShowDialog();  
+               
             }
             );
         }

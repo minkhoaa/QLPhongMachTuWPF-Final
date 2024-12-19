@@ -50,13 +50,16 @@
                 <DataGridTextColumn Header="ID" Binding="{Binding MaLH, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" CanUserResize="False" Width="0.8*"/>
                 <DataGridTextColumn Header="Staff Name" Binding="{Binding TenNV, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" />
                 <DataGridTextColumn Header="Patient Name" Binding="{Binding TenBN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" />
-                <DataGridTextColumn Header="Due date" Binding="{Binding NgayKham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" />
+                <DataGridTextColumn Header="Due date" Binding="{Binding NgayKham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='dd/MM/yyyy'}"  ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False"  Width="1.5*" />
                 <DataGridTextColumn Header="Status" Binding="{Binding TrangThai, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" />
                 <DataGridTemplateColumn Header="" Width="0.5*" CanUserResize="False">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <Button Style="{StaticResource gridRemoveBtn}" Background="Green">
+                                <Button
+                                    Command="{Binding DataContext.VerifyCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                    CommandParameter="{Binding}"
+                                    x:Name="btnVerify" Style="{StaticResource gridRemoveBtn}" Background="Green">
                                     <materialDesign:PackIcon Kind="CheckBold" Width="20" Height="20" Foreground="White"/>
                                 </Button>
                             </StackPanel>
@@ -66,7 +69,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Button  Command="{Binding ModifyMedicineCommand}" Grid.Row="0"   Style="{StaticResource anotherAddBtn}" >
+        <Button Command="{Binding ModifyMedicineCommand}" Grid.Row="0"   Style="{StaticResource anotherAddBtn}" >
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Modify Appointment" FontSize="15" FontWeight="Bold"/>
             </StackPanel>
