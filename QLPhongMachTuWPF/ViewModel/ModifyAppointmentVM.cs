@@ -281,10 +281,41 @@ namespace QLPhongMachTuWPF.ViewModel
             {
                 return true;
             }, (p) => {
-                benhnhan.TenBN = TenBN;
-                benhnhan.DiaChi = DiaChi;
-                benhnhan.DienThoai = DienThoai;
-                benhnhan.NgaySinh = new DateTime(int.Parse(Nam), int.Parse(Thang), int.Parse(Ngay)) ;
+                if (benhnhan != null)
+                {
+                    try
+                    {
+                        benhnhan.TenBN = TenBN;
+                        benhnhan.DiaChi = DiaChi;
+                        benhnhan.DienThoai = DienThoai;
+                        benhnhan.NgaySinh = new DateTime(int.Parse(Nam), int.Parse(Thang), int.Parse(Ngay));
+                    }
+                    catch (Exception)
+                    {
+
+                        MessageBox.Show("Lỗi");
+                    }
+                    Messenger.Default.Send(benhnhan);
+                } 
+                else
+                {
+                    var newPatient = new BENHNHAN()
+                    {
+                        TenBN = TenBN,
+                        DiaChi = DiaChi,
+                        DienThoai = DienThoai,
+                        NgaySinh = new DateTime(int.Parse(Nam), int.Parse(Thang), int.Parse(Ngay)),
+                        GioiTinh = (Gender == "Male") ? "Nam" : "Nữ",
+                        TrangThai = (Status == "Discharged") ? 1 : 0
+                    };
+
+                    DataProvider.Ins.db.BENHNHANs.Add(newPatient);
+
+                    DataProvider.Ins.db.SaveChanges();
+                    Messenger.Default.Send(newPatient);
+                }
+
+
                 LichHen.TenBN = TenBN;
                 LichHen.DiaChi = DiaChi;
                 LichHen.GioiTinh = Gender;
