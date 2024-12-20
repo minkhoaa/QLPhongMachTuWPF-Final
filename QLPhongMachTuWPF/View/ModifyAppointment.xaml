@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:QLPhongMachTuWPF.View"
         mc:Ignorable="d"
         Title="ModifyAppointment" Height="600" Width="800"
-                xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent" AllowsTransparency="True">
+      DataContext="{StaticResource ModifyAppointmentVM}"
+                xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodel="clr-namespace:QLPhongMachTuWPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ModifyAppointmentVM}"
+        WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent" AllowsTransparency="True">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -102,6 +103,7 @@ Grid.Column="1" Panel.ZIndex="1"
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 50 0 0">
                     <!--name-->
                     <TextBox
+                        Text="{Binding TenBN}"
                          VerticalAlignment="Center"
                          materialDesign:HintAssist.Hint="Name"
                          Style="{StaticResource MaterialDesignOutlinedTextBox}"
@@ -109,6 +111,7 @@ Grid.Column="1" Panel.ZIndex="1"
 
                     <!--Phone-->
                     <TextBox
+                    Text="{Binding DienThoai}"
                     VerticalAlignment="Center"
                     materialDesign:HintAssist.Hint="Phone"
                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
@@ -119,20 +122,33 @@ Grid.Column="1" Panel.ZIndex="1"
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 150 0 0">
                     <!--Date of birth-->
-                    <ComboBox x:Name="cmbDay" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox
+                        ItemsSource="{Binding Days}"
+                        SelectedItem="{Binding SelectedDay}"
+                        Text="{Binding Ngay}"
+                        x:Name="cmbDay" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
                              
                                FontSize="16"/>
 
-                    <ComboBox x:Name="cmbMonth" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox
+                        ItemsSource="{Binding Months}"
+                        SelectedItem="{Binding SelectedMonth}"
+                        Text="{Binding Thang}"
+                        x:Name="cmbMonth" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
          
           FontSize="16" Margin="10 0 0 0"/>
 
-                    <ComboBox x:Name="cmbYear" Width="110" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox
+                        ItemsSource="{Binding Years}"
+                        SelectedItem="{Binding SelectedYear}"
+                        Text="{Binding Nam}"
+                        x:Name="cmbYear" Width="110" Style="{StaticResource MaterialDesignOutlinedComboBox}"
 
  FontSize="16" Margin="10 0 0 0"/>
 
                     <!--Address-->
                     <TextBox VerticalAlignment="Center"
+                             Text="{Binding DiaChi }"
                                 materialDesign:HintAssist.Hint="Address"
                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                 Width="250" Margin="60 0 0 0" FontSize="16"/>
@@ -144,34 +160,55 @@ Grid.Column="1" Panel.ZIndex="1"
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 250 0 0">
                     <!--Day appointment-->
-                    <ComboBox x:Name="cmbDayapp" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox
+                        ItemsSource="{Binding DaysApp}"
+                        SelectedItem="{Binding SelectedDayApp}"
+                        Text="{Binding NgayApp}"
+                        x:Name="cmbDayapp" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
                              
                                FontSize="16"/>
 
-                    <ComboBox x:Name="cmbMonthapp" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox
+                        ItemsSource="{Binding MonthsApp}"
+                        SelectedItem="{Binding SelectedMonthApp}"
+                        Text="{Binding ThangApp}"
+                        x:Name="cmbMonthapp" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
          
           FontSize="16" Margin="10 0 0 0"/>
 
-                    <ComboBox x:Name="cmbYearapp" Width="110" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox 
+                        ItemsSource="{Binding YearsApp}"
+                        SelectedItem="{Binding SelectedYearApp}"
+                        Text="{Binding NamApp}"
+                        x:Name="cmbYearapp" Width="110" Style="{StaticResource MaterialDesignOutlinedComboBox}"
 
  FontSize="16" Margin="10 0 0 0"/>
                     <!--Gender-->
-                    <ComboBox x:Name="cmbGender" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox
+             Text="{Binding Gender}"
+                        
+             ItemsSource="{Binding GenderSource  }"
+                        
+             x:Name="cmbGender" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
          
-           FontSize="16" Margin="60 0 0 0"/>
-
+FontSize="16" Margin="60 0 0 0"/>
                 </StackPanel>
 
                 <TextBlock Text="Status" Margin="390 150 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontSize="16" Foreground="Gray"/>
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 350 0 0">
-                    <!--Day appointment-->
-                    <TextBox VerticalAlignment="Center"
-            materialDesign:HintAssist.Hint="Staff Name"
-            Style="{StaticResource MaterialDesignOutlinedTextBox}"
-            Width="250" FontSize="16"/>
+                    <ComboBox 
+                        ItemsSource="{Binding ListStaff}"
+                        DisplayMemberPath="TenNV"
+                        Text="{Binding TenNV, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              VerticalAlignment="Center"  x:Name="cmbStaff" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+         
+FontSize="16"  Margin="60 0 0 0"/>
 
-                    <ComboBox x:Name="cmbStatus" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox
+                       ItemsSource="{Binding StatusSource}"
+                        Text="{Binding Status}"
+                        x:Name="cmbStatus" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
          
 FontSize="16" Margin="60 0 0 0"/>
 
@@ -179,7 +216,9 @@ FontSize="16" Margin="60 0 0 0"/>
                 </StackPanel>
 
 
-                <Button Content="Modify appointment" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Margin=" 80 0 0 50" Style="{StaticResource btnAdd}">
+                <Button 
+                    Command="{Binding SaveChangesCommand}"
+                    Content="Save Changes" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Margin=" 80 0 0 50" Style="{StaticResource btnAdd}">
 
                 </Button>
 

@@ -36,6 +36,8 @@ namespace QLPhongMachTuWPF.ViewModel
         public ICommand VerifyCommand { get; set; }
         public ICommand AddAppointmentCommand { get; set; }
 
+        public ICommand ModifyAppointmentCommand { get; set; }
+
         public ICollectionView FilteredAppointment{ get; set; }
 
         private ObservableCollection<LICHHEN> _Appointment;
@@ -105,6 +107,19 @@ namespace QLPhongMachTuWPF.ViewModel
                
             }
             );
+            ModifyAppointmentCommand = new RelayCommand<object>((p) => SelectedItemCommand != null, (p) =>
+            {
+                if (SelectedItemCommand == null)
+                {
+                    MessageBox.Show("Vui lòng chọn một lịch hẹn để sửa.");
+                    return;
+                }
+
+                ModifyAppointment modifyWindow = new ModifyAppointment();
+                Messenger.Default.Send(SelectedItemCommand); // Gửi bệnh nhân đã chọn
+                modifyWindow.ShowDialog();
+
+            });
         }
 
 

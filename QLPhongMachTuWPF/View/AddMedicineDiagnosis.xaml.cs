@@ -22,38 +22,6 @@ namespace QLPhongMachTuWPF.View
         public AddMedicineDiagnosis()
         {
             InitializeComponent();
-            var status = new List<string>
-            {
-                "Available", "Unavailable"
-            };
-
-            cmbStatus.ItemsSource = status;
-
-            var days = Enumerable.Range(1, 31).ToList();
-            cmbDay.ItemsSource = days;
-            cmbDayapp.ItemsSource = days;
-
-            var months = new List<string>
-{
-            "January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"
-};
-
-            cmbMonth.ItemsSource = months;
-            cmbMonthapp.ItemsSource = months;
-
-            var years = Enumerable.Range(1900, DateTime.Now.Year - 1900 + 1).ToList();
-
-
-            cmbYear.ItemsSource = years;
-            cmbYearapp.ItemsSource = years;
-
-            var gender = new List<string>
-            {
-                "Male", "Female"
-            };
-
-            cmbGender.ItemsSource = gender;
            
 
 

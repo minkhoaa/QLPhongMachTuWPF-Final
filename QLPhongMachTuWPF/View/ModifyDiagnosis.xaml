@@ -97,7 +97,10 @@ Grid.Column="1" Panel.ZIndex="1"
             <!--Input-->
 
             <Grid Grid.Row="1" >
-                <Border CornerRadius="0 0 10 0" Background="White"/>
+                <Border CornerRadius="0 0 10 0" Background="White">
+                    <Button Command="{Binding ModifyDiagnosisCommand}" 
+                        Content="Create invoice"  Margin="360,0,0,50" Style="{StaticResource btnAdd}"/>
+                </Border>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 50 0 0">
                     <!--name-->
                     <TextBox
@@ -120,17 +123,28 @@ Grid.Column="1" Panel.ZIndex="1"
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 130 0 0">
                     <!--Date of birth-->
-                    <ComboBox IsEditable="True" Text="{Binding Ngay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbDay" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox Text="{Binding Ngay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              ItemsSource="{Binding Days}"
+                              SelectedItem="{Binding SelectedDay}"
+                          
+                             x:Name="cmbDay" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                            
+                              FontSize="16"/>
+
+                    <ComboBox Text="{Binding Thang, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              ItemsSource="{Binding Months}"
+                              SelectedItem="{Binding SelectedMonth}"
+                             x:Name="cmbMonth" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+        
+         FontSize="16" Margin="10 0 0 0"/>
+
+                    <ComboBox Text="{Binding Nam, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              ItemsSource="{Binding Years}"
+                              SelectedItem="{Binding SelectedYear}" 
                              
-                               FontSize="16"/>
+                             x:Name="cmbYear" Width="110" Style="{StaticResource MaterialDesignOutlinedComboBox}"
 
-                    <ComboBox IsEditable="True" Text="{Binding Thang, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbMonth" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-         
-          FontSize="16" Margin="10 0 0 0"/>
-
-                    <ComboBox IsEditable="True" Text="{Binding Nam, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbYear" Width="110" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-
- FontSize="16" Margin="10 0 0 0"/>
+FontSize="16" Margin="10 0 0 0"/>
 
                     <!--Address-->
                     <TextBox 
@@ -147,20 +161,30 @@ Grid.Column="1" Panel.ZIndex="1"
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 210 0 0">
                     <!--Day appointment-->
-                    <ComboBox IsEditable="True" Text="{Binding NgayKham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbDayapp" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                             
+                    <ComboBox IsEditable="True" 
+                              ItemsSource="{Binding DaysApp}"
+                              SelectedItem="{Binding SelectedDayApp}"
+                              Text="{Binding NgayKham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                              x:Name="cmbDayapp" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                
                                FontSize="16"/>
 
-                    <ComboBox IsEditable="True" Text="{Binding ThangKham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbMonthapp" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox
+                        
+                        ItemsSource="{Binding MonthsApp}"
+                        SelectedItem="{Binding SelectedMonthApp}"
+                        IsEditable="True" Text="{Binding ThangKham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbMonthapp" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
          
           FontSize="16" Margin="10 0 0 0"/>
 
-                    <ComboBox IsEditable="True" Text="{Binding NamKham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbYearapp" Width="110" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox ItemsSource="{Binding YearsApp}"
+                              SelectedItem="{Binding SelectedYearApp}"
+                              IsEditable="True" Text="{Binding NamKham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbYearapp" Width="110" Style="{StaticResource MaterialDesignOutlinedComboBox}"
 
  FontSize="16" Margin="10 0 0 0"/>
                     <!--Gender-->
                     <ComboBox
-                        IsEditable="True"
+                        ItemsSource="{Binding GenderSource}"
                         Text="{Binding Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbGender" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
          
            FontSize="16" Margin="60 0 0 0"/>
@@ -170,14 +194,18 @@ Grid.Column="1" Panel.ZIndex="1"
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 290 0 0">
                     <!--Day appointment-->
-                    <TextBox
+                    <ComboBox 
+                        ItemsSource="{Binding ListStaff}"
+                        DisplayMemberPath="TenNV"
                         Text="{Binding TenNV, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        VerticalAlignment="Center"
-            materialDesign:HintAssist.Hint="Staff Name"
-            Style="{StaticResource MaterialDesignOutlinedTextBox}"
-            Width="250" FontSize="16"/>
+                              VerticalAlignment="Center"  x:Name="cmbStaff" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+         
+FontSize="16"  Margin="60 0 0 0"/>
 
-                    <ComboBox IsEditable="True" Text="{Binding Status, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  x:Name="cmbStatus" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox
+                        ItemsSource="{Binding StatusSource}"
+                        Text="{Binding Status, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbStatus"
+                        Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
          
 FontSize="16" Margin="60 0 0 0"/>
 
@@ -207,8 +235,8 @@ Width="560" FontSize="16"/>
 
 
 
-                <Button Command="{Binding AddDiagnosisCommand}" 
-                    Content="Modify Diagnosis" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Margin=" 80 0 0 50" Style="{StaticResource btnAdd}">
+                <Button Command="{Binding ConfirmCommand}" 
+                    Content="Confirm" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Margin=" 80 0 0 50" Style="{StaticResource btnAdd}">
 
                 </Button>
 
