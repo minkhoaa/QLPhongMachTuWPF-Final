@@ -118,14 +118,14 @@ Grid.Column="1" Panel.ZIndex="1"
                     <ComboBox Text="{Binding Ngay}"
                                ItemsSource="{Binding Days}"  
                               SelectedItem="{Binding SelectedDay}"
-                              x:Name="cmbDay" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                              x:Name="cmbDay" Width="70" Style="{StaticResource MaterialDesignOutlinedComboBox}"
                              
                                FontSize="16"/>
 
                     <ComboBox Text="{Binding Thang}"
                                ItemsSource="{Binding Months}"
                               SelectedItem="{Binding SelectedMonth}"
-                              x:Name="cmbMonth" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                              x:Name="cmbMonth" Width="70" Style="{StaticResource MaterialDesignOutlinedComboBox}"
          
           FontSize="16" Margin="10 0 0 0"/>
 
@@ -133,7 +133,7 @@ Grid.Column="1" Panel.ZIndex="1"
                               SelectedItem="{Binding SelectedYear}"
                                ItemsSource="{Binding Years}"
                                
-                              x:Name="cmbYear" Width="110" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                              x:Name="cmbYear" Width="90" Style="{StaticResource MaterialDesignOutlinedComboBox}"
 
  FontSize="16" Margin="10 0 0 0"/>
 
@@ -155,14 +155,14 @@ Grid.Column="1" Panel.ZIndex="1"
                     <ComboBox Text="{Binding NgayKham}"
                               ItemsSource="{Binding DaysApp}"  
                              SelectedItem="{Binding SelectedDayApp}"
-                             x:Name="cmbDayApp" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                             x:Name="cmbDayApp" Width="70" Style="{StaticResource MaterialDesignOutlinedComboBox}"
                             
                               FontSize="16"/>
 
                     <ComboBox Text="{Binding ThangKham}"
                               ItemsSource="{Binding MonthsApp}"
                              SelectedItem="{Binding SelectedMonthApp}"
-                             x:Name="cmbMonthApp" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                             x:Name="cmbMonthApp" Width="70" Style="{StaticResource MaterialDesignOutlinedComboBox}"
         
          FontSize="16" Margin="10 0 0 0"/>
 
@@ -170,7 +170,7 @@ Grid.Column="1" Panel.ZIndex="1"
                              SelectedItem="{Binding SelectedYearApp}"
                               ItemsSource="{Binding YearsApp}"
                               
-                             x:Name="cmbYearApp" Width="110" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                             x:Name="cmbYearApp" Width="90" Style="{StaticResource MaterialDesignOutlinedComboBox}"
 
 FontSize="16" Margin="10 0 0 0"/>
                     <!--Gender-->
@@ -183,8 +183,8 @@ FontSize="16" Margin="10 0 0 0"/>
 
                 </StackPanel>
                 <TextBlock Text="Status" Margin="390 -60 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontSize="16" Foreground="Gray"/>
-
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 290 0 0">
+                <TextBlock Text="Staff's Name" Margin="80 -60 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontSize="16" Foreground="Gray"/>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="20 290 0 0">
                     <!--Day appointment-->
                     <ComboBox Text="{Binding TenNV, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                               ItemsSource="{Binding ListStaff}" DisplayMemberPath="TenNV" VerticalAlignment="Center"  x:Name="cmbStaff" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"

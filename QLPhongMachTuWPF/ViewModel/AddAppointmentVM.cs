@@ -347,15 +347,9 @@ namespace QLPhongMachTuWPF.ViewModel
             TenBN = string.Empty;
             DiaChi = string.Empty;
             DienThoai = string.Empty;
-            Ngay = string.Empty;
-            Thang = string.Empty;
-            Nam = string.Empty;
             Gender = string.Empty;
             Status = string.Empty;
             TenNV = string.Empty;
-            NgayKham = string.Empty;
-            ThangKham = string.Empty;
-            NamKham = string.Empty;
         }
 
     }

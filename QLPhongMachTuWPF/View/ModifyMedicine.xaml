@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QLPhongMachTuWPF.View"
         mc:Ignorable="d"
-        Title="ModifyMedicine"  Height="600" Width="800"
+        Title="ModifyMedicine" Height="500" Width="800"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:viewmodel="clr-namespace:QLPhongMachTuWPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ModifyMedicineVM}"
-        WindowStartupLocation="CenterScreen" WindowStyle="None" 
-        Background="Transparent" 
+        WindowStartupLocation="CenterScreen" WindowStyle="None"
+        Background="Transparent"
         DataContext="{StaticResource ModifyMedicineVM}"
         AllowsTransparency="True">
 
@@ -23,12 +23,11 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="80"></ColumnDefinition>
+            <ColumnDefinition Width="80"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Column="0">
-
             <Grid.RowDefinitions>
                 <RowDefinition Height="80"/>
                 <RowDefinition Height="*"/>
@@ -37,15 +36,11 @@
             <!--Logo-->
             <Grid Grid.Row="0">
                 <Border CornerRadius="10 0 0 0" Background="#1ca7ec">
-
                 </Border>
                 <materialDesign:PackIcon Kind="Doctor" Style="{StaticResource icon}"/>
-
-
-
-
             </Grid>
-            <!--chu-->
+
+            <!--Text-->
             <Grid Grid.Row="1">
                 <Border CornerRadius="0 0 0 10">
                     <Border.Background>
@@ -68,83 +63,74 @@
             </Grid>
         </Grid>
 
-        <Grid Grid.Column="1" >
+        <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="80"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <!--Chu-->
-            <Grid Grid.Row="0" >
+            <!--Header-->
+            <Grid Grid.Row="0">
                 <Button x:Name="btnClose"
-                       Click="btnClose_Click"
-         BorderBrush="#3693ff"
-        Grid.Column="1" Panel.ZIndex="1"
-           Width="30"
-           Height="30"
-           VerticalAlignment="Top"
-           HorizontalAlignment="Right"
-           Margin="0 13 13 0"
-           
-            BorderThickness="0">
-                    <Button.Background >
-                        <ImageBrush ImageSource="/Images/image.png"
-                        Stretch="Fill"
-                        />
+                        Click="btnClose_Click"
+                        BorderBrush="#3693ff"
+                        Grid.Column="1" Panel.ZIndex="1"
+                        Width="30"
+                        Height="30"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Right"
+                        Margin="0 13 13 0"
+                        BorderThickness="0">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/Images/image.png" Stretch="Fill"/>
                     </Button.Background>
                 </Button>
                 <Border CornerRadius="0 10 0 0" Background="White"/>
                 <TextBlock Text="MODIFY MEDICINE" Style="{StaticResource titleText}"/>
             </Grid>
 
-            <!--Input-->
-
+            <!--Input Fields-->
             <Grid Grid.Row="1">
                 <Border CornerRadius="0 0 10 0" Background="White">
-                    <TextBox
-                       Text="{Binding Price, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                       materialDesign:HintAssist.Hint="Price"
-                       Style="{StaticResource MaterialDesignOutlinedTextBox}" 
-                       FontSize="16" Margin="382,50,88,415"/>
                 </Border>
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 50 0 0">
-                    <!--name-->
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 80 0 0">
+                    <!--Name-->
                     <TextBox
-                       Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                         VerticalAlignment="Center"
                         materialDesign:HintAssist.Hint="Name"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
                         Width="250" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 150 0 0">
-                    <StackPanel/>
                     <TextBox
-                           Text="{Binding Unit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-   Height="60"
-                           Width="249"
-   materialDesign:HintAssist.Hint="Unit"
-   AcceptsReturn="True"
-   
-   Style="{StaticResource MaterialDesignOutlinedTextBox}"
-   TextWrapping="Wrap"
-   VerticalScrollBarVisibility="Auto"
-                           FontSize="16"/>
+                        Text="{Binding Price, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        materialDesign:HintAssist.Hint="Price"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        FontSize="16" Width="250" Margin="50 0 0 0"/>
                 </StackPanel>
-                <TextBlock Text="Status" Margin="80 50 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" FontSize="16" Foreground="Gray"/>
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 300 0 0">
-                    <!--Status-->
-                    <ComboBox Text="{Binding Status , UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsEditable="True" x:Name="cmbStatus" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-        
-          FontSize="16" Margin="0 0 0 0"/>
 
+                <TextBlock Text="Status" Margin="380 -60 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" FontSize="16" Foreground="Gray"/>
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80,190,0,0">
+                    <TextBox
+                        Text="{Binding Unit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Width="250"
+                        materialDesign:HintAssist.Hint="Unit"
+                        AcceptsReturn="True"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        TextWrapping="Wrap"
+                        VerticalScrollBarVisibility="Auto"
+                        FontSize="16"/>
+
+                    <ComboBox
+                        Text="{Binding Status, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        IsEditable="True" x:Name="cmbStatus" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                        FontSize="16" Margin="50,0,0,0"/>
                 </StackPanel>
+
                 <Button
-                   Command="{Binding SaveChangesCommand}"
-                   Content="Save Changes"  Style="{StaticResource btnAdd}">
-                </Button>
-
+                    Command="{Binding SaveChangesCommand}"
+                    Content="Save Changes" Style="{StaticResource btnAdd}"/>
             </Grid>
         </Grid>
-
     </Grid>
 </Window>

@@ -119,7 +119,7 @@
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 150 0 0">
                     <!--Date of birth-->
-                    <ComboBox x:Name="cmbDay" Width="60" 
+                    <ComboBox x:Name="cmbDay" Width="70" 
                               Text ="{Binding Ngay}"
                               IsReadOnly="False"
                               IsEditable="True"
@@ -129,12 +129,12 @@
                     <ComboBox x:Name="cmbMonth"
                               Text="{Binding Thang}"
                               IsEditable="True"
-                              Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                              Width="70" Style="{StaticResource MaterialDesignOutlinedComboBox}"
           FontSize="16" Margin="10 0 0 0"/>
 
                     <ComboBox x:Name="cmbYear" 
                               Text="{Binding Nam}"
-                              Width="110" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                              Width="90" Style="{StaticResource MaterialDesignOutlinedComboBox}"
  FontSize="16" Margin="10 0 0 0" IsEditable="True"/>
 
                     <!--Address-->
