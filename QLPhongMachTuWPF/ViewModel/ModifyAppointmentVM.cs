@@ -253,7 +253,7 @@ namespace QLPhongMachTuWPF.ViewModel
             
             Messenger.Default.Register<LICHHEN>(this, (appointment) =>
             {
-               benhnhan = DataProvider.Ins.db.BENHNHANs.FirstOrDefault(x => x.TenBN == appointment.TenBN && x.NgaySinh == appointment.NgaySinh);
+               benhnhan = DataProvider.Ins.db.BENHNHANs.FirstOrDefault(x => x.TenBN == appointment.TenBN && x.NgaySinh == appointment.NgaySinh && x.DienThoai == appointment.DienThoai);
                 Application.Current.Dispatcher.Invoke(() =>
                 {
                     LichHen = appointment;
@@ -271,7 +271,7 @@ namespace QLPhongMachTuWPF.ViewModel
                     Gender = (appointment.GioiTinh == "Nam") ? "Male" : "Female";
                     Status = (appointment.TrangThai == 1) ? "Available" : "Unavailable";
                     TenNV = appointment.TenNV;
-
+                    
 
                 });
             });

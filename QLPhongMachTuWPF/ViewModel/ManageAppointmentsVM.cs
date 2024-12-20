@@ -43,6 +43,7 @@ namespace QLPhongMachTuWPF.ViewModel
         private ObservableCollection<LICHHEN> _Appointment;
         public ObservableCollection<LICHHEN> AppointmentList { get => _Appointment; set { _Appointment = value; OnPropertyChanged(); } }
 
+        
         public ManageAppointmentsVM()
         {
 
@@ -84,6 +85,9 @@ namespace QLPhongMachTuWPF.ViewModel
                 DataProvider.Ins.db.SaveChanges();
                 FilteredAppointment?.Refresh();
             });
+          
+
+
 
 
             AddAppointmentCommand = new RelayCommand<object>((p) => { return true; }, (p) =>

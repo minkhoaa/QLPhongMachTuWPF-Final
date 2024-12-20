@@ -18,6 +18,8 @@ namespace QLPhongMachTuWPF.ViewModel
         private ObservableCollection<BENHNHAN> _patients { get ; set; }
 
         public ObservableCollection<BENHNHAN> Patients { get { return _patients; } set { _patients = value; OnPropertyChanged();  } }
+
+        #region Thuoctinh
         private string _TenBN {  get; set; }
 
         public string TenBN { get => _TenBN; set { _TenBN = value; OnPropertyChanged();  } }
@@ -52,43 +54,178 @@ namespace QLPhongMachTuWPF.ViewModel
 
         public string Charged { get => _Charged; set { _Charged = value; OnPropertyChanged(); } }
 
-        
+        #endregion 
         public ICommand AddPatientCommand { get; set; }
-        public int CheckMonth(string Thang)
+        #region FormatBindingDate
+
+        public List<int> Days { get; set; }
+        public List<int> Months { get; set; }
+        public List<int> Years { get; set; }
+
+        public List<int> DaysApp { get; set; }
+        public List<int> MonthsApp { get; set; }
+        public List<int> YearsApp { get; set; }
+
+
+
+        public List<string> GenderSource { get; set; }
+        public List<string> StatusSource { get; set; }
+
+        private int _selectedDay;
+        public int SelectedDay
         {
-            switch (Thang)
+            get => _selectedDay;
+            set
             {
-                case "January":
-                   return 1;
-                case "February":
-                    return 2;
-                case "March":
-                    return 3;
-                case "April":
-                    return 4;
-                case "May":
-                    return 5;
-                case "June":
-                    return 6;
-                case "July":
-                    return 7;
-                case "August":
-                    return 8;
-                case "September":
-                    return 9;
-                case "October":
-                    return 10;
-                case "November":
-                    return 11;
-                case "December":
-                    return 12;
-                default:
-                    return -1; 
+                _selectedDay = value;
+                OnPropertyChanged();
             }
         }
+        private int _selectedMonth;
+        public int SelectedMonth
+        {
+            get => _selectedMonth;
+            set
+            {
+                _selectedMonth = value;
+                OnPropertyChanged();
+                UpdateDays();
+                // Cập nhật số ngày khi tháng thay đổi
+            }
+        }
+
+        private int _selectedYear;
+        public int SelectedYear
+        {
+            get => _selectedYear;
+            set
+            {
+                _selectedYear = value;
+                OnPropertyChanged();
+                UpdateDays();
+                // Cập nhật số ngày khi năm thay đổi
+            }
+        }
+
+
+        private int _selectedDayApp;
+        public int SelectedDayApp
+        {
+            get => _selectedDayApp;
+            set
+            {
+                _selectedDayApp = value;
+                OnPropertyChanged();
+            }
+        }
+        private int _selectedMonthApp;
+        public int SelectedMonthApp
+        {
+            get => _selectedMonthApp;
+            set
+            {
+                _selectedMonthApp = value;
+                OnPropertyChanged();
+                UpdateDaysApp();
+                // Cập nhật số ngày khi tháng thay đổi
+            }
+        }
+
+        private int _selectedYearApp;
+        public int SelectedYearApp
+        {
+            get => _selectedYearApp;
+            set
+            {
+                _selectedYearApp = value;
+                OnPropertyChanged();
+                UpdateDaysApp();
+
+            }
+        }
+
+
+        public void AddSource()
+        {
+            SelectedYear = DateTime.Now.Year;
+            SelectedMonth = DateTime.Now.Month;
+            Years = new List<int>();
+            for (int i = 1900; i <= 2100; i++)
+                Years.Add(i);
+            Months = new List<int>();
+            for (int i = 1; i <= 12; i++)
+                Months.Add(i);
+            UpdateDays();
+
+
+
+         //  ListStaff = new ObservableCollection<NHANVIEN>(DataProvider.Ins.db.NHANVIENs.ToList());
+            GenderSource = new List<string> { "Male", "Female" };
+            StatusSource = new List<string> { "Discharged", "Under treatment" };
+
+            // Khởi tạo số ngày theo tháng và năm mặc định  a
+
+
+            SelectedYearApp = DateTime.Now.Year;
+            SelectedMonthApp = DateTime.Now.Month;
+            YearsApp = new List<int>();
+            for (int i = 1900; i <= 2100; i++)
+                YearsApp.Add(i);
+            MonthsApp = new List<int>();
+            for (int i = 1; i <= 12; i++)
+                MonthsApp.Add(i);
+            UpdateDaysApp();
+        }
+        private void UpdateDays()
+        {
+            try
+            {
+                if (SelectedYear < 1 || SelectedYear > 9999)
+                    throw new ArgumentOutOfRangeException(nameof(SelectedYear), "Year must be between 1 and 9999.");
+
+                int daysInMonth = DateTime.DaysInMonth(SelectedYear, SelectedMonth);
+
+                Days = new List<int>();
+                for (int i = 1; i <= daysInMonth; i++)
+                    Days.Add(i);
+
+                if (SelectedDay > daysInMonth)
+                    SelectedDay = daysInMonth;
+
+                OnPropertyChanged(nameof(Days));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error updating days: {ex.Message}");
+            }
+        }
+        private void UpdateDaysApp()
+        {
+            try
+            {
+                if (SelectedYearApp < 1 || SelectedYearApp > 9999)
+                    throw new ArgumentOutOfRangeException(nameof(SelectedYearApp), "Year must be between 1 and 9999.");
+
+                int daysInMonthApp = DateTime.DaysInMonth(SelectedYearApp, SelectedMonthApp);
+
+                DaysApp = new List<int>();
+                for (int i = 1; i <= daysInMonthApp; i++)
+                    DaysApp.Add(i);
+
+                if (SelectedDayApp > daysInMonthApp)
+                    SelectedDayApp = daysInMonthApp;
+
+                OnPropertyChanged(nameof(DaysApp));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error updating days: {ex.Message}");
+            }
+        }
+        #endregion
         public AddPatientVM()
         {
-            CheckMonth(Thang); 
+            AddSource(); 
             AddPatientCommand = new RelayCommand<object>((p)=>  
             {
                 if(string.IsNullOrEmpty(TenBN)) return false;
@@ -101,7 +238,7 @@ namespace QLPhongMachTuWPF.ViewModel
                     TenBN = TenBN,
                     DiaChi = DiaChi,
                     DienThoai = DienThoai,
-                    NgaySinh = new DateTime(int.Parse(Nam), CheckMonth(Thang), int.Parse(Ngay)),
+                    NgaySinh = new DateTime(int.Parse(Nam), int.Parse(Thang), int.Parse(Ngay)),
                     GioiTinh = Gender,
                     TrangThai = (Charged == "Discharged") ? 1 : 0
                 }; 

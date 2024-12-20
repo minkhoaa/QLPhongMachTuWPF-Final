@@ -119,13 +119,13 @@
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 200 0 0">
                     <!--Date of birth-->
-                    <ComboBox Text="{Binding Ngay}" IsEditable="True" x:Name="cmbDay" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox Text="{Binding Ngay}" ItemsSource="{Binding Days}" x:Name="cmbDay" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                FontSize="16"/>
 
-                    <ComboBox Text="{Binding Thang}" IsEditable="True" x:Name="cmbMonth" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox Text="{Binding Thang}" ItemsSource="{Binding Months}" x:Name="cmbMonth" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
           FontSize="16" Margin="10 0 0 0"/>
 
-                    <ComboBox Text="{Binding Nam}" IsEditable="True" x:Name="cmbYear" Width="110" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox Text="{Binding Nam}" ItemsSource="{Binding Years}" x:Name="cmbYear" Width="110" Style="{StaticResource MaterialDesignOutlinedComboBox}"
  FontSize="16" Margin="10 0 0 0"/>
 
                     <!--Address-->
@@ -141,10 +141,10 @@
 
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 300 0 0">
-                    <ComboBox Text="{Binding Gender}" IsEditable="True" x:Name="cmbGender" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox Text="{Binding Gender}" ItemsSource="{Binding GenderSource}" x:Name="cmbGender" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
          
            FontSize="16"/>
-                    <ComboBox Text="{Binding Charged}" IsEditable="True" x:Name="cmbType" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox Text="{Binding Charged}" ItemsSource="{Binding StatusSource}" x:Name="cmbType" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
 
  FontSize="16" Margin="60 0 0 0"/>
                 </StackPanel>
