@@ -228,6 +228,7 @@ namespace QLPhongMachTuWPF.ViewModel
 
         LICHHEN lichhen { get; set; }
 
+        PHIEUKHAM phieukham   { get; set; }
         public int CheckMonth(string Thang)
         {
             switch (Thang)
@@ -301,7 +302,7 @@ namespace QLPhongMachTuWPF.ViewModel
             // Đăng ký nhận thông báo về bệnh nhân
             Messenger.Default.Register<BENHNHAN>(this, (patient) =>
             {
-                lichhen = DataProvider.Ins.db.LICHHENs.FirstOrDefault(x => x.TenBN == patient.TenBN && x.NgaySinh == patient.NgaySinh); 
+                lichhen = DataProvider.Ins.db.LICHHENs.FirstOrDefault(x => x.TenBN == patient.TenBN && x.NgaySinh == patient.NgaySinh);
                 Application.Current.Dispatcher.Invoke(() =>
                 {
                     
@@ -338,6 +339,7 @@ namespace QLPhongMachTuWPF.ViewModel
                     }
                     Messenger.Default.Send(lichhen);
                 }
+              
                 BenhNhan.TenBN = TenBN;
                 BenhNhan.DiaChi = DiaChi;
                 BenhNhan.GioiTinh = Gender;

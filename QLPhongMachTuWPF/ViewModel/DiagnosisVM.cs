@@ -19,6 +19,8 @@ namespace QLPhongMachTuWPF.ViewModel
         private PHIEUKHAM _SelectedItemCommand {  get; set; }
         public PHIEUKHAM SelectedItemCommand { get => _SelectedItemCommand; set { _SelectedItemCommand = value; OnPropertyChanged(); }  }
         public ICommand AddDiagnosisCommand { get; set; }
+        public ICommand ModifyDiagnosis { get; set; }
+
 
         public ICommand VerifyCommand { get; set; }
 
@@ -53,7 +55,7 @@ namespace QLPhongMachTuWPF.ViewModel
                 add.ShowDialog();
             }
             );
-            VerifyCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            ModifyDiagnosis = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 //if (SelectedItemCommand.NgayKham.HasValue)
                 //{

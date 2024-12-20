@@ -69,7 +69,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Button Grid.Row="0" Command="{Binding ModifyPatientCommand}"  Style="{StaticResource anotherAddBtn}">
+        <Button Grid.Row="0" Command="{Binding ModifyDiagnosis}"  Style="{StaticResource anotherAddBtn}">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Modify diagnosis" FontSize="15" FontWeight="Bold"/>
             </StackPanel>
