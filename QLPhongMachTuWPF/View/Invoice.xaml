@@ -18,15 +18,12 @@
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-
-
-
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         
-        <Grid Grid.Row="0" Width="250" HorizontalAlignment="Left" Margin="100 30 400 35">
+        <Grid Grid.Row="0" Width="250" HorizontalAlignment="Left" Margin="10 30 400 35">
             <TextBlock Margin="20,0,30,0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
    Panel.ZIndex="1" Text="Search" Visibility="{Binding ElementName=txtSearch, Path=Text.IsEmpty,Converter={StaticResource BoolToVis}}" FontSize="20"/>
 
@@ -40,6 +37,7 @@
             </StackPanel>
         </Button>
 
+        
 
         <DataGrid Grid.Row="1" ItemsSource="{Binding InvoiceList}" Background="#eeeeee" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle2}" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="patientsDatagrid" Margin="0,0,0,10"
          HorizontalScrollBarVisibility="Disabled" Grid.RowSpan="2" 

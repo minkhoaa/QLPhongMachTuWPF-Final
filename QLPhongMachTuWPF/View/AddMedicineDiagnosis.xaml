@@ -202,27 +202,22 @@ FontSize="16" Margin="60 0 0 0"/>
 
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 370 0 0">
-                  
+
                     <TextBox
                         Text="{Binding Symtoms}"
                         VerticalAlignment="Center"
             materialDesign:HintAssist.Hint="Symptom"
             Style="{StaticResource MaterialDesignOutlinedTextBox}"
-            Width="560" FontSize="16"/>
-                </StackPanel>
+            Width="250" Height="150" FontSize="16"/>
 
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 450 0 0">
                     <TextBox
                     Text="{Binding Result}"
             VerticalAlignment="Center"
 materialDesign:HintAssist.Hint="Result"
 Style="{StaticResource MaterialDesignOutlinedTextBox}"
-Width="560" FontSize="16"/>
+Width="250" Height="150" FontSize="16" Margin="60 0 0 0"/>
                 </StackPanel>
-
-
-
-
+                
                 <Button Command="{Binding AddDiagnosisCommand}" 
                     Content="Add Diagnosis" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Margin=" 80 0 0 50" Style="{StaticResource btnAdd}">
 
