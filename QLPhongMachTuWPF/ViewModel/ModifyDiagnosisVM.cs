@@ -19,7 +19,7 @@ namespace QLPhongMachTuWPF.ViewModel
     {
         public ICommand ConfirmCommand { get; set; }
         
-
+        public ICommand AddMedicineTolist { get; set; }
         #region ThuocTinh
         private string _TenBN { get; set; }
 
@@ -85,6 +85,18 @@ namespace QLPhongMachTuWPF.ViewModel
         private ObservableCollection<NHANVIEN> _ListStaff { get; set; }
 
         public ObservableCollection<NHANVIEN> ListStaff { get => _ListStaff; set { _ListStaff = value; OnPropertyChanged(); } }
+
+        private ObservableCollection<THUOC> _ListMedicine { get; set; }
+
+        public ObservableCollection<THUOC> ListMedicine { get => _ListMedicine; set { _ListMedicine = value; OnPropertyChanged(); } }
+        private ObservableCollection<string> _ListChoice { get; set; }
+
+        public ObservableCollection<string> ListChoice { get => _ListChoice; set { _ListChoice = value; OnPropertyChanged(); } }
+
+        private string _MedicineChoice { get; set; }
+
+        public string MedicineChoice { get => _MedicineChoice; set { _MedicineChoice = value; OnPropertyChanged(); } }
+
 
         #region FormatBindingDate
 
@@ -190,6 +202,7 @@ namespace QLPhongMachTuWPF.ViewModel
 
 
             ListStaff = new ObservableCollection<NHANVIEN>(DataProvider.Ins.db.NHANVIENs.ToList());
+            
             GenderSource = new List<string> {"Nam", "Nữ" };
             StatusSource = new List<string> { "Available", "Unavailable" };
 
@@ -254,10 +267,13 @@ namespace QLPhongMachTuWPF.ViewModel
         }
         #endregion
 
+       
         public ModifyDiagnosisVM()
         {
             AddSource();
             ListStaff = new ObservableCollection<NHANVIEN>(DataProvider.Ins.db.NHANVIENs.ToList());
+            ListMedicine = new ObservableCollection<THUOC>(DataProvider.Ins.db.THUOCs.ToList());
+            ListChoice = new ObservableCollection<string>();  
             Messenger.Default.Register<LICHHEN>(this, (diagnosis) =>
             {
                 Application.Current.Dispatcher.Invoke(() =>
@@ -304,6 +320,13 @@ namespace QLPhongMachTuWPF.ViewModel
                     Result = diagnosis.KetQua; 
 
                 });
+            });
+            AddMedicineTolist = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) => {
+                ListChoice.Add(MedicineChoice);
+                
             });
 
         }
