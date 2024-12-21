@@ -275,9 +275,7 @@ namespace QLPhongMachTuWPF.ViewModel
                     }
                     else { Gender = (appointment.GioiTinh); }
                     Status = (appointment.TrangThai == 1) ? "Available" : "Unavailable";
-                    TenNV = appointment.TenNV;
-
-
+                    TenNV = appointment.TenNV; 
                 });
             });
             SaveChangesCommand = new RelayCommand<object>((p) =>
@@ -296,10 +294,8 @@ namespace QLPhongMachTuWPF.ViewModel
                     }
                     catch (Exception)
                     {
-
                         MessageBox.Show("Lỗi");
                     }
-                    Messenger.Default.Send(benhnhan);
                 } 
                 else
                 {

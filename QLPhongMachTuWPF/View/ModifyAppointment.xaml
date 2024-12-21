@@ -185,7 +185,7 @@ Grid.Column="1" Panel.ZIndex="1"
  FontSize="16" Margin="10 0 0 0"/>
                     <!--Gender-->
                     <ComboBox
-             Text="{Binding Gender}"
+             Text="{Binding Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         
              ItemsSource="{Binding GenderSource  }"
                         

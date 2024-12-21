@@ -269,12 +269,13 @@ namespace QLPhongMachTuWPF.ViewModel
                         lichhen.DienThoai = DienThoai;
                         lichhen.NgaySinh = new DateTime(int.Parse(Nam), int.Parse(Thang), int.Parse(Ngay));
                         lichhen.GioiTinh = Gender;
+                        Messenger.Default.Send(lichhen);
                     }
                     catch (Exception)
                     {
                         MessageBox.Show("Lỗi");
                     }
-                    Messenger.Default.Send(lichhen);
+                  
                 }
               
                 BenhNhan.TenBN = TenBN;
