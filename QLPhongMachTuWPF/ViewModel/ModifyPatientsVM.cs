@@ -71,6 +71,8 @@ namespace QLPhongMachTuWPF.ViewModel
 
         public List<string> GenderSource { get; set; }
         public List<string> StatusSource { get; set; }
+        public List<string> TypeSource { get; set; }
+
 
         private int _selectedDay;
         public int SelectedDay
@@ -161,9 +163,9 @@ namespace QLPhongMachTuWPF.ViewModel
 
 
             //  ListStaff = new ObservableCollection<NHANVIEN>(DataProvider.Ins.db.NHANVIENs.ToList());
-            GenderSource = new List<string> { "Male", "Female" };
+            GenderSource = new List<string> {"Nam", "Nữ" };
             StatusSource = new List<string> { "Discharged", "Under treatment" };
-
+            TypeSource = new List<string> { "User", "Admin" };
             // Khởi tạo số ngày theo tháng và năm mặc định  a
 
 
@@ -229,75 +231,10 @@ namespace QLPhongMachTuWPF.ViewModel
         LICHHEN lichhen { get; set; }
 
         PHIEUKHAM phieukham   { get; set; }
-        public int CheckMonth(string Thang)
-        {
-            switch (Thang)
-            {
-                case "January":
-                    return 1;
-                case "February":
-                    return 2;
-                case "March":
-                    return 3;
-                case "April":
-                    return 4;
-                case "May":
-                    return 5;
-                case "June":
-                    return 6;
-                case "July":
-                    return 7;
-                case "August":
-                    return 8;
-                case "September":
-                    return 9;
-                case "October":
-                    return 10;
-                case "November":
-                    return 11;
-                case "December":
-                    return 12;
-                default:
-                    return -1;
-            }
-        }
-
-        public string MonthToString(int thang)
-        {
-          
-                switch (thang)
-                {
-                    case 1 :
-                        return "January";
-                    case 2 :
-                        return "February";
-                    case 3:
-                    return "March";
-                    case 4:
-                        return "April";
-                    case 5:
-                        return "May";
-                    case 6 :
-                    return "June"; 
-                    case 7:
-                        return "July";
-                    case 8:
-                        return "August";
-                    case 9 :
-                    return "September";
-                    case 10:
-                    return "October";
-                    case 11:
-                    return "November";
-                    case 12:
-                    return "December";
-                    default:
-                        return "null";
-                }
-            }
-        
+   
         public ModifyPatientsVM()
         {
+            AddSource(); 
            
             // Đăng ký nhận thông báo về bệnh nhân
             Messenger.Default.Register<BENHNHAN>(this, (patient) =>

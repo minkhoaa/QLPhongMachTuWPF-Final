@@ -122,13 +122,16 @@
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 200 0 0">
                     <!--Date of birth-->
-                    <ComboBox IsEditable="True" Text="{Binding Ngay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbDay" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox 
+                              SelectedItem="{Binding SelectedDay}"
+                        ItemsSource="{Binding Days}"
+                              Text="{Binding Ngay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbDay" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                FontSize="16"/>
 
-                    <ComboBox IsEditable="True" Text="{Binding Thang, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbMonth" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox SelectedItem="{Binding SelectedMonth}" ItemsSource="{Binding Months}" Text="{Binding Thang, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbMonth" Width="60" Style="{StaticResource MaterialDesignOutlinedComboBox}"
           FontSize="16" Margin="10 0 0 0"/>
 
-                    <ComboBox IsEditable="True" Text="{Binding Nam, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbYear" Width="110" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox ItemsSource="{Binding Years}" SelectedItem="{Binding SelectedYear}" Text="{Binding Nam, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbYear" Width="110" Style="{StaticResource MaterialDesignOutlinedComboBox}"
  FontSize="16" Margin="10 0 0 0"/>
 
                     <!--Address-->
@@ -144,10 +147,10 @@
 
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 300 0 0">
-                    <ComboBox IsEditable="True" Text="{Binding Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbGender" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox ItemsSource="{Binding GenderSource}" Text="{Binding Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbGender" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
          
            FontSize="16"/>
-                    <ComboBox IsEditable="True" Text="{Binding Charged, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbType" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox ItemsSource="{Binding StatusSource}" Text="{Binding Charged, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbType" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
 
  FontSize="16" Margin="60 0 0 0"/>
                 </StackPanel>

@@ -88,9 +88,7 @@ namespace QLPhongMachTuWPF.ViewModel
           
 
 
-
-
-            AddAppointmentCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+               AddAppointmentCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 AddAppointment add = new AddAppointment();
                 add.ShowDialog(); 

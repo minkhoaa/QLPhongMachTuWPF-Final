@@ -160,7 +160,7 @@ namespace QLPhongMachTuWPF.ViewModel
 
 
          //  ListStaff = new ObservableCollection<NHANVIEN>(DataProvider.Ins.db.NHANVIENs.ToList());
-            GenderSource = new List<string> { "Male", "Female" };
+            GenderSource = new List<string> {"Nam", "Nữ" };
             StatusSource = new List<string> { "Discharged", "Under treatment" };
 
             // Khởi tạo số ngày theo tháng và năm mặc định  a
@@ -265,11 +265,9 @@ namespace QLPhongMachTuWPF.ViewModel
             TenBN = string.Empty;
             DiaChi = string.Empty;
             DienThoai = string.Empty;
-            Ngay = string.Empty;
-            Thang = string.Empty;
-            Nam = string.Empty;
-            Gender = string.Empty;
-            Charged = string.Empty;
+          
+         
+           
         }
 
     }

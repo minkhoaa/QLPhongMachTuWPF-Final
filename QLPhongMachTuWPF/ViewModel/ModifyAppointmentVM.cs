@@ -172,7 +172,7 @@ namespace QLPhongMachTuWPF.ViewModel
 
 
             ListStaff = new ObservableCollection<NHANVIEN>(DataProvider.Ins.db.NHANVIENs.ToList());
-            GenderSource = new List<string> { "Male", "Female" };
+            GenderSource = new List<string> {"Nam", "Nữ" };
             StatusSource = new List<string> { "Available", "Unavailable" };
 
             // Khởi tạo số ngày theo tháng và năm mặc định  a
@@ -268,7 +268,12 @@ namespace QLPhongMachTuWPF.ViewModel
                     NgayApp = dueDate.Day.ToString(); 
                     ThangApp = dueDate.Month.ToString();
                     NamApp = dueDate.Year.ToString();
-                    Gender = (appointment.GioiTinh == "Nam") ? "Male" : "Female";
+                    if (appointment.GioiTinh == "Female" || appointment.GioiTinh == "Male")
+                    {
+                        Gender = (appointment.GioiTinh == "Male") ? "Nam" : "Nữ";
+
+                    }
+                    else { Gender = (appointment.GioiTinh); } 
                     Status = (appointment.TrangThai == 1) ? "Available" : "Unavailable";
                     TenNV = appointment.TenNV;
                     
@@ -289,6 +294,7 @@ namespace QLPhongMachTuWPF.ViewModel
                         benhnhan.DiaChi = DiaChi;
                         benhnhan.DienThoai = DienThoai;
                         benhnhan.NgaySinh = new DateTime(int.Parse(Nam), int.Parse(Thang), int.Parse(Ngay));
+                        benhnhan.GioiTinh = Gender;
                     }
                     catch (Exception)
                     {
@@ -305,9 +311,9 @@ namespace QLPhongMachTuWPF.ViewModel
                         DiaChi = DiaChi,
                         DienThoai = DienThoai,
                         NgaySinh = new DateTime(int.Parse(Nam), int.Parse(Thang), int.Parse(Ngay)),
-                        GioiTinh = (Gender == "Male") ? "Nam" : "Nữ",
+                        GioiTinh = Gender, 
                         TrangThai = (Status == "Discharged") ? 1 : 0
-                    };
+                    }; 
 
                     DataProvider.Ins.db.BENHNHANs.Add(newPatient);
 

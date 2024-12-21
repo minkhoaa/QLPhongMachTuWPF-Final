@@ -17,7 +17,7 @@ namespace QLPhongMachTuWPF.ViewModel
 
 
         public ICommand SaveChangesCommand { get; set; }
-
+        #region ThuocTinh
         private string _TenNV { get; set; }
         public string TenNV
         {
@@ -53,78 +53,185 @@ namespace QLPhongMachTuWPF.ViewModel
 
         private string _Type { get; set; }
         public string Type { get => _Type; set { _Type = value; OnPropertyChanged(); } }
-        public DateTime? date { get; set; }
+       
    
         private NHANVIEN NhanVien { get; set; }
-        public int CheckMonth(string Thang)
+        #endregion
+        #region FormatBindingDate
+
+        public List<int> Days { get; set; }
+        public List<int> Months { get; set; }
+        public List<int> Years { get; set; }
+
+        public List<int> DaysApp { get; set; }
+        public List<int> MonthsApp { get; set; }
+        public List<int> YearsApp { get; set; }
+
+
+
+        public List<string> GenderSource { get; set; }
+        public List<string> StatusSource { get; set; }
+        public List<string> TypeSource { get; set; }
+
+
+
+        private int _selectedDay;
+        public int SelectedDay
         {
-            switch (Thang)
+            get => _selectedDay;
+            set
             {
-                case "January":
-                    return 1;
-                case "February":
-                    return 2;
-                case "March":
-                    return 3;
-                case "April":
-                    return 4;
-                case "May":
-                    return 5;
-                case "June":
-                    return 6;
-                case "July":
-                    return 7;
-                case "August":
-                    return 8;
-                case "September":
-                    return 9;
-                case "October":
-                    return 10;
-                case "November":
-                    return 11;
-                case "December":
-                    return 12;
-                default:
-                    return -1;
+                _selectedDay = value;
+                OnPropertyChanged();
+            }
+        }
+        private int _selectedMonth;
+        public int SelectedMonth
+        {
+            get => _selectedMonth;
+            set
+            {
+                _selectedMonth = value;
+                OnPropertyChanged();
+                UpdateDays();
+                // Cập nhật số ngày khi tháng thay đổi
             }
         }
 
-        public string MonthToString(int thang)
+        private int _selectedYear;
+        public int SelectedYear
         {
-
-            switch (thang)
+            get => _selectedYear;
+            set
             {
-                case 1:
-                    return "January";
-                case 2:
-                    return "February";
-                case 3:
-                    return "March";
-                case 4:
-                    return "April";
-                case 5:
-                    return "May";
-                case 6:
-                    return "June";
-                case 7:
-                    return "July";
-                case 8:
-                    return "August";
-                case 9:
-                    return "September";
-                case 10:
-                    return "October";
-                case 11:
-                    return "November";
-                case 12:
-                    return "December";
-                default:
-                    return "null";
+                _selectedYear = value;
+                OnPropertyChanged();
+                UpdateDays();
+                // Cập nhật số ngày khi năm thay đổi
             }
         }
+
+
+        private int _selectedDayApp;
+        public int SelectedDayApp
+        {
+            get => _selectedDayApp;
+            set
+            {
+                _selectedDayApp = value;
+                OnPropertyChanged();
+            }
+        }
+        private int _selectedMonthApp;
+        public int SelectedMonthApp
+        {
+            get => _selectedMonthApp;
+            set
+            {
+                _selectedMonthApp = value;
+                OnPropertyChanged();
+                UpdateDaysApp();
+                // Cập nhật số ngày khi tháng thay đổi
+            }
+        }
+
+        private int _selectedYearApp;
+        public int SelectedYearApp
+        {
+            get => _selectedYearApp;
+            set
+            {
+                _selectedYearApp = value;
+                OnPropertyChanged();
+                UpdateDaysApp();
+
+            }
+        }
+
+
+        public void AddSource()
+        {
+            SelectedYear = DateTime.Now.Year;
+            SelectedMonth = DateTime.Now.Month;
+            Years = new List<int>();
+            for (int i = 1900; i <= 2100; i++)
+                Years.Add(i);
+            Months = new List<int>();
+            for (int i = 1; i <= 12; i++)
+                Months.Add(i);
+            UpdateDays();
+
+
+
+            //  ListStaff = new ObservableCollection<NHANVIEN>(DataProvider.Ins.db.NHANVIENs.ToList());
+            GenderSource = new List<string> { "Nam", "Nữ" };
+            StatusSource = new List<string> { "Discharged", "Under treatment" };
+            TypeSource = new List<string> { "User", "Admin" };
+
+            // Khởi tạo số ngày theo tháng và năm mặc định  a
+
+
+            SelectedYearApp = DateTime.Now.Year;
+            SelectedMonthApp = DateTime.Now.Month;
+            YearsApp = new List<int>();
+            for (int i = 1900; i <= 2100; i++)
+                YearsApp.Add(i);
+            MonthsApp = new List<int>();
+            for (int i = 1; i <= 12; i++)
+                MonthsApp.Add(i);
+            UpdateDaysApp();
+        }
+        private void UpdateDays()
+        {
+            try
+            {
+                if (SelectedYear < 1 || SelectedYear > 9999)
+                    throw new ArgumentOutOfRangeException(nameof(SelectedYear), "Year must be between 1 and 9999.");
+
+                int daysInMonth = DateTime.DaysInMonth(SelectedYear, SelectedMonth);
+
+                Days = new List<int>();
+                for (int i = 1; i <= daysInMonth; i++)
+                    Days.Add(i);
+
+                if (SelectedDay > daysInMonth)
+                    SelectedDay = daysInMonth;
+
+                OnPropertyChanged(nameof(Days));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error updating days: {ex.Message}");
+            }
+        }
+        private void UpdateDaysApp()
+        {
+            try
+            {
+                if (SelectedYearApp < 1 || SelectedYearApp > 9999)
+                    throw new ArgumentOutOfRangeException(nameof(SelectedYearApp), "Year must be between 1 and 9999.");
+
+                int daysInMonthApp = DateTime.DaysInMonth(SelectedYearApp, SelectedMonthApp);
+
+                DaysApp = new List<int>();
+                for (int i = 1; i <= daysInMonthApp; i++)
+                    DaysApp.Add(i);
+
+                if (SelectedDayApp > daysInMonthApp)
+                    SelectedDayApp = daysInMonthApp;
+
+                OnPropertyChanged(nameof(DaysApp));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error updating days: {ex.Message}");
+            }
+        }
+        #endregion
 
         public ModifyStaffVM()
         {
+            AddSource(); 
             Messenger.Default.Register<NHANVIEN>(this, (staff) =>
             {
                 Application.Current.Dispatcher.Invoke(() =>
@@ -137,7 +244,7 @@ namespace QLPhongMachTuWPF.ViewModel
 
                     DateTime dateOfBirth = staff.NgaySinh.Value;
                     Ngay = dateOfBirth.Day.ToString();
-                    Thang = MonthToString(dateOfBirth.Month);
+                    Thang = dateOfBirth.Month.ToString();
                     Nam = dateOfBirth.Year.ToString();
                     Type = (staff.LoaiNV == 0) ? "Admin" : "User";
                     Status = (staff.TrangThai == 1) ? "Onboard" : "Rejected";
@@ -153,7 +260,7 @@ namespace QLPhongMachTuWPF.ViewModel
                     NhanVien.DiaChi = DiaChi;
                     NhanVien.GioiTinh = Gender;
                     NhanVien.DienThoai = DienThoai;
-                    NhanVien.NgaySinh = new DateTime(int.Parse(Nam), CheckMonth(Thang), int.Parse(Ngay));
+                    NhanVien.NgaySinh = new DateTime(int.Parse(Nam), int.Parse(Thang), int.Parse(Ngay));
                     NhanVien.TrangThai = (Status == "Onboard") ? 1 : 0;
                     NhanVien.LoaiNV = (Type == "Admin") ? 0 : 1;
 

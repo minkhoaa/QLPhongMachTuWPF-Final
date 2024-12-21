@@ -124,23 +124,26 @@
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 150 0 0">
                     <!--Date of birth-->
                     <ComboBox x:Name="cmbDay" Width="70" 
-                              Text ="{Binding Ngay , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                              IsReadOnly="False"
-                              IsEditable="True"
-                              Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                               FontSize="16"/>
+                             Text ="{Binding Ngay}"
+                             ItemsSource="{Binding Days}"
+                             SelectedItem="{Binding SelectedDay}"
+                             Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                              FontSize="16"/>
 
                     <ComboBox x:Name="cmbMonth"
-                              Text="{Binding Thang, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                              IsEditable="True"
-                              Width="70" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-          FontSize="16" Margin="10 0 0 0"/>
+                             Text="{Binding Thang}"
+                             
+                            ItemsSource="{Binding Months}"
+                             SelectedItem="{Binding SelectedMonth}"
+                             Width="70" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+         FontSize="16" Margin="10 0 0 0"/>
 
                     <ComboBox x:Name="cmbYear" 
-                              Text="{Binding Nam, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                              Width="90" Style="{StaticResource MaterialDesignOutlinedComboBox}"
- FontSize="16" Margin="10 0 0 0" IsEditable="True"/>
-
+                             Text="{Binding Nam}"
+                             ItemsSource="{Binding Years}"
+                             SelectedItem="{Binding SelectedYear}"
+                             Width="90" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+FontSize="16" Margin="10 0 0 0"/>
                     <!--Address-->
                     <TextBox VerticalAlignment="Center"
                                 Text="{Binding DiaChi , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -154,15 +157,19 @@
 
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 240 0 0">
-                    <ComboBox Text="{Binding Gender , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEditable="True"  x:Name="cmbGender" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox 
+                        
+                        Text="{Binding Gender , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding GenderSource}" x:Name="cmbGender" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
                      FontSize="16"/>
-                    <ComboBox Text="{Binding Type , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEditable="True" x:Name="cmbType" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox Text="{Binding Type , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding TypeSource}" x:Name="cmbType" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
                     FontSize="16" Margin="60 0 0 0"/>
 
                 </StackPanel >
                 <TextBlock Text="Status" Margin="80 100 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontSize="16" Foreground="Gray"/>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="20 323 0 0">
-                    <ComboBox Text="{Binding Status , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEditable="True" x:Name="cmbStatus" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    <ComboBox
+                        ItemsSource="{Binding StatusSource}"
+                        Text="{Binding Status , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEditable="True" x:Name="cmbStatus" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
 FontSize="16" Margin="60 0 0 0"/>
                 </StackPanel>
 

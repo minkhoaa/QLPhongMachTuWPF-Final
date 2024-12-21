@@ -190,7 +190,7 @@ namespace QLPhongMachTuWPF.ViewModel
 
 
             ListStaff = new ObservableCollection<NHANVIEN>(DataProvider.Ins.db.NHANVIENs.ToList());
-            GenderSource = new List<string> { "Male", "Female" };
+            GenderSource = new List<string> {"Nam", "Nữ" };
             StatusSource = new List<string> { "Available", "Unavailable" };
 
             // Khởi tạo số ngày theo tháng và năm mặc định  a
@@ -298,7 +298,7 @@ namespace QLPhongMachTuWPF.ViewModel
 
                     DiaChi = Patient.DiaChi;
                     DienThoai = Patient.DienThoai;
-                    Gender =(Patient.GioiTinh == "Nam" ) ? "Male":"Female";
+                    Gender = Patient.GioiTinh;
                     Status = (diagnosis.TrangThai == 1) ? "Available" : "Unavailable";
                     Symtoms = diagnosis.TrieuChung;
                     Result = diagnosis.KetQua; 
