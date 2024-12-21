@@ -113,33 +113,34 @@
                     <TextBlock Text="{Binding DiaChi}" TextWrapping="WrapWithOverflow" Style="{StaticResource textDateAndInvoice}" HorizontalAlignment="Left" FontSize="14" FontWeight="Thin" Margin="10 -10"/>
 
                 </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Top" Width="auto" Height="auto" Margin="400 20 0 0">
-                        <TextBlock Text= "INVOICE CODE" Foreground="Black" Style="{StaticResource titleTextDateAndInvoice}" HorizontalAlignment="Left" Margin="10" FontSize="14"/>
+                    </StackPanel>
+                    
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Top" Width="auto" Height="auto" Margin="0 -100 200 0">
+                        <TextBlock Text= "INVOICE CODE:" Foreground="Black" Style="{StaticResource titleTextDateAndInvoice}" HorizontalAlignment="Left" Margin="10" FontSize="14"/>
                         <TextBlock Text="INVOICE DATE:" Style="{StaticResource textDateAndInvoice}" HorizontalAlignment="Left" Margin="10 0 0 0" FontSize="14"/>
 
                     </StackPanel>
 
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Top" Width="auto" Height="auto" Margin="0 20 0 0">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Top" Width="auto" Height="auto" Margin="0 -100 50 0">
                             <TextBlock Text="{Binding ID, Mode=TwoWay}" Foreground="Black" Style="{StaticResource titleTextDateAndInvoice}" FontWeight="Normal" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-10 10" FontSize="14"/>
-                            <TextBlock Text="{Binding NgayHoanThanh, Mode=TwoWay}" Style="{StaticResource textDateAndInvoice}" HorizontalAlignment="Left" FontWeight="Normal" Margin="10 0 0 0" FontSize="14"/>
+                            <TextBlock Text="{Binding NgayHoanThanh, Mode=TwoWay}" Style="{StaticResource textDateAndInvoice}" HorizontalAlignment="Left" FontWeight="Normal" Margin="-10 0 0 0" FontSize="14"/>
 
                         </StackPanel>
-                    </StackPanel>
+                    
 
                     
-                </StackPanel>
+                
 
                     <DataGrid AutoGenerateColumns="False" HeadersVisibility="Column" 
                   CanUserAddRows="False" IsReadOnly="True" 
                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                  Margin="10" x:Name="datagrid">
+                  Margin="10" x:Name="datagrid" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="#"  Width="50" Binding="{Binding ID}"/>
-                            <DataGridTextColumn Header="MEDICINE"  Width="200" Binding="{Binding Medicine}"/>
-                            <DataGridTextColumn Header="PRICE"  Width="200" Binding="{Binding Price}"/>
-                            <DataGridTextColumn Header="UNIT"  Width="200" Binding="{Binding Unit}"/>
-                            <DataGridTextColumn Header="TOTAL"  Width="200" Binding="{Binding Total}"/>
+                            <DataGridTextColumn Header="#"  Width="0.5*" Binding="{Binding ID}"/>
+                            <DataGridTextColumn Header="MEDICINE"  Width="2*" Binding="{Binding Medicine}"/>
+                            <DataGridTextColumn Header="PRICE"  Width="2*" Binding="{Binding Price}"/>
+                            <DataGridTextColumn Header="UNIT"  Width="2*" Binding="{Binding Unit}"/>
+                            <DataGridTextColumn Header="TOTAL"  Width="2*" Binding="{Binding Total}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>
