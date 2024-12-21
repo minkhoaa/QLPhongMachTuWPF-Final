@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:QLPhongMachTuWPF.View"
         mc:Ignorable="d"
         Title="DetailInovice" Height="880" Width="880"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        DataContext="{StaticResource DetailsInvoice}"
+        
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodel="clr-namespace:QLPhongMachTuWPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:DetailsInvoice}"
         WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent" AllowsTransparency="True">
 
     <Window.Resources>
@@ -106,21 +108,21 @@
                     <Rectangle Fill="#1f2f98" Margin="10 0 0 0" Width="10" HorizontalAlignment="Left" VerticalAlignment="top" Height="120" />
                 <StackPanel Orientation="Vertical" Margin="10 0 0 0" Width="auto" Height="auto">
                     <TextBlock Text="INVOICE TO:" Style="{StaticResource titleTextDateAndInvoice}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10" FontSize="14"/>
-                    <TextBlock Text="NAME" Style="{StaticResource textDateAndInvoice}" HorizontalAlignment="Left" Margin="10 -10" FontSize="30"/>
-                    <TextBlock Text="1234567890" Style="{StaticResource textDateAndInvoice}" HorizontalAlignment="Left" Margin="10 10" FontWeight="Thin" FontSize="14"/>
-                    <TextBlock Text="Quan 1" Style="{StaticResource textDateAndInvoice}" HorizontalAlignment="Left" FontSize="14" FontWeight="Thin" Margin="10 -10"/>
+                    <TextBlock Text="{Binding TenBN}" TextWrapping="WrapWithOverflow" Style="{StaticResource textDateAndInvoice}" HorizontalAlignment="Left" Margin="10 -10" FontSize="30"/>
+                    <TextBlock Text="{Binding DienThoai}" Style="{StaticResource textDateAndInvoice}" HorizontalAlignment="Left" Margin="10 10" FontWeight="Thin" FontSize="14"/>
+                    <TextBlock Text="{Binding DiaChi}" TextWrapping="WrapWithOverflow" Style="{StaticResource textDateAndInvoice}" HorizontalAlignment="Left" FontSize="14" FontWeight="Thin" Margin="10 -10"/>
 
                 </StackPanel>
                     <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Top" Width="auto" Height="auto" Margin="400 20 0 0">
-                        <TextBlock Text="INVOICE TO:" Foreground="Black" Style="{StaticResource titleTextDateAndInvoice}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10" FontSize="14"/>
+                        <TextBlock Text= "INVOICE CODE" Foreground="Black" Style="{StaticResource titleTextDateAndInvoice}" HorizontalAlignment="Left" Margin="10" FontSize="14"/>
                         <TextBlock Text="INVOICE DATE:" Style="{StaticResource textDateAndInvoice}" HorizontalAlignment="Left" Margin="10 0 0 0" FontSize="14"/>
 
                     </StackPanel>
 
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Top" Width="auto" Height="auto" Margin="0 20 0 0">
-                            <TextBlock Text="#111" Foreground="Black" Style="{StaticResource titleTextDateAndInvoice}" FontWeight="Normal" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-10 10" FontSize="14"/>
-                            <TextBlock Text="01/01/2025" Style="{StaticResource textDateAndInvoice}" HorizontalAlignment="Left" FontWeight="Normal" Margin="10 0 0 0" FontSize="14"/>
+                            <TextBlock Text="{Binding ID, Mode=TwoWay}" Foreground="Black" Style="{StaticResource titleTextDateAndInvoice}" FontWeight="Normal" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-10 10" FontSize="14"/>
+                            <TextBlock Text="{Binding NgayHoanThanh, Mode=TwoWay}" Style="{StaticResource textDateAndInvoice}" HorizontalAlignment="Left" FontWeight="Normal" Margin="10 0 0 0" FontSize="14"/>
 
                         </StackPanel>
                     </StackPanel>

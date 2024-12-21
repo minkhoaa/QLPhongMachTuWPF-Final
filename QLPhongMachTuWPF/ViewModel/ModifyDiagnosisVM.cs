@@ -18,8 +18,8 @@ namespace QLPhongMachTuWPF.ViewModel
     public class ModifyDiagnosisVM  : ViewModelBase
     {
         public ICommand ConfirmCommand { get; set; }
+        
 
-     
         #region ThuocTinh
         private string _TenBN { get; set; }
 

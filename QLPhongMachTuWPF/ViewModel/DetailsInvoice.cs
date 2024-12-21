@@ -3,21 +3,15 @@ using QLPhongMachTuWPF.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Data;
-using System.Windows.Input;
 using System.Windows;
 
 namespace QLPhongMachTuWPF.ViewModel
 {
-    public class ModifyAppointmentVM : ViewModelBase
+    public class DetailsInvoice : ViewModelBase
     {
-        private ObservableCollection<NHANVIEN> _ListStaff { get; set; }
-
-        public ObservableCollection<NHANVIEN> ListStaff { get => _ListStaff; set { _ListStaff = value; OnPropertyChanged(); } }
         #region ThuocTinh
         private string _TenBN { get; set; }
 
@@ -52,22 +46,43 @@ namespace QLPhongMachTuWPF.ViewModel
         private string _Status { get; set; }
 
         public string Status { get => _Status; set { _Status = value; OnPropertyChanged(); } }
+
+        private string _NgayKham { get; set; }
+
+        public string NgayKham { get => _NgayKham; set { _NgayKham = value; OnPropertyChanged(); } }
+
+        private string _ThangKham { get; set; }
+
+        public string ThangKham { get => _ThangKham; set { _ThangKham = value; OnPropertyChanged(); } }
+
+        private string _NamKham { get; set; }
+
+        public string NamKham { get => _NamKham; set { _NamKham = value; OnPropertyChanged(); } }
+
         private string _TenNV { get; set; }
 
         public string TenNV { get => _TenNV; set { _TenNV = value; OnPropertyChanged(); } }
 
-        private string _NgayKham { get; set; }
+        private string _Symtoms { get; set; }
 
-        public string NgayApp { get => _NgayKham; set { _NgayKham = value; OnPropertyChanged(); } }
+        public string Symtoms { get => _Symtoms; set { _Symtoms = value; OnPropertyChanged(); } }
 
-        private string _ThangKham { get; set; }
+        private string _Result { get; set; }
 
-        public string ThangApp { get => _ThangKham; set { _ThangKham = value; OnPropertyChanged(); } }
+        public string Result { get => _Result; set { _Result = value; OnPropertyChanged(); } }
 
-        private string _NamKham { get; set; }
-
-        public string NamApp { get => _NamKham; set { _NamKham = value; OnPropertyChanged(); } }
         #endregion
+        private ObservableCollection<NHANVIEN> _ListStaff { get; set; }
+
+        private string _ID { get; set; }
+
+        public string ID { get => _ID; set { _ID = value; OnPropertyChanged(); } }
+        private string _NgayHoanThanh { get; set; }
+
+        public string NgayHoanThanh { get => _NgayHoanThanh; set { _NgayHoanThanh = value; OnPropertyChanged(); } }
+
+        public ObservableCollection<NHANVIEN> ListStaff { get => _ListStaff; set { _ListStaff = value; OnPropertyChanged(); } }
+
         #region FormatBindingDate
 
         public List<int> Days { get; set; }
@@ -172,7 +187,7 @@ namespace QLPhongMachTuWPF.ViewModel
 
 
             ListStaff = new ObservableCollection<NHANVIEN>(DataProvider.Ins.db.NHANVIENs.ToList());
-            GenderSource = new List<string> {"Nam", "Nữ" };
+            GenderSource = new List<string> { "Nam", "Nữ" };
             StatusSource = new List<string> { "Available", "Unavailable" };
 
             // Khởi tạo số ngày theo tháng và năm mặc định  a
@@ -235,108 +250,60 @@ namespace QLPhongMachTuWPF.ViewModel
             }
         }
         #endregion
-        public ICollectionView FilteredAppointment { get; set; }
 
-        public ICommand SaveChangesCommand { get; set; }
-
-        private ObservableCollection<LICHHEN> _Appointment;
-        public ObservableCollection<LICHHEN> AppointmentList { get => _Appointment; set { _Appointment = value; OnPropertyChanged(); } }
-
-        private LICHHEN LichHen { get; set; }
-
-        private BENHNHAN benhnhan { get; set; }
-        public ModifyAppointmentVM()
+        public DetailsInvoice()
         {
-            AddSource(); 
-            AppointmentList = new ObservableCollection<LICHHEN>(DataProvider.Ins.db.LICHHENs);
-            FilteredAppointment = CollectionViewSource.GetDefaultView(AppointmentList);
-
-            Messenger.Default.Register<LICHHEN>(this, (appointment) =>
+            AddSource();
+            ListStaff = new ObservableCollection<NHANVIEN>(DataProvider.Ins.db.NHANVIENs.ToList());
+            Messenger.Default.Register<LICHHEN>(this, (diagnosis) =>
             {
-                benhnhan = DataProvider.Ins.db.BENHNHANs.FirstOrDefault(x => x.TenBN == appointment.TenBN && x.NgaySinh == appointment.NgaySinh && x.DienThoai == appointment.DienThoai);
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    LichHen = appointment;
-                    TenBN = appointment.TenBN;
-                    DiaChi = appointment.DiaChi;
-                    DienThoai = appointment.DienThoai;
-                    DateTime dateofBirth = appointment.NgaySinh.Value;
-                    Ngay = dateofBirth.Day.ToString();
-                    Thang = dateofBirth.Month.ToString();
-                    Nam = dateofBirth.Year.ToString();
-                    DateTime dueDate = appointment.NgayKham.Value;
-                    NgayApp = dueDate.Day.ToString();
-                    ThangApp = dueDate.Month.ToString();
-                    NamApp = dueDate.Year.ToString();
-                    if (appointment.GioiTinh == "Female" || appointment.GioiTinh == "Male")
-                    {
-                        Gender = (appointment.GioiTinh == "Male") ? "Nam" : "Nữ";
-
-                    }
-                    else { Gender = (appointment.GioiTinh); }
-                    Status = (appointment.TrangThai == 1) ? "Available" : "Unavailable";
-                    TenNV = appointment.TenNV;
-
+                    
+                    TenNV = diagnosis.TenNV;
+                    TenBN = diagnosis.TenBN;
+                    DateTime dateOfBirth = diagnosis.NgaySinh.Value;
+                    Ngay = dateOfBirth.Day.ToString();
+                    Thang = dateOfBirth.Month.ToString();
+                    Nam = dateOfBirth.Year.ToString();
+                    DateTime dateTreat = diagnosis.NgayKham.Value;
+                    NgayKham = dateTreat.Day.ToString();
+                    ThangKham = dateTreat.Month.ToString();
+                    NamKham = dateTreat.Year.ToString();
+                    
+                    DiaChi = diagnosis.DiaChi;
+                    DienThoai = diagnosis.DienThoai;
+                    Gender = diagnosis.GioiTinh;
+                    Status = (diagnosis.TrangThai == 1) ? "Available" : "Unavailable";
+                });
+            });
+            Messenger.Default.Register<PHIEUKHAM>(this, (diagnosis) =>
+            {
+                var Staff = DataProvider.Ins.db.NHANVIENs.FirstOrDefault(a => a.MaNV == diagnosis.MaNV);
+                var Patient = DataProvider.Ins.db.BENHNHANs.FirstOrDefault(a => a.MaBN == diagnosis.MaBN);
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    ID = diagnosis.MaPK.ToString();
+                    TenNV = Staff.TenNV;
+                    TenBN = Patient.TenBN;
+                    DateTime dateOfBirth = Patient.NgaySinh.Value;
+                    Ngay = dateOfBirth.Day.ToString();
+                    Thang = dateOfBirth.Month.ToString();
+                    Nam = dateOfBirth.Year.ToString();
+                    DateTime dateTreat = diagnosis.NgayKham.Value;
+                    NgayKham = dateTreat.Day.ToString();
+                    ThangKham = dateTreat.Month.ToString();
+                    NamKham = dateTreat.Year.ToString();
+                    NgayHoanThanh = dateTreat.ToString();   
+                    DiaChi = Patient.DiaChi;
+                    DienThoai = Patient.DienThoai;
+                    Gender = Patient.GioiTinh;
+                    Status = (diagnosis.TrangThai == 1) ? "Available" : "Unavailable";
+                    Symtoms = diagnosis.TrieuChung;
+                    Result = diagnosis.KetQua;
 
                 });
             });
-            SaveChangesCommand = new RelayCommand<object>((p) =>
-            {
-                return true;
-            }, (p) => {
-                if (benhnhan != null)
-                {
-                    try
-                    {
-                        benhnhan.TenBN = TenBN;
-                        benhnhan.DiaChi = DiaChi;
-                        benhnhan.DienThoai = DienThoai;
-                        benhnhan.NgaySinh = new DateTime(int.Parse(Nam), int.Parse(Thang), int.Parse(Ngay));
-                        benhnhan.GioiTinh = Gender;
-                    }
-                    catch (Exception)
-                    {
-
-                        MessageBox.Show("Lỗi");
-                    }
-                    Messenger.Default.Send(benhnhan);
-                } 
-                else
-                {
-                    var newPatient = new BENHNHAN()
-                    {
-                        TenBN = TenBN,
-                        DiaChi = DiaChi,
-                        DienThoai = DienThoai,
-                        NgaySinh = new DateTime(int.Parse(Nam), int.Parse(Thang), int.Parse(Ngay)),
-                        GioiTinh = Gender, 
-                        TrangThai = (Status == "Discharged") ? 1 : 0
-                    }; 
-
-                    DataProvider.Ins.db.BENHNHANs.Add(newPatient);
-
-                    DataProvider.Ins.db.SaveChanges();
-                    Messenger.Default.Send(newPatient);
-                }
-
-
-                LichHen.TenBN = TenBN;
-                LichHen.DiaChi = DiaChi;
-                LichHen.GioiTinh = Gender;
-                LichHen.DienThoai = DienThoai;
-                LichHen.NgaySinh = new DateTime(int.Parse(Nam), int.Parse(Thang), int.Parse(Ngay));
-                LichHen.TrangThai = (Status == "Available") ? 1 : 0;
-
-
-                Messenger.Default.Send(benhnhan); 
-                Messenger.Default.Send(LichHen);
-
-                Application.Current.Windows
-                .OfType<Window>()
-                .SingleOrDefault(w => w.IsActive)
-                ?.Close();
-});
-
 
         }
 

@@ -57,18 +57,18 @@ namespace QLPhongMachTuWPF.ViewModel
             );
             ModifyDiagnosis = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                //if (SelectedItemCommand.NgayKham.HasValue)
-                //{
-                //    DateTime dateOfBirth = SelectedItemCommand.NgayKham.Value;
-
-                //    SelectedItemCommand.NgaySinh = new DateTime(int.Parse(dateOfBirth.ToString("yyyy")), int.Parse(dateOfBirth.ToString("dd")), int.Parse(dateOfBirth.ToString("MM")));
-                //}
                 ModifyDiagnosis diagnosis = new ModifyDiagnosis();
                 Messenger.Default.Send(SelectedItemCommand);
                 diagnosis.ShowDialog();
             }
             );
-
+            VerifyCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                DetailInovice detailInovice = new DetailInovice();
+                Messenger.Default.Send(SelectedItemCommand);
+                detailInovice.ShowDialog();
+            }
+           );
         }
     }
 }

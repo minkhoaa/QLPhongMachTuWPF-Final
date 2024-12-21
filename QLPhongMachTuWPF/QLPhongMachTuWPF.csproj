@@ -145,6 +145,7 @@
     <Compile Include="ViewModel\AddPatientVM.cs" />
     <Compile Include="ViewModel\AddStaffsVM.cs" />
     <Compile Include="ViewModel\ControlBarViewModel.cs" />
+    <Compile Include="ViewModel\DetailsInvoice.cs" />
     <Compile Include="ViewModel\DiagnosisVM.cs" />
     <Compile Include="ViewModel\HomepageVM.cs" />
     <Compile Include="ViewModel\InvoiceVM.cs" />
