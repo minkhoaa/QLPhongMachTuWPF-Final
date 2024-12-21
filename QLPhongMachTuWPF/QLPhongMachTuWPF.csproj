@@ -176,6 +176,9 @@
     <Compile Include="View\ControlBarUC.xaml.cs">
       <DependentUpon>ControlBarUC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\DetailInovice.xaml.cs">
+      <DependentUpon>DetailInovice.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\LoginModel.xaml.cs">
       <DependentUpon>LoginModel.xaml</DependentUpon>
     </Compile>
@@ -286,6 +289,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ControlBarUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DetailInovice.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
