@@ -294,14 +294,13 @@ namespace QLPhongMachTuWPF.ViewModel
                     NgayKham = dateTreat.Day.ToString();
                     ThangKham = dateTreat.Month.ToString();
                     NamKham = dateTreat.Year.ToString();
-                    NgayHoanThanh = dateTreat.ToString();   
+                    NgayHoanThanh = DateTime.Now.ToString();   
                     DiaChi = Patient.DiaChi;
                     DienThoai = Patient.DienThoai;
                     Gender = Patient.GioiTinh;
                     Status = (diagnosis.TrangThai == 1) ? "Available" : "Unavailable";
                     Symtoms = diagnosis.TrieuChung;
-                    Result = diagnosis.KetQua;
-
+                    Result = diagnosis.KetQua; 
                 });
             });
 

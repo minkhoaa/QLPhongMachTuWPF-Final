@@ -64,9 +64,10 @@ namespace QLPhongMachTuWPF.ViewModel
             );
             VerifyCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                DetailInovice detailInovice = new DetailInovice();
+             //   SelectedItemCommand.NHANVIEN = DataProvider.Ins.db.NHANVIENs.Where(x => x.MaNV == SelectedItemCommand.MaNV) as NHANVIEN;
+                ModifyDiagnosis diagnosis = new ModifyDiagnosis();
                 Messenger.Default.Send(SelectedItemCommand);
-                detailInovice.ShowDialog();
+                diagnosis.ShowDialog();
             }
            );
         }

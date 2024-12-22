@@ -92,7 +92,7 @@ Grid.Column="1" Panel.ZIndex="1"
                     </Button.Background>
                 </Button>
                 <Border CornerRadius="0 10 0 0" Background="White"/>
-                <TextBlock Text="MODIFY DIAGNOSIS" Style="{StaticResource titleText}"/>
+                <TextBlock Text="ADD DIAGNOSIS" Style="{StaticResource titleText}"/>
             </Grid>
 
             <!--Input-->
@@ -261,7 +261,7 @@ Width="250" Height="100" FontSize="16" Margin="60 0 0 0"/>
 
 
 
-                <Button Command="{Binding ConfirmCommand}" 
+                <Button Command="{Binding AddDiagnosisCommand}" 
                     Content="Confirm" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Margin=" 80 0 0 50" Style="{StaticResource btnAdd}">
 
                 </Button>

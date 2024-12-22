@@ -18,7 +18,9 @@ namespace QLPhongMachTuWPF.ViewModel
     public class ModifyDiagnosisVM  : ViewModelBase
     {
         public ICommand ConfirmCommand { get; set; }
-        
+
+        public ICommand CreateInvoice { get; set; }
+
         public ICommand AddMedicineTolist { get; set; }
         #region ThuocTinh
         private string _TenBN { get; set; }
@@ -96,7 +98,12 @@ namespace QLPhongMachTuWPF.ViewModel
         private string _MedicineChoice { get; set; }
 
         public string MedicineChoice { get => _MedicineChoice; set { _MedicineChoice = value; OnPropertyChanged(); } }
+        private int _MaNV { get; set; }
 
+        public int MaNV { get => _MaNV; set { _MaNV = value; OnPropertyChanged(); } }
+        private int  _MaBN { get; set; }
+
+        public int  MaBN { get => _MaBN; set { _MaBN = value; OnPropertyChanged(); } }
 
         #region FormatBindingDate
 
@@ -278,6 +285,7 @@ namespace QLPhongMachTuWPF.ViewModel
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
+                    
                      TenNV =  diagnosis.TenNV;
                      TenBN = diagnosis.TenBN;
                     DateTime dateOfBirth = diagnosis.NgaySinh.Value;
@@ -297,10 +305,13 @@ namespace QLPhongMachTuWPF.ViewModel
             });
             Messenger.Default.Register<PHIEUKHAM>(this, (diagnosis) =>
             {
+
                 var Staff = DataProvider.Ins.db.NHANVIENs.FirstOrDefault(a => a.MaNV == diagnosis.MaNV);
                 var Patient = DataProvider.Ins.db.BENHNHANs.FirstOrDefault(a => a.MaBN == diagnosis.MaBN);
                 Application.Current.Dispatcher.Invoke(() =>
                 {
+                    MaNV = (int)diagnosis.MaNV;
+                    MaBN = (int)diagnosis.MaBN; 
                     TenNV = Staff.TenNV;
                     TenBN = Patient.TenBN;
                     DateTime dateOfBirth = Patient.NgaySinh.Value;
@@ -327,6 +338,27 @@ namespace QLPhongMachTuWPF.ViewModel
             }, (p) => {
                 ListChoice.Add(MedicineChoice);
                 
+            });
+            CreateInvoice = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) => {
+                PHIEUKHAM staff = new PHIEUKHAM()
+                {
+                    MaNV = MaNV,
+                    MaBN = MaBN,
+                    TrieuChung = Symtoms,
+                    KetQua = Result,
+                    TrangThai = (Status == "Available") ? 1 : 0,
+                    NgayKham = new DateTime(int.Parse(NamKham), int.Parse(ThangKham), int.Parse(NgayKham)), 
+                     NHANVIEN = DataProvider.Ins.db.NHANVIENs.Where(x=>x.MaNV == MaNV) as NHANVIEN,
+                };
+            
+
+            DetailInovice detailInovice = new DetailInovice();
+                Messenger.Default.Send(staff);
+                detailInovice.ShowDialog();
+
             });
 
         }
