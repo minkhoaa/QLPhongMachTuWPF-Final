@@ -11,7 +11,79 @@ namespace QLPhongMachTuWPF.ViewModel
 {
     public class HomepageVM : ViewModelBase
     {
-        //Patient with diagnosis
+        public string FormattedTotalIncome
+        {
+            get => $"{TotalIncome:N0}đ"; // Định dạng số với dấu phân cách hàng nghìn và thêm 'đ'
+        }
+
+        //Tổng số tiền hóa đơn
+        private int _totalIncome;
+        public int TotalIncome
+        {
+            get => _totalIncome;
+            set
+            {
+                _totalIncome = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        // Tổng số staffs
+        private int _totalStaffs;
+        public int TotalStaffs
+        {
+            get => _totalStaffs;
+            set
+            {
+                _totalStaffs = value;
+                OnPropertyChanged();
+            }
+        }
+
+        // Tổng số patients
+        private int _totalPatients;
+        public int TotalPatients
+        {
+            get => _totalPatients;
+            set
+            {
+                _totalPatients = value;
+                OnPropertyChanged();
+            }
+        }
+
+        // Thuộc tính lưu ngày được chọn từ DatePicker
+        private DateTime? _selectedDate;
+        public DateTime? SelectedDate
+        {
+            get => _selectedDate;
+            set
+            {
+                _selectedDate = value;
+                OnPropertyChanged();
+
+                // Tự động tải danh sách lịch hẹn khi ngày thay đổi
+                if (_selectedDate.HasValue)
+                {
+                    LoadAppointmentsByDate(_selectedDate.Value);
+                }
+            }
+        }
+
+        // Thuộc tính lưu danh sách lịch hẹn
+        private ObservableCollection<Appointment> _appointments;
+        public ObservableCollection<Appointment> Appointments
+        {
+            get => _appointments;
+            set
+            {
+                _appointments = value;
+                OnPropertyChanged();
+            }
+        }
+
+        // Danh sách bệnh nhân kèm thông tin chẩn đoán
         private ObservableCollection<PatientWithDiagnosis> _patientsWithDiagnosis;
         public ObservableCollection<PatientWithDiagnosis> PatientsWithDiagnosis
         {
@@ -19,23 +91,23 @@ namespace QLPhongMachTuWPF.ViewModel
             set { _patientsWithDiagnosis = value; OnPropertyChanged(); }
         }
 
-        // Thuộc tính dữ liệu
+        // Thuộc tính dữ liệu cho biểu đồ
         private ChartValues<int> _customerCounts;
         private List<string> _dayLabels;
 
         public ChartValues<int> CustomerCounts
         {
-            get { return _customerCounts; }
+            get => _customerCounts;
             set { _customerCounts = value; OnPropertyChanged(); }
         }
 
         public List<string> DayLabels
         {
-            get { return _dayLabels; }
+            get => _dayLabels;
             set { _dayLabels = value; OnPropertyChanged(); }
         }
 
-        // Lệnh để tải dữ liệu
+        // Lệnh (Command)
         public ICommand LoadChartDataCommand { get; set; }
 
         public HomepageVM()
@@ -43,21 +115,68 @@ namespace QLPhongMachTuWPF.ViewModel
             // Khởi tạo lệnh
             LoadChartDataCommand = new RelayCommand<object>(CanLoadChartData, LoadChartData);
 
-
             // Khởi tạo giá trị mặc định cho các thuộc tính
             CustomerCounts = new ChartValues<int>();
             DayLabels = new List<string>();
 
-            //Load datagrid
+            // Tải dữ liệu cho DataGrid
             LoadCombinedData();
+
+            // Tự động tải dữ liệu biểu đồ
+            LoadChartData(null);
+
+            // Khởi tạo danh sách lịch hẹn
+            Appointments = new ObservableCollection<Appointment>();
+
+            // Đặt ngày mặc định là hôm nay
+            SelectedDate = DateTime.Today;
+
+            // Tải dữ liệu mặc định
+            LoadAppointmentsByDate(SelectedDate.Value);
+
+            // Tính tổng staffs và patients
+            LoadTotalCounts();
+        }
+
+        // Hàm tính tổng số staff và patient
+        private void LoadTotalCounts()
+        {
+            // Lấy tổng số staffs từ cơ sở dữ liệu
+            TotalStaffs = DataProvider.Ins.db.NHANVIENs.Count();
+
+            // Lấy tổng số patients từ cơ sở dữ liệu
+            TotalPatients = DataProvider.Ins.db.BENHNHANs.Count();
+
+            //Lấy tổng số tiền income từ csdl
+            TotalIncome = (int)DataProvider.Ins.db.HOADONs
+        .Where(hd => hd.TrangThai == 1) // Chỉ tính các hóa đơn đã thanh toán (nếu cần)
+        .Sum(hd => hd.TongTien);
+        }
+
+        private void LoadAppointmentsByDate(DateTime date)
+        {
+            // Lọc dữ liệu từ cơ sở dữ liệu
+            var filteredAppointments = DataProvider.Ins.db.LICHHENs
+                .Where(a => DbFunctions.TruncateTime(a.NgayKham) == DbFunctions.TruncateTime(date))
+                .Select(a => new Appointment
+                {
+                   
+                    PatientName = a.TenBN,
+                    AppointmentDate = (DateTime)a.NgayKham,
+                    
+                })
+                .ToList();
+
+            // Cập nhật danh sách
+            Appointments = new ObservableCollection<Appointment>(filteredAppointments);
         }
 
         private bool CanLoadChartData(object parameter)
         {
-            return true; // Có thể tải dữ liệu nếu cần thiết
+            return true; // Luôn có thể tải dữ liệu biểu đồ
         }
 
-        // Hàm tải dữ liệu và cập nhật biểu đồ
+        // Hàm tải dữ liệu biểu đồ
         private void LoadChartData(object parameter)
         {
             var (startOfWeek, endOfWeek) = GetCurrentWeekRange();
@@ -74,12 +193,13 @@ namespace QLPhongMachTuWPF.ViewModel
                 CustomerCounts.Add(customerCounts.ContainsKey(date) ? customerCounts[date] : 0);
             }
         }
-        // Hàm truy vấn số lượng khách hàng từ cơ sở dữ liệu
+
+        // Hàm lấy số lượng khách hàng theo ngày trong tuần
         private Dictionary<DateTime, int> GetCustomerCountsPerDay(DateTime startOfWeek, DateTime endOfWeek)
         {
             var customerCounts = DataProvider.Ins.db.PHIEUKHAMs
                 .Where(pk => pk.NgayKham >= startOfWeek && pk.NgayKham < endOfWeek) // Lọc các ngày khám trong tuần
-                .GroupBy(pk => DbFunctions.TruncateTime(pk.NgayKham)) // Group theo ngày (TruncateTime)
+                .GroupBy(pk => DbFunctions.TruncateTime(pk.NgayKham)) // Nhóm theo ngày
                 .Select(g => new
                 {
                     Date = g.Key,
@@ -95,12 +215,12 @@ namespace QLPhongMachTuWPF.ViewModel
             DateTime today = DateTime.Today;
             int daysToMonday = ((int)today.DayOfWeek + 6) % 7;
             DateTime startOfWeek = today.AddDays(-daysToMonday);
-            DateTime endOfWeek = startOfWeek.AddDays(5); // Thứ Sáu là ngày cuối tuần
+            DateTime endOfWeek = startOfWeek.AddDays(5); // Thứ Sáu
             return (startOfWeek, endOfWeek);
         }
 
-        //Load combined data
-        public void LoadCombinedData()
+        // Hàm tải dữ liệu kết hợp (DataGrid)
+        private void LoadCombinedData()
         {
             var combinedData = from bn in DataProvider.Ins.db.BENHNHANs
                                join pk in DataProvider.Ins.db.PHIEUKHAMs
@@ -117,23 +237,25 @@ namespace QLPhongMachTuWPF.ViewModel
 
             PatientsWithDiagnosis = new ObservableCollection<PatientWithDiagnosis>(combinedData);
         }
-
     }
 
-
-
-
-
+    // Lớp model cho bệnh nhân kèm chẩn đoán
     public class PatientWithDiagnosis
     {
         public int MaBN { get; set; }
         public string TenBN { get; set; }
-
         public DateTime DOB { get; set; }
-        public string Phone {  get; set; }
-        public string Gender {  get; set; }
+        public string Phone { get; set; }
+        public string Gender { get; set; }
         public DateTime NgayKham { get; set; }
+    }
 
-
+    //Lớp model cho appointment
+    public class Appointment
+    {
+       
+        public string PatientName { get; set; }
+        public DateTime AppointmentDate { get; set; }
+        
     }
 }
