@@ -49,8 +49,8 @@
                 <DataGridTextColumn Header="Name" IsReadOnly="True" CanUserResize="False" Width="0.8*" Binding="{Binding TenThuoc }" />
                 <DataGridTextColumn Header="Unit" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1*" Binding="{Binding DonViTinh}"/>
                 <DataGridTextColumn Header="Price" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="2*" Binding="{Binding Gia}"/>
-               
-                <DataGridTemplateColumn Header="Status" Width="*">
+
+                <DataGridTemplateColumn Header="Status" CanUserResize="False"  Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock>
@@ -71,7 +71,28 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                
+                <DataGridTemplateColumn Header="" Width="1*" CanUserResize="False">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+
+
+                                <Button
+                                    Command="{Binding DataContext.VerifyCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                    CommandParameter="{Binding}"
+                                    x:Name="btnVerify" Style="{StaticResource gridRemoveBtn}" Background="Green">
+                                    <materialDesign:PackIcon Kind="CheckBold" Width="20" Height="20" Foreground="White"/>
+                                </Button>
+                                <Button 
+Style="{StaticResource gridRemoveBtn}" Background="Red" Margin="5 0 0 0 ">
+                                    <materialDesign:PackIcon Kind="TrashCan" Width="20" Height="20" Foreground="White" />
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+
             </DataGrid.Columns>
         </DataGrid>
         <Button  Command="{Binding ModifyMedicineCommand}" Grid.Row="0"   Style="{StaticResource anotherAddBtn}" >

@@ -57,12 +57,12 @@
                 <DataGridTextColumn Header="Patient ID" IsReadOnly="True" CanUserResize="False" Width="0.8*" Binding="{Binding MaBN}" />
                 <DataGridTextColumn Header="Name" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" Binding="{Binding TenBN}"/>
                 <DataGridTextColumn Header="DOB" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding NgaySinh, StringFormat='dd/MM/yyyy'}"/>
-                <DataGridTextColumn Header="Address" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding DiaChi}"/>
-                <DataGridTextColumn Header="Phone" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding DienThoai}"/>
+                <DataGridTextColumn Header="Address" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" Binding="{Binding DiaChi}"/>
+                <DataGridTextColumn Header="Phone" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" Binding="{Binding DienThoai}"/>
                 <DataGridTextColumn Header="Gender" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="0.8*" Binding="{Binding GioiTinh}"/>
 
 
-                <DataGridTemplateColumn Header="Type" IsReadOnly="True" Width="0.8*">
+                <DataGridTemplateColumn Header="Type" IsReadOnly="True" CanUserResize="False" Width="1*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock>
@@ -83,7 +83,26 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="" Width="1*" CanUserResize="False">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
 
+
+                                <Button
+                                    Command="{Binding DataContext.VerifyCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                    CommandParameter="{Binding}"
+                                    x:Name="btnVerify" Style="{StaticResource gridRemoveBtn}" Background="Green">
+                                    <materialDesign:PackIcon Kind="CheckBold" Width="20" Height="20" Foreground="White"/>
+                                </Button>
+                                <Button 
+Style="{StaticResource gridRemoveBtn}" Background="Red" Margin="5 0 0 0 ">
+                                    <materialDesign:PackIcon Kind="TrashCan" Width="20" Height="20" Foreground="White" />
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
 
 
             </DataGrid.Columns>
