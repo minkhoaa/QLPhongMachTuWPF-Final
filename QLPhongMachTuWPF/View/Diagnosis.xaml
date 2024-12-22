@@ -51,15 +51,23 @@
                 <DataGridTextColumn Header="Symptom" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="2*" Binding="{Binding TrieuChung, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Header ="Result" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding KetQua, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Header="Status" Binding="{Binding TrangThai, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="0.51*" />
-                <DataGridTemplateColumn Header="" Width="0.5*" CanUserResize="False">
+                <DataGridTemplateColumn Header="" Width="1*" CanUserResize="False">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
+                                <!--Button Check-->
                                 <Button 
                                      Command="{Binding DataContext.VerifyCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                         CommandParameter="{Binding}"
                                     Style="{StaticResource gridRemoveBtn}" Background="Green">
                                     <materialDesign:PackIcon Kind="CheckBold" Width="20" Height="20" Foreground="White"/>
+                                </Button>
+                                
+                                
+                               <!--Button delete-->
+                                <Button 
+     Style="{StaticResource gridRemoveBtn}" Background="Red" Margin="5 0 0 0 ">
+                                    <materialDesign:PackIcon Kind="TrashCan" Width="20" Height="20" Foreground="White" />
                                 </Button>
                             </StackPanel>
                         </DataTemplate>
