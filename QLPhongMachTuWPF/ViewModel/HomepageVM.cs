@@ -63,13 +63,17 @@ namespace QLPhongMachTuWPF.ViewModel
                 _selectedDate = value;
                 OnPropertyChanged();
 
-                // Tự động tải danh sách lịch hẹn khi ngày thay đổi
+                // Tự động tải lịch hẹn cho ngày được chọn
                 if (_selectedDate.HasValue)
                 {
                     LoadAppointmentsByDate(_selectedDate.Value);
+
+                    // Gọi hàm hiển thị bệnh nhân trong tuần
+                    LoadWeeklyPatientCounts(_selectedDate.Value);
                 }
             }
         }
+
 
         // Thuộc tính lưu danh sách lịch hẹn
         private ObservableCollection<Appointment> _appointments;
@@ -136,6 +140,9 @@ namespace QLPhongMachTuWPF.ViewModel
 
             // Tính tổng staffs và patients
             LoadTotalCounts();
+
+            LoadWeeklyPatientCounts(SelectedDate.Value);
+
         }
 
         // Hàm tính tổng số staff và patient
@@ -237,6 +244,45 @@ namespace QLPhongMachTuWPF.ViewModel
 
             PatientsWithDiagnosis = new ObservableCollection<PatientWithDiagnosis>(combinedData);
         }
+
+        private void LoadWeeklyPatientCounts(DateTime selectedDate)
+        {
+            // Tính khoảng ngày trong tuần
+            var (startOfWeek, endOfWeek) = GetCurrentWeekRange(selectedDate);
+
+            // Lấy dữ liệu số lượng bệnh nhân mỗi ngày
+            var dailyPatientCounts = DataProvider.Ins.db.PHIEUKHAMs
+                .Where(pk => pk.NgayKham >= startOfWeek && pk.NgayKham < endOfWeek) // Chỉ lấy trong tuần
+                .GroupBy(pk => DbFunctions.TruncateTime(pk.NgayKham)) // Nhóm theo ngày
+                .Select(g => new
+                {
+                    Date = g.Key.Value,
+                    Count = g.Count()
+                })
+                .ToList();
+
+            // Cập nhật dữ liệu hiển thị
+            CustomerCounts.Clear();
+            DayLabels.Clear();
+
+            for (int i = 0; i < 7; i++) // 7 ngày trong tuần
+            {
+                var date = startOfWeek.AddDays(i);
+                DayLabels.Add(date.ToString("dd/MM"));
+
+                // Nếu ngày có dữ liệu thì lấy số lượng, nếu không thì gán 0
+                var count = dailyPatientCounts.FirstOrDefault(d => d.Date == date)?.Count ?? 0;
+                CustomerCounts.Add(count);
+            }
+        }
+        private (DateTime, DateTime) GetCurrentWeekRange(DateTime referenceDate)
+        {
+            int daysToMonday = ((int)referenceDate.DayOfWeek + 6) % 7; // Tìm Thứ Hai
+            DateTime startOfWeek = referenceDate.AddDays(-daysToMonday);
+            DateTime endOfWeek = startOfWeek.AddDays(5); // Chủ Nhật
+            return (startOfWeek, endOfWeek);
+        }
+
     }
 
     // Lớp model cho bệnh nhân kèm chẩn đoán
