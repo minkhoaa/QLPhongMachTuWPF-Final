@@ -8,7 +8,7 @@
              d:DesignHeight="720" d:DesignWidth="880"
             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
-             DataContext="{Binding Source={StaticResource HomepageVM}}">
+             DataContext="{StaticResource HomepageVM}">
 
 
 
@@ -29,7 +29,6 @@
             <Grid Grid.Row="0">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Dashboard" Style="{StaticResource titleTextBlocl}" Margin="20 0 0 0"/>
-                    <Button x:Name="btnLoad" FontSize="16" Content="Load chart" Foreground="White" Margin="310 0 0 0" Command="{Binding LoadChartDataCommand}" HorizontalAlignment="Right"/>
 
                 </StackPanel>
 
@@ -53,7 +52,7 @@
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Text="Total staffs" Foreground="#c3c9cd" Margin="10 0 0 0" FontSize="14"/>
 
-                                <TextBlock Text="150" Foreground="Black" FontSize="24" FontWeight="Bold" Margin="10 -4 0 0"/>
+                                <TextBlock Text="{Binding TotalStaffs}" Foreground="Black" FontSize="24" FontWeight="Bold" Margin="10 -4 0 0"/>
                             </StackPanel>
                         </StackPanel>
                     </Border>
@@ -68,7 +67,7 @@
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Text="Total patients" Foreground="#c3c9cd" Margin="10 0 0 0" FontSize="14"/>
 
-                                <TextBlock Text="150" Foreground="Black" FontSize="24" FontWeight="Bold" Margin="10 -4 0 0"/>
+                                <TextBlock Text="{Binding TotalPatients}" Foreground="Black" FontSize="24" FontWeight="Bold" Margin="10 -4 0 0"/>
                             </StackPanel>
                         </StackPanel>
                     </Border>
@@ -83,7 +82,7 @@
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Text="Total income" Foreground="#c3c9cd" Margin="10 0 0 0" FontSize="14"/>
 
-                                <TextBlock Text="150$" Foreground="Black" FontSize="24" FontWeight="Bold" Margin="10 -4 0 0"/>
+                                <TextBlock Text="{Binding FormattedTotalIncome}" Foreground="Black" FontSize="20" FontWeight="Bold" Margin="10 0 0 0"/>
                             </StackPanel>
                         </StackPanel>
                     </Border>
@@ -184,40 +183,43 @@
             CalendarButtonStyle="{StaticResource CustomCalendarButton}"
             CalendarDayButtonStyle="{StaticResource CustomCalendarDayButton}"
             Foreground="Black"
-            FontWeight="Bold" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="auto" Height="auto">
+            FontWeight="Bold" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="auto" Height="auto"
+                          SelectedDate="{Binding SelectedDate, Mode=TwoWay}">
                 </Calendar>
 
 
             </Grid>
 
 
-            <!--Appointment-->
+            <!-- Appointment -->
             <Grid Grid.Row="1">
                 <Border CornerRadius="10" Background="White" Margin="5" Padding="10">
                     <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Appointment" FontSize="18" FontWeight="Bold" Foreground="Black" Margin="0 0 0 10"/>
+                        <TextBlock Text="Appointment" FontSize="18" FontWeight="Bold" Foreground="Black" Margin="0 0 0 10" />
 
                         <!-- Appointment List -->
-                        <ItemsControl>
-                            <ItemsControl.ItemTemplate>
+                        <ListBox ItemsSource="{Binding Appointments}" BorderThickness="0">
+                            <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <Border Background="#f0f4f8" CornerRadius="5" Margin="0 5 0 5" Padding="10">
+                                    <Border BorderBrush="#e0e0e0" BorderThickness="0 0 0 1" Padding="10">
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <materialDesign:PackIcon Kind="Clock" Width="20" Height="20" Foreground="#1ca7ec" Margin="0 0 10 0"/>
-                                            <StackPanel>
-                                                <TextBlock Text="{Binding Time}" FontSize="16" FontWeight="Bold"/>
-                                                <TextBlock Text="{Binding PatientName}" FontSize="14" Foreground="Gray"/>
-                                            </StackPanel>
+                                            <!-- Biểu tượng đồng hồ -->
+                                            <materialDesign:PackIcon Kind="Clock" Width="20" Height="20" Foreground="#0580fd" Margin="0 0 10 0" />
 
+                                            <!-- Thời gian và thông tin bệnh nhân -->
+                                            <TextBlock Text="{Binding AppointmentDate, StringFormat={}{0:hh\\:mm tt}}" FontWeight="Bold" Width="80" />
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding PatientName}" FontWeight="Bold" />
+                                            </StackPanel>
                                         </StackPanel>
                                     </Border>
                                 </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                           
-                        </ItemsControl>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
                     </StackPanel>
                 </Border>
             </Grid>
+
 
 
 
