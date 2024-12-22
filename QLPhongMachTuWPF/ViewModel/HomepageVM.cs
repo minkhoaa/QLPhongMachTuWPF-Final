@@ -186,26 +186,26 @@ namespace QLPhongMachTuWPF.ViewModel
         // Hàm tải dữ liệu biểu đồ
         private void LoadChartData(object parameter)
         {
-            var (startOfWeek, endOfWeek) = GetCurrentWeekRange();
-            var customerCounts = GetCustomerCountsPerDay(startOfWeek, endOfWeek);
+            var (startOfMonth, endOfMonth) = GetCurrentMonthRange(SelectedDate ?? DateTime.Today);
+            var customerCounts = GetCustomerCountsPerDay(startOfMonth, endOfMonth);
 
             // Cập nhật dữ liệu biểu đồ
             CustomerCounts.Clear();
             DayLabels.Clear();
 
-            for (int i = 0; i < 5; i++) // Từ Thứ Hai đến Thứ Sáu
+            for (int i = 0; i < (endOfMonth - startOfMonth).Days + 1; i++)
             {
-                var date = startOfWeek.AddDays(i);
+                var date = startOfMonth.AddDays(i);
                 DayLabels.Add(date.ToString("dd/MM"));
                 CustomerCounts.Add(customerCounts.ContainsKey(date) ? customerCounts[date] : 0);
             }
         }
 
         // Hàm lấy số lượng khách hàng theo ngày trong tuần
-        private Dictionary<DateTime, int> GetCustomerCountsPerDay(DateTime startOfWeek, DateTime endOfWeek)
+        private Dictionary<DateTime, int> GetCustomerCountsPerDay(DateTime startOfMonth, DateTime endOfMonth)
         {
             var customerCounts = DataProvider.Ins.db.PHIEUKHAMs
-                .Where(pk => pk.NgayKham >= startOfWeek && pk.NgayKham < endOfWeek) // Lọc các ngày khám trong tuần
+                .Where(pk => pk.NgayKham >= startOfMonth && pk.NgayKham <= endOfMonth) // Lọc các ngày khám trong tháng
                 .GroupBy(pk => DbFunctions.TruncateTime(pk.NgayKham)) // Nhóm theo ngày
                 .Select(g => new
                 {
@@ -213,17 +213,16 @@ namespace QLPhongMachTuWPF.ViewModel
                     Count = g.Count()
                 })
                 .ToDictionary(g => g.Date.Value, g => g.Count); // Chuyển thành Dictionary
+
             return customerCounts;
         }
 
         // Hàm tính ngày đầu tuần (Thứ Hai) và cuối tuần (Thứ Sáu)
-        private (DateTime, DateTime) GetCurrentWeekRange()
+        private (DateTime, DateTime) GetCurrentMonthRange(DateTime referenceDate)
         {
-            DateTime today = DateTime.Today;
-            int daysToMonday = ((int)today.DayOfWeek + 6) % 7;
-            DateTime startOfWeek = today.AddDays(-daysToMonday);
-            DateTime endOfWeek = startOfWeek.AddDays(5); // Thứ Sáu
-            return (startOfWeek, endOfWeek);
+            DateTime startOfMonth = new DateTime(referenceDate.Year, referenceDate.Month, 1);
+            DateTime endOfMonth = startOfMonth.AddMonths(1).AddDays(-1); // Ngày cuối tháng
+            return (startOfMonth, endOfMonth);
         }
 
         // Hàm tải dữ liệu kết hợp (DataGrid)
@@ -247,13 +246,12 @@ namespace QLPhongMachTuWPF.ViewModel
 
         private void LoadWeeklyPatientCounts(DateTime selectedDate)
         {
-            // Tính khoảng ngày trong tuần
-            var (startOfWeek, endOfWeek) = GetCurrentWeekRange(selectedDate);
+            // Thay đổi để hiển thị dữ liệu của cả tháng
+            var (startOfMonth, endOfMonth) = GetCurrentMonthRange(selectedDate);
 
-            // Lấy dữ liệu số lượng bệnh nhân mỗi ngày
             var dailyPatientCounts = DataProvider.Ins.db.PHIEUKHAMs
-                .Where(pk => pk.NgayKham >= startOfWeek && pk.NgayKham < endOfWeek) // Chỉ lấy trong tuần
-                .GroupBy(pk => DbFunctions.TruncateTime(pk.NgayKham)) // Nhóm theo ngày
+                .Where(pk => pk.NgayKham >= startOfMonth && pk.NgayKham <= endOfMonth) // Lấy dữ liệu trong tháng
+                .GroupBy(pk => DbFunctions.TruncateTime(pk.NgayKham))
                 .Select(g => new
                 {
                     Date = g.Key.Value,
@@ -261,27 +259,18 @@ namespace QLPhongMachTuWPF.ViewModel
                 })
                 .ToList();
 
-            // Cập nhật dữ liệu hiển thị
             CustomerCounts.Clear();
             DayLabels.Clear();
 
-            for (int i = 0; i < 7; i++) // 7 ngày trong tuần
+            for (int i = 0; i < (endOfMonth - startOfMonth).Days + 1; i++)
             {
-                var date = startOfWeek.AddDays(i);
+                var date = startOfMonth.AddDays(i);
                 DayLabels.Add(date.ToString("dd/MM"));
-
-                // Nếu ngày có dữ liệu thì lấy số lượng, nếu không thì gán 0
                 var count = dailyPatientCounts.FirstOrDefault(d => d.Date == date)?.Count ?? 0;
                 CustomerCounts.Add(count);
             }
         }
-        private (DateTime, DateTime) GetCurrentWeekRange(DateTime referenceDate)
-        {
-            int daysToMonday = ((int)referenceDate.DayOfWeek + 6) % 7; // Tìm Thứ Hai
-            DateTime startOfWeek = referenceDate.AddDays(-daysToMonday);
-            DateTime endOfWeek = startOfWeek.AddDays(5); // Chủ Nhật
-            return (startOfWeek, endOfWeek);
-        }
+       
 
     }
 
