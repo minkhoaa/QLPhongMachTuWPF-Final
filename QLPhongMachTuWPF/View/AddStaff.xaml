@@ -176,7 +176,7 @@ FontSize="16" Margin="60 0 0 0"/>
 
                 <Button
                     Command="{Binding AddStaffsCommand}"
-                    Content="Add patient"  Style="{StaticResource btnAdd}">
+                    Content="Add staff"  Style="{StaticResource btnAdd}">
 
                 </Button>
 

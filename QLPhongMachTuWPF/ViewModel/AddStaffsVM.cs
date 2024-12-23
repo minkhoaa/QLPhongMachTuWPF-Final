@@ -257,7 +257,8 @@ namespace QLPhongMachTuWPF.ViewModel
                         Messenger.Default.Send(newStaff);
 
                         MessageBox.Show("Thêm nhân viên thành công!");
-                        ResetFields();
+                    Messenger.Default.Send("NewStaffAdded");
+                    ResetFields();
                     }
                     catch (Exception ex)
                     {

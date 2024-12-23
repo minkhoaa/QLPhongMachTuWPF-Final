@@ -334,6 +334,8 @@ namespace QLPhongMachTuWPF.ViewModel
                     DataProvider.Ins.db.SaveChanges();
                     Messenger.Default.Send(newAppointment);
                     MessageBox.Show("Thêm lịch hẹn thành công!");
+                    Messenger.Default.Send("NewAppointmentAdded");
+
                     ResetFields();
                 }
                 catch (Exception ex)

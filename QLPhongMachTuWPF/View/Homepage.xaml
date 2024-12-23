@@ -201,7 +201,7 @@
                         <TextBlock Text="Appointment" FontSize="18" FontWeight="Bold" Foreground="Black" Margin="0 0 0 10" />
 
                         <!-- Appointment List -->
-                        <ListBox ItemsSource="{Binding Appointments}" BorderThickness="0">
+                        <ListBox ItemsSource="{Binding Appointments}" BorderThickness="0" MaxHeight="300" ScrollViewer.VerticalScrollBarVisibility="Auto">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <Border BorderBrush="#e0e0e0" BorderThickness="0 0 0 1" Padding="10">

@@ -302,6 +302,8 @@ namespace QLPhongMachTuWPF.ViewModel
                     Gender = diagnosis.GioiTinh ;
                     Status = (diagnosis.TrangThai == 1) ? "Available" : "Unavailable";  
                 });
+                
+
             });
             Messenger.Default.Register<PHIEUKHAM>(this, (diagnosis) =>
             {

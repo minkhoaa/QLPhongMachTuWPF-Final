@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
 using System.Windows.Input;
+using GalaSoft.MvvmLight.Messaging;
 using LiveCharts;
 using QLPhongMachTuWPF.Model;
 
@@ -142,6 +143,32 @@ namespace QLPhongMachTuWPF.ViewModel
             LoadTotalCounts();
 
             LoadWeeklyPatientCounts(SelectedDate.Value);
+
+            Messenger.Default.Register<string>(this, (message) =>
+            {
+                if (message == "NewPatientAdded")
+                {
+                    // Cập nhật TotalPatients (tăng thêm 1)
+                    TotalPatients += 1;
+                }
+
+                if (message == "NewStaffAdded")
+                {
+                    TotalStaffs += 1;
+                }
+
+                if (message == "NewAppointmentAdded")
+                {
+                    // Cập nhật biểu đồ
+                    LoadChartData(null);
+
+                    // Cập nhật danh sách lịch hẹn (nếu cần)
+                    if (SelectedDate.HasValue)
+                    {
+                        LoadAppointmentsByDate(SelectedDate.Value);
+                    }
+                }
+            });
 
         }
 

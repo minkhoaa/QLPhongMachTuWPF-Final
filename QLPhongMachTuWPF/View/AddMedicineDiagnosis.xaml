@@ -165,7 +165,7 @@ FontSize="16" Margin="10 0 0 0"/>
 
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 0 0 0">
                         <!--Day appointment-->
-                        <ComboBox IsEditable="True" 
+                        <ComboBox 
                               ItemsSource="{Binding DaysApp}"
                               SelectedItem="{Binding SelectedDayApp}"
                               Text="{Binding NgayKham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
@@ -177,20 +177,20 @@ FontSize="16" Margin="10 0 0 0"/>
                         
                         ItemsSource="{Binding MonthsApp}"
                         SelectedItem="{Binding SelectedMonthApp}"
-                        IsEditable="True" Text="{Binding ThangKham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbMonthapp" Width="70" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                        Text="{Binding ThangKham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbMonthapp" Width="70" Style="{StaticResource MaterialDesignOutlinedComboBox}"
          
           FontSize="16" Margin="10 0 0 0"/>
 
                         <ComboBox ItemsSource="{Binding YearsApp}"
                               SelectedItem="{Binding SelectedYearApp}"
-                              IsEditable="True" Text="{Binding NamKham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbYearapp" Width="90" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                              Text="{Binding NamKham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbYearapp" Width="90" Style="{StaticResource MaterialDesignOutlinedComboBox}"
 
  FontSize="16" Margin="10 0 0 0"/>
                         <!--Gender-->
                         <ComboBox
                         ItemsSource="{Binding GenderSource}"
                         Text="{Binding Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbGender" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-         
+                        
            FontSize="16" Margin="60 0 0 0"/>
 
                     </StackPanel>
@@ -226,13 +226,19 @@ FontSize="16" Margin="60 0 0 0"/>
                         VerticalAlignment="Center"
             materialDesign:HintAssist.Hint="Symptom"
             Style="{StaticResource MaterialDesignOutlinedTextBox}"
-            Width="250" Height="100" FontSize="16"/>
+            Width="250" Height="100" FontSize="16"
+                            AcceptsReturn="True"
+                            VerticalScrollBarVisibility="Auto"
+                            TextWrapping="Wrap"/>
                         <TextBox
                     Text="{Binding Result}"
             VerticalAlignment="Center"
 materialDesign:HintAssist.Hint="Result"
 Style="{StaticResource MaterialDesignOutlinedTextBox}"
-Width="250" Height="100" FontSize="16" Margin="60 0 0 0"/>
+Width="250" Height="100" FontSize="16" Margin="60 0 0 0"
+                             AcceptsReturn="True"
+ VerticalScrollBarVisibility="Auto"
+ TextWrapping="Wrap"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="80 30 0 0">
