@@ -165,27 +165,29 @@ FontSize="16" Margin="10 0 0 0"/>
 
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 0 0 0">
                         <!--Day appointment-->
-                        <ComboBox 
+                        <!--Date of birth-->
+                        <ComboBox Text="{Binding NgayKham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               ItemsSource="{Binding DaysApp}"
                               SelectedItem="{Binding SelectedDayApp}"
-                              Text="{Binding NgayKham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                              x:Name="cmbDayapp" Width="70" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                                
-                               FontSize="16"/>
+                          
+                             x:Name="cmbDayApp" Width="70" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                            
+                              FontSize="16"/>
 
-                        <ComboBox
-                        
-                        ItemsSource="{Binding MonthsApp}"
-                        SelectedItem="{Binding SelectedMonthApp}"
-                        Text="{Binding ThangKham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbMonthapp" Width="70" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-         
-          FontSize="16" Margin="10 0 0 0"/>
+                        <ComboBox Text="{Binding ThangKham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              ItemsSource="{Binding MonthsApp}"
+                              SelectedItem="{Binding SelectedMonthApp}"
+                             x:Name="cmbMonthApp" Width="70" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+        
+         FontSize="16" Margin="10 0 0 0"/>
 
-                        <ComboBox ItemsSource="{Binding YearsApp}"
-                              SelectedItem="{Binding SelectedYearApp}"
-                              Text="{Binding NamKham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbYearapp" Width="90" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                        <ComboBox Text="{Binding NamKham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              ItemsSource="{Binding YearsApp}"
+                              SelectedItem="{Binding SelectedYearApp}" 
+                             
+                             x:Name="cmbYearApp" Width="90" Style="{StaticResource MaterialDesignOutlinedComboBox}"
 
- FontSize="16" Margin="10 0 0 0"/>
+FontSize="16" Margin="10 0 0 0"/>
                         <!--Gender-->
                         <ComboBox
                         ItemsSource="{Binding GenderSource}"
