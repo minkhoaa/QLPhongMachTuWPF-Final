@@ -22,41 +22,7 @@ namespace QLPhongMachTuWPF.View
         public AddStaff()
         {
             InitializeComponent();
-            var days = Enumerable.Range(1, 31).ToList();
-            cmbDay.ItemsSource = days;
-
-            var months = new List<string>
-{
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
-};
-
-            cmbMonth.ItemsSource = months;
-
-            var years = Enumerable.Range(1900, DateTime.Now.Year - 1900 + 1).ToList();
-
-
-            cmbYear.ItemsSource = years;
-
-            var gender = new List<string>
-            {
-                "Male", "Female"
-            };
-
-            cmbGender.ItemsSource = gender;
-
-            var type = new List<string>
-            {
-                "Admin", "User"
-            };
-
-            cmbType.ItemsSource = type;
-
-            var status = new List<string>
-            {
-                "Onboard", "Rejected"
-            };
-            cmbStatus.ItemsSource = status;
+          
         }
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
