@@ -128,7 +128,6 @@
 
                     <ComboBox x:Name="cmbMonth"
                               Text="{Binding Thang}"
-                              
                              ItemsSource="{Binding Months}"
                               SelectedItem="{Binding SelectedMonth}"
                               Width="70" Style="{StaticResource MaterialDesignOutlinedComboBox}"
