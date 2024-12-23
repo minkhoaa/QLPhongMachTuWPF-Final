@@ -224,7 +224,7 @@
 
     <Style x:Key="textBlockDatagrid" TargetType="TextBlock">
         <Setter Property="TextWrapping" Value="Wrap" />
-        <Setter Property="TextAlignment" Value="Center" />
+        <Setter Property="TextAlignment" Value="Left" />
     </Style>
     
     <!--Invoice-->

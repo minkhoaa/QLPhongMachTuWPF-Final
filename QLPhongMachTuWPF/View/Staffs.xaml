@@ -47,7 +47,7 @@
                 <DataGridTextColumn Header="Staff ID" IsReadOnly="True" CanUserResize="False" Width="0.8*" Binding="{Binding MaNV}" />
                 <DataGridTextColumn Header="Name" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" Binding="{Binding TenNV}"/>
                 <DataGridTextColumn Header="Birthday" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding NgaySinh, StringFormat='dd/MM/yyyy'}"/>
-                <DataGridTextColumn Header="Address" IsReadOnly="True" CanUserResize="False" Width="1.8*" Binding="{Binding DiaChi}"/>
+                <DataGridTextColumn Header="Address"  ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.8*" Binding="{Binding DiaChi}"/>
                 <DataGridTextColumn Header="Phone" IsReadOnly="True" CanUserResize="False" Width="1.5*" Binding="{Binding DienThoai}"/>
                 <DataGridTemplateColumn Header="Type" Width="*" CanUserResize="False" IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
@@ -76,14 +76,9 @@
                             <StackPanel Orientation="Horizontal">
 
 
-                                <Button
-                                    Command="{Binding DataContext.VerifyCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                    CommandParameter="{Binding}"
-                                    x:Name="btnVerify" Style="{StaticResource gridRemoveBtn}" Background="Green">
-                                    <materialDesign:PackIcon Kind="CheckBold" Width="20" Height="20" Foreground="White"/>
-                                </Button>
+                                
                                 <Button 
-Style="{StaticResource gridRemoveBtn}" Background="Red" Margin="5 0 0 0 ">
+Style="{StaticResource gridRemoveBtn}" Background="Red">
                                     <materialDesign:PackIcon Kind="TrashCan" Width="20" Height="20" Foreground="White" />
                                 </Button>
                             </StackPanel>

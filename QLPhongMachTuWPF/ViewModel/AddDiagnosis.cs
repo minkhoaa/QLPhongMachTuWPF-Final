@@ -317,6 +317,8 @@ namespace QLPhongMachTuWPF.ViewModel
                     DataProvider.Ins.db.SaveChanges();
                     Messenger.Default.Send(newDiagnosis);
                     MessageBox.Show("Thêm phiếu khám thành công");
+                    Messenger.Default.Send("NewAppointmentAdded");
+
                     ResetFields(); 
                 }
                 catch (Exception ex) { MessageBox.Show(ex.Message); }

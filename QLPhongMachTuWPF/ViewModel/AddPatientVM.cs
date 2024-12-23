@@ -252,6 +252,7 @@ namespace QLPhongMachTuWPF.ViewModel
                     Messenger.Default.Send(newPatient);
 
                     MessageBox.Show("Thêm bệnh nhân thành công!");
+                    Messenger.Default.Send("NewPatientAdded");
                     ResetFields();
                 }
                 catch (Exception ex)

@@ -80,14 +80,9 @@
                             <StackPanel Orientation="Horizontal">
 
 
-                                <Button
-                                    Command="{Binding DataContext.VerifyCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                    CommandParameter="{Binding}"
-                                    x:Name="btnVerify" Style="{StaticResource gridRemoveBtn}" Background="Green">
-                                    <materialDesign:PackIcon Kind="CheckBold" Width="20" Height="20" Foreground="White"/>
-                                </Button>
+                               
                                 <Button 
-Style="{StaticResource gridRemoveBtn}" Background="Red" Margin="5 0 0 0 ">
+Style="{StaticResource gridRemoveBtn}" Background="Red">
                                     <materialDesign:PackIcon Kind="TrashCan" Width="20" Height="20" Foreground="White" />
                                 </Button>
                             </StackPanel>
