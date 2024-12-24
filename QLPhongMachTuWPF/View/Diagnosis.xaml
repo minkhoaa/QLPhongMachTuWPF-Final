@@ -57,7 +57,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <!--Button Check-->
                                 <Button 
-                                     Command="{Binding DataContext.VerifyCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                     Command="{Binding DataContext.ModifyDiagnosis, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                         CommandParameter="{Binding}"
                                     Style="{StaticResource gridRemoveBtn}" Background="Green">
                                     <materialDesign:PackIcon Kind="CheckBold" Width="20" Height="20" Foreground="White"/>

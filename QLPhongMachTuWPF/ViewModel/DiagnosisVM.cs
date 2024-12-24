@@ -37,14 +37,27 @@ namespace QLPhongMachTuWPF.ViewModel
               
                 if (diagnosis == null) return;
 
-                Application.Current.Dispatcher.Invoke(() =>
+            var existingDiagnosis = DiagnosisList.FirstOrDefault(p => (p.MaPK == diagnosis.MaPK));
+                if (existingDiagnosis != null)
                 {
-                    DiagnosisList.Add(diagnosis);
-                  
-                });
+                    existingDiagnosis.TrieuChung = diagnosis.TrieuChung;
+                    existingDiagnosis.KetQua = diagnosis.KetQua;
+                    existingDiagnosis.TrangThai = diagnosis.TrangThai;
+                    existingDiagnosis.NgayKham = diagnosis.NgayKham;
+                    existingDiagnosis.MaNV = diagnosis.MaNV;
+                    existingDiagnosis.MaBN = diagnosis.MaBN;
+                }else {
+
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        DiagnosisList.Add(diagnosis);
+
+                    });
+                }
 
                 DataProvider.Ins.db.SaveChanges();
                 FilteredDiagnosis?.Refresh();
+               
 
             });
 

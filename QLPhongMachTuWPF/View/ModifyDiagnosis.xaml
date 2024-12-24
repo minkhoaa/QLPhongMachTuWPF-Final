@@ -203,6 +203,7 @@ FontSize="16" Margin="10 0 0 0"/>
                     <!--Day appointment-->
                     <ComboBox 
                         ItemsSource="{Binding ListStaff}"
+                        SelectedItem="{Binding SelectedStaff, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         DisplayMemberPath="TenNV"
                         Text="{Binding TenNV, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               VerticalAlignment="Center"  x:Name="cmbStaff" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
@@ -242,6 +243,7 @@ Width="250" Height="150" FontSize="16" Margin="60 0 0 0"/>
                                 <ComboBox Width="183" 
            Text="{Binding MedicineChoice}"
            ItemsSource="{Binding ListMedicine}"
+                                          SelectedItem="{Binding SelectedItemCommand, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
            DisplayMemberPath="TenThuoc"
            Style="{StaticResource MaterialDesignOutlinedComboBox}"  FontSize="16"/>
                                 <Button Content="Add" Command="{Binding AddMedicineTolist}"  Margin="10 50 0 0" Foreground="White" />

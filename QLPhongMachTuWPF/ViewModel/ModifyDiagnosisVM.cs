@@ -293,7 +293,36 @@ namespace QLPhongMachTuWPF.ViewModel
             }
         }
         #endregion
+
+        private string _SelectedItemCommand { get; set; }
+
+        public string SelectedItemCommand
+        {
+            get => _SelectedItemCommand;
+            set
+            {
+                if (_SelectedItemCommand != value)
+                {
+                    _SelectedItemCommand = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private NHANVIEN _SelectedStaff {  get; set; }
+        public NHANVIEN SelectedStaff
+        {
+            get => _SelectedStaff;
+            set
+            {
+                if (_SelectedStaff != value)
+                {
+                    _SelectedStaff = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         private PHIEUKHAM _Diagnosis {  get; set; }
+
        public PHIEUKHAM Diagnosis { get => _Diagnosis; set { _Diagnosis = value; OnPropertyChanged();  } }
         public ModifyDiagnosisVM()
         {
@@ -367,12 +396,14 @@ namespace QLPhongMachTuWPF.ViewModel
             {
                 return true;
                }, (p) => {
-                THUOC Medicine = DataProvider.Ins.db.THUOCs.FirstOrDefault(x => x.TenThuoc == MedicineChoice) as THUOC;
-                   var cttt = DataProvider.Ins.db.CTTTs.FirstOrDefault(x => (x.MaThuoc == Medicine.MaThuoc) && (Diagnosis.MaPK == x.MaPK));
-                   
+                   try
+                   {
+                       THUOC Medicine = DataProvider.Ins.db.THUOCs.FirstOrDefault(x => x.TenThuoc == SelectedItemCommand) as THUOC;
+                       var cttt = DataProvider.Ins.db.CTTTs.FirstOrDefault(x => (x.MaThuoc == Medicine.MaThuoc) && (Diagnosis.MaPK == x.MaPK));
+
                        if (Medicine != null)
                        {
-                      
+
                            var MedicineDetails = new CTTT()
                            {
                                MaThuoc = Medicine.MaThuoc,
@@ -382,24 +413,21 @@ namespace QLPhongMachTuWPF.ViewModel
                                CachDung = Instruction.ToString(),
                                TrangThai = Medicine.TrangThai,
                            };
-                       try
-                       {
-                           DataProvider.Ins.db.CTTTs.Add(MedicineDetails);
-                           DataProvider.Ins.db.SaveChanges();
+                           
+                               DataProvider.Ins.db.CTTTs.Add(MedicineDetails);
+                               DataProvider.Ins.db.SaveChanges();
 
-                           ListChoice.Add(MedicineChoice);
-                           Instruction = string.Empty;
+                               ListChoice.Add(MedicineChoice);
+                               Instruction = string.Empty;
                        }
-                       catch (Exception )
-                       {
-                           MessageBox.Show("Thuốc này đã được thêm rồi");
-                           Instruction = string.Empty;
-                           MedicineChoice = null;
-                           SoLuong = null; 
-                       }
-                       }
-                  
-                
+
+                   }catch
+                   {
+                       MessageBox.Show("Thuốc này đã được thêm rồi");
+                       Instruction = string.Empty;
+                       MedicineChoice = null;
+                       SoLuong = null;
+                   }
 
             });
             CreateInvoice = new RelayCommand<object>((p) =>
@@ -407,7 +435,7 @@ namespace QLPhongMachTuWPF.ViewModel
                 return true;
             }, (p) => {
 
-                Diagnosis.MaNV = MaNV;
+                Diagnosis.MaNV = SelectedStaff.MaNV;
                 Diagnosis.MaBN = MaBN;
                 Diagnosis.TrieuChung = Symtoms;
                 Diagnosis.KetQua = Result;
@@ -417,6 +445,21 @@ namespace QLPhongMachTuWPF.ViewModel
                Messenger.Default.Send(Diagnosis);
                 detailInovice.ShowDialog();
 
+            });
+            ConfirmCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) => {
+
+                Diagnosis.MaNV = SelectedStaff.MaNV;
+                Diagnosis.MaBN = MaBN;
+                Diagnosis.TrieuChung = Symtoms;
+                Diagnosis.KetQua = Result;
+                Diagnosis.TrangThai = (Status == "Available") ? 1 : 0;
+                Diagnosis.NgayKham = new DateTime(int.Parse(NamKham), int.Parse(ThangKham), int.Parse(NgayKham));
+               
+                Messenger.Default.Send(Diagnosis);
+                MessageBox.Show("Thay đổi thông tin thành công");
             });
 
         }
