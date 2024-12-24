@@ -143,7 +143,7 @@
                             <DataGridTextColumn Header="PRICE"  Width="*" Binding="{Binding DonGia}"/>
                            
                             <DataGridTextColumn Header="QUANTITY"  Width="1.5*" Binding="{Binding SoLuong}"/>
-                            <DataGridTextColumn Header="INSTRUCTION"  Width="*" Binding="{Binding CachDung}"/>
+                            <DataGridTextColumn Header="INSTRUCTION"  Width="*" Binding="{Binding CachDung}" ElementStyle="{StaticResource textBlockDatagrid}"/>
                             <DataGridTextColumn Header="STATUS"  Width="*" Binding="{Binding TrangThai}"/>
                         </DataGrid.Columns>
                     </DataGrid>

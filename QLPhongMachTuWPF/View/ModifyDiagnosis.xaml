@@ -99,7 +99,7 @@ Grid.Column="1" Panel.ZIndex="1"
             <Grid Grid.Row="1" >
                 <Border CornerRadius="0 0 10 0" Background="White">
                     <Button Command="{Binding CreateInvoice}" 
-                        Content="Create invoice"  Margin="390,0,0,50" Style="{StaticResource btnAdd}"/>
+                        Content="Create invoice"  Margin="390,0,0,30" Style="{StaticResource btnAdd}"/>
                 </Border>
                 <StackPanel Margin="0 10 0 0" Orientation="Vertical">
                     
@@ -158,8 +158,8 @@ FontSize="16" Margin="10 0 0 0"/>
                                 Width="250" Margin="60 0 0 0" FontSize="16"/>
                 </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Appointment day" Margin="80 30 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" FontSize="16" Foreground="Gray"/>
-                <TextBlock Text="Gender" Margin="110 30 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontSize="16" Foreground="Gray"/>
+                <TextBlock Text="Appointment day" Margin="80 20 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" FontSize="16" Foreground="Gray"/>
+                <TextBlock Text="Gender" Margin="110 20 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontSize="16" Foreground="Gray"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 0 0 0">
@@ -194,8 +194,8 @@ FontSize="16" Margin="10 0 0 0"/>
 
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Staff's Name" Margin="80 30 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" FontSize="16" Foreground="Gray"/>
-                        <TextBlock Text="Status" Margin="110 30 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontSize="16" Foreground="Gray"/>
+                        <TextBlock Text="Staff's Name" Margin="80 20 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" FontSize="16" Foreground="Gray"/>
+                        <TextBlock Text="Status" Margin="110 20 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontSize="16" Foreground="Gray"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="20 0 0 0">
                     <!--Day appointment-->
@@ -237,14 +237,14 @@ Width="250" FontSize="16" Margin="60 0 0 0"/>
                         <StackPanel Orientation="Horizontal" Margin="80 30 0 0">
                         <StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <ComboBox Width="171" 
+                                <ComboBox Width="183" 
            Text="{Binding MedicineChoice}"
            ItemsSource="{Binding ListMedicine}"
            DisplayMemberPath="TenThuoc"
            Style="{StaticResource MaterialDesignOutlinedComboBox}"  FontSize="16"/>
                                 <Button Content="Add" Command="{Binding AddMedicineTolist}"  Margin="10" Foreground="White" />
                             </StackPanel>
-                        <ComboBox Width="171" HorizontalAlignment="Left"
+                            <ComboBox Width="183" HorizontalAlignment="Left" Margin="0 10 0 0" 
            Text="{Binding SoLuong}"
            ItemsSource="{Binding NumberSource}"
           
@@ -253,7 +253,7 @@ Width="250" FontSize="16" Margin="60 0 0 0"/>
                         </StackPanel>
                        
                        
-                        <Border Margin="60 0 0 0" BorderBrush="Gray" BorderThickness="1" CornerRadius="5">
+                        <Border Margin="50 0 0 0" BorderBrush="Gray" BorderThickness="1" CornerRadius="5">
                             <ListBox
 
                             ItemsSource="{Binding ListChoice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -286,7 +286,7 @@ Width="560" FontSize="16"
 
 
                 <Button Command="{Binding ConfirmCommand}" 
-                    Content="Confirm" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Margin=" 80 0 0 50" Style="{StaticResource btnAdd}">
+                    Content="Confirm" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Margin=" 80 0 0 30" Style="{StaticResource btnAdd}">
 
                 </Button>
 
