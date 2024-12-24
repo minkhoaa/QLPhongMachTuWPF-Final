@@ -395,41 +395,52 @@ namespace QLPhongMachTuWPF.ViewModel
             AddMedicineTolist = new RelayCommand<object>((p) =>
             {
                 return true;
-               }, (p) => {
-                   try
-                   {
-                       THUOC Medicine = DataProvider.Ins.db.THUOCs.FirstOrDefault(x => x.TenThuoc == SelectedItemCommand) as THUOC;
-                       var cttt = DataProvider.Ins.db.CTTTs.FirstOrDefault(x => (x.MaThuoc == Medicine.MaThuoc) && (Diagnosis.MaPK == x.MaPK));
+            }, (p) =>
+            {
+                // Kiểm tra nếu thuốc đã tồn tại trong ListChoice
+                if (ListChoice.Contains(MedicineChoice))
+                {
+                    MessageBox.Show("Thuốc này đã được thêm rồi");
+                    Instruction = string.Empty;
+                    MedicineChoice = null;
+                    SoLuong = null;
+                    return;
+                }
 
-                       if (Medicine != null)
-                       {
+                // Kiểm tra xem thuốc có tồn tại trong cơ sở dữ liệu không
+                var existingItem = DataProvider.Ins.db.THUOCs.FirstOrDefault(x => x.TenThuoc == MedicineChoice);
+                if (existingItem == null)
+                {
+                    MessageBox.Show("Thuốc không tồn tại trong danh sách thuốc.");
+                    Instruction = string.Empty;
+                    MedicineChoice = null;
+                    SoLuong = null;
+                    return;
+                }
 
-                           var MedicineDetails = new CTTT()
-                           {
-                               MaThuoc = Medicine.MaThuoc,
-                               MaPK = Diagnosis.MaPK,
-                               SoLuong = int.Parse(SoLuong),
-                               DonGia = Medicine.Gia,
-                               CachDung = Instruction.ToString(),
-                               TrangThai = Medicine.TrangThai,
-                           };
-                           
-                               DataProvider.Ins.db.CTTTs.Add(MedicineDetails);
-                               DataProvider.Ins.db.SaveChanges();
+                // Thêm thuốc mới vào cơ sở dữ liệu CTTT
+                var MedicineDetails = new CTTT()
+                {
+                    MaThuoc = existingItem.MaThuoc,
+                    MaPK = Diagnosis.MaPK,
+                    SoLuong = int.Parse(SoLuong),
+                    DonGia = existingItem.Gia,
+                    CachDung = Instruction,
+                    TrangThai = existingItem.TrangThai,
+                };
 
-                               ListChoice.Add(MedicineChoice);
-                               Instruction = string.Empty;
-                       }
+                DataProvider.Ins.db.CTTTs.Add(MedicineDetails);
+                DataProvider.Ins.db.SaveChanges();
 
-                   }catch
-                   {
-                       MessageBox.Show("Thuốc này đã được thêm rồi");
-                       Instruction = string.Empty;
-                       MedicineChoice = null;
-                       SoLuong = null;
-                   }
+                // Cập nhật ListChoice và xóa các trường nhập liệu
+                ListChoice.Add(MedicineChoice);
+                Instruction = string.Empty;
+                MedicineChoice = null;
+                SoLuong = null;
 
+                MessageBox.Show("Thêm thuốc thành công!");
             });
+
             CreateInvoice = new RelayCommand<object>((p) =>
             {
                 return true;
