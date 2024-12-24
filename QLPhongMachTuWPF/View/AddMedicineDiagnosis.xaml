@@ -228,7 +228,7 @@ FontSize="16" Margin="60 0 0 0"/>
                         VerticalAlignment="Center"
             materialDesign:HintAssist.Hint="Symptom"
             Style="{StaticResource MaterialDesignOutlinedTextBox}"
-            Width="250" Height="100" FontSize="16"
+            Width="250" FontSize="16"
                             AcceptsReturn="True"
                             VerticalScrollBarVisibility="Auto"
                             TextWrapping="Wrap"/>
@@ -237,7 +237,7 @@ FontSize="16" Margin="60 0 0 0"/>
             VerticalAlignment="Center"
 materialDesign:HintAssist.Hint="Result"
 Style="{StaticResource MaterialDesignOutlinedTextBox}"
-Width="250" Height="100" FontSize="16" Margin="60 0 0 0"
+Width="250" FontSize="16" Margin="60 0 0 0"
                              AcceptsReturn="True"
  VerticalScrollBarVisibility="Auto"
  TextWrapping="Wrap"/>
@@ -257,14 +257,28 @@ Width="250" Height="100" FontSize="16" Margin="60 0 0 0"
 
                             ItemsSource="{Binding ListChoice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             VerticalAlignment="Center"
-                            Width="250" Height="150"
+                            Width="250" Height="100"
                             >
 
                             </ListBox>
                         </Border>
                     </StackPanel>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 30 0 0">
+
+                        <TextBox
+                        Text="{Binding Symtoms}"
+                        VerticalAlignment="Center"
+            materialDesign:HintAssist.Hint="Instruction"
+            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+            Width="560" FontSize="16"
+                            AcceptsReturn="True"
+                            VerticalScrollBarVisibility="Auto"
+                            TextWrapping="Wrap"/>
+                        
+                    </StackPanel>
 
                 </StackPanel>
+                
 
 
 
