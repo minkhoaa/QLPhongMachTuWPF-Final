@@ -4,6 +4,7 @@ using QLPhongMachTuWPF.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net.Mime;
@@ -13,7 +14,10 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Shell;
 
 namespace QLPhongMachTuWPF.ViewModel
 {
@@ -83,7 +87,7 @@ namespace QLPhongMachTuWPF.ViewModel
 
         public string Result { get => _Result; set { _Result = value; OnPropertyChanged(); } }
 
-        #endregion
+     
 
 
         private ObservableCollection<NHANVIEN> _ListStaff { get; set; }
@@ -97,6 +101,8 @@ namespace QLPhongMachTuWPF.ViewModel
 
         public ObservableCollection<string> ListChoice { get => _ListChoice; set { _ListChoice = value; OnPropertyChanged(); } }
 
+   
+
         private string _MedicineChoice { get; set; }
 
         public string MedicineChoice { get => _MedicineChoice; set { _MedicineChoice = value; OnPropertyChanged(); } }
@@ -106,8 +112,11 @@ namespace QLPhongMachTuWPF.ViewModel
         private int  _MaBN { get; set; }
         public string Instruction { get => _Instruction; set { _Instruction = value; OnPropertyChanged(); } }
         private string _Instruction { get; set; }
-
         public int  MaBN { get => _MaBN; set { _MaBN = value; OnPropertyChanged(); } }
+
+        private string _SoLuong { get; set; }
+        public string SoLuong { get => _SoLuong; set { _SoLuong = value; OnPropertyChanged(); } }
+#endregion 
 
         #region FormatBindingDate
 
@@ -119,6 +128,7 @@ namespace QLPhongMachTuWPF.ViewModel
         public List<int> MonthsApp { get; set; }
         public List<int> YearsApp { get; set; }
 
+        public List<int> NumberSource { get; set; }
 
 
         public List<string> GenderSource { get; set; }
@@ -202,6 +212,12 @@ namespace QLPhongMachTuWPF.ViewModel
         {
             SelectedYear = DateTime.Now.Year;
             SelectedMonth = DateTime.Now.Month;
+            NumberSource = new List<int>();
+            for (int i = 1; i <= 100; i++)
+            {
+                
+                NumberSource.Add(i);
+            }
             Years = new List<int>();
             for (int i = 1900; i <= 2100; i++)
                 Years.Add(i);
@@ -281,18 +297,20 @@ namespace QLPhongMachTuWPF.ViewModel
        public PHIEUKHAM Diagnosis { get => _Diagnosis; set { _Diagnosis = value; OnPropertyChanged();  } }
         public ModifyDiagnosisVM()
         {
+
             AddSource();
             ListStaff = new ObservableCollection<NHANVIEN>(DataProvider.Ins.db.NHANVIENs.ToList());
             ListMedicine = new ObservableCollection<THUOC>(DataProvider.Ins.db.THUOCs.ToList());
             ListChoice = new ObservableCollection<string>();  
             
             Messenger.Default.Register<LICHHEN>(this, (diagnosis) =>
-            {
+            { 
+                
                 Application.Current.Dispatcher.Invoke(() =>
                 {
                     
-                     TenNV =  diagnosis.TenNV;
-                     TenBN = diagnosis.TenBN;
+                    TenNV =  diagnosis.TenNV;
+                    TenBN = diagnosis.TenBN;
                     DateTime dateOfBirth = diagnosis.NgaySinh.Value;
                     Ngay = dateOfBirth.Day.ToString();
                     Thang = dateOfBirth.Month.ToString();
@@ -312,6 +330,12 @@ namespace QLPhongMachTuWPF.ViewModel
             });
             Messenger.Default.Register<PHIEUKHAM>(this, (diagnosis) =>
             {
+                ListChoice = new ObservableCollection<string>();
+                foreach (var i in DataProvider.Ins.db.CTTTs)
+                {
+                    if (i.MaPK == diagnosis.MaPK) ListChoice.Add(i.THUOC.TenThuoc.ToString());
+                    
+                }
                 Diagnosis = (PHIEUKHAM)diagnosis;
                 var Staff = DataProvider.Ins.db.NHANVIENs.FirstOrDefault(a => a.MaNV == diagnosis.MaNV);
                 var Patient = DataProvider.Ins.db.BENHNHANs.FirstOrDefault(a => a.MaBN == diagnosis.MaBN);
@@ -342,46 +366,52 @@ namespace QLPhongMachTuWPF.ViewModel
             AddMedicineTolist = new RelayCommand<object>((p) =>
             {
                 return true;
-            }, (p) => {
-                var Medicine = DataProvider.Ins.db.THUOCs.FirstOrDefault(x => x.TenThuoc == MedicineChoice) as THUOC;
-                if (Medicine != null)
-                {
-                    var MedicineDetails = new CTTT()
-                    {
-                        MaThuoc = Medicine.MaThuoc,
-                        MaPK = Diagnosis.MaPK,
-                        SoLuong = 1,
-                        DonGia = Medicine.Gia, 
-                        CachDung = Instruction.ToString(), 
-                        TrangThai = Medicine.TrangThai,
-                    }; 
-                    DataProvider.Ins.db.CTTTs.Add(MedicineDetails);
-                    DataProvider.Ins.db.SaveChanges();
+               }, (p) => {
+                THUOC Medicine = DataProvider.Ins.db.THUOCs.FirstOrDefault(x => x.TenThuoc == MedicineChoice) as THUOC;
+                   var cttt = DataProvider.Ins.db.CTTTs.FirstOrDefault(x => (x.MaThuoc == Medicine.MaThuoc) && (Diagnosis.MaPK == x.MaPK));
+                   try { 
+                       if (Medicine != null)
+                       {
+                           var MedicineDetails = new CTTT()
+                           {
+                               MaThuoc = Medicine.MaThuoc,
+                               MaPK = Diagnosis.MaPK,
+                               SoLuong = int.Parse(SoLuong),
+                               DonGia = Medicine.Gia,
+                               CachDung = Instruction.ToString(),
+                               TrangThai = Medicine.TrangThai,
+                           };
+                           DataProvider.Ins.db.CTTTs.Add(MedicineDetails);
+                           DataProvider.Ins.db.SaveChanges();
 
-                    ListChoice.Add(MedicineChoice);
-
-
-                }
+                           ListChoice.Add(MedicineChoice);
+                       }
+                   }
+                   catch {
+                       MessageBox.Show("Phiếu khám này đã được kê đơn");
+                   }
                 
+
             });
             CreateInvoice = new RelayCommand<object>((p) =>
             {
                 return true;
             }, (p) => {
-                PHIEUKHAM staff = new PHIEUKHAM()
-                {
-                    MaNV = MaNV,
-                    MaBN = MaBN,
-                    TrieuChung = Symtoms,
-                    KetQua = Result,
-                    TrangThai = (Status == "Available") ? 1 : 0,
-                    NgayKham = new DateTime(int.Parse(NamKham), int.Parse(ThangKham), int.Parse(NgayKham)), 
-                     NHANVIEN = DataProvider.Ins.db.NHANVIENs.Where(x=>x.MaNV == MaNV) as NHANVIEN,
-                };
-            
 
-            DetailInovice detailInovice = new DetailInovice();
-                Messenger.Default.Send(staff);
+                Diagnosis.MaNV = MaNV;
+                Diagnosis.MaBN = MaBN;
+                Diagnosis.TrieuChung = Symtoms;
+                Diagnosis.KetQua = Result;
+                Diagnosis.TrangThai = (Status == "Available") ? 1 : 0;
+                Diagnosis.NgayKham = new DateTime(int.Parse(NamKham), int.Parse(ThangKham), int.Parse(NgayKham));
+
+
+
+
+                    
+                
+                DetailInovice detailInovice = new DetailInovice();
+               Messenger.Default.Send(Diagnosis);
                 detailInovice.ShowDialog();
 
             });

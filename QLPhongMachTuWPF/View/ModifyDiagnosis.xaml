@@ -245,9 +245,9 @@ Width="250" FontSize="16" Margin="60 0 0 0"/>
                                 <Button Content="Add" Command="{Binding AddMedicineTolist}"  Margin="10" Foreground="White" />
                             </StackPanel>
                         <ComboBox Width="171" HorizontalAlignment="Left"
-           Text="{Binding MedicineChoice}"
-           ItemsSource="{Binding ListMedicine}"
-           DisplayMemberPath="TenThuoc"
+           Text="{Binding SoLuong}"
+           ItemsSource="{Binding NumberSource}"
+          
            Style="{StaticResource MaterialDesignOutlinedComboBox}"  FontSize="16"/>
 
                         </StackPanel>
@@ -257,7 +257,8 @@ Width="250" FontSize="16" Margin="60 0 0 0"/>
                             <ListBox
 
                             ItemsSource="{Binding ListChoice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                            VerticalAlignment="Center"
+                           
+                                VerticalAlignment="Center"
                             Width="250" Height="100"
                             > 
                                

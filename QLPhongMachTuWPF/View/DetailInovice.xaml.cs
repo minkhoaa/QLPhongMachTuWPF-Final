@@ -22,17 +22,7 @@ namespace QLPhongMachTuWPF.View
         public DetailInovice()
         {
             InitializeComponent();
-            List<InvoiceItem> items = new List<InvoiceItem>
-                {
-                new InvoiceItem { ID = "01", Medicine = "Business Card Design", Price = "$40.00", Quantity = "01", Total = "$40.00" },
-                new InvoiceItem { ID = "02", Medicine = "Web PSD Design", Price = "$350.00", Quantity = "02", Total = "$350.00" },
-                new InvoiceItem { ID = "03", Medicine = "Letterhead INCD", Price = "$70.00", Quantity = "03", Total = "$140.00" },
-                new InvoiceItem { ID = "04", Medicine = "Branding Complete", Price = "$1000.00", Quantity = "04", Total = "$1000.00" },
-                new InvoiceItem { ID = "05", Medicine = "Corporate Flyer", Price = "$100.00", Quantity = "05", Total = "$300.00" },
-                new InvoiceItem { ID = "06", Medicine = "Web Development", Price = "$1200.00", Quantity = "06", Total = "$1200.00" },
-                new InvoiceItem { ID = "07", Medicine = "Website SEO", Price = "$550.00", Quantity = "07", Total = "$1100.00" },
-            };
-            datagrid.ItemsSource = items;
+         
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
