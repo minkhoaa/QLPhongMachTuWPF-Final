@@ -104,6 +104,8 @@ namespace QLPhongMachTuWPF.ViewModel
 
         public int MaNV { get => _MaNV; set { _MaNV = value; OnPropertyChanged(); } }
         private int  _MaBN { get; set; }
+        public string Instruction { get => _Instruction; set { _Instruction = value; OnPropertyChanged(); } }
+        private string _Instruction { get; set; }
 
         public int  MaBN { get => _MaBN; set { _MaBN = value; OnPropertyChanged(); } }
 
@@ -349,9 +351,9 @@ namespace QLPhongMachTuWPF.ViewModel
                         MaThuoc = Medicine.MaThuoc,
                         MaPK = Diagnosis.MaPK,
                         SoLuong = 1,
-                        DonGia = 10000, 
-                        CachDung = "Demo", 
-                        TrangThai = 1,
+                        DonGia = Medicine.Gia, 
+                        CachDung = Instruction.ToString(), 
+                        TrangThai = Medicine.TrangThai,
                     }; 
                     DataProvider.Ins.db.CTTTs.Add(MedicineDetails);
                     DataProvider.Ins.db.SaveChanges();

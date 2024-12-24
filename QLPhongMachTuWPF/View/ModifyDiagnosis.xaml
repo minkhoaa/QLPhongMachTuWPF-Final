@@ -257,7 +257,7 @@ Width="250" FontSize="16" Margin="60 0 0 0"/>
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 30 0 0">
 
                         <TextBox
-            Text="{Binding Symtoms}"
+            Text="{Binding Instruction}"
             VerticalAlignment="Center"
 materialDesign:HintAssist.Hint="Instruction"
 Style="{StaticResource MaterialDesignOutlinedTextBox}"
