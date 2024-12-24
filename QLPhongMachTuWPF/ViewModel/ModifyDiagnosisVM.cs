@@ -6,8 +6,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net.Mime;
 using System.Runtime.InteropServices;
 using System.Security.Authentication.ExtendedProtection.Configuration;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -273,14 +275,15 @@ namespace QLPhongMachTuWPF.ViewModel
             }
         }
         #endregion
-
-       
+        private PHIEUKHAM _Diagnosis {  get; set; }
+       public PHIEUKHAM Diagnosis { get => _Diagnosis; set { _Diagnosis = value; OnPropertyChanged();  } }
         public ModifyDiagnosisVM()
         {
             AddSource();
             ListStaff = new ObservableCollection<NHANVIEN>(DataProvider.Ins.db.NHANVIENs.ToList());
             ListMedicine = new ObservableCollection<THUOC>(DataProvider.Ins.db.THUOCs.ToList());
             ListChoice = new ObservableCollection<string>();  
+            
             Messenger.Default.Register<LICHHEN>(this, (diagnosis) =>
             {
                 Application.Current.Dispatcher.Invoke(() =>
@@ -307,7 +310,7 @@ namespace QLPhongMachTuWPF.ViewModel
             });
             Messenger.Default.Register<PHIEUKHAM>(this, (diagnosis) =>
             {
-
+                Diagnosis = (PHIEUKHAM)diagnosis;
                 var Staff = DataProvider.Ins.db.NHANVIENs.FirstOrDefault(a => a.MaNV == diagnosis.MaNV);
                 var Patient = DataProvider.Ins.db.BENHNHANs.FirstOrDefault(a => a.MaBN == diagnosis.MaBN);
                 Application.Current.Dispatcher.Invoke(() =>
@@ -338,7 +341,25 @@ namespace QLPhongMachTuWPF.ViewModel
             {
                 return true;
             }, (p) => {
-                ListChoice.Add(MedicineChoice);
+                var Medicine = DataProvider.Ins.db.THUOCs.FirstOrDefault(x => x.TenThuoc == MedicineChoice) as THUOC;
+                if (Medicine != null)
+                {
+                    var MedicineDetails = new CTTT()
+                    {
+                        MaThuoc = Medicine.MaThuoc,
+                        MaPK = Diagnosis.MaPK,
+                        SoLuong = 1,
+                        DonGia = 10000, 
+                        CachDung = "Demo", 
+                        TrangThai = 1,
+                    }; 
+                    DataProvider.Ins.db.CTTTs.Add(MedicineDetails);
+                    DataProvider.Ins.db.SaveChanges();
+
+                    ListChoice.Add(MedicineChoice);
+
+
+                }
                 
             });
             CreateInvoice = new RelayCommand<object>((p) =>
