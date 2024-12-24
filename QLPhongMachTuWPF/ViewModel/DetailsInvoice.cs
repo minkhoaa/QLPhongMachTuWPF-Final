@@ -303,6 +303,7 @@ namespace QLPhongMachTuWPF.ViewModel
                     Status = (diagnosis.TrangThai == 1) ? "Available" : "Unavailable";
                     Symtoms = diagnosis.TrieuChung;
                     Result = diagnosis.KetQua;
+                    NgayHoanThanh = (new DateTime(int.Parse(NamKham), int.Parse(ThangKham), int.Parse(NgayKham))).ToShortDateString();
                 });
             });
 

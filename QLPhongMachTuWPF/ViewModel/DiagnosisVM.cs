@@ -68,7 +68,7 @@ namespace QLPhongMachTuWPF.ViewModel
                 add.ShowDialog();
             }
             );
-            ModifyDiagnosis = new RelayCommand<object>((p) => { if (SelectedItemCommand != null) return true;  return false; }, (p) =>
+            ModifyDiagnosis = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 ModifyDiagnosis diagnosis = new ModifyDiagnosis();
                 Messenger.Default.Send(SelectedItemCommand);
