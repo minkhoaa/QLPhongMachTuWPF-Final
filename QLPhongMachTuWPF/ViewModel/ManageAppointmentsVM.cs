@@ -103,11 +103,11 @@ namespace QLPhongMachTuWPF.ViewModel
                 {
                     DateTime dateOfBirth = SelectedItemCommand.NgaySinh.Value;
                    
-                    SelectedItemCommand.NgaySinh = new DateTime(int.Parse(dateOfBirth.ToString("yyyy")), int.Parse(dateOfBirth.ToString("dd")), int.Parse(dateOfBirth.ToString("MM"))); 
+                    SelectedItemCommand.NgaySinh = new DateTime(int.Parse(dateOfBirth.ToString("yyyy")), int.Parse(dateOfBirth.ToString("MM")), int.Parse(dateOfBirth.ToString("dd"))); 
                 }
-              
-                PHIEUKHAM Diagnosis = DataProvider.Ins.db.BENHNHANs.FirstOrDefault(x => x.TenBN == SelectedItemCommand.TenBN
-                && x.NgaySinh == SelectedItemCommand.NgaySinh).PHIEUKHAMs.Where(x => x.NgayKham == SelectedItemCommand.NgayKham).FirstOrDefault() as PHIEUKHAM;           
+                BENHNHAN patient = DataProvider.Ins.db.BENHNHANs.FirstOrDefault(x => x.TenBN == SelectedItemCommand.TenBN
+               ) as BENHNHAN;
+                PHIEUKHAM Diagnosis = patient.PHIEUKHAMs.Where(x => x.NgayKham == SelectedItemCommand.NgayKham.Value).FirstOrDefault() as PHIEUKHAM;           
                 // &&(x.BENHNHAN.DienThoai == SelectedItemCommand.DienThoai)
 
        //         if (patient == null) MessageBox.Show("fail");
