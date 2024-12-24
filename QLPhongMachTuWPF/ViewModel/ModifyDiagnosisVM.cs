@@ -369,9 +369,10 @@ namespace QLPhongMachTuWPF.ViewModel
                }, (p) => {
                 THUOC Medicine = DataProvider.Ins.db.THUOCs.FirstOrDefault(x => x.TenThuoc == MedicineChoice) as THUOC;
                    var cttt = DataProvider.Ins.db.CTTTs.FirstOrDefault(x => (x.MaThuoc == Medicine.MaThuoc) && (Diagnosis.MaPK == x.MaPK));
-                   try { 
+                   
                        if (Medicine != null)
                        {
+                      
                            var MedicineDetails = new CTTT()
                            {
                                MaThuoc = Medicine.MaThuoc,
@@ -381,17 +382,23 @@ namespace QLPhongMachTuWPF.ViewModel
                                CachDung = Instruction.ToString(),
                                TrangThai = Medicine.TrangThai,
                            };
+                       try
+                       {
                            DataProvider.Ins.db.CTTTs.Add(MedicineDetails);
                            DataProvider.Ins.db.SaveChanges();
 
                            ListChoice.Add(MedicineChoice);
                            Instruction = string.Empty;
-
                        }
-                   }
-                   catch {
-                       MessageBox.Show("Phiếu khám này đã được kê đơn");
-                   }
+                       catch (Exception )
+                       {
+                           MessageBox.Show("Thuốc này đã được thêm rồi");
+                           Instruction = string.Empty;
+                           MedicineChoice = null;
+                           SoLuong = null; 
+                       }
+                       }
+                  
                 
 
             });
