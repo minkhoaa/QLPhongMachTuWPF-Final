@@ -17,7 +17,7 @@
         <AssociationConnector Association="QLPMTModel.CTTT_TenThuoc_FK" />
         <AssociationConnector Association="QLPMTModel.HD_MaPK_FK" />
         <AssociationConnector Association="QLPMTModel.PK_MaNV_FK" />
-        <EntityTypeShape EntityType="QLPMTModel.LICHHEN" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="QLPMTModel.LICHHEN" Width="1.5" PointX="5.625" PointY="1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -385,6 +385,8 @@ namespace QLPhongMachTuWPF.ViewModel
                            DataProvider.Ins.db.SaveChanges();
 
                            ListChoice.Add(MedicineChoice);
+                           Instruction = string.Empty;
+
                        }
                    }
                    catch {
@@ -403,13 +405,7 @@ namespace QLPhongMachTuWPF.ViewModel
                 Diagnosis.TrieuChung = Symtoms;
                 Diagnosis.KetQua = Result;
                 Diagnosis.TrangThai = (Status == "Available") ? 1 : 0;
-                Diagnosis.NgayKham = new DateTime(int.Parse(NamKham), int.Parse(ThangKham), int.Parse(NgayKham));
-
-
-
-
-                    
-                
+                Diagnosis.NgayKham = new DateTime(int.Parse(NamKham), int.Parse(ThangKham), int.Parse(NgayKham));                
                 DetailInovice detailInovice = new DetailInovice();
                Messenger.Default.Send(Diagnosis);
                 detailInovice.ShowDialog();

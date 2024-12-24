@@ -282,7 +282,7 @@ namespace QLPhongMachTuWPF.ViewModel
                 }
 
                 CollectionViewMedicine.Refresh();
-
+                
                 var Staff = DataProvider.Ins.db.NHANVIENs.FirstOrDefault(a => a.MaNV == diagnosis.MaNV);
                 var Patient = DataProvider.Ins.db.BENHNHANs.FirstOrDefault(a => a.MaBN == diagnosis.MaBN);
 

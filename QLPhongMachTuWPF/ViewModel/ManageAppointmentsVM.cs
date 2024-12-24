@@ -5,14 +5,19 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Automation.Peers;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Markup.Localizer;
 
 namespace QLPhongMachTuWPF.ViewModel
 {
@@ -85,9 +90,6 @@ namespace QLPhongMachTuWPF.ViewModel
                 DataProvider.Ins.db.SaveChanges();
                 FilteredAppointment?.Refresh();
             });
-          
-
-
                AddAppointmentCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 AddAppointment add = new AddAppointment();
@@ -103,10 +105,16 @@ namespace QLPhongMachTuWPF.ViewModel
                    
                     SelectedItemCommand.NgaySinh = new DateTime(int.Parse(dateOfBirth.ToString("yyyy")), int.Parse(dateOfBirth.ToString("dd")), int.Parse(dateOfBirth.ToString("MM"))); 
                 }
-                ModifyDiagnosis diagnosis   = new ModifyDiagnosis(); 
-                Messenger.Default.Send(SelectedItemCommand);
-                diagnosis.ShowDialog();  
-               
+              
+                PHIEUKHAM Diagnosis = DataProvider.Ins.db.BENHNHANs.FirstOrDefault(x => x.TenBN == SelectedItemCommand.TenBN
+                && x.NgaySinh == SelectedItemCommand.NgaySinh).PHIEUKHAMs.Where(x => x.NgayKham == SelectedItemCommand.NgayKham).FirstOrDefault() as PHIEUKHAM;           
+                // &&(x.BENHNHAN.DienThoai == SelectedItemCommand.DienThoai)
+
+       //         if (patient == null) MessageBox.Show("fail");
+                    ModifyDiagnosis diagnosis = new ModifyDiagnosis();
+                Messenger.Default.Send(Diagnosis);
+                diagnosis.ShowDialog();
+
             }
             );
             ModifyAppointmentCommand = new RelayCommand<object>((p) => SelectedItemCommand != null, (p) =>

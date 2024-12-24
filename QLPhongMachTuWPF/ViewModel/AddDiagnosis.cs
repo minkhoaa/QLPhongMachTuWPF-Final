@@ -268,7 +268,7 @@ namespace QLPhongMachTuWPF.ViewModel
                     DienThoai = DienThoai,
                     NgaySinh = new DateTime(int.Parse(Nam), int.Parse(Thang), int.Parse(Ngay)),
                     GioiTinh = Gender, 
-                    TrangThai = 0
+                    TrangThai = 0,
                 };
 
                 try
@@ -309,7 +309,8 @@ namespace QLPhongMachTuWPF.ViewModel
                     TrieuChung = Symtoms,
                     KetQua = Result,
                     TrangThai = (Status == "Available") ? 1 : 0,
-                };
+                    BENHNHAN = newPatient,
+                }; 
                 try
                 {
                     // Đảm bảo Messenger đã được đăng ký và đối tượng DiagnosisVM đã sẵn sàng
