@@ -20,6 +20,7 @@ namespace QLPhongMachTuWPF.ViewModel
 
         public ICommand ModifyMedicineCommand { get; set; }
 
+        public ICommand DeleteMedicineCommand { get; set; }
         private ObservableCollection<THUOC> _medicine;
         public ObservableCollection<THUOC> MedicineList { get => _medicine; set { _medicine = value; OnPropertyChanged(); } }
 
@@ -88,6 +89,44 @@ namespace QLPhongMachTuWPF.ViewModel
                 modifyWindow.ShowDialog();
 
             });
+
+            DeleteMedicineCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                if (SelectedItemCommand == null)
+                {
+                    MessageBox.Show("Vui lòng chọn một thuốc để xóa.");
+                    return;
+                }
+
+                // Tìm kiếm lịch hẹn liên quan đến phiếu khám
+                foreach (CTTT i in DataProvider.Ins.db.CTTTs)
+                {
+                    if (i.MaThuoc == SelectedItemCommand.MaThuoc)
+                    {
+                        DataProvider.Ins.db.CTTTs.Remove(i);
+
+                    }
+                }
+                DataProvider.Ins.db.THUOCs.Remove(SelectedItemCommand);
+
+                try
+                {
+                    DataProvider.Ins.db.SaveChanges(); // Lưu thay đổi vào cơ sở dữ liệu
+                    FilteredMedicine.Refresh();
+                    // Cập nhật danh sách `PHIEUKHAM`
+                    MedicineList.Remove(SelectedItemCommand);
+
+                    // Làm mới danh sách `LICHHEN`
+                    Messenger.Default.Send("Refresh", "RefreshMedicineList");
+
+                    MessageBox.Show("Xóa thành công");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Xóa thất bại: " + ex.Message.ToString());
+                }
+            });
+
         }
     }
 }

@@ -472,7 +472,25 @@ namespace QLPhongMachTuWPF.ViewModel
                 Messenger.Default.Send(Diagnosis);
                 MessageBox.Show("Thay đổi thông tin thành công");
             });
-
+            Messenger.Default.Register<string>(this, "RefreshAppointmentList", (message) =>
+            {
+                if (message == "Refresh")
+                {
+                    RefreshMedicineList();
+                }
+            });
+        }
+        public void RefreshMedicineList()
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                ListMedicine.Clear(); // Xóa danh sách cũ
+                var Medicine = new ObservableCollection<THUOC>(DataProvider.Ins.db.THUOCs.ToList()); // Lấy danh sách mới từ DB
+                foreach (var item in Medicine)
+                {
+                    ListMedicine.Add(item);
+                }
+            });
         }
     }
 }
