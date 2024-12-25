@@ -18,8 +18,8 @@ namespace QLPhongMachTuWPF.ViewModel
         }
 
         //Tổng số tiền hóa đơn
-        private int _totalIncome;
-        public int TotalIncome
+        private int? _totalIncome;
+        public int? TotalIncome
         {
             get => _totalIncome;
             set
@@ -118,6 +118,7 @@ namespace QLPhongMachTuWPF.ViewModel
         public HomepageVM()
         {
             // Khởi tạo lệnh
+            TotalIncome = 0; 
             LoadChartDataCommand = new RelayCommand<object>(CanLoadChartData, LoadChartData);
 
             // Khởi tạo giá trị mặc định cho các thuộc tính
@@ -181,9 +182,10 @@ namespace QLPhongMachTuWPF.ViewModel
             // Lấy tổng số patients từ cơ sở dữ liệu
             TotalPatients = DataProvider.Ins.db.BENHNHANs.Count();
 
+            
             //Lấy tổng số tiền income từ csdl
-            TotalIncome = (int)DataProvider.Ins.db.HOADONs
-        .Where(hd => hd.TrangThai == 1) // Chỉ tính các hóa đơn đã thanh toán (nếu cần)
+            TotalIncome = (int?)DataProvider.Ins.db.HOADONs
+        .Where(hd => hd.TrangThai == 1)
         .Sum(hd => hd.TongTien);
         }
 

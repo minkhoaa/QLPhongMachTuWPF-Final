@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -97,14 +98,24 @@ namespace QLPhongMachTuWPF.ViewModel
                 }
 
                 // Tìm kiếm lịch hẹn liên quan đến phiếu khám
-                var existingAppointment = DataProvider.Ins.db.LICHHENs
-                    .FirstOrDefault(x => x.NgayKham == SelectedItemCommand.NgayKham && x.TenBN == SelectedItemCommand.BENHNHAN.TenBN);
+                var existingAppointment = (LICHHEN)DataProvider.Ins.db.LICHHENs
+                    .FirstOrDefault(x => x.NgayKham == SelectedItemCommand.NgayKham && x.TenBN == SelectedItemCommand.BENHNHAN.TenBN) ;
 
                 if (existingAppointment != null)
                 {
                     DataProvider.Ins.db.LICHHENs.Remove(existingAppointment);
+                   
                 }
 
+                foreach (var i in DataProvider.Ins.db.CTTTs)
+                {
+                if (i.MaPK == SelectedItemCommand.MaPK)
+                    {
+                        DataProvider.Ins.db.CTTTs.Remove(i);
+                       
+                    }
+                    }
+                DataProvider.Ins.db.SaveChanges();
                 DataProvider.Ins.db.PHIEUKHAMs.Remove(SelectedItemCommand);
 
                 try
@@ -116,7 +127,6 @@ namespace QLPhongMachTuWPF.ViewModel
 
                     // Làm mới danh sách `LICHHEN`
                     Messenger.Default.Send("Refresh", "RefreshAppointmentList");
-
 
                     MessageBox.Show("Xóa thành công");
                 }
