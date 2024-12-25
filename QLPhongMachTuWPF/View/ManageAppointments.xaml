@@ -65,7 +65,9 @@
                                     <materialDesign:PackIcon Kind="CheckBold" Width="20" Height="20" Foreground="White"/>
                                 </Button>
                                 <Button 
-Style="{StaticResource gridRemoveBtn}" Background="Red" Margin="5 0 0 0 ">
+                                     Command="{Binding DataContext.DeleteAppointmentCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                    CommandParameter="{Binding}"
+                                    Style="{StaticResource gridRemoveBtn}" Background="Red" Margin="5 0 0 0 ">
                                     <materialDesign:PackIcon Kind="TrashCan" Width="20" Height="20" Foreground="White" />
                                 </Button>
                             </StackPanel>
