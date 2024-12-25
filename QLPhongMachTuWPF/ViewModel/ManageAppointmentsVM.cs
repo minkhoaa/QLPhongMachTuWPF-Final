@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
 using System.Security;
@@ -42,6 +43,8 @@ namespace QLPhongMachTuWPF.ViewModel
         public ICommand AddAppointmentCommand { get; set; }
 
         public ICommand ModifyAppointmentCommand { get; set; }
+
+        public ICommand DeleteAppointmentCommand { get; set; }
 
         public ICollectionView FilteredAppointment{ get; set; }
 
@@ -130,8 +133,48 @@ namespace QLPhongMachTuWPF.ViewModel
                 modifyWindow.ShowDialog();
 
             });
+            DeleteAppointmentCommand = new RelayCommand<object>((p) => { return true; } , (p) =>
+            {
+                if (SelectedItemCommand == null)
+                {
+                    MessageBox.Show("Vui lòng chọn một lịch hẹn để xóa.");
+                    return;
+                }
+
+               DataProvider.Ins.db.LICHHENs.Remove( SelectedItemCommand );
+                try { 
+                if  (AppointmentList.Remove(SelectedItemCommand))
+                {
+                        MessageBox.Show("Xóa thành công");
+
+                    } }
+                catch (Exception ex) { MessageBox.Show("Xóa thất bại" + ex.Message.ToString());  }
+                DataProvider.Ins.db.SaveChanges();
+
+            });
+            Messenger.Default.Register<string>(this, "RefreshAppointmentList", (message) =>
+            {
+                if (message == "Refresh")
+                {
+                    RefreshAppointmentList();
+                }
+            });
+
+
         }
 
+        public void RefreshAppointmentList()
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                AppointmentList.Clear(); // Xóa danh sách cũ
+                var appointments = DataProvider.Ins.db.LICHHENs.ToList(); // Lấy danh sách mới từ DB
+                foreach (var appointment in appointments)
+                {
+                    AppointmentList.Add(appointment);
+                }
+            });
+        }
 
     }
 }

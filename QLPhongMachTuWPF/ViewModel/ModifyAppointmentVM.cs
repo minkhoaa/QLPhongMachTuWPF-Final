@@ -58,13 +58,18 @@ namespace QLPhongMachTuWPF.ViewModel
 
         private string _NgayKham { get; set; }
 
+        public string NgayKham { get => _NgayKham; set { _NgayKham = value; OnPropertyChanged(); } }
+
         public string NgayApp { get => _NgayKham; set { _NgayKham = value; OnPropertyChanged(); } }
 
         private string _ThangKham { get; set; }
 
+        public string ThangKham { get => _ThangKham; set { _ThangKham = value; OnPropertyChanged(); } }
         public string ThangApp { get => _ThangKham; set { _ThangKham = value; OnPropertyChanged(); } }
 
         private string _NamKham { get; set; }
+        public string NamKham { get => _NamKham; set { _NamKham = value; OnPropertyChanged(); } }
+
 
         public string NamApp { get => _NamKham; set { _NamKham = value; OnPropertyChanged(); } }
         #endregion
@@ -297,23 +302,11 @@ namespace QLPhongMachTuWPF.ViewModel
                         MessageBox.Show("Lỗi");
                     }
                 } 
-                else
-                {
-                    var newPatient = new BENHNHAN()
-                    {
-                        TenBN = TenBN,
-                        DiaChi = DiaChi,
-                        DienThoai = DienThoai,
-                        NgaySinh = new DateTime(int.Parse(Nam), int.Parse(Thang), int.Parse(Ngay)),
-                        GioiTinh = Gender, 
-                        TrangThai = (Status == "Discharged") ? 1 : 0
-                    }; 
-
-                    DataProvider.Ins.db.BENHNHANs.Add(newPatient);
 
                     DataProvider.Ins.db.SaveChanges();
-                    Messenger.Default.Send(newPatient);
-                }
+                    Messenger.Default.Send(benhnhan);
+                  
+                
 
 
                 LichHen.TenBN = TenBN;
@@ -321,6 +314,7 @@ namespace QLPhongMachTuWPF.ViewModel
                 LichHen.GioiTinh = Gender;
                 LichHen.DienThoai = DienThoai;
                 LichHen.NgaySinh = new DateTime(int.Parse(Nam), int.Parse(Thang), int.Parse(Ngay));
+                LichHen.NgayKham = new DateTime(int.Parse(NamKham), int.Parse(ThangKham), int.Parse(NgayKham));
                 LichHen.TrangThai = (Status == "Available") ? 1 : 0;
 
 

@@ -1,12 +1,12 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Messaging;
+using LiveCharts;
+using QLPhongMachTuWPF.Model;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
 using System.Windows.Input;
-using GalaSoft.MvvmLight.Messaging;
-using LiveCharts;
-using QLPhongMachTuWPF.Model;
 
 namespace QLPhongMachTuWPF.ViewModel
 {
@@ -194,10 +194,10 @@ namespace QLPhongMachTuWPF.ViewModel
                 .Where(a => DbFunctions.TruncateTime(a.NgayKham) == DbFunctions.TruncateTime(date))
                 .Select(a => new Appointment
                 {
-                   
+
                     PatientName = a.TenBN,
                     AppointmentDate = (DateTime)a.NgayKham,
-                    
+
                 })
                 .ToList();
 
@@ -297,7 +297,7 @@ namespace QLPhongMachTuWPF.ViewModel
                 CustomerCounts.Add(count);
             }
         }
-       
+
 
     }
 
@@ -315,9 +315,9 @@ namespace QLPhongMachTuWPF.ViewModel
     //Lớp model cho appointment
     public class Appointment
     {
-       
+
         public string PatientName { get; set; }
         public DateTime AppointmentDate { get; set; }
-        
+
     }
 }

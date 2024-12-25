@@ -13,22 +13,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using QLPhongMachTuWPF.Model;
 using System.Diagnostics.Eventing.Reader;
+using System.Security.Cryptography;
 namespace QLPhongMachTuWPF.ViewModel
 {
     public class LoginViewModel : ViewModelBase
     {
-        public bool isLogin { get ; set; }
+        public bool isLogin { get; set; }
         public ICommand LoginCommand { get; set; }
         public ICommand EnterKeyCommand { get; set; }
         public ICommand PasswordChangedCommand { get; set; }
 
         private string _username;
-        
-        public string Username {get => _username; set{ _username = value; OnPropertyChanged(); } }
-        
+
+        public string Username { get => _username; set { _username = value; OnPropertyChanged(); } }
+
 
         private string _password;
-        
+
         public string Password { get => _password; set { _password = value; OnPropertyChanged(); } }
         public LoginViewModel()
         {
@@ -38,8 +39,10 @@ namespace QLPhongMachTuWPF.ViewModel
              *  employer employer
              *  
              */
-            LoginCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { Login(p);
-            
+            LoginCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                Login(p);
+
             });
             PasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; }, (p) => { Password = p.Password; });
         }
@@ -54,22 +57,27 @@ namespace QLPhongMachTuWPF.ViewModel
                 Login(null);
             }
         }
-        void Login( Window p)
+        void Login(Window p)
+        {
+            if (p == null) return;
+            string hashedPassword = HashPasswordWithSHA256(Password);
+            var count = DataProvider.Ins.db.ACCOUNTs
+      .Where(x => x.UserName == Username && x.PassWord == hashedPassword)
+      .Count();
+
+
+            if (count > 0)
             {
-                if (p == null) return;
-                var count = DataProvider.Ins.db.ACCOUNTs.Where(x => x.UserName == Username && x.PassWord == Password).Count();
-                if (count > 0) 
-                { 
-                    isLogin = true;
-                    p.Close();
+                isLogin = true;
+                p.Close();
             }
-                else
-                {
-                    isLogin = false;    
-                    MessageBox.Show("Sai tài khoản hoặc mật khẩu");
-                }
-               
+            else
+            {
+                isLogin = false;
+                MessageBox.Show("Sai tài khoản hoặc mật khẩu");
             }
- 
-    }
+
+        }
+     
+    } 
 }

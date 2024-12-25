@@ -5,13 +5,12 @@ use QLPMT
 go
 set dateformat DMY
 	CREATE TABLE ACCOUNT ( 
-	UserName NVARCHAR(100) PRIMARY KEY, 
-	DisPlayName nvarchar(100) not null default 'Account',
-	PassWord nvarchar(1000) not null default 'Trống',
-	Type int not null default 0 
-	)
-	go
-
+    UserName NVARCHAR(100) COLLATE SQL_Latin1_General_CP1_CS_AS PRIMARY KEY, 
+    DisPlayName NVARCHAR(100) NOT NULL DEFAULT 'Account',
+    PassWord NVARCHAR(1000) NOT NULL DEFAULT 'Trống',
+    Type INT NOT NULL DEFAULT 0
+);
+GO
 
 
 CREATE TABLE BENHNHAN
@@ -227,8 +226,8 @@ INSERT INTO QUIDINH (TienKham)
 VALUES (100000)
 
 
-INSERT INTO ACCOUNT( UserName, DisPlayName, PassWord, Type) values ('admin' , 'admin', 'admin', 0)
-INSERT INTO ACCOUNT( UserName, DisPlayName, PassWord, Type) values ('employer' , 'employer', 'employer', 1)
+INSERT INTO ACCOUNT( UserName, DisPlayName, PassWord, Type) values ('admin' , 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 0)
+INSERT INTO ACCOUNT( UserName, DisPlayName, PassWord, Type) values ('employer' , 'employer', '8efdf55724c97710333b1e6e7ad03e1b61c9c4206a35ca33898058c6e15c9c42', 1)
 create table LICHHEN (
 	MaLH int identity(1,1) not null, 
 	TenBN nvarchar(40),
@@ -243,3 +242,4 @@ create table LICHHEN (
 alter table LICHHEN add primary key(MaLH)
 INSERT INTO LICHHEN (TenBN, NgaySinh, DiaChi, DienThoai, GioiTinh, TrangThai, TenNV, NgayKham)
 VALUES(N'Hồ Thị Thu Thủy',	'05/01/1997', N'100 Lý Thường Kiệt, Phường 14, Quận 10, Hồ Chí Minh', '998623462', N'Nữ', '1', N'Nguyễn Minh', '11/12/1970' )
+
