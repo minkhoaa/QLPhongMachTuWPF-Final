@@ -74,7 +74,7 @@ namespace QLPhongMachTuWPF.ViewModel
                         existingAppointment.DienThoai = Appointment.DienThoai;
                         existingAppointment.NgaySinh = Appointment.NgaySinh;
                         existingAppointment.TrangThai = Appointment.TrangThai;
-                        existingAppointment.TenNV = Appointment.TenNV;
+                   //     existingAppointment.TenNV = Appointment.TenNV;
                         existingAppointment.NgayKham = Appointment.NgayKham;
 
                     });

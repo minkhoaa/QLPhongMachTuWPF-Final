@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QLPhongMachTuWPF.View"
         mc:Ignorable="d"
-        Title="AddMedicineDiagnosis" Height="880" Width="800"
+        Title="AddMedicineDiagnosis" Height="600" Width="800"
         DataContext="{StaticResource AddDiagnosis}"
                 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodel="clr-namespace:QLPhongMachTuWPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:AddDiagnosis}"
         WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent" AllowsTransparency="True">
@@ -19,6 +19,7 @@
     </Window.Resources>
 
     <Grid>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="80"></ColumnDefinition>
             <ColumnDefinition Width="*"/>
@@ -97,37 +98,38 @@ Grid.Column="1" Panel.ZIndex="1"
 
             <!--Input-->
 
-            <Grid Grid.Row="1" >
-                <Border CornerRadius="0 0 10 0" Background="White">
-                    <Button Command="{Binding ModifyDiagnosisCommand}" 
-                        Content="Create invoice"  Margin="390,0,0,50" Style="{StaticResource btnAdd}"/>
-                </Border>
-                <StackPanel Margin="0 10 0 0" Orientation="Vertical">
+
+            <Grid Grid.Row="1" Background="White">
+
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+
+                    <StackPanel Margin="0 10 0 0" Orientation="Vertical">
 
 
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 10 0 0">
-                        <!--name-->
-                        <TextBox
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 10 0 0">
+
+                            <!--name-->
+                            <TextBox
                          Text="{Binding TenBN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          VerticalAlignment="Center"
                          materialDesign:HintAssist.Hint="Name"
                          Style="{StaticResource MaterialDesignOutlinedTextBox}"
                          Width="250" FontSize="16"/>
 
-                        <!--Phone-->
-                        <TextBox
+                            <!--Phone-->
+                            <TextBox
                         Text="{Binding DienThoai, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     VerticalAlignment="Center"
                     materialDesign:HintAssist.Hint="Phone"
                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
                     Width="250" Margin="60 0 0 0" FontSize="16"/>
-                    </StackPanel>
+                        </StackPanel>
 
-                    <TextBlock Text="Date of birth" Margin="80 20 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontSize="16" Foreground="Gray"/>
+                        <TextBlock Text="Date of birth" Margin="80 20 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontSize="16" Foreground="Gray"/>
 
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 0 0 0">
-                        <!--Date of birth-->
-                        <ComboBox Text="{Binding Ngay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 0 0 0">
+                            <!--Date of birth-->
+                            <ComboBox Text="{Binding Ngay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               ItemsSource="{Binding Days}"
                               SelectedItem="{Binding SelectedDay}"
                           
@@ -135,14 +137,14 @@ Grid.Column="1" Panel.ZIndex="1"
                             
                               FontSize="16"/>
 
-                        <ComboBox Text="{Binding Thang, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            <ComboBox Text="{Binding Thang, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               ItemsSource="{Binding Months}"
                               SelectedItem="{Binding SelectedMonth}"
                              x:Name="cmbMonth" Width="70" Style="{StaticResource MaterialDesignOutlinedComboBox}"
         
          FontSize="16" Margin="10 0 0 0"/>
 
-                        <ComboBox Text="{Binding Nam, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            <ComboBox Text="{Binding Nam, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               ItemsSource="{Binding Years}"
                               SelectedItem="{Binding SelectedYear}" 
                              
@@ -150,67 +152,67 @@ Grid.Column="1" Panel.ZIndex="1"
 
 FontSize="16" Margin="10 0 0 0"/>
 
-                        <!--Address-->
-                        <TextBox 
+                            <!--Address-->
+                            <TextBox 
                         Text="{Binding DiaChi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         VerticalAlignment="Center"
                                 materialDesign:HintAssist.Hint="Address"
                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                 Width="250" Margin="60 0 0 0" FontSize="16"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Appointment day" Margin="80 30 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" FontSize="16" Foreground="Gray"/>
-                        <TextBlock Text="Gender" Margin="110 30 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontSize="16" Foreground="Gray"/>
-                    </StackPanel>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Appointment day" Margin="80 20 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" FontSize="16" Foreground="Gray"/>
+                            <TextBlock Text="Gender" Margin="110 20 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontSize="16" Foreground="Gray"/>
+                        </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 0 0 0">
-                        <!--Day appointment-->
-                        <!--Date of birth-->
-                        <ComboBox Text="{Binding NgayKham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                              ItemsSource="{Binding DaysApp}"
-                              SelectedItem="{Binding SelectedDayApp}"
-                          
-                             x:Name="cmbDayApp" Width="70" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                            
-                              FontSize="16"/>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 0 0 0">
+                            <!--Day appointment-->
+                            <ComboBox Text="{Binding NgayKham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     ItemsSource="{Binding DaysApp}"
+                     SelectedItem="{Binding SelectedDayApp}"
+                 
+                    x:Name="cmbDayApp" Width="70" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                   
+                     FontSize="16"/>
 
-                        <ComboBox Text="{Binding ThangKham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                              ItemsSource="{Binding MonthsApp}"
-                              SelectedItem="{Binding SelectedMonthApp}"
-                             x:Name="cmbMonthApp" Width="70" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                            <ComboBox Text="{Binding ThangKham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     ItemsSource="{Binding MonthsApp}"
+                     SelectedItem="{Binding SelectedMonthApp}"
+                    x:Name="cmbMonthApp" Width="70" Style="{StaticResource MaterialDesignOutlinedComboBox}"
         
-         FontSize="16" Margin="10 0 0 0"/>
-
-                        <ComboBox Text="{Binding NamKham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                              ItemsSource="{Binding YearsApp}"
-                              SelectedItem="{Binding SelectedYearApp}" 
-                             
-                             x:Name="cmbYearApp" Width="90" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-
 FontSize="16" Margin="10 0 0 0"/>
-                        <!--Gender-->
-                        <ComboBox
+
+                            <ComboBox Text="{Binding NamKham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     ItemsSource="{Binding YearsApp}"
+                     SelectedItem="{Binding SelectedYearApp}" 
+                    
+                    x:Name="cmbYearApp" Width="90" Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
+
+
+                            <!--Gender-->
+                            <ComboBox
                         ItemsSource="{Binding GenderSource}"
                         Text="{Binding Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbGender" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                        
+         
            FontSize="16" Margin="60 0 0 0"/>
 
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Staff's Name" Margin="80 30 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" FontSize="16" Foreground="Gray"/>
-                        <TextBlock Text="Status" Margin="110 30 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontSize="16" Foreground="Gray"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="20 0 0 0">
-                        <!--Day appointment-->
-                        <ComboBox 
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Staff's Name" Margin="80 20 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" FontSize="16" Foreground="Gray"/>
+                            <TextBlock Text="Status" Margin="110 20 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontSize="16" Foreground="Gray"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="20 0 0 0">
+                            <!--Day appointment-->
+                            <ComboBox 
                         ItemsSource="{Binding ListStaff}"
+                        SelectedItem="{Binding SelectedStaff, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         DisplayMemberPath="TenNV"
                         Text="{Binding TenNV, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               VerticalAlignment="Center"  x:Name="cmbStaff" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
          
 FontSize="16"  Margin="60 0 0 0"/>
 
-                        <ComboBox
+                            <ComboBox
                         ItemsSource="{Binding StatusSource}"
                         Text="{Binding Status, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cmbStatus"
                         Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
@@ -218,75 +220,90 @@ FontSize="16"  Margin="60 0 0 0"/>
 FontSize="16" Margin="60 0 0 0"/>
 
 
-                    </StackPanel>
+                        </StackPanel>
 
 
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 30 0 0">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 30 0 0">
 
-                        <TextBox
+                            <TextBox
                         Text="{Binding Symtoms}"
                         VerticalAlignment="Center"
             materialDesign:HintAssist.Hint="Symptom"
             Style="{StaticResource MaterialDesignOutlinedTextBox}"
-            Width="250" FontSize="16"
-                            AcceptsReturn="True"
-                            VerticalScrollBarVisibility="Auto"
-                            TextWrapping="Wrap"/>
-                        <TextBox
+            Width="250" Height="150" FontSize="16" 
+                        AcceptsReturn="True"
+                        TextWrapping="Wrap"/>
+                            <TextBox
                     Text="{Binding Result}"
             VerticalAlignment="Center"
 materialDesign:HintAssist.Hint="Result"
 Style="{StaticResource MaterialDesignOutlinedTextBox}"
-Width="250" FontSize="16" Margin="60 0 0 0"
-                             AcceptsReturn="True"
- VerticalScrollBarVisibility="Auto"
+Width="250" Height="150" FontSize="16" Margin="60 0 0 0"
+                         AcceptsReturn="True"
  TextWrapping="Wrap"/>
-                    </StackPanel>
+                        </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" Margin="80 30 0 0">
+                        <StackPanel Orientation="Horizontal" Margin="80 30 0 0">
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <ComboBox Width="183" 
+           Text="{Binding MedicineChoice}"
+           ItemsSource="{Binding ListMedicine}"
+                                          SelectedItem="{Binding SelectedItemCommand, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+           DisplayMemberPath="TenThuoc"
+           Style="{StaticResource MaterialDesignOutlinedComboBox}"  FontSize="16"/>
+                                    <Button Content="Add" Command="{Binding AddMedicineTolist}"  Margin="10 50 0 0" Foreground="White" />
+                                </StackPanel>
 
-                        <ComboBox Width="171"
-                                  Text="{Binding MedicineChoice}"
-                                  ItemsSource="{Binding ListMedicine}"
-                                  DisplayMemberPath="TenThuoc"
-                                  Style="{StaticResource MaterialDesignOutlinedComboBox}"  FontSize="16"/>
+                                <ComboBox Margin="0 10 0 0" Width="171" HorizontalAlignment="Left"
 
-                        <Button Content="Add" Command="{Binding AddMedicineTolist}"  Margin="10" Foreground="White" />
-                        <Border Margin="60 0 0 0" BorderBrush="Gray" BorderThickness="1" CornerRadius="5">
-                            <ListBox
+           Text="{Binding SoLuong}"
+           ItemsSource="{Binding NumberSource}"
+          
+           Style="{StaticResource MaterialDesignOutlinedComboBox}"  FontSize="16"/>
+
+                            </StackPanel>
+
+
+                            <Border Margin="50 0 0 0" BorderBrush="Gray" BorderThickness="1" CornerRadius="5">
+                                <ListBox
 
                             ItemsSource="{Binding ListChoice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                            VerticalAlignment="Center"
-                            Width="250" Height="100"
-                            >
+                           
+                                VerticalAlignment="Center"
+                            Width="250" Height="130"
+                               FontSize="16">
 
-                            </ListBox>
-                        </Border>
+                                </ListBox>
+                            </Border>
+
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 30 0 0">
+
+                            <TextBox
+            Text="{Binding Instruction}"
+            VerticalAlignment="Center"
+materialDesign:HintAssist.Hint="Instruction"
+Style="{StaticResource MaterialDesignOutlinedTextBox}"
+Width="560" FontSize="16" Height="150"
+                AcceptsReturn="True"
+                VerticalScrollBarVisibility="Auto"
+                TextWrapping="Wrap"/>
+
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+
+                            <Button Command="{Binding AddDiagnosisCommand}" 
+    Content="Confirm" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Margin=" 80 15 0 50" Style="{StaticResource btnAdd}">
+
+                            </Button>
+
+
+                        </StackPanel>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 30 0 0">
-
-                        <TextBox
-                        Text="{Binding Symtoms}"
-                        VerticalAlignment="Center"
-            materialDesign:HintAssist.Hint="Instruction"
-            Style="{StaticResource MaterialDesignOutlinedTextBox}"
-            Width="560" FontSize="16"
-                            AcceptsReturn="True"
-                            VerticalScrollBarVisibility="Auto"
-                            TextWrapping="Wrap"/>
-                        
-                    </StackPanel>
-
-                </StackPanel>
-                
 
 
-
-
-                <Button Command="{Binding AddDiagnosisCommand}" 
-                    Content="Confirm" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Margin=" 80 0 0 50" Style="{StaticResource btnAdd}">
-
-                </Button>
+                </ScrollViewer>
 
             </Grid>
         </Grid>

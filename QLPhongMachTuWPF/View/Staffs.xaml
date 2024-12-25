@@ -54,6 +54,8 @@
                 <DataGridTextColumn Header="Name" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" Binding="{Binding TenNV}"/>
                 <DataGridTextColumn Header="Birthday" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding NgaySinh, StringFormat='dd/MM/yyyy'}"/>
                 <DataGridTextColumn Header="Address"  ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.8*" Binding="{Binding DiaChi}"/>
+                <DataGridTextColumn Header="Gender"  ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.8*" Binding="{Binding GioiTinh}"/>
+
                 <DataGridTextColumn Header="Phone" IsReadOnly="True" CanUserResize="False" Width="1.5*" Binding="{Binding DienThoai}"/>
                 <DataGridTemplateColumn Header="Type" Width="*" CanUserResize="False" IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
@@ -67,7 +69,7 @@
                                                 <Setter Property="Text" Value="Admin" />
                                             </DataTrigger>
                                             <DataTrigger Binding="{Binding LoaiNV}" Value="1">
-                                                <Setter Property="Text" Value="Staff" />
+                                                <Setter Property="Text" Value="User" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>

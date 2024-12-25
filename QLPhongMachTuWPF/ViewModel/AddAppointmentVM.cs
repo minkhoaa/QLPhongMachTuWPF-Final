@@ -11,6 +11,7 @@ using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Markup.Localizer;
 using System.Windows.Media;
@@ -74,6 +75,9 @@ namespace QLPhongMachTuWPF.ViewModel
 
         public ObservableCollection<NHANVIEN> ListStaff { get => _ListStaff; set { _ListStaff = value; OnPropertyChanged(); } }
 
+        private NHANVIEN _SelectedItemCommand {  get; set; }
+        
+        public NHANVIEN SelectedItemCommand { get => _SelectedItemCommand; set { _SelectedItemCommand = value ; OnPropertyChanged(); } }
         public ICommand AddAppointmentCommand { get; set; }
 
 
@@ -265,17 +269,19 @@ namespace QLPhongMachTuWPF.ViewModel
 
                 };
 
-           
+
                 // Tạo lịch hẹn mới
                 var newAppointment = new LICHHEN()
                 {
                     TenBN = TenBN,
+                    MaBN = newPatient.MaBN,
+                    MaNV = SelectedItemCommand.MaNV,
                     DiaChi = DiaChi,
                     DienThoai = DienThoai,
-                    NgaySinh = new DateTime(int.Parse(Nam),   int.Parse(Thang), int.Parse(Ngay)),
+                    NgaySinh = new DateTime(int.Parse(Nam), int.Parse(Thang), int.Parse(Ngay)),
                     GioiTinh = Gender,
                     TrangThai = (Status == "Discharged") ? 1 : 0,
-                    TenNV = TenNV,
+
                     NgayKham = new DateTime(int.Parse(NamKham), int.Parse(ThangKham), int.Parse(NgayKham))
                 };
                 try

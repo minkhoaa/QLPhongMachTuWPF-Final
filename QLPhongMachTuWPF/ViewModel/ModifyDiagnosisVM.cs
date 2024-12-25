@@ -344,7 +344,7 @@ namespace QLPhongMachTuWPF.ViewModel
                 Application.Current.Dispatcher.Invoke(() =>
                 {
                     
-                    TenNV =  diagnosis.TenNV;
+                  //  TenNV =  diagnosis.TenBN;
                     TenBN = diagnosis.TenBN;
                     DateTime dateOfBirth = diagnosis.NgaySinh.Value;
                     Ngay = dateOfBirth.Day.ToString();
@@ -491,7 +491,7 @@ namespace QLPhongMachTuWPF.ViewModel
                 {
                     tempAppointment.TenBN = TenBN;
                     tempAppointment.NgayKham = DateDiagnosis;
-                    tempAppointment.TenNV = TenNV;
+                 //   tempAppointment.TenNV = TenNV;
                     tempAppointment.DiaChi = DiaChi;
                     tempAppointment.DienThoai = DienThoai;
                     tempAppointment.NgaySinh = new DateTime(int.Parse(Nam), int.Parse(Thang), int.Parse(Ngay));

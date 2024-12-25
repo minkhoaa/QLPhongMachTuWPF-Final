@@ -192,7 +192,9 @@ SelectedItem="{Binding SelectedMonthApp}"
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="20 350 0 0">
                     <!--Day appointment-->
                     <ComboBox Text="{Binding TenNV, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                              ItemsSource="{Binding ListStaff}" DisplayMemberPath="TenNV" VerticalAlignment="Center"  x:Name="cmbStaff" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                              ItemsSource="{Binding ListStaff}" DisplayMemberPath="TenNV"
+                              SelectedItem="{Binding SelectedItemCommand}"
+                              VerticalAlignment="Center"  x:Name="cmbStaff" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
          
 FontSize="16"  Margin="60 0 0 0"/>
 

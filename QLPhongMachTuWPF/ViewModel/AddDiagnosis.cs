@@ -18,6 +18,7 @@ namespace QLPhongMachTuWPF.ViewModel
     public class AddDiagnosis : ViewModelBase
     {  
         public ICommand AddDiagnosisCommand { get; set; }
+        public ICommand AddMedicineTolist { get; set; }
 
         #region ThuocTinh
         private string _TenBN { get; set; }
@@ -78,11 +79,36 @@ namespace QLPhongMachTuWPF.ViewModel
 
         public string Result { get => _Result; set { _Result = value; OnPropertyChanged(); } }
 
-        #endregion
+
+
 
         private ObservableCollection<NHANVIEN> _ListStaff { get; set; }
 
-        public ObservableCollection<NHANVIEN> ListStaff { get => _ListStaff; set { _ListStaff = value; OnPropertyChanged(); }  }
+        public ObservableCollection<NHANVIEN> ListStaff { get => _ListStaff; set { _ListStaff = value; OnPropertyChanged(); } }
+
+        private ObservableCollection<THUOC> _ListMedicine { get; set; }
+
+        public ObservableCollection<THUOC> ListMedicine { get => _ListMedicine; set { _ListMedicine = value; OnPropertyChanged(); } }
+        private ObservableCollection<string> _ListChoice { get; set; }
+
+        public ObservableCollection<string> ListChoice { get => _ListChoice; set { _ListChoice = value; OnPropertyChanged(); } }
+
+
+
+        private string _MedicineChoice { get; set; }
+
+        public string MedicineChoice { get => _MedicineChoice; set { _MedicineChoice = value; OnPropertyChanged(); } }
+        private int _MaNV { get; set; }
+
+        public int MaNV { get => _MaNV; set { _MaNV = value; OnPropertyChanged(); } }
+        private int _MaBN { get; set; }
+        public string Instruction { get => _Instruction; set { _Instruction = value; OnPropertyChanged(); } }
+        private string _Instruction { get; set; }
+        public int MaBN { get => _MaBN; set { _MaBN = value; OnPropertyChanged(); } }
+
+        private string _SoLuong { get; set; }
+        public string SoLuong { get => _SoLuong; set { _SoLuong = value; OnPropertyChanged(); } }
+        #endregion
 
         #region FormatBindingDate
 
@@ -94,6 +120,7 @@ namespace QLPhongMachTuWPF.ViewModel
         public List<int> MonthsApp { get; set; }
         public List<int> YearsApp { get; set; }
 
+        public List<int> NumberSource { get; set; }
 
 
         public List<string> GenderSource { get; set; }
@@ -168,7 +195,7 @@ namespace QLPhongMachTuWPF.ViewModel
                 _selectedYearApp = value;
                 OnPropertyChanged();
                 UpdateDaysApp();
-               
+
             }
         }
 
@@ -177,18 +204,25 @@ namespace QLPhongMachTuWPF.ViewModel
         {
             SelectedYear = DateTime.Now.Year;
             SelectedMonth = DateTime.Now.Month;
+            NumberSource = new List<int>();
+            for (int i = 1; i <= 100; i++)
+            {
+
+                NumberSource.Add(i);
+            }
             Years = new List<int>();
             for (int i = 1900; i <= 2100; i++)
                 Years.Add(i);
             Months = new List<int>();
             for (int i = 1; i <= 12; i++)
-                Months.Add(i); 
+                Months.Add(i);
             UpdateDays();
 
 
 
             ListStaff = new ObservableCollection<NHANVIEN>(DataProvider.Ins.db.NHANVIENs.ToList());
-            GenderSource = new List<string>{"Nam", "Nữ" };
+
+            GenderSource = new List<string> { "Nam", "Nữ" };
             StatusSource = new List<string> { "Available", "Unavailable" };
 
             // Khởi tạo số ngày theo tháng và năm mặc định  a
@@ -240,7 +274,7 @@ namespace QLPhongMachTuWPF.ViewModel
                 for (int i = 1; i <= daysInMonthApp; i++)
                     DaysApp.Add(i);
 
-                if (SelectedDayApp  > daysInMonthApp)
+                if (SelectedDayApp > daysInMonthApp)
                     SelectedDayApp = daysInMonthApp;
 
                 OnPropertyChanged(nameof(DaysApp));
@@ -252,9 +286,48 @@ namespace QLPhongMachTuWPF.ViewModel
         }
         #endregion
 
+        private string _SelectedItemCommand { get; set; }
+
+        public string SelectedItemCommand
+        {
+            get => _SelectedItemCommand;
+            set
+            {
+                if (_SelectedItemCommand != value)
+                {
+                    _SelectedItemCommand = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private NHANVIEN _SelectedStaff { get; set; }
+        public NHANVIEN SelectedStaff
+        {
+            get => _SelectedStaff;
+            set
+            {
+                if (_SelectedStaff != value)
+                {
+                    _SelectedStaff = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private PHIEUKHAM _Diagnosis { get; set; }
+
+        public PHIEUKHAM Diagnosis { get => _Diagnosis; set { _Diagnosis = value; OnPropertyChanged(); } }
+
+        private DateTime? _DateDiagnosis { get; set; }
+
+        public DateTime? DateDiagnosis { get => _DateDiagnosis; set { _DateDiagnosis = value; OnPropertyChanged(); } }
+
+
         public AddDiagnosis()
         {
             AddSource();
+            ListStaff = new ObservableCollection<NHANVIEN>(DataProvider.Ins.db.NHANVIENs.ToList());
+            ListMedicine = new ObservableCollection<THUOC>(DataProvider.Ins.db.THUOCs.ToList());
+            ListChoice = new ObservableCollection<string>();
             AddDiagnosisCommand = new RelayCommand<object>((p) =>
             {
                 if (string.IsNullOrEmpty(TenBN)) return false;
@@ -318,12 +391,60 @@ namespace QLPhongMachTuWPF.ViewModel
                     DataProvider.Ins.db.SaveChanges();
                     Messenger.Default.Send(newDiagnosis);
                     MessageBox.Show("Thêm phiếu khám thành công");
-                    Messenger.Default.Send("NewAppointmentAdded");
+                    //Messenger.Default.Send("NewAppointmentAdded");
 
                     ResetFields(); 
                 }
                 catch (Exception ex) { MessageBox.Show(ex.Message); }
               
+            });
+            AddMedicineTolist = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                // Kiểm tra nếu thuốc đã tồn tại trong ListChoice
+                if (ListChoice.Contains(MedicineChoice))
+                {
+                    MessageBox.Show("Thuốc này đã được thêm rồi");
+                    Instruction = string.Empty;
+                    MedicineChoice = null;
+                    SoLuong = null;
+                    return;
+                }
+
+                // Kiểm tra xem thuốc có tồn tại trong cơ sở dữ liệu không
+                var existingItem = DataProvider.Ins.db.THUOCs.FirstOrDefault(x => x.TenThuoc == MedicineChoice);
+                if (existingItem == null)
+                {
+                    MessageBox.Show("Thuốc không tồn tại trong danh sách thuốc.");
+                    Instruction = string.Empty;
+                    MedicineChoice = null;
+                    SoLuong = null;
+                    return;
+                }
+
+                // Thêm thuốc mới vào cơ sở dữ liệu CTTT
+                var MedicineDetails = new CTTT()
+                {
+                    MaThuoc = existingItem.MaThuoc,
+                    MaPK = Diagnosis.MaPK,
+                    SoLuong = int.Parse(SoLuong),
+                    DonGia = existingItem.Gia,
+                    CachDung = Instruction,
+                    TrangThai = existingItem.TrangThai,
+                };
+
+                DataProvider.Ins.db.CTTTs.Add(MedicineDetails);
+                DataProvider.Ins.db.SaveChanges();
+
+                // Cập nhật ListChoice và xóa các trường nhập liệu
+                ListChoice.Add(MedicineChoice);
+                Instruction = string.Empty;
+                MedicineChoice = null;
+                SoLuong = null;
+
+                MessageBox.Show("Thêm thuốc thành công!");
             });
         } private void ResetFields()
             {

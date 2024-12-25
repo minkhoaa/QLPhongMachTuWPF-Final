@@ -313,7 +313,7 @@ namespace QLPhongMachTuWPF.ViewModel
                     Application.Current.Dispatcher.Invoke(() =>
                     {
 
-                        TenNV = diagnosis.TenNV;
+                      //  TenNV = diagnosis.TenNV;
                         TenBN = diagnosis.TenBN;
                         DateTime dateOfBirth = diagnosis.NgaySinh.Value;
                         Ngay = dateOfBirth.Day.ToString();
