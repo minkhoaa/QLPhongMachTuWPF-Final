@@ -152,8 +152,29 @@ namespace QLPhongMachTuWPF.ViewModel
                 DataProvider.Ins.db.SaveChanges();
 
             });
+            Messenger.Default.Register<string>(this, "RefreshAppointmentList", (message) =>
+            {
+                if (message == "Refresh")
+                {
+                    RefreshAppointmentList();
+                }
+            });
+
+
         }
 
+        public void RefreshAppointmentList()
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                AppointmentList.Clear(); // Xóa danh sách cũ
+                var appointments = DataProvider.Ins.db.LICHHENs.ToList(); // Lấy danh sách mới từ DB
+                foreach (var appointment in appointments)
+                {
+                    AppointmentList.Add(appointment);
+                }
+            });
+        }
 
     }
 }

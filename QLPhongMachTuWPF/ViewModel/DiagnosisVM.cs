@@ -16,16 +16,19 @@ namespace QLPhongMachTuWPF.ViewModel
 {
     public class DiagnosisVM : ViewModelBase
     {
-        private PHIEUKHAM _SelectedItemCommand {  get; set; }
-        public PHIEUKHAM SelectedItemCommand { get => _SelectedItemCommand; set { _SelectedItemCommand = value; OnPropertyChanged(); }  }
+        private PHIEUKHAM _SelectedItemCommand { get; set; }
+        public PHIEUKHAM SelectedItemCommand { get => _SelectedItemCommand; set { _SelectedItemCommand = value; OnPropertyChanged(); } }
         public ICommand AddDiagnosisCommand { get; set; }
         public ICommand ModifyDiagnosis { get; set; }
+
+        public ICommand DeleteDiagnosisCommand { get; set; }
+
 
 
         public ICommand VerifyCommand { get; set; }
 
         private ObservableCollection<PHIEUKHAM> _DiagnosisList;
-        public ICollectionView FilteredDiagnosis{ get; set; }
+        public ICollectionView FilteredDiagnosis { get; set; }
         public ObservableCollection<PHIEUKHAM> DiagnosisList { get => _DiagnosisList; set { _DiagnosisList = value; OnPropertyChanged(); } }
         public DiagnosisVM()
         {
@@ -34,10 +37,10 @@ namespace QLPhongMachTuWPF.ViewModel
             FilteredDiagnosis = CollectionViewSource.GetDefaultView(DiagnosisList);
             Messenger.Default.Register<PHIEUKHAM>(this, (diagnosis) =>
             {
-              
+
                 if (diagnosis == null) return;
 
-            var existingDiagnosis = DiagnosisList.FirstOrDefault(p => (p.MaPK == diagnosis.MaPK));
+                var existingDiagnosis = DiagnosisList.FirstOrDefault(p => (p.MaPK == diagnosis.MaPK));
                 if (existingDiagnosis != null)
                 {
                     existingDiagnosis.TrieuChung = diagnosis.TrieuChung;
@@ -46,7 +49,9 @@ namespace QLPhongMachTuWPF.ViewModel
                     existingDiagnosis.NgayKham = diagnosis.NgayKham;
                     existingDiagnosis.MaNV = diagnosis.MaNV;
                     existingDiagnosis.MaBN = diagnosis.MaBN;
-                }else {
+                }
+                else
+                {
 
                     Application.Current.Dispatcher.Invoke(() =>
                     {
@@ -57,7 +62,7 @@ namespace QLPhongMachTuWPF.ViewModel
 
                 DataProvider.Ins.db.SaveChanges();
                 FilteredDiagnosis?.Refresh();
-               
+
 
             });
 
@@ -77,12 +82,50 @@ namespace QLPhongMachTuWPF.ViewModel
             );
             VerifyCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-             //   SelectedItemCommand.NHANVIEN = DataProvider.Ins.db.NHANVIENs.Where(x => x.MaNV == SelectedItemCommand.MaNV) as NHANVIEN;
+                //   SelectedItemCommand.NHANVIEN = DataProvider.Ins.db.NHANVIENs.Where(x => x.MaNV == SelectedItemCommand.MaNV) as NHANVIEN;
                 ModifyDiagnosis diagnosis = new ModifyDiagnosis();
                 Messenger.Default.Send(SelectedItemCommand);
                 diagnosis.ShowDialog();
             }
            );
+            DeleteDiagnosisCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                if (SelectedItemCommand == null)
+                {
+                    MessageBox.Show("Vui lòng chọn một phiếu khám để xóa.");
+                    return;
+                }
+
+                // Tìm kiếm lịch hẹn liên quan đến phiếu khám
+                var existingAppointment = DataProvider.Ins.db.LICHHENs
+                    .FirstOrDefault(x => x.NgayKham == SelectedItemCommand.NgayKham && x.TenBN == SelectedItemCommand.BENHNHAN.TenBN);
+
+                if (existingAppointment != null)
+                {
+                    DataProvider.Ins.db.LICHHENs.Remove(existingAppointment);
+                }
+
+                DataProvider.Ins.db.PHIEUKHAMs.Remove(SelectedItemCommand);
+
+                try
+                {
+                    DataProvider.Ins.db.SaveChanges(); // Lưu thay đổi vào cơ sở dữ liệu
+
+                    // Cập nhật danh sách `PHIEUKHAM`
+                    DiagnosisList.Remove(SelectedItemCommand);
+
+                    // Làm mới danh sách `LICHHEN`
+                    Messenger.Default.Send("Refresh", "RefreshAppointmentList");
+
+
+                    MessageBox.Show("Xóa thành công");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Xóa thất bại: " + ex.Message.ToString());
+                }
+            });
+
         }
     }
-}
+    }

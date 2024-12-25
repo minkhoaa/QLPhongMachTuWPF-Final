@@ -40,7 +40,7 @@
             </StackPanel>
         </Button>
 
-        <DataGrid Grid.Row="1" ItemsSource="{Binding FilteredAppointment}"
+        <DataGrid Grid.Row="1" ItemsSource="{Binding FilteredAppointment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   SelectedItem="{Binding SelectedItemCommand}"
                   Background="#eeeeee" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle2}" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="patientsDatagrid" Margin="0,0,0,10"
           HorizontalScrollBarVisibility="Disabled" Grid.RowSpan="2" 
