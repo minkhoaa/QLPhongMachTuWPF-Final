@@ -99,7 +99,7 @@
                         <TextBox x:Name="txtUser" TextChanged="txtUser_TextChanged" 
                              FontSize="14"
                              Grid.Column="1"
-                             Text="{Binding Username}"
+                             Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              Margin="10,0,0,0"
                              Foreground="Black"
                              BorderBrush="Transparent"

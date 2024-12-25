@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using System.Security.Cryptography;
 
 
 namespace QLPhongMachTuWPF.ViewModel
@@ -16,6 +17,24 @@ namespace QLPhongMachTuWPF.ViewModel
         public void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public static string HashPasswordWithSHA256(string password)
+        {
+            byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
+
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] hashBytes = sha256.ComputeHash(passwordBytes);
+
+                StringBuilder sb = new StringBuilder();
+                foreach (byte b in hashBytes)
+                {
+                    sb.Append(b.ToString("x2"));
+                }
+
+                return sb.ToString();
+            }
         }
     }
     public class RelayCommand<T> : ICommand

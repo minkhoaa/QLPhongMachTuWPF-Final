@@ -5,13 +5,12 @@ use QLPMT
 go
 set dateformat DMY
 	CREATE TABLE ACCOUNT ( 
-	UserName NVARCHAR(100) PRIMARY KEY, 
-	DisPlayName nvarchar(100) not null default 'Account',
-	PassWord nvarchar(1000) not null default 'Trống',
-	Type int not null default 0 
-	)
-	go
-
+    UserName NVARCHAR(100) COLLATE SQL_Latin1_General_CP1_CS_AS PRIMARY KEY, 
+    DisPlayName NVARCHAR(100) NOT NULL DEFAULT 'Account',
+    PassWord NVARCHAR(1000) NOT NULL DEFAULT 'Trống',
+    Type INT NOT NULL DEFAULT 0
+);
+GO
 
 
 CREATE TABLE BENHNHAN
