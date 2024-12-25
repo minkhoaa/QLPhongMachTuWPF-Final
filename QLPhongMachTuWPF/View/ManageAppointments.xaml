@@ -49,9 +49,9 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding MaLH, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" CanUserResize="False" Width="0.8*"/>
                 <DataGridTextColumn Header="Staff ID" Binding="{Binding MaNV, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="2*" />
-                <DataGridTextColumn Header="Patient Name" Binding="{Binding TenBN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="2*" />
-                <DataGridTextColumn Header="Due date" Binding="{Binding NgayKham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='dd/MM/yyyy'}"  ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False"  Width="1.5*" />
-                <DataGridTextColumn Header="Status" Binding="{Binding TrangThai, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" />
+                <DataGridTextColumn Header="Patient ID" Binding="{Binding MaBN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="2*" />
+                <DataGridTextColumn Header="Due date" Binding="{Binding NgayHen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='dd/MM/yyyy'}"  ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False"  Width="1.5*" />
+                <DataGridTextColumn Header="Hours" Binding="{Binding GioHen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" />
                 <DataGridTemplateColumn Header="" Width="1*" CanUserResize="False">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

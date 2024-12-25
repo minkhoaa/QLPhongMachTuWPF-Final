@@ -239,10 +239,9 @@ namespace QLPhongMachTuWPF.ViewModel
             // Đăng ký nhận thông báo về bệnh nhân
             Messenger.Default.Register<BENHNHAN>(this, (patient) =>
             {
-                lichhen = DataProvider.Ins.db.LICHHENs.FirstOrDefault(x => x.TenBN == patient.TenBN && x.NgaySinh == patient.NgaySinh);
+             //   lichhen = DataProvider.Ins.db.LICHHENs.FirstOrDefault(x => x.BENHNHAN.TenBN == patient.TenBN && x.ngay == patient.NgaySinh);
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    
                     BenhNhan = patient;
                     TenBN = patient.TenBN;
                     DiaChi = patient.DiaChi;
@@ -259,41 +258,24 @@ namespace QLPhongMachTuWPF.ViewModel
             SaveChangesCommand = new RelayCommand<object>((p) =>
             {
                 return true;
-            }, (p) => {
-                if (lichhen != null)
-                {
-                    try
-                    {
-                        lichhen.TenBN = TenBN;
-                        lichhen.DiaChi = DiaChi;
-                        lichhen.DienThoai = DienThoai;
-                        lichhen.NgaySinh = new DateTime(int.Parse(Nam), int.Parse(Thang), int.Parse(Ngay));
-                        lichhen.GioiTinh = Gender;
-                        Messenger.Default.Send(lichhen);
-                    }
-                    catch (Exception)
-                    {
-                        MessageBox.Show("Lỗi");
-                    }
-                  
-                }
-              
-                BenhNhan.TenBN = TenBN;
-                BenhNhan.DiaChi = DiaChi;
-                BenhNhan.GioiTinh = Gender;
-                BenhNhan.DienThoai = DienThoai;
-                BenhNhan.NgaySinh = new DateTime(int.Parse(Nam), int.Parse(Thang), int.Parse(Ngay));
-                BenhNhan.TrangThai = (Charged == "Discharged") ? 1 : 0;
+            }, (p) =>
+            {
+                    BenhNhan.TenBN = TenBN;
+                    BenhNhan.DiaChi = DiaChi;
+                    BenhNhan.GioiTinh = Gender;
+                    BenhNhan.DienThoai = DienThoai;
+                    BenhNhan.NgaySinh = new DateTime(int.Parse(Nam), int.Parse(Thang), int.Parse(Ngay));
+                    BenhNhan.TrangThai = (Charged == "Discharged") ? 1 : 0;
 
-                // Gửi thông tin bệnh nhân đã cập nhật qua Messenger
-               
-                Messenger.Default.Send(BenhNhan);
+                    // Gửi thông tin bệnh nhân đã cập nhật qua Messenger
+                    DataProvider.Ins.db.SaveChanges();
+                    Messenger.Default.Send(BenhNhan);
 
-                // Đóng cửa sổ
-                Application.Current.Windows
-                    .OfType<Window>()
-                    .SingleOrDefault(w => w.IsActive)
-                    ?.Close();
+                    // Đóng cửa sổ
+                    Application.Current.Windows
+                        .OfType<Window>()
+                        .SingleOrDefault(w => w.IsActive)
+                        ?.Close();
             });
         }
     }

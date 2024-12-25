@@ -278,23 +278,6 @@ namespace QLPhongMachTuWPF.ViewModel
                 {
                     MessageBox.Show("fail to add patient");
                 }
-
-
-                // Tạo lịch hẹn mới
-                var newAppointment = new LICHHEN()
-                {
-                       TenBN = TenBN,
-                    MaBN = newPatient.MaBN,
-                    MaNV = SelectedItemCommand.MaNV,
-                    DiaChi = DiaChi,
-                    DienThoai = DienThoai,
-                    NgaySinh = new DateTime(int.Parse(Nam), int.Parse(Thang), int.Parse(Ngay)),
-                    GioiTinh = Gender,
-                    TrangThai = (Status == "Discharged") ? 1 : 0,
-                    NgayKham = new DateTime(int.Parse(NamKham), int.Parse(ThangKham), int.Parse(NgayKham))
-                };
-
-                // Tạo đối tượng PHIEUKHAM và gửi
                 PHIEUKHAM newDiagnosis = new PHIEUKHAM()
                 {
                     MaNV = SelectedItemCommand.MaNV,
@@ -313,7 +296,20 @@ namespace QLPhongMachTuWPF.ViewModel
                     Messenger.Default.Send(newDiagnosis);
 
                 }
-                catch (Exception ex) { MessageBox.Show(ex.Message);  }  
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+
+                // Tạo lịch hẹn mới
+                var newAppointment = new LICHHEN()
+                {
+                    MaBN = newPatient.MaBN,
+                    MaNV = SelectedItemCommand.MaNV,
+                    NgayHen = new DateTime(int.Parse(NamKham), int.Parse(ThangKham), int.Parse(NgayKham)),
+                    GioHen = new TimeSpan(12, 0, 0),
+                    MaPK = newDiagnosis.MaPK
+                };
+
+                // Tạo đối tượng PHIEUKHAM và gửi
+              
                 try
                 {
                     // Lưu vào cơ sở dữ liệu

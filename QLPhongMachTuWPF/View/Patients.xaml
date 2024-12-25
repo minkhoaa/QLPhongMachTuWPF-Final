@@ -89,8 +89,9 @@
                             <StackPanel Orientation="Horizontal">
 
 
-                                
-                                <Button 
+
+                                <Button  Command="{Binding DataContext.DeletePatientCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+CommandParameter="{Binding}"
 Style="{StaticResource gridRemoveBtn}" Background="Red">
                                     <materialDesign:PackIcon Kind="TrashCan" Width="20" Height="20" Foreground="White" />
                                 </Button>

@@ -112,6 +112,49 @@ namespace QLPhongMachTuWPF.ViewModel
                 modifyWindow.ShowDialog();
 
             });
+            DeleteStaffCommand = new RelayCommand<object>((p) => SelectedItemCommand != null, (p) =>
+            {
+                if (SelectedItemCommand == null)
+                {
+                    MessageBox.Show("Vui lòng chọn một nhân viên để xóa.");
+                    return;
+                }
+                foreach (var diagnosis in DataProvider.Ins.db.PHIEUKHAMs)
+                {
+                    if (diagnosis.MaNV == SelectedItemCommand.MaNV) { 
+                        DataProvider.Ins.db.PHIEUKHAMs.Remove(diagnosis);
+                        var appointment = DataProvider.Ins.db.LICHHENs.FirstOrDefault(x => x.MaPK == diagnosis.MaPK);
+                        if (appointment != null)
+                        {
+                            DataProvider.Ins.db.LICHHENs.Remove(appointment);
+                        }
+                    }
+                }
+                DataProvider.Ins.db.SaveChanges();
+                DataProvider.Ins.db.NHANVIENs.Remove(SelectedItemCommand);
+
+                try
+                {
+                    DataProvider.Ins.db.SaveChanges(); // Lưu thay đổi vào cơ sở dữ liệu
+
+                    // Cập nhật danh sách `PHIEUKHAM`
+                    StaffList.Remove(SelectedItemCommand);
+
+                    // Làm mới danh sách `LICHHEN`
+                    Messenger.Default.Send("Refresh", "RefreshAppointmentList");
+                    Messenger.Default.Send("Refresh", "RefreshDiagnosisList");
+
+                    MessageBox.Show("Xóa thành công");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Xóa thất bại: " + ex.Message.ToString());
+                }
+                FilteredStaffs.Refresh();
+
+
+
+            });
 
 
 

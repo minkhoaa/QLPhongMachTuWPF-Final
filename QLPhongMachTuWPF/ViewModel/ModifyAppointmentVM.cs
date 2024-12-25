@@ -265,23 +265,23 @@ namespace QLPhongMachTuWPF.ViewModel
                 Application.Current.Dispatcher.Invoke(() =>
                 {
                     LichHen = appointment;
-                    TenBN = appointment.TenBN;
-                    DiaChi = appointment.DiaChi;
-                    DienThoai = appointment.DienThoai;
-                    DateTime dateofBirth = appointment.NgaySinh.Value;
+                    TenBN = appointment.BENHNHAN.TenBN;
+                    DiaChi = appointment.BENHNHAN.DiaChi;
+                    DienThoai = appointment.BENHNHAN.DienThoai;
+                    DateTime dateofBirth = appointment.BENHNHAN.NgaySinh.Value;
                     Ngay = dateofBirth.Day.ToString();
                     Thang = dateofBirth.Month.ToString();
                     Nam = dateofBirth.Year.ToString();
-                    DateTime dueDate = appointment.NgayKham.Value;
+                    DateTime dueDate = appointment.NgayHen.Value;
                     NgayApp = dueDate.Day.ToString();
                     ThangApp = dueDate.Month.ToString();
                     NamApp = dueDate.Year.ToString();
-                    if (appointment.GioiTinh == "Female" || appointment.GioiTinh == "Male")
+                    if (appointment.BENHNHAN.GioiTinh == "Female" || appointment.BENHNHAN.GioiTinh == "Male")
                     {
-                        Gender = (appointment.GioiTinh == "Male") ? "Nam" : "Nữ";
+                        Gender = (appointment.BENHNHAN.GioiTinh == "Male") ? "Nam" : "Nữ";
                     }
-                    else { Gender = (appointment.GioiTinh); }
-                    Status = (appointment.TrangThai == 1) ? "Available" : "Unavailable";
+                    else { Gender = (appointment.BENHNHAN.GioiTinh); }
+                    Status = (appointment.BENHNHAN.TrangThai == 1) ? "Available" : "Unavailable";
                     TenNV = appointment.NHANVIEN.TenNV; 
                 });
             });
@@ -293,20 +293,12 @@ namespace QLPhongMachTuWPF.ViewModel
                 LichHen.BENHNHAN.DiaChi = DiaChi;
                 LichHen.BENHNHAN.DienThoai = DienThoai;
                 LichHen.BENHNHAN.NgaySinh = new DateTime(int.Parse(Nam), int.Parse(Thang), int.Parse(Ngay));
+                LichHen.PHIEUKHAM.MaNV = SelectedItemCommand.MaNV;
 
-
-
-                LichHen.TenBN = TenBN;
-                LichHen.DiaChi= DiaChi;
                 LichHen.MaNV = SelectedItemCommand.MaNV;
-                LichHen.DienThoai = DienThoai;
-                LichHen.GioiTinh = Gender; 
-                LichHen.NgayKham = new DateTime(int.Parse(NamKham), int.Parse(ThangKham), int.Parse(NgayKham));
-                LichHen.NgaySinh = new DateTime(int.Parse(Nam), int.Parse(Thang), int.Parse(Ngay));
-                LichHen.TrangThai = (Status == "Available") ? 1 : 0;
+                LichHen.NgayHen = new DateTime(int.Parse(NamKham), int.Parse(ThangKham), int.Parse(NgayKham));
 
                 DataProvider.Ins.db.SaveChanges();
-
 
                 Messenger.Default.Send(LichHen);
 

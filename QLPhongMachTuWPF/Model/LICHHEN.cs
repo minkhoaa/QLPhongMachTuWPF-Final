@@ -17,15 +17,12 @@ namespace QLPhongMachTuWPF.Model
         public int MaLH { get; set; }
         public int MaNV { get; set; }
         public int MaBN { get; set; }
-        public string TenBN { get; set; }
-        public Nullable<System.DateTime> NgaySinh { get; set; }
-        public string DiaChi { get; set; }
-        public string DienThoai { get; set; }
-        public string GioiTinh { get; set; }
-        public Nullable<int> TrangThai { get; set; }
-        public Nullable<System.DateTime> NgayKham { get; set; }
+        public Nullable<System.DateTime> NgayHen { get; set; }
+        public Nullable<System.TimeSpan> GioHen { get; set; }
+        public Nullable<int> MaPK { get; set; }
     
         public virtual BENHNHAN BENHNHAN { get; set; }
         public virtual NHANVIEN NHANVIEN { get; set; }
+        public virtual PHIEUKHAM PHIEUKHAM { get; set; }
     }
 }

@@ -83,7 +83,7 @@ namespace QLPhongMachTuWPF.ViewModel
             );
             VerifyCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                //   SelectedItemCommand.NHANVIEN = DataProvider.Ins.db.NHANVIENs.Where(x => x.MaNV == SelectedItemCommand.MaNV) as NHANVIEN;
+              
                 ModifyDiagnosis diagnosis = new ModifyDiagnosis();
                 Messenger.Default.Send(SelectedItemCommand);
                 diagnosis.ShowDialog();
@@ -91,20 +91,19 @@ namespace QLPhongMachTuWPF.ViewModel
            );
             DeleteDiagnosisCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                if (SelectedItemCommand == null)
-                {
-                    MessageBox.Show("Vui lòng chọn một phiếu khám để xóa.");
-                    return;
-                }
+            if (SelectedItemCommand == null)
+            {
+                MessageBox.Show("Vui lòng chọn một phiếu khám để xóa.");
+                return;
+            }
 
-                // Tìm kiếm lịch hẹn liên quan đến phiếu khám
-                var existingAppointment = (LICHHEN)DataProvider.Ins.db.LICHHENs
-                    .FirstOrDefault(x => x.NgayKham == SelectedItemCommand.NgayKham && x.TenBN == SelectedItemCommand.BENHNHAN.TenBN) ;
-
-                if (existingAppointment != null)
+            // Tìm kiếm lịch hẹn liên quan đến phiếu khám
+           foreach (var i in DataProvider.Ins.db.LICHHENs)
                 {
-                    DataProvider.Ins.db.LICHHENs.Remove(existingAppointment);
-                   
+                    if (i.MaPK == SelectedItemCommand.MaPK)
+                    {
+                        DataProvider.Ins.db.LICHHENs.Remove(i);
+                    }
                 }
 
                 foreach (var i in DataProvider.Ins.db.CTTTs)
@@ -135,7 +134,26 @@ namespace QLPhongMachTuWPF.ViewModel
                     MessageBox.Show("Xóa thất bại: " + ex.Message.ToString());
                 }
             });
+            Messenger.Default.Register<string>(this, "RefreshDiagnosisList", (message) =>
+            {
+                if (message == "Refresh")
+                {
+                    RefreshDiagnosisList();
+                }
+            });
 
+        }
+        public void RefreshDiagnosisList()
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                DiagnosisList.Clear(); // Xóa danh sách cũ
+                var appointments = DataProvider.Ins.db.PHIEUKHAMs.ToList(); // Lấy danh sách mới từ DB
+                foreach (var appointment in appointments)
+                {
+                    DiagnosisList.Add(appointment);
+                }
+            });
         }
     }
     }

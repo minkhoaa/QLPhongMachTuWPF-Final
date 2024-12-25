@@ -193,12 +193,12 @@ namespace QLPhongMachTuWPF.ViewModel
         {
             // Lọc dữ liệu từ cơ sở dữ liệu
             var filteredAppointments = DataProvider.Ins.db.LICHHENs
-                .Where(a => DbFunctions.TruncateTime(a.NgayKham) == DbFunctions.TruncateTime(date))
+                .Where(a => DbFunctions.TruncateTime(a.NgayHen) == DbFunctions.TruncateTime(date))
                 .Select(a => new Appointment
                 {
 
-                    PatientName = a.TenBN,
-                    AppointmentDate = (DateTime)a.NgayKham,
+                    PatientName = a.BENHNHAN.TenBN,
+                    AppointmentDate = (DateTime)a.NgayHen,
 
                 })
                 .ToList();

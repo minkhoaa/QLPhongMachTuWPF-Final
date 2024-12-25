@@ -67,16 +67,11 @@ namespace QLPhongMachTuWPF.ViewModel
                 {
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        // Cập nhật thông tin bệnh nhân
-                        existingAppointment.TenBN = Appointment.TenBN;
-                        existingAppointment.DiaChi = Appointment.DiaChi;
-                        existingAppointment.GioiTinh = Appointment.GioiTinh;
-                        existingAppointment.DienThoai = Appointment.DienThoai;
-                        existingAppointment.NgaySinh = Appointment.NgaySinh;
-                        existingAppointment.TrangThai = Appointment.TrangThai;
-                   //     existingAppointment.TenNV = Appointment.TenNV;
-                        existingAppointment.NgayKham = Appointment.NgayKham;
-
+                        existingAppointment.MaNV = Appointment.MaNV;
+                        existingAppointment.MaBN = Appointment.MaBN;
+                        existingAppointment.NgayHen = Appointment.NgayHen;
+                        existingAppointment.GioHen = Appointment.GioHen;
+                        existingAppointment.MaPK = Appointment.MaPK;
                     });
                 }
                 else
@@ -102,20 +97,9 @@ namespace QLPhongMachTuWPF.ViewModel
 
             VerifyCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                if (SelectedItemCommand.NgaySinh.HasValue)
-                {
-                    DateTime dateOfBirth = SelectedItemCommand.NgaySinh.Value;
-                   
-                    SelectedItemCommand.NgaySinh = new DateTime(int.Parse(dateOfBirth.ToString("yyyy")), int.Parse(dateOfBirth.ToString("MM")), int.Parse(dateOfBirth.ToString("dd"))); 
-                }
-                BENHNHAN patient = DataProvider.Ins.db.BENHNHANs.FirstOrDefault(x => x.TenBN == SelectedItemCommand.TenBN
-               ) as BENHNHAN;
-                PHIEUKHAM Diagnosis = patient.PHIEUKHAMs.Where(x => x.NgayKham == SelectedItemCommand.NgayKham.Value).FirstOrDefault() as PHIEUKHAM;           
-                // &&(x.BENHNHAN.DienThoai == SelectedItemCommand.DienThoai)
-
-       //         if (patient == null) MessageBox.Show("fail");
-                    ModifyDiagnosis diagnosis = new ModifyDiagnosis();
-                Messenger.Default.Send(Diagnosis);
+               
+                ModifyDiagnosis diagnosis = new ModifyDiagnosis();
+                Messenger.Default.Send(SelectedItemCommand);
                 diagnosis.ShowDialog();
 
             }

@@ -314,20 +314,20 @@ namespace QLPhongMachTuWPF.ViewModel
                     {
 
                       //  TenNV = diagnosis.TenNV;
-                        TenBN = diagnosis.TenBN;
-                        DateTime dateOfBirth = diagnosis.NgaySinh.Value;
-                        Ngay = dateOfBirth.Day.ToString();
-                        Thang = dateOfBirth.Month.ToString();
-                        Nam = dateOfBirth.Year.ToString();
-                        DateTime dateTreat = diagnosis.NgayKham.Value;
-                        NgayKham = dateTreat.Day.ToString();
-                        ThangKham = dateTreat.Month.ToString();
-                        NamKham = dateTreat.Year.ToString();
+                        //TenBN = diagnosis.TenBN;
+                        //DateTime dateOfBirth = diagnosis.NgaySinh.Value;
+                        //Ngay = dateOfBirth.Day.ToString();
+                        //Thang = dateOfBirth.Month.ToString();
+                        //Nam = dateOfBirth.Year.ToString();
+                        //DateTime dateTreat = diagnosis.NgayKham.Value;
+                        //NgayKham = dateTreat.Day.ToString();
+                        //ThangKham = dateTreat.Month.ToString();
+                        //NamKham = dateTreat.Year.ToString();
 
-                        DiaChi = diagnosis.DiaChi;
-                        DienThoai = diagnosis.DienThoai;
-                        Gender = diagnosis.GioiTinh;
-                        Status = (diagnosis.TrangThai == 1) ? "Available" : "Unavailable";
+                        //DiaChi = diagnosis.DiaChi;
+                        //DienThoai = diagnosis.DienThoai;
+                        //Gender = diagnosis.GioiTinh;
+                        //Status = (diagnosis.TrangThai == 1) ? "Available" : "Unavailable";
                     });
                 });
 

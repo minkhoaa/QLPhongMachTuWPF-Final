@@ -94,8 +94,7 @@ namespace QLPhongMachTuWPF.ViewModel
                 if (patient == null) return;
 
                 // Kiểm tra nếu bệnh nhân đã tồn tại
-                var existingPatient = PatientsList.FirstOrDefault(p => ( p.MaBN == patient.MaBN) || 
-                (p.TenBN == patient.TenBN && p.NgaySinh == patient.NgaySinh));
+                var existingPatient = PatientsList.FirstOrDefault(p => (p.MaBN == patient.MaBN)); 
                 if (existingPatient != null)
                 {
                     Application.Current.Dispatcher.Invoke(() =>
@@ -114,14 +113,10 @@ namespace QLPhongMachTuWPF.ViewModel
                 {
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        // Thêm bệnh nhân 
-                        DataProvider.Ins.db.SaveChanges(); 
                         PatientsList.Add(patient);
                       
                     });
                 }
-
-                // Làm mới view
                 DataProvider.Ins.db.SaveChanges();
                 FilteredPatients?.Refresh();
             });
@@ -146,6 +141,48 @@ namespace QLPhongMachTuWPF.ViewModel
                 modifyWindow.ShowDialog();
 
             });
+            DeletePatientCommand = new RelayCommand<object>((p) => SelectedItemCommand != null, (p) =>
+            {
+                if (SelectedItemCommand == null)
+                {
+                    MessageBox.Show("Vui lòng chọn một bệnh nhân để xóa.");
+                    return;
+                }
+                foreach (var diagnosis in DataProvider.Ins.db.PHIEUKHAMs)
+                {
+                    if (diagnosis.MaBN == SelectedItemCommand.MaBN)
+                    {
+                        DataProvider.Ins.db.PHIEUKHAMs.Remove(diagnosis);
+                        var appointment = DataProvider.Ins.db.LICHHENs.FirstOrDefault(x => x.MaPK == diagnosis.MaPK);
+                        if (appointment != null)
+                        {
+                            DataProvider.Ins.db.LICHHENs.Remove(appointment);
+                        }
+                    }
+                }
+                DataProvider.Ins.db.SaveChanges();
+                DataProvider.Ins.db.BENHNHANs.Remove(SelectedItemCommand);
+
+                try
+                {
+                    DataProvider.Ins.db.SaveChanges(); // Lưu thay đổi vào cơ sở dữ liệu
+                  
+                    // Cập nhật danh sách `PHIEUKHAM`
+                    PatientsList.Remove(SelectedItemCommand);
+
+                    // Làm mới danh sách `LICHHEN`
+                    Messenger.Default.Send("Refresh", "RefreshAppointmentList");
+                    Messenger.Default.Send("Refresh", "RefreshDiagnosisList");
+
+                    MessageBox.Show("Xóa thành công");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Xóa thất bại: " + ex.Message.ToString());
+                }
+                FilteredPatients.Refresh();
+            });
+
         }
         private void FilterPatients()
         {

@@ -19,6 +19,7 @@ namespace QLPhongMachTuWPF.Model
         {
             this.CTTTs = new HashSet<CTTT>();
             this.HOADONs = new HashSet<HOADON>();
+            this.LICHHENs = new HashSet<LICHHEN>();
         }
     
         public int MaPK { get; set; }
@@ -34,6 +35,8 @@ namespace QLPhongMachTuWPF.Model
         public virtual ICollection<CTTT> CTTTs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HOADON> HOADONs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LICHHEN> LICHHENs { get; set; }
         public virtual NHANVIEN NHANVIEN { get; set; }
     }
 }

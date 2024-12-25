@@ -86,7 +86,8 @@
 
                                 
                                 <Button 
-                                    
+                                     Command="{Binding DataContext.DeleteStaffCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                    CommandParameter="{Binding}"
                                     Style="{StaticResource gridRemoveBtn}" Background="Red">
                                     <materialDesign:PackIcon Kind="TrashCan" Width="20" Height="20" Foreground="White" />
                                 </Button>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QLPhongMachTuWPF.View"
         mc:Ignorable="d"
-        Title="ModifyDiagnosis" Height="600" Width="800" 
+        Title="ModifyDiagnosis" Height="800" Width="800" 
         DataContext="{StaticResource ModifyDiagnosisVM}"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodel="clr-namespace:QLPhongMachTuWPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ModifyDiagnosisVM}"
         WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent" AllowsTransparency="True">
@@ -203,7 +203,7 @@ FontSize="16" Margin="10 0 0 0"/>
                     <!--Day appointment-->
                     <ComboBox 
                         ItemsSource="{Binding ListStaff}"
-                        SelectedItem="{Binding SelectedStaff, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        SelectedItem="{Binding SelectedItemCommandStaff, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         DisplayMemberPath="TenNV"
                         Text="{Binding TenNV, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               VerticalAlignment="Center"  x:Name="cmbStaff" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
@@ -245,10 +245,10 @@ Width="250" Height="150" FontSize="16" Margin="60 0 0 0"
                         <StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <ComboBox Width="183" 
-           Text="{Binding MedicineChoice}"
-           ItemsSource="{Binding ListMedicine}"
-                                          SelectedItem="{Binding SelectedItemCommand, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-           DisplayMemberPath="TenThuoc"
+                             Text="{Binding MedicineChoice}"
+                            ItemsSource="{Binding ListMedicine}"
+                                          SelectedItem="{Binding SelectedMedicineCommand, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    DisplayMemberPath="TenThuoc"
            Style="{StaticResource MaterialDesignOutlinedComboBox}"  FontSize="16"/>
                                 <Button Content="Add" Command="{Binding AddMedicineTolist}"  Margin="10 50 0 0" Foreground="White" />
                             </StackPanel>
@@ -265,10 +265,9 @@ Width="250" Height="150" FontSize="16" Margin="60 0 0 0"
                        
                         <Border Margin="50 0 0 0" BorderBrush="Gray" BorderThickness="1" CornerRadius="5">
                             <ListBox
-
                             ItemsSource="{Binding ListChoice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                            
-                                VerticalAlignment="Center"
+                            VerticalAlignment="Center"
                             Width="250" Height="130"
                                FontSize="16"> 
                                

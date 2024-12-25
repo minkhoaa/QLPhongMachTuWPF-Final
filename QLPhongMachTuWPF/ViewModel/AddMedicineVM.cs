@@ -16,6 +16,8 @@ namespace QLPhongMachTuWPF.ViewModel
    
     public class AddMedicineVM : ViewModelBase
     {
+
+
         private ObservableCollection<THUOC> _Medicine { get; set; }
 
         public ObservableCollection<THUOC> Medicine { get { return _Medicine; } set { _Medicine = value; OnPropertyChanged(); } }
