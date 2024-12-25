@@ -84,7 +84,8 @@
 
                                 
                                 <Button 
-Style="{StaticResource gridRemoveBtn}" Background="Red">
+                                    
+                                    Style="{StaticResource gridRemoveBtn}" Background="Red">
                                     <materialDesign:PackIcon Kind="TrashCan" Width="20" Height="20" Foreground="White" />
                                 </Button>
                             </StackPanel>
