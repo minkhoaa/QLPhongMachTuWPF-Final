@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Mime;
 using System.Runtime.InteropServices;
@@ -324,6 +325,11 @@ namespace QLPhongMachTuWPF.ViewModel
         private PHIEUKHAM _Diagnosis {  get; set; }
 
        public PHIEUKHAM Diagnosis { get => _Diagnosis; set { _Diagnosis = value; OnPropertyChanged();  } }
+
+        private DateTime? _DateDiagnosis { get; set; }
+
+        public DateTime? DateDiagnosis { get => _DateDiagnosis; set { _DateDiagnosis = value; OnPropertyChanged(); } }
+
         public ModifyDiagnosisVM()
         {
 
@@ -461,15 +467,39 @@ namespace QLPhongMachTuWPF.ViewModel
             {
                 return true;
             }, (p) => {
-
                 Diagnosis.MaNV = SelectedStaff.MaNV;
                 Diagnosis.MaBN = MaBN;
                 Diagnosis.TrieuChung = Symtoms;
                 Diagnosis.KetQua = Result;
                 Diagnosis.TrangThai = (Status == "Available") ? 1 : 0;
                 Diagnosis.NgayKham = new DateTime(int.Parse(NamKham), int.Parse(ThangKham), int.Parse(NgayKham));
+
+
+                BENHNHAN patient = DataProvider.Ins.db.BENHNHANs.FirstOrDefault(x => x.MaBN == MaBN) as BENHNHAN;
+                if (patient != null)
+                {
+                    patient.MaBN = MaBN; 
+                    patient.TenBN = TenBN;
+                    patient.DiaChi= DiaChi;
+                    patient.NgaySinh = new DateTime(int.Parse(Nam), int.Parse(Thang), int.Parse(Ngay));
+                    patient.DienThoai = DienThoai;
+                    Messenger.Default.Send(patient);
+                }
+                DateDiagnosis = new DateTime(int.Parse(NamKham), int.Parse(ThangKham), int.Parse(NgayKham));
+                LICHHEN tempAppointment = DataProvider.Ins.db.LICHHENs.FirstOrDefault(x => x.TenBN == TenBN && x.NgayKham == DateDiagnosis) as LICHHEN;
+                if (tempAppointment != null)
+                {
+                    tempAppointment.TenBN = TenBN;
+                    tempAppointment.NgayKham = DateDiagnosis;
+                    tempAppointment.TenNV = TenNV;
+                    tempAppointment.DiaChi = DiaChi;
+                    tempAppointment.DienThoai = DienThoai;
+                    tempAppointment.NgaySinh = new DateTime(int.Parse(Nam), int.Parse(Thang), int.Parse(Ngay));
+                    Messenger.Default.Send(tempAppointment);
+                }
                
                 Messenger.Default.Send(Diagnosis);
+                DataProvider.Ins.db.SaveChanges();
                 MessageBox.Show("Thay đổi thông tin thành công");
             });
             Messenger.Default.Register<string>(this, "RefreshAppointmentList", (message) =>
