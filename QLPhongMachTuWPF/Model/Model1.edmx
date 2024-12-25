@@ -55,13 +55,14 @@
             <PropertyRef Name="MaLH" />
           </Key>
           <Property Name="MaLH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaNV" Type="int" Nullable="false" />
+          <Property Name="MaBN" Type="int" Nullable="false" />
           <Property Name="TenBN" Type="nvarchar" MaxLength="40" />
           <Property Name="NgaySinh" Type="smalldatetime" />
           <Property Name="DiaChi" Type="nvarchar" MaxLength="80" />
           <Property Name="DienThoai" Type="varchar" MaxLength="20" />
           <Property Name="GioiTinh" Type="nvarchar" MaxLength="20" />
           <Property Name="TrangThai" Type="int" />
-          <Property Name="TenNV" Type="nvarchar" MaxLength="40" />
           <Property Name="NgayKham" Type="smalldatetime" />
         </EntityType>
         <EntityType Name="NHANVIEN">
@@ -140,6 +141,30 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="LH_MaBN_FK">
+          <End Role="BENHNHAN" Type="Self.BENHNHAN" Multiplicity="1" />
+          <End Role="LICHHEN" Type="Self.LICHHEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BENHNHAN">
+              <PropertyRef Name="MaBN" />
+            </Principal>
+            <Dependent Role="LICHHEN">
+              <PropertyRef Name="MaBN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LH_MaNV_FK">
+          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="1" />
+          <End Role="LICHHEN" Type="Self.LICHHEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHANVIEN">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="LICHHEN">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="PK_MaBN_FK">
           <End Role="BENHNHAN" Type="Self.BENHNHAN" Multiplicity="0..1" />
           <End Role="PHIEUKHAM" Type="Self.PHIEUKHAM" Multiplicity="*" />
@@ -185,6 +210,14 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
             <End Role="PHIEUKHAM" EntitySet="PHIEUKHAM" />
             <End Role="HOADON" EntitySet="HOADON" />
           </AssociationSet>
+          <AssociationSet Name="LH_MaBN_FK" Association="Self.LH_MaBN_FK">
+            <End Role="BENHNHAN" EntitySet="BENHNHAN" />
+            <End Role="LICHHEN" EntitySet="LICHHEN" />
+          </AssociationSet>
+          <AssociationSet Name="LH_MaNV_FK" Association="Self.LH_MaNV_FK">
+            <End Role="NHANVIEN" EntitySet="NHANVIEN" />
+            <End Role="LICHHEN" EntitySet="LICHHEN" />
+          </AssociationSet>
           <AssociationSet Name="PK_MaBN_FK" Association="Self.PK_MaBN_FK">
             <End Role="BENHNHAN" EntitySet="BENHNHAN" />
             <End Role="PHIEUKHAM" EntitySet="PHIEUKHAM" />
@@ -203,9 +236,14 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
           <EntitySet Name="BENHNHANs" EntityType="QLPMTModel.BENHNHAN" />
           <EntitySet Name="CTTTs" EntityType="QLPMTModel.CTTT" />
           <EntitySet Name="HOADONs" EntityType="QLPMTModel.HOADON" />
+          <EntitySet Name="LICHHENs" EntityType="QLPMTModel.LICHHEN" />
           <EntitySet Name="NHANVIENs" EntityType="QLPMTModel.NHANVIEN" />
           <EntitySet Name="PHIEUKHAMs" EntityType="QLPMTModel.PHIEUKHAM" />
           <EntitySet Name="THUOCs" EntityType="QLPMTModel.THUOC" />
+          <AssociationSet Name="LH_MaBN_FK" Association="QLPMTModel.LH_MaBN_FK">
+            <End Role="BENHNHAN" EntitySet="BENHNHANs" />
+            <End Role="LICHHEN" EntitySet="LICHHENs" />
+          </AssociationSet>
           <AssociationSet Name="PK_MaBN_FK" Association="QLPMTModel.PK_MaBN_FK">
             <End Role="BENHNHAN" EntitySet="BENHNHANs" />
             <End Role="PHIEUKHAM" EntitySet="PHIEUKHAMs" />
@@ -222,11 +260,14 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
             <End Role="PHIEUKHAM" EntitySet="PHIEUKHAMs" />
             <End Role="HOADON" EntitySet="HOADONs" />
           </AssociationSet>
+          <AssociationSet Name="LH_MaNV_FK" Association="QLPMTModel.LH_MaNV_FK">
+            <End Role="NHANVIEN" EntitySet="NHANVIENs" />
+            <End Role="LICHHEN" EntitySet="LICHHENs" />
+          </AssociationSet>
           <AssociationSet Name="PK_MaNV_FK" Association="QLPMTModel.PK_MaNV_FK">
             <End Role="NHANVIEN" EntitySet="NHANVIENs" />
             <End Role="PHIEUKHAM" EntitySet="PHIEUKHAMs" />
           </AssociationSet>
-          <EntitySet Name="LICHHENs" EntityType="QLPMTModel.LICHHEN" />
         </EntityContainer>
         <EntityType Name="ACCOUNT">
           <Key>
@@ -248,6 +289,7 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
           <Property Name="DienThoai" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="GioiTinh" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="TrangThai" Type="Int32" />
+          <NavigationProperty Name="LICHHENs" Relationship="QLPMTModel.LH_MaBN_FK" FromRole="BENHNHAN" ToRole="LICHHEN" />
           <NavigationProperty Name="PHIEUKHAMs" Relationship="QLPMTModel.PK_MaBN_FK" FromRole="BENHNHAN" ToRole="PHIEUKHAM" />
         </EntityType>
         <EntityType Name="CTTT">
@@ -277,6 +319,23 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
           <Property Name="TrangThai" Type="Int32" />
           <NavigationProperty Name="PHIEUKHAM" Relationship="QLPMTModel.HD_MaPK_FK" FromRole="HOADON" ToRole="PHIEUKHAM" />
         </EntityType>
+        <EntityType Name="LICHHEN">
+          <Key>
+            <PropertyRef Name="MaLH" />
+          </Key>
+          <Property Name="MaLH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaNV" Type="Int32" Nullable="false" />
+          <Property Name="MaBN" Type="Int32" Nullable="false" />
+          <Property Name="TenBN" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="NgaySinh" Type="DateTime" Precision="0" />
+          <Property Name="DiaChi" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="DienThoai" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="GioiTinh" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TrangThai" Type="Int32" />
+          <Property Name="NgayKham" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="BENHNHAN" Relationship="QLPMTModel.LH_MaBN_FK" FromRole="LICHHEN" ToRole="BENHNHAN" />
+          <NavigationProperty Name="NHANVIEN" Relationship="QLPMTModel.LH_MaNV_FK" FromRole="LICHHEN" ToRole="NHANVIEN" />
+        </EntityType>
         <EntityType Name="NHANVIEN">
           <Key>
             <PropertyRef Name="MaNV" />
@@ -289,6 +348,7 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
           <Property Name="GioiTinh" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="LoaiNV" Type="Int32" />
           <Property Name="TrangThai" Type="Int32" />
+          <NavigationProperty Name="LICHHENs" Relationship="QLPMTModel.LH_MaNV_FK" FromRole="NHANVIEN" ToRole="LICHHEN" />
           <NavigationProperty Name="PHIEUKHAMs" Relationship="QLPMTModel.PK_MaNV_FK" FromRole="NHANVIEN" ToRole="PHIEUKHAM" />
         </EntityType>
         <EntityType Name="PHIEUKHAM">
@@ -318,6 +378,18 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
           <Property Name="TrangThai" Type="Int32" />
           <NavigationProperty Name="CTTTs" Relationship="QLPMTModel.CTTT_TenThuoc_FK" FromRole="THUOC" ToRole="CTTT" />
         </EntityType>
+        <Association Name="LH_MaBN_FK">
+          <End Type="QLPMTModel.BENHNHAN" Role="BENHNHAN" Multiplicity="1" />
+          <End Type="QLPMTModel.LICHHEN" Role="LICHHEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BENHNHAN">
+              <PropertyRef Name="MaBN" />
+            </Principal>
+            <Dependent Role="LICHHEN">
+              <PropertyRef Name="MaBN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="PK_MaBN_FK">
           <End Type="QLPMTModel.BENHNHAN" Role="BENHNHAN" Multiplicity="0..1" />
           <End Type="QLPMTModel.PHIEUKHAM" Role="PHIEUKHAM" Multiplicity="*" />
@@ -366,6 +438,18 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="LH_MaNV_FK">
+          <End Type="QLPMTModel.NHANVIEN" Role="NHANVIEN" Multiplicity="1" />
+          <End Type="QLPMTModel.LICHHEN" Role="LICHHEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHANVIEN">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="LICHHEN">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="PK_MaNV_FK">
           <End Type="QLPMTModel.NHANVIEN" Role="NHANVIEN" Multiplicity="0..1" />
           <End Type="QLPMTModel.PHIEUKHAM" Role="PHIEUKHAM" Multiplicity="*" />
@@ -378,20 +462,6 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="LICHHEN">
-          <Key>
-            <PropertyRef Name="MaLH" />
-          </Key>
-          <Property Name="MaLH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TenBN" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
-          <Property Name="NgaySinh" Type="DateTime" Precision="0" />
-          <Property Name="DiaChi" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
-          <Property Name="DienThoai" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="GioiTinh" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="TrangThai" Type="Int32" />
-          <Property Name="TenNV" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
-          <Property Name="NgayKham" Type="DateTime" Precision="0" />
-        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -446,6 +516,22 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="LICHHENs">
+            <EntityTypeMapping TypeName="QLPMTModel.LICHHEN">
+              <MappingFragment StoreEntitySet="LICHHEN">
+                <ScalarProperty Name="NgayKham" ColumnName="NgayKham" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="TenBN" ColumnName="TenBN" />
+                <ScalarProperty Name="MaBN" ColumnName="MaBN" />
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="MaLH" ColumnName="MaLH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="NHANVIENs">
             <EntityTypeMapping TypeName="QLPMTModel.NHANVIEN">
               <MappingFragment StoreEntitySet="NHANVIEN">
@@ -481,21 +567,6 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
                 <ScalarProperty Name="DonViTinh" ColumnName="DonViTinh" />
                 <ScalarProperty Name="TenThuoc" ColumnName="TenThuoc" />
                 <ScalarProperty Name="MaThuoc" ColumnName="MaThuoc" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="LICHHENs">
-            <EntityTypeMapping TypeName="QLPMTModel.LICHHEN">
-              <MappingFragment StoreEntitySet="LICHHEN">
-                <ScalarProperty Name="NgayKham" ColumnName="NgayKham" />
-                <ScalarProperty Name="TenNV" ColumnName="TenNV" />
-                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
-                <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
-                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
-                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
-                <ScalarProperty Name="TenBN" ColumnName="TenBN" />
-                <ScalarProperty Name="MaLH" ColumnName="MaLH" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

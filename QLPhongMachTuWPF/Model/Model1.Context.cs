@@ -29,9 +29,9 @@ namespace QLPhongMachTuWPF.Model
         public virtual DbSet<BENHNHAN> BENHNHANs { get; set; }
         public virtual DbSet<CTTT> CTTTs { get; set; }
         public virtual DbSet<HOADON> HOADONs { get; set; }
+        public virtual DbSet<LICHHEN> LICHHENs { get; set; }
         public virtual DbSet<NHANVIEN> NHANVIENs { get; set; }
         public virtual DbSet<PHIEUKHAM> PHIEUKHAMs { get; set; }
         public virtual DbSet<THUOC> THUOCs { get; set; }
-        public virtual DbSet<LICHHEN> LICHHENs { get; set; }
     }
 }

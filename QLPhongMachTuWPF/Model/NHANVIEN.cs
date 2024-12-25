@@ -17,6 +17,7 @@ namespace QLPhongMachTuWPF.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public NHANVIEN()
         {
+            this.LICHHENs = new HashSet<LICHHEN>();
             this.PHIEUKHAMs = new HashSet<PHIEUKHAM>();
         }
     
@@ -29,6 +30,8 @@ namespace QLPhongMachTuWPF.Model
         public Nullable<int> LoaiNV { get; set; }
         public Nullable<int> TrangThai { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LICHHEN> LICHHENs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PHIEUKHAM> PHIEUKHAMs { get; set; }
     }
