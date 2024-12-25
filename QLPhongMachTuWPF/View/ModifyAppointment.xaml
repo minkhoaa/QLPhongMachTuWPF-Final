@@ -200,6 +200,7 @@ FontSize="16" Margin="60 0 0 0"/>
                     <ComboBox 
                         ItemsSource="{Binding ListStaff}"
                         DisplayMemberPath="TenNV"
+                        SelectedItem="{Binding SelectedItemCommand}"
                         Text="{Binding TenNV, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               VerticalAlignment="Center"  x:Name="cmbStaff" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
          

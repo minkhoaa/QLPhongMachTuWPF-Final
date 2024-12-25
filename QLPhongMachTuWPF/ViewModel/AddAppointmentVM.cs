@@ -266,14 +266,24 @@ namespace QLPhongMachTuWPF.ViewModel
                     NgaySinh = new DateTime(int.Parse(Nam), int.Parse(Thang), int.Parse(Ngay)),
                     GioiTinh = Gender,
                     TrangThai = (Status == "Discharged") ? 1 : 0
-
                 };
+                try
+                {
+                    DataProvider.Ins.db.BENHNHANs.Add(newPatient);
+                    DataProvider.Ins.db.SaveChanges();
+                    Messenger.Default.Send(newPatient);
+                }
+                catch
+                (Exception )
+                {
+                    MessageBox.Show("fail to add patient");
+                }
 
 
                 // Tạo lịch hẹn mới
                 var newAppointment = new LICHHEN()
                 {
-                    TenBN = TenBN,
+                       TenBN = TenBN,
                     MaBN = newPatient.MaBN,
                     MaNV = SelectedItemCommand.MaNV,
                     DiaChi = DiaChi,
@@ -281,50 +291,20 @@ namespace QLPhongMachTuWPF.ViewModel
                     NgaySinh = new DateTime(int.Parse(Nam), int.Parse(Thang), int.Parse(Ngay)),
                     GioiTinh = Gender,
                     TrangThai = (Status == "Discharged") ? 1 : 0,
-
                     NgayKham = new DateTime(int.Parse(NamKham), int.Parse(ThangKham), int.Parse(NgayKham))
                 };
-                try
-                {
-                    var existingPatients = DataProvider.Ins.db.BENHNHANs.FirstOrDefault(a => a.TenBN == newPatient.TenBN && a.NgaySinh == newPatient.NgaySinh);
-                    if (existingPatients == null)
-                    {
-                        DataProvider.Ins.db.BENHNHANs.Add(newPatient);
-                    }
-                    DataProvider.Ins.db.SaveChanges();
-                    Messenger.Default.Send(newPatient);
-                }
-                catch
-                (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                var nhanVien = DataProvider.Ins.db.NHANVIENs.FirstOrDefault(nv => nv.TenNV == TenNV);
-                if (nhanVien == null)
-                {
-                    MessageBox.Show("Không tìm thấy nhân viên với tên này.");
-                    return;
-                }
-
-                var benhNhan = DataProvider.Ins.db.BENHNHANs.FirstOrDefault(bn => bn.TenBN == TenBN);
-                if (benhNhan == null)
-                {
-                    MessageBox.Show("Không tìm thấy bệnh nhân với tên này.");
-                    return;
-                }
 
                 // Tạo đối tượng PHIEUKHAM và gửi
                 PHIEUKHAM newDiagnosis = new PHIEUKHAM()
                 {
-                    MaNV = nhanVien.MaNV,
-                    MaBN = benhNhan.MaBN,
+                    MaNV = SelectedItemCommand.MaNV,
+                    MaBN = newPatient.MaBN,
+
                     NgayKham = new DateTime(int.Parse(NamKham), int.Parse(ThangKham), int.Parse(NgayKham)),
                     TrieuChung = "",
                     KetQua = "",
                     TrangThai = 1,
-                  
                 };
-
                 try
                 {
                     // Đảm bảo Messenger đã được đăng ký và đối tượng DiagnosisVM đã sẵn sàng
