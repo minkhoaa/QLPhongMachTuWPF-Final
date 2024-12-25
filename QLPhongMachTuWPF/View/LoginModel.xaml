@@ -115,7 +115,7 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock x:Name="textPassword"  MouseDown="textPassword_MouseDown" 
-                                   Text="Password"  FontSize="14"
+                                Text="Password"  FontSize="14"
                                 Grid.Column="1"
                                 Panel.ZIndex="1"
                                 Margin="10 0 0 0"
@@ -147,12 +147,21 @@
                     CommandParameter="{Binding ElementName=FormLogin}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Width="170"
-                   Click="Button_Click"
+                   
                         IsDefault="True"
                         Foreground="White">
                     LOG IN
                 </Button>
-
+                <Button x:Name="btnRegister" Background="#1d6fc1"
+      Command="{Binding RegisterCommand}"
+      CommandParameter="{Binding ElementName=FormLogin}"
+      Style="{StaticResource MaterialDesignRaisedButton}"
+      Width="170"
+    
+          IsDefault="True"
+          Foreground="White">
+                   REGISTER
+                </Button>
 
             </StackPanel>
         </Border>

@@ -157,6 +157,7 @@
     <Compile Include="ViewModel\ModifyMedicineVM.cs" />
     <Compile Include="ViewModel\ModifyPatientsVM.cs" />
     <Compile Include="ViewModel\ModifyStaffVM.cs" />
+    <Compile Include="ViewModel\RegisterVM.cs" />
     <Compile Include="View\AddAppointment.xaml.cs">
       <DependentUpon>AddAppointment.xaml</DependentUpon>
     </Compile>

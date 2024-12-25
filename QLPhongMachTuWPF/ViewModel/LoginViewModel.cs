@@ -23,6 +23,8 @@ namespace QLPhongMachTuWPF.ViewModel
         public ICommand EnterKeyCommand { get; set; }
         public ICommand PasswordChangedCommand { get; set; }
 
+        public ICommand RegisterCommand { get; set; }
+
         private string _username;
 
         public string Username { get => _username; set { _username = value; OnPropertyChanged(); } }
@@ -45,6 +47,12 @@ namespace QLPhongMachTuWPF.ViewModel
 
             });
             PasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; }, (p) => { Password = p.Password; });
+            RegisterCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                Register register = new Register();
+                register.ShowDialog();
+
+            });
         }
 
 

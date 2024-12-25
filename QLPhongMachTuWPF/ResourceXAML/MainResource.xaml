@@ -25,6 +25,7 @@
     <viewmodel:ModifyDiagnosisVM x:Key="ModifyDiagnosisVM"></viewmodel:ModifyDiagnosisVM>
     <viewmodel:ModifyAppointmentVM x:Key="ModifyAppointmentVM"></viewmodel:ModifyAppointmentVM>
     <viewmodel:DetailsInvoice x:Key="DetailsInvoice"></viewmodel:DetailsInvoice>
+    <viewmodel:RegisterVM x:Key="RegisterVM"></viewmodel:RegisterVM>
     
 </ResourceDictionary> 
     
