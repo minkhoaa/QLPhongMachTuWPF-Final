@@ -117,6 +117,7 @@ namespace QLPhongMachTuWPF.ViewModel
 
         public HomepageVM()
         {
+
             // Khởi tạo lệnh
             TotalIncome = 0; 
             LoadChartDataCommand = new RelayCommand<object>(CanLoadChartData, LoadChartData);

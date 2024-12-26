@@ -8,10 +8,10 @@
              d:DesignHeight="720" d:DesignWidth="880"
             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
-             DataContext="{StaticResource HomepageVM}">
+             DataContext="{Binding HomepageVM}">
 
 
-
+    
 
     <Grid Background="#ebedf5">
         <Grid.ColumnDefinitions>
@@ -120,11 +120,50 @@
             </Grid>
 
             <DataGrid x:Name="Patientdatagrid" Grid.Row="3" Margin="10 50 10 10"
-         ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle3}" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  RowStyle="{DynamicResource DataGridRowStyle1}" 
+            AutoGenerateColumns="False"
+                      CanUserResizeColumns="False"
+                      CanUserAddRows="False"
+                      CanUserDeleteRows="False"
+                      IsReadOnly="True"
+                      CanUserReorderColumns="False"
+                      
          HorizontalScrollBarVisibility="Disabled" Grid.RowSpan="2" 
     HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
     Width="auto" Height="auto" VerticalScrollBarVisibility="Auto" 
                       ItemsSource="{Binding PatientsWithDiagnosis}">
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Foreground" Value="Black"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="Background" Value="DarkGray"/>
+                        <Setter Property="Height" Value="30"/>
+                        <Setter Property="FontSize" Value="14"/>
+
+                    </Style>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Foreground" Value="Black" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="Background" Value="White" />
+                        <Setter Property="Foreground" Value="Black" />
+                        <!-- Thay đổi màu nền khi dòng được chọn -->
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="#1ca7ec" />
+                                <!-- Màu xanh nhạt -->
+                                <Setter Property="Foreground" Value="Black" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.Resources>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="#" Binding="{Binding MaBN}" Width="0.5*" />
                     <DataGridTextColumn Header="Date In" Binding="{Binding NgayKham,StringFormat='dd/MM/yyyy'}" Width="*" />
