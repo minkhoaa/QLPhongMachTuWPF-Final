@@ -147,9 +147,10 @@
                          CanUserAddRows="False" 
                              HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                              Margin="10" x:Name="datagrid" 
-                           SelectedItem="{Binding SelectedMedicine, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                            ItemsSource="{Binding CollectionViewMedicine, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                           HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" MaxHeight="500">
+                           HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" MaxHeight="500"
+                              SelectedItem="{Binding SelectedMedicine, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                ItemsSource="{Binding CollectionViewMedicine, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="#" IsReadOnly="True" Width="0.5*" Binding="{Binding MaPK, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             <DataGridTextColumn Header="MEDICINE" IsReadOnly="True"  Width="*" Binding="{Binding MaThuoc, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
