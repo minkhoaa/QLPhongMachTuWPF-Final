@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Dynamic;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -342,11 +343,40 @@ namespace QLPhongMachTuWPF.ViewModel
             });
 
 
-            Messenger.Default.Register<HOADON>(this, (diagnosis) =>
+            Messenger.Default.Register<HOADON>(this, (invoice) =>
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
+                    if (invoice == null) return;
+                    ListMedicine.Clear(); // Đảm bảo danh sách không bị dữ liệu cũ
+                    var medicines = DataProvider.Ins.db.CTTTs.Where(x => x.MaPK == invoice.MaPK).ToList();
+                    foreach (var medicine in medicines)
+                    {
+                        ListMedicine.Add(medicine);
+                    }
 
+                    CollectionViewMedicine.Refresh();
+
+
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        ID = invoice.MaHD.ToString();
+                        TenNV = invoice.PHIEUKHAM.NHANVIEN.TenNV;
+                        TenBN =  invoice.PHIEUKHAM.BENHNHAN.TenBN;
+                        Ngay = invoice.PHIEUKHAM.BENHNHAN.NgaySinh.Value.Day.ToString() ?? "N/A";
+                        Thang = invoice.PHIEUKHAM.BENHNHAN.NgaySinh.Value.Month.ToString() ?? "N/A";
+                        Nam = invoice.PHIEUKHAM.BENHNHAN.NgaySinh.Value.Year.ToString() ?? "N/A";
+                        NgayKham = invoice.NgayHD.Value.Day.ToString() ?? "N/A";
+                        ThangKham = invoice.NgayHD.Value.Day.ToString() ?? "N/A";
+                        NamKham = invoice.NgayHD.Value.Day.ToString() ?? "N/A";
+                        DiaChi = invoice.PHIEUKHAM.BENHNHAN.DiaChi;
+                        DienThoai = invoice.PHIEUKHAM.BENHNHAN.DienThoai;
+                        Gender = invoice.PHIEUKHAM.BENHNHAN.GioiTinh;
+                        Status = "Unpaid";
+                        Symtoms = invoice.PHIEUKHAM.TrieuChung;
+                        Result = invoice.PHIEUKHAM.KetQua;
+                        NgayHoanThanh = DateTime.Now;
+                    });
                 });
             });
 

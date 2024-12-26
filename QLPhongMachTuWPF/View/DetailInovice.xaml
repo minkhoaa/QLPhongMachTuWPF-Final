@@ -108,7 +108,7 @@
                     <Rectangle Fill="#1f2f98" Margin="10 0 0 0" Width="10" HorizontalAlignment="Left" VerticalAlignment="top" Height="120" />
                 <StackPanel Orientation="Vertical" Margin="10 0 0 0" Width="auto" Height="auto">
                     <TextBlock Text="INVOICE TO:" Style="{StaticResource titleTextDateAndInvoice}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10" FontSize="14"/>
-                    <TextBlock Text="{Binding TenBN}" TextWrapping="WrapWithOverflow" Style="{StaticResource textDateAndInvoice}" HorizontalAlignment="Left" Margin="10 -10" FontSize="30"/>
+                    <TextBlock Text="{Binding TenBN}"  TextWrapping="WrapWithOverflow" Style="{StaticResource textDateAndInvoice}" HorizontalAlignment="Left" Margin="10 -10" FontSize="30"/>
                     <TextBlock Text="{Binding DienThoai}" Style="{StaticResource textDateAndInvoice}" HorizontalAlignment="Left" Margin="10 10" FontWeight="Thin" FontSize="14"/>
                     <TextBlock Text="{Binding DiaChi}" TextWrapping="WrapWithOverflow" Style="{StaticResource textDateAndInvoice}" HorizontalAlignment="Left" FontSize="14" FontWeight="Thin" Margin="10 -10"/>
 
