@@ -326,6 +326,10 @@ namespace QLPhongMachTuWPF.ViewModel
                 {
                     MessageBox.Show($"Lỗi khi thêm lịch hẹn: {ex.Message}");
                 }
+                Application.Current.Windows
+              .OfType<Window>()
+              .SingleOrDefault(w => w.IsActive)
+              ?.Close();
             });
         }
         private void ResetFields()

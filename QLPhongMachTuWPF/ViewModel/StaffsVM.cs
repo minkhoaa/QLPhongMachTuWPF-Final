@@ -119,9 +119,10 @@ namespace QLPhongMachTuWPF.ViewModel
             {
                 if (SelectedItemCommand == null)
                 {
-                    MessageBox.Show("Vui lòng chọn một nhân viên để xóa.");
+                    MessageBox.Show("Vui lòng chọn một bệnh nhân để xóa.");
                     return;
                 }
+
                 foreach (var item in DataProvider.Ins.db.HOADONs)
                 {
                     if (item.PHIEUKHAM.MaNV == SelectedItemCommand.MaNV)
@@ -130,56 +131,48 @@ namespace QLPhongMachTuWPF.ViewModel
                     }
 
                 }
+
                 foreach (var diagnosis in DataProvider.Ins.db.PHIEUKHAMs)
                 {
                     if (diagnosis.MaNV == SelectedItemCommand.MaNV)
                     {
-                        
                         var appointment = DataProvider.Ins.db.LICHHENs.FirstOrDefault(x => x.MaPK == diagnosis.MaPK);
                         if (appointment != null)
                         {
-
                             DataProvider.Ins.db.LICHHENs.Remove(appointment);
                         }
+
                         foreach (var item in DataProvider.Ins.db.CTTTs)
                         {
                             if (item.MaPK == diagnosis.MaPK)
                             {
                                 DataProvider.Ins.db.CTTTs.Remove(item);
                             }
-
                         }
-                      
-
                         DataProvider.Ins.db.PHIEUKHAMs.Remove(diagnosis);
                     }
                 }
 
-
-                DataProvider.Ins.db.SaveChanges();
                 DataProvider.Ins.db.NHANVIENs.Remove(SelectedItemCommand);
+                DataProvider.Ins.db.SaveChanges();
 
                 try
                 {
-                    DataProvider.Ins.db.SaveChanges(); // Lưu thay đổi vào cơ sở dữ liệu
-
-                    // Cập nhật danh sách `PHIEUKHAM`
+                    DataProvider.Ins.db.SaveChanges();
                     StaffList.Remove(SelectedItemCommand);
 
-                    // Làm mới danh sách `LICHHEN`
-                    Messenger.Default.Send("Refresh", "RefreshAppointmentList");
-                    Messenger.Default.Send("Refresh", "RefreshDiagnosisList");
-                    Messenger.Default.Send("Refresh", "RefreshInvoiceList");
-
                     MessageBox.Show("Xóa thành công");
-                    FilteredStaffs.Refresh(); 
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Xóa thất bại: " + ex.Message.ToString());
+                    MessageBox.Show("Xóa thất bại: " + ex.Message);
                 }
-                FilteredStaffs.Refresh();
+                Messenger.Default.Send("Refresh", "RefreshInvoiceList");
+                Messenger.Default.Send("Refresh", "RefreshDiagnosisList");
+                Messenger.Default.Send("Refresh", "RefreshAppointmentList");
 
+
+                FilteredStaffs.Refresh();
             });
 
         }

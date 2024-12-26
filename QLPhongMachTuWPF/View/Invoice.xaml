@@ -37,21 +37,21 @@
             </StackPanel>
         </Button>
 
-        
+
 
         <DataGrid Grid.Row="1" ItemsSource="{Binding FilteredInvoice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   SelectedItem="{Binding SelectedInvoice}"
-                  x:Name="patientsDatagrid" Margin="0,0,0,10"
-         HorizontalScrollBarVisibility="Disabled" Grid.RowSpan="2" 
+                  Background="#eeeeee"  x:Name="patientsDatagrid" Margin="0,0,0,10"
+          HorizontalScrollBarVisibility="Disabled" Grid.RowSpan="2" 
     HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AutoGenerateColumns="False" CanUserAddRows="False"
     Width="auto" Height="auto" VerticalScrollBarVisibility="Auto">
-         
+
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Invoice ID" IsReadOnly="True" CanUserResize="False" Width="1*" Binding="{Binding MaHD, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Header="Exam form ID" IsReadOnly="True" CanUserResize="False" Width="1*" Binding="{Binding MaPK, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTextColumn Header="Examination fee" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" Binding="{Binding TienKham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Examination fee" IsReadOnly="True"  ElementStyle="{StaticResource textBlockDatagrid}" CanUserResize="False" Width="1.5*" Binding="{Binding TienKham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <DataGridTextColumn Header="Pharmancy fee" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" Binding="{Binding TienThuoc, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTextColumn Header="Total fee" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding TongTien, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Total fee"  ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding TongTien, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <DataGridTextColumn Header="Date" IsReadOnly="True" CanUserResize="False" Width="0.8*" Binding="{Binding NgayHD, StringFormat='dd/MM/yyyy', Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 <DataGridTemplateColumn Header="Status" CanUserResize="False" Width="1.2*">

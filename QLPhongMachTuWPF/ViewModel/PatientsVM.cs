@@ -194,7 +194,7 @@ namespace QLPhongMachTuWPF.ViewModel
                 {
                     MessageBox.Show("Xóa thất bại: " + ex.Message);
                 }
-  Messenger.Default.Send("Refresh", "RefreshInvoiceList");
+                Messenger.Default.Send("Refresh", "RefreshInvoiceList");
                 Messenger.Default.Send("Refresh", "RefreshDiagnosisList");
                 Messenger.Default.Send("Refresh", "RefreshAppointmentList");
               

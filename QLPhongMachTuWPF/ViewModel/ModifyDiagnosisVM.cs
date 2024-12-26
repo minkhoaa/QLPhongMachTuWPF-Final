@@ -520,6 +520,10 @@ namespace QLPhongMachTuWPF.ViewModel
                Messenger.Default.Send(Diagnosis);
                 detailInovice.ShowDialog();
                 Messenger.Default.Send("RefreshInvoiceList");
+                Application.Current.Windows
+              .OfType<Window>()
+              .SingleOrDefault(w => w.IsActive)
+              ?.Close();
 
             });
             ConfirmCommand = new RelayCommand<object>((p) =>
@@ -544,6 +548,7 @@ namespace QLPhongMachTuWPF.ViewModel
                 DataProvider.Ins.db.SaveChanges();
                 MessageBox.Show("Thay đổi thông tin thành công");
                 Messenger.Default.Send("RefreshInvoiceList");
+              
             });
             Messenger.Default.Register<string>(this, "RefreshAppointmentList", (message) =>
             {

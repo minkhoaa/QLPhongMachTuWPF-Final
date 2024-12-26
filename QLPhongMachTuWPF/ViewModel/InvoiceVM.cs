@@ -109,24 +109,26 @@ namespace QLPhongMachTuWPF.ViewModel
                 DataProvider.Ins.db.SaveChanges();
             });
 
-
-            Messenger.Default.Register<string>(this, (message) =>
+            Messenger.Default.Register<string>(this, "RefreshInvoiceList", (message) =>
             {
-                if (message == "RefreshInvoiceList")
+                if (message == "Refresh")
                 {
                     RefreshInvoiceList();
                 }
+
             });
 
         }
-        private void RefreshInvoiceList()
-        {
+        private void RefreshInvoiceList() {
             Application.Current.Dispatcher.Invoke(() =>
             {
                 InvoiceList.Clear(); // Xóa danh sách cũ
-                InvoiceList = new ObservableCollection<HOADON>(DataProvider.Ins.db.HOADONs);
-                FilteredInvoice = CollectionViewSource.GetDefaultView(InvoiceList);
-                FilteredInvoice.Refresh();
+                var appointments = DataProvider.Ins.db.HOADONs.ToList(); // Lấy danh sách mới từ DB
+                foreach (var appointment in appointments)
+                {
+                    InvoiceList.Add(appointment);
+
+                }
             });
         }
 

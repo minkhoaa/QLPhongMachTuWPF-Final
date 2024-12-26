@@ -408,6 +408,11 @@ namespace QLPhongMachTuWPF.ViewModel
                 DataProvider.Ins.db.SaveChanges();
                 Messenger.Default.Send("RefreshInvoiceList");
 
+                Application.Current.Windows
+              .OfType<Window>()
+              .SingleOrDefault(w => w.IsActive)
+              ?.Close();
+
             });
             PrintCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
@@ -417,6 +422,11 @@ namespace QLPhongMachTuWPF.ViewModel
 
                 DataProvider.Ins.db.SaveChanges();
                 Messenger.Default.Send("RefreshInvoiceList");
+
+                Application.Current.Windows
+              .OfType<Window>()
+              .SingleOrDefault(w => w.IsActive)
+              ?.Close();
 
             }
          );
