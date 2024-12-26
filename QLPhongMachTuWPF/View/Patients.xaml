@@ -51,12 +51,19 @@
         <DataGrid Grid.Row="1" Background="#eeeeee"
                   SelectedItem="{Binding SelectedItemCommand, UpdateSourceTrigger=PropertyChanged}"
                   ItemsSource="{Binding FilteredPatients}" 
-                  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle2}" 
-                  Style="{DynamicResource DataGridStyle1}"
-                  CellStyle="{DynamicResource DataGridCellStyle1}"  
-                  RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="patientsDatagrid" Margin="0,0,0,10"
+                   x:Name="patientsDatagrid" Margin="0,0,0,10"
               HorizontalScrollBarVisibility="Disabled" Grid.RowSpan="3"
                   Width="auto" Height="auto" VerticalScrollBarVisibility="Auto">
+            <DataGrid.Resources>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="Background" Value="DarkGray"/>
+                    <Setter Property="Height" Value="40"/>
+                    <Setter Property="FontSize" Value="16"/>
+                </Style>
+            </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Patient ID" IsReadOnly="True" CanUserResize="False" Width="0.8*" Binding="{Binding MaBN}" />
                 <DataGridTextColumn Header="Name" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1.5*" Binding="{Binding TenBN}"/>
