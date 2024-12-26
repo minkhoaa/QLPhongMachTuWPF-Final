@@ -149,7 +149,7 @@
                              Margin="10" x:Name="datagrid" 
                            SelectedItem="{Binding SelectedMedicine, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             ItemsSource="{Binding CollectionViewMedicine, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                           HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                           HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" MaxHeight="500">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="#" IsReadOnly="True" Width="0.5*" Binding="{Binding MaPK, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             <DataGridTextColumn Header="MEDICINE" IsReadOnly="True"  Width="*" Binding="{Binding MaThuoc, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
@@ -164,14 +164,15 @@
                         </DataGrid.Columns>
                     </DataGrid>
 
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0 450" HorizontalAlignment="Center">
-                        <Button
-                            Command = "{Binding SaveChangesCommand}"
-                            Content="Save changes" Margin="10 0 80 0" FontSize="20" Width="180" Height="40" Foreground="White"/>
-                        <Button
-                            Command="{Binding PrintCommand}"
-                            Content="Print" Margin="0 10" Width="180" FontSize="20" Height="40" Foreground="White"/>
-                    </StackPanel>
+                    
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="10" HorizontalAlignment="Center" Panel.ZIndex="1">
+                    <Button
+        Command = "{Binding SaveChangesCommand}"
+        Content="Save changes" Margin="10 0 80 0" FontSize="20" Width="180" Height="40" Foreground="White"/>
+                    <Button
+        Command="{Binding PrintCommand}"
+        Content="Print" Margin="0 10" Width="180" FontSize="20" Height="40" Foreground="White"/>
                 </StackPanel>
             </Grid>
         </Grid>
