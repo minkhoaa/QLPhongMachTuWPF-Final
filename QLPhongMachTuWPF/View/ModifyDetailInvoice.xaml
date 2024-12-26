@@ -1,4 +1,4 @@
-<Window x:Class="QLPhongMachTuWPF.View.DetailInovice"
+﻿<Window x:Class="QLPhongMachTuWPF.View.ModifyDetailInvoice"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -54,6 +54,13 @@
                     </Border.Background>
                 </Border>
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Text="M" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
+                    <TextBlock Text="O" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
+                    <TextBlock Text="D" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
+                    <TextBlock Text="I" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
+                    <TextBlock Text="F" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
+                    <TextBlock Text="Y" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
+                    <TextBlock Text=" " Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
                     <TextBlock Text="I" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
                     <TextBlock Text="N" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
                     <TextBlock Text="V" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
@@ -61,14 +68,6 @@
                     <TextBlock Text="I" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
                     <TextBlock Text="C" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
                     <TextBlock Text="E" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
-                    <TextBlock Text=" " Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
-                    <TextBlock Text="D" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
-                    <TextBlock Text="E" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
-                    <TextBlock Text="T" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
-                    <TextBlock Text="A" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
-                    <TextBlock Text="I" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
-                    <TextBlock Text="L" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
-                    <TextBlock Text="S" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
 
                 </StackPanel>
             </Grid>
@@ -103,7 +102,7 @@
                     </Button.Background>
                 </Button>
                 <Border CornerRadius="0 10 0 0" Background="White"/>
-                <TextBlock Text="INVOICE DETAILS" Style="{StaticResource titleText}" HorizontalAlignment="Center" Margin="0 0 0 0"/>
+                <TextBlock Text="MODIFY INVOICE" Style="{StaticResource titleText}" HorizontalAlignment="Center" Margin="0 0 0 0"/>
             </Grid>
 
             <!--Input-->
@@ -112,18 +111,18 @@
 
                 <Border CornerRadius="0 0 10 0" Background="White"/>
                 <StackPanel Orientation="Vertical">
-                <StackPanel Orientation="Horizontal">
-                    <Rectangle Fill="#1f2f98" Margin="10 0 0 0" Width="10" HorizontalAlignment="Left" VerticalAlignment="top" Height="120" />
-                <StackPanel Orientation="Vertical" Margin="10 0 0 0" Width="auto" Height="auto">
-                    <TextBlock Text="INVOICE TO:" Style="{StaticResource titleTextDateAndInvoice}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10" FontSize="14"/>
-                     <TextBox Text="{Binding TenBN}" TextWrapping="WrapWithOverflow" Style="{StaticResource txtTextBox}" HorizontalAlignment="Left" Margin="10 -10" FontSize="30" BorderBrush="Transparent"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Fill="#1f2f98" Margin="10 0 0 0" Width="10" HorizontalAlignment="Left" VerticalAlignment="top" Height="120" />
+                        <StackPanel Orientation="Vertical" Margin="10 0 0 0" Width="auto" Height="auto">
+                            <TextBlock Text="INVOICE TO:" Style="{StaticResource titleTextDateAndInvoice}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10" FontSize="14"/>
+                            <TextBox Text="{Binding TenBN}" TextWrapping="WrapWithOverflow" Style="{StaticResource txtTextBox}" HorizontalAlignment="Left" Margin="10 -10" FontSize="30" BorderBrush="Transparent"/>
                             <TextBox Text="{Binding DienThoai}" Style="{StaticResource txtTextBox}" HorizontalAlignment="Left" Margin="10 10" FontWeight="Thin" FontSize="14" BorderBrush="Transparent"/>
                             <TextBox Text="{Binding DiaChi}" TextWrapping="WrapWithOverflow" Style="{StaticResource txtTextBox}" HorizontalAlignment="Left" FontSize="14" FontWeight="Thin" Margin="10 -10" BorderBrush="Transparent"/>
 
-                </StackPanel>
+                        </StackPanel>
                     </StackPanel>
-              
-                    
+
+
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Top" Width="auto" Height="auto" Margin="0 -100 150 0">
                         <TextBlock Text= "INVOICE CODE:" Foreground="Black" Style="{StaticResource titleTextDateAndInvoice}" HorizontalAlignment="Left" Margin="10" FontSize="14"/>
                         <TextBlock Text="INVOICE DATE:" Style="{StaticResource textDateAndInvoice}" HorizontalAlignment="Left" Margin="10 0 0 0" FontSize="14"/>
@@ -132,16 +131,16 @@
 
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Top" Width="auto" Height="auto" Margin="0 -100 50 0">
                         <TextBox Text="{Binding ID, Mode=TwoWay}" Foreground="Black" 
-                                       Style="{StaticResource txtTextBox}" FontWeight="Normal"
-                                       VerticalAlignment="Top" HorizontalAlignment="Left" 
-                                       Margin="-10 10" FontSize="14" BorderBrush="Transparent"/>
+                           Style="{StaticResource txtTextBox}" FontWeight="Normal"
+                           VerticalAlignment="Top" HorizontalAlignment="Left" 
+                           Margin="-10 10" FontSize="14" BorderBrush="Transparent"/>
                         <TextBox Text="{Binding NgayHoanThanh, Mode=TwoWay, StringFormat='dd/MM/yyyy'}" Style="{StaticResource txtTextBox}" HorizontalAlignment="Left" FontWeight="Normal" Margin="-10 0 0 0" FontSize="14" BorderBrush="Transparent"/>
 
-                        </StackPanel>
-                    
+                    </StackPanel>
 
-                    
-                
+
+
+
 
                     <DataGrid AutoGenerateColumns="False" HeadersVisibility="Column" 
                   CanUserAddRows="False" IsReadOnly="True" 
@@ -153,7 +152,7 @@
                             <DataGridTextColumn Header="#"   Width="0.5*" Binding="{Binding MaPK}"/>
                             <DataGridTextColumn Header="MEDICINE"  Width="*" Binding="{Binding MaThuoc}"/>
                             <DataGridTextColumn Header="PRICE"  Width="*" Binding="{Binding DonGia}"/>
-                           
+
                             <DataGridTextColumn Header="QUANTITY"  Width="1.5*" Binding="{Binding SoLuong}"/>
                             <DataGridTextColumn Header="INSTRUCTION"  Width="*" Binding="{Binding CachDung}" ElementStyle="{StaticResource textBlockDatagrid}"/>
                             <DataGridTextColumn Header="STATUS"  Width="*" Binding="{Binding TrangThai}"/>
