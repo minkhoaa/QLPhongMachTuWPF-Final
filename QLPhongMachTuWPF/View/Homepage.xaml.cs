@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QLPhongMachTuWPF.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,7 @@ namespace QLPhongMachTuWPF.View
         public Homepage()
         {
             InitializeComponent();
-            
+            this.DataContext = new HomepageVM();
         }
     }
 
