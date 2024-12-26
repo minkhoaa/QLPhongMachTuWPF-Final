@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 using QLPhongMachTuWPF.Model;
+using QLPhongMachTuWPF.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Input;
 
 namespace QLPhongMachTuWPF.ViewModel
 {
@@ -264,6 +266,10 @@ namespace QLPhongMachTuWPF.ViewModel
         private CTTT _SelectedMedicine { get; set; }
         public CTTT SelectedMedicine { get => _SelectedMedicine; set { _SelectedMedicine = value; OnPropertyChanged(); } }
 
+        public HOADON tempInvoice { get; set; } 
+        public ICommand SaveChangesCommand { get; set; }
+
+        public ICommand PrintCommand { get; set; }
 
         public ModifyDetailInvoiceVM()
         {
@@ -346,6 +352,7 @@ namespace QLPhongMachTuWPF.ViewModel
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
+                    tempInvoice = invoice;
                     if (invoice == null) return;
                     ListMedicine.Clear(); // Đảm bảo danh sách không bị dữ liệu cũ
                     var medicines = DataProvider.Ins.db.CTTTs.Where(x => x.MaPK == invoice.MaPK).ToList();
@@ -378,6 +385,43 @@ namespace QLPhongMachTuWPF.ViewModel
                     });
                 });
             });
+
+            SaveChangesCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                
+                tempInvoice.PHIEUKHAM.BENHNHAN.DiaChi = DiaChi;
+                tempInvoice.PHIEUKHAM.BENHNHAN.TenBN = TenBN;
+                tempInvoice.PHIEUKHAM.BENHNHAN.DienThoai = DienThoai;
+                tempInvoice.PHIEUKHAM.BENHNHAN.GioiTinh = Gender;
+
+                foreach (var medicine in ListMedicine)
+                {
+                    var dbMedicine = DataProvider.Ins.db.CTTTs.FirstOrDefault(x => x.MaPK == tempInvoice.MaPK && x.MaThuoc == medicine.MaThuoc);
+                    if (dbMedicine != null)
+                    {
+                        dbMedicine.CachDung = medicine.CachDung;
+                        dbMedicine.SoLuong = medicine.SoLuong; // Số lượng
+                        dbMedicine.DonGia = medicine.THUOC.Gia * medicine.SoLuong ;   // Đơn giá
+                      
+                    }
+                }
+                DataProvider.Ins.db.SaveChanges();
+                Messenger.Default.Send("RefreshInvoiceList");
+
+            });
+            PrintCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                tempInvoice.TrangThai = 1;
+
+
+
+                DataProvider.Ins.db.SaveChanges();
+                Messenger.Default.Send("RefreshInvoiceList");
+
+            }
+         );
+
+
             DataProvider.Ins.db.SaveChanges();
             Messenger.Default.Send("UpdateInvoiceList");
 

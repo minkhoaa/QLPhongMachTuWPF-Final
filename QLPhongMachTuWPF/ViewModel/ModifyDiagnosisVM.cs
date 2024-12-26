@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Entity.ModelConfiguration.Configuration;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Mime;
@@ -458,7 +459,7 @@ namespace QLPhongMachTuWPF.ViewModel
                         MaThuoc = existingItem.MaThuoc,
                         MaPK = Diagnosis.MaPK,
                         SoLuong = int.Parse(SoLuong),
-                        DonGia = existingItem.Gia,
+                        DonGia = existingItem.Gia * int.Parse(SoLuong),
                         CachDung = Instruction,
                         TrangThai = existingItem.TrangThai,
                     };
@@ -489,35 +490,36 @@ namespace QLPhongMachTuWPF.ViewModel
                 Diagnosis.KetQua = Result;
                 Diagnosis.TrangThai = (Status == "Available") ? 1 : 0;
                 Diagnosis.NgayKham = new DateTime(int.Parse(NamKham), int.Parse(ThangKham), int.Parse(NgayKham));
-                var tempMoney = DataProvider.Ins.db.QUIDINHs.First();
-                decimal tempTotalMoney = 0;
-                foreach (var i in DataProvider.Ins.db.CTTTs)
-                {
-                    if (i.MaPK == Diagnosis.MaPK)
-                    {
-                        tempTotalMoney += (decimal)i.THUOC.Gia;
-                    }
-                }
 
+              
+                decimal tempTienKham = DataProvider.Ins.db.QUIDINHs.First().TienKham;
                 HOADON newInvoice = new HOADON()
                 {
                     MaPK = Diagnosis.MaPK,
-                    TienKham = tempMoney.TienKham,
-                    TienThuoc = tempTotalMoney,
-                    TongTien = tempTotalMoney + tempMoney.TienKham,
+                    TienKham = (decimal)DataProvider.Ins.db.QUIDINHs.First().TienKham,
+                    // Tính tổng DonGia theo MaPK
+                     TienThuoc  = DataProvider.Ins.db.CTTTs
+                    .Where(cttt => cttt.MaPK == Diagnosis.MaPK)
+                    .Sum(cttt => cttt.DonGia), 
+
+                    TongTien = DataProvider.Ins.db.CTTTs
+                    .Where(cttt => cttt.MaPK == Diagnosis.MaPK)
+                    .Sum(cttt => cttt.DonGia) + tempTienKham,
                     NgayHD = DateTime.Now,
                     TrangThai = 0
                 };
+                Messenger.Default.Send(newInvoice);
                 DataProvider.Ins.db.HOADONs.Add(newInvoice);
                 DataProvider.Ins.db.SaveChanges();
 
-                Messenger.Default.Send(newInvoice);
+                
                 MessageBox.Show("Thêm hóa đơn thành công!");
 
-
+               
                 DetailInovice detailInovice = new DetailInovice();
                Messenger.Default.Send(Diagnosis);
                 detailInovice.ShowDialog();
+                Messenger.Default.Send("RefreshInvoiceList");
 
             });
             ConfirmCommand = new RelayCommand<object>((p) =>
@@ -541,6 +543,7 @@ namespace QLPhongMachTuWPF.ViewModel
                 Messenger.Default.Send(Diagnosis);
                 DataProvider.Ins.db.SaveChanges();
                 MessageBox.Show("Thay đổi thông tin thành công");
+                Messenger.Default.Send("RefreshInvoiceList");
             });
             Messenger.Default.Register<string>(this, "RefreshAppointmentList", (message) =>
             {

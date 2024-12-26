@@ -26,6 +26,8 @@ namespace QLPhongMachTuWPF.ViewModel
 
         public ICommand ModifyInvoiceCommand { get; set; }
         public ICommand VerifyCommand { get; set; }
+
+        public ICommand DeleteInvoiceCommand { get; set; }
         private ObservableCollection<HOADON> _invoice;
         public ObservableCollection<HOADON> InvoiceList { get => _invoice; set { _invoice = value; OnPropertyChanged(); } }
 
@@ -57,10 +59,9 @@ namespace QLPhongMachTuWPF.ViewModel
                         existingInvoice.MaPK = invoice.MaPK;
                         existingInvoice.NgayHD = invoice .NgayHD;
                         existingInvoice.TongTien = invoice .TongTien;  
-                        existingInvoice.TienThuoc = invoice .TienThuoc;
-                        existingInvoice.TienKham = invoice .TienKham;
-                        existingInvoice.TrangThai = invoice .TrangThai;
-
+                        existingInvoice.TienThuoc = invoice.TienThuoc;
+                        existingInvoice.TienKham = invoice.TienKham;
+                        existingInvoice.TrangThai = invoice.TrangThai;
                     }
                     else
                     {
@@ -88,11 +89,33 @@ namespace QLPhongMachTuWPF.ViewModel
                 // Làm mới dữ liệu sau khi sửa đổi
                
             });
+            DeleteInvoiceCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                if (SelectedInvoice == null)
+                {
+                    MessageBox.Show("Vui lòng chọn một hóa đơn để xóa.");
+                    return;
+                }
+
+                DataProvider.Ins.db.HOADONs.Remove(SelectedInvoice);
+                try
+                {
+                    if (InvoiceList.Remove(SelectedInvoice))
+                    {
+                        MessageBox.Show("Xóa thành công");
+
+                    }
+                }
+                catch (Exception ex) { MessageBox.Show("Xóa thất bại" + ex.Message.ToString()); }
+                DataProvider.Ins.db.SaveChanges();
+            });
+
+
             Messenger.Default.Register<string>(this, (message) =>
             {
                 if (message == "RefreshInvoiceList")
                 {
-                    RefreshInvoiceList();
+                   // RefreshInvoiceList();
                 }
             });
 
