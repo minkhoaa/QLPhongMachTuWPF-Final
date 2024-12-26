@@ -43,7 +43,7 @@
 
         <DataGrid Grid.Row="1" SelectedItem="{Binding SelectedItemCommand}" ItemsSource="{Binding FilteredMedicine }" Background="#eeeeee"  x:Name="patientsDatagrid" Margin="0,0,0,10"
           HorizontalScrollBarVisibility="Disabled" Grid.RowSpan="2" 
-    HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AutoGenerateColumns="False" CanUserAddRows="False"
     Width="auto" Height="auto" VerticalScrollBarVisibility="Auto">
             <DataGrid.Resources>
                 <Style TargetType="DataGridColumnHeader">
@@ -53,6 +53,29 @@
                     <Setter Property="Background" Value="DarkGray"/>
                     <Setter Property="Height" Value="40"/>
                     <Setter Property="FontSize" Value="16"/>
+
+                </Style>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Foreground" Value="Black" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background" Value="White" />
+                    <Setter Property="Foreground" Value="Black" />
+                    <!-- Thay đổi màu nền khi dòng được chọn -->
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="#1ca7ec" />
+                            <!-- Màu xanh nhạt -->
+                            <Setter Property="Foreground" Value="Black" />
+                        </Trigger>
+                    </Style.Triggers>
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
