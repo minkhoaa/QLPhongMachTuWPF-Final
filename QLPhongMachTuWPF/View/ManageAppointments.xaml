@@ -42,10 +42,20 @@
 
         <DataGrid Grid.Row="1" ItemsSource="{Binding FilteredAppointment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   SelectedItem="{Binding SelectedItemCommand}"
-                  Background="#eeeeee" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle2}" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="patientsDatagrid" Margin="0,0,0,10"
+                  Background="#eeeeee"  x:Name="patientsDatagrid" Margin="0,0,0,10"
           HorizontalScrollBarVisibility="Disabled" Grid.RowSpan="2" 
     HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
     Width="auto" Height="auto" VerticalScrollBarVisibility="Auto">
+            <DataGrid.Resources>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="Background" Value="DarkGray"/>
+                    <Setter Property="Height" Value="40"/>
+                    <Setter Property="FontSize" Value="16"/>
+                </Style>
+            </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding MaLH, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" CanUserResize="False" Width="0.8*"/>
                 <DataGridTextColumn Header="Staff ID" Binding="{Binding MaNV, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="2*" />
