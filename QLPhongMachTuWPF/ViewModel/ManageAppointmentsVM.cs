@@ -97,9 +97,9 @@ namespace QLPhongMachTuWPF.ViewModel
 
             VerifyCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-               
+                var exisitedDiagnosis = DataProvider.Ins.db.PHIEUKHAMs.Where(x => x.MaPK == SelectedItemCommand.MaPK && x.MaBN == SelectedItemCommand.MaBN).FirstOrDefault() as PHIEUKHAM;
                 ModifyDiagnosis diagnosis = new ModifyDiagnosis();
-                Messenger.Default.Send(SelectedItemCommand);
+                Messenger.Default.Send(exisitedDiagnosis);
                 diagnosis.ShowDialog();
 
             }

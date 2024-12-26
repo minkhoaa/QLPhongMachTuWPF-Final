@@ -127,7 +127,7 @@
                                        Style="{StaticResource titleTextDateAndInvoice}" FontWeight="Normal"
                                        VerticalAlignment="Top" HorizontalAlignment="Left" 
                                        Margin="-10 10" FontSize="14"/>
-                            <TextBlock Text="{Binding NgayHoanThanh, Mode=TwoWay}" Style="{StaticResource textDateAndInvoice}" HorizontalAlignment="Left" FontWeight="Normal" Margin="-10 0 0 0" FontSize="14"/>
+                            <TextBlock Text="{Binding NgayHoanThanh, Mode=TwoWay, StringFormat='dd/MM/yyyy'}" Style="{StaticResource textDateAndInvoice}" HorizontalAlignment="Left" FontWeight="Normal" Margin="-10 0 0 0" FontSize="14"/>
 
                         </StackPanel>
                     

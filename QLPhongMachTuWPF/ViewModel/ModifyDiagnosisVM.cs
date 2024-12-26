@@ -355,41 +355,41 @@ namespace QLPhongMachTuWPF.ViewModel
             AddSource();
             ListStaff = new ObservableCollection<NHANVIEN>(DataProvider.Ins.db.NHANVIENs.ToList());
             ListMedicine = new ObservableCollection<THUOC>(DataProvider.Ins.db.THUOCs.ToList());
-            ListChoice = new ObservableCollection<string>(); 
-           
+            ListChoice = new ObservableCollection<string>();
 
-            Messenger.Default.Register<LICHHEN>(this, (appointment) =>
-            {
-                ListChoice = new ObservableCollection<string>();
-                foreach (var i in DataProvider.Ins.db.CTTTs)
-                {
-                    if (i.MaPK == appointment.MaPK) ListChoice.Add(i.THUOC.TenThuoc.ToString());
 
-                }
-                Application.Current.Dispatcher.Invoke(() =>
-                {
+            //Messenger.Default.Register<LICHHEN>(this, (appointment) =>
+            //{
+            //    ListChoice = new ObservableCollection<string>();
+            //    foreach (var i in DataProvider.Ins.db.CTTTs)
+            //    {
+            //        if (i.MaPK == appointment.MaPK) ListChoice.Add(i.THUOC.TenThuoc.ToString());
 
-                    
-                    TenBN = appointment.BENHNHAN.TenBN;
-                    DateTime dateOfBirth = appointment.BENHNHAN.NgaySinh.Value;
-                    Ngay = dateOfBirth.Day.ToString();
-                    Thang = dateOfBirth.Month.ToString();
-                    Nam = dateOfBirth.Year.ToString();
-                    DateTime dateTreat = appointment.NgayHen.Value;
-                    NgayKham = dateTreat.Day.ToString();
-                    ThangKham = dateTreat.Month.ToString();
-                    NamKham = dateTreat.Year.ToString();
-                    
-                    DiaChi = appointment.BENHNHAN.DiaChi;
-                    DienThoai = appointment.BENHNHAN.DienThoai;
-                    Gender = appointment.BENHNHAN.GioiTinh;
-                    TenNV = appointment.NHANVIEN.TenNV;
-                    Status = (appointment.PHIEUKHAM.TrangThai == 1) ? "Available" : "Unvailable";
-                    
-                });
-                
+            //    }
+            //    Application.Current.Dispatcher.Invoke(() =>
+            //    {
 
-            });
+
+            //        TenBN = appointment.BENHNHAN.TenBN;
+            //        DateTime dateOfBirth = appointment.BENHNHAN.NgaySinh.Value;
+            //        Ngay = dateOfBirth.Day.ToString();
+            //        Thang = dateOfBirth.Month.ToString();
+            //        Nam = dateOfBirth.Year.ToString();
+            //        DateTime dateTreat = appointment.NgayHen.Value;
+            //        NgayKham = dateTreat.Day.ToString();
+            //        ThangKham = dateTreat.Month.ToString();
+            //        NamKham = dateTreat.Year.ToString();
+
+            //        DiaChi = appointment.BENHNHAN.DiaChi;
+            //        DienThoai = appointment.BENHNHAN.DienThoai;
+            //        Gender = appointment.BENHNHAN.GioiTinh;
+            //        TenNV = appointment.NHANVIEN.TenNV;
+            //        Status = (appointment.PHIEUKHAM.TrangThai == 1) ? "Available" : "Unvailable";
+
+            //    });
+
+
+            //});
             Messenger.Default.Register<PHIEUKHAM>(this, (diagnosis) =>
             {
                 ListChoice = new ObservableCollection<string>();
@@ -488,7 +488,33 @@ namespace QLPhongMachTuWPF.ViewModel
                 Diagnosis.TrieuChung = Symtoms;
                 Diagnosis.KetQua = Result;
                 Diagnosis.TrangThai = (Status == "Available") ? 1 : 0;
-                Diagnosis.NgayKham = new DateTime(int.Parse(NamKham), int.Parse(ThangKham), int.Parse(NgayKham));                
+                Diagnosis.NgayKham = new DateTime(int.Parse(NamKham), int.Parse(ThangKham), int.Parse(NgayKham));
+                var tempMoney = DataProvider.Ins.db.QUIDINHs.First();
+                decimal tempTotalMoney = 0;
+                foreach (var i in DataProvider.Ins.db.CTTTs)
+                {
+                    if (i.MaPK == Diagnosis.MaPK)
+                    {
+                        tempTotalMoney += (decimal)i.THUOC.Gia;
+                    }
+                }
+
+                HOADON newInvoice = new HOADON()
+                {
+                    MaPK = Diagnosis.MaPK,
+                    TienKham = tempMoney.TienKham,
+                    TienThuoc = tempTotalMoney,
+                    TongTien = tempTotalMoney + tempMoney.TienKham,
+                    NgayHD = DateTime.Now,
+                    TrangThai = 0
+                };
+                DataProvider.Ins.db.HOADONs.Add(newInvoice);
+                DataProvider.Ins.db.SaveChanges();
+
+                Messenger.Default.Send(newInvoice);
+                MessageBox.Show("Thêm hóa đơn thành công!");
+
+
                 DetailInovice detailInovice = new DetailInovice();
                Messenger.Default.Send(Diagnosis);
                 detailInovice.ShowDialog();

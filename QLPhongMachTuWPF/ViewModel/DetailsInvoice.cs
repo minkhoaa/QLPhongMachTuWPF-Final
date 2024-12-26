@@ -6,10 +6,12 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Media.Animation;
 
 namespace QLPhongMachTuWPF.ViewModel
 {
@@ -78,9 +80,9 @@ namespace QLPhongMachTuWPF.ViewModel
         private string _ID { get; set; }
 
         public string ID { get => _ID; set { _ID = value; OnPropertyChanged(); } }
-        private string _NgayHoanThanh { get; set; }
+        private DateTime _NgayHoanThanh { get; set; }
 
-        public string NgayHoanThanh { get => _NgayHoanThanh; set { _NgayHoanThanh = value; OnPropertyChanged(); } }
+        public DateTime NgayHoanThanh { get => _NgayHoanThanh; set { _NgayHoanThanh = value; OnPropertyChanged(); } }
 
         public ObservableCollection<NHANVIEN> ListStaff { get => _ListStaff; set { _ListStaff = value; OnPropertyChanged(); } }
 
@@ -274,6 +276,7 @@ namespace QLPhongMachTuWPF.ViewModel
             // Lắng nghe thông điệp từ Messenger
             Messenger.Default.Register<PHIEUKHAM>(this, (diagnosis) =>
             {
+                if (diagnosis == null) return; 
                 ListMedicine.Clear(); // Đảm bảo danh sách không bị dữ liệu cũ
                 var medicines = DataProvider.Ins.db.CTTTs.Where(x => x.MaPK == diagnosis.MaPK).ToList();
                 foreach (var medicine in medicines)
@@ -283,55 +286,69 @@ namespace QLPhongMachTuWPF.ViewModel
 
                 CollectionViewMedicine.Refresh();
                 
-                var Staff = DataProvider.Ins.db.NHANVIENs.FirstOrDefault(a => a.MaNV == diagnosis.MaNV);
-                var Patient = DataProvider.Ins.db.BENHNHANs.FirstOrDefault(a => a.MaBN == diagnosis.MaBN);
-
+               
                 Application.Current.Dispatcher.Invoke(() =>
                 {
                     ID = diagnosis.MaPK.ToString();
-                    TenNV = Staff?.TenNV;
-                    TenBN = Patient?.TenBN;
-                    Ngay = Patient?.NgaySinh?.Day.ToString() ?? "N/A";
-                    Thang = Patient?.NgaySinh?.Month.ToString() ?? "N/A";
-                    Nam = Patient?.NgaySinh?.Year.ToString() ?? "N/A";
+                    TenNV = diagnosis.NHANVIEN.TenNV;
+                    TenBN = diagnosis.BENHNHAN.TenBN;
+                    Ngay =  diagnosis.BENHNHAN.NgaySinh?.Day.ToString() ?? "N/A";
+                    Thang = diagnosis.BENHNHAN.NgaySinh?.Month.ToString() ?? "N/A";
+                    Nam = diagnosis.BENHNHAN.NgaySinh?.Year.ToString() ?? "N/A";
                     NgayKham = diagnosis.NgayKham?.Day.ToString() ?? "N/A";
                     ThangKham = diagnosis.NgayKham?.Month.ToString() ?? "N/A";
                     NamKham = diagnosis.NgayKham?.Year.ToString() ?? "N/A";
-                    DiaChi = Patient?.DiaChi;
-                    DienThoai = Patient?.DienThoai;
-                    Gender = Patient?.GioiTinh;
+                    DiaChi = diagnosis.BENHNHAN.DiaChi;
+                    DienThoai = diagnosis.BENHNHAN.DienThoai;
+                    Gender = diagnosis.BENHNHAN.GioiTinh;
                     Status = (diagnosis.TrangThai == 1) ? "Available" : "Unavailable";
                     Symtoms = diagnosis.TrieuChung;
                     Result = diagnosis.KetQua;
-                    NgayHoanThanh = (new DateTime(int.Parse(NamKham), int.Parse(ThangKham), int.Parse(NgayKham))).ToShortDateString();
+                    NgayHoanThanh = DateTime.Now;
+                });
+            });
+            Messenger.Default.Register<LICHHEN>(this, (appointment) =>
+            {
+                if (appointment == null) return;
+                ListMedicine.Clear(); // Đảm bảo danh sách không bị dữ liệu cũ
+                var medicines = DataProvider.Ins.db.CTTTs.Where(x => x.MaPK == appointment.MaPK).ToList();
+                foreach (var medicine in medicines)
+                {
+                    ListMedicine.Add(medicine);
+                }
+
+                CollectionViewMedicine.Refresh();
+
+
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    ID = appointment.MaPK.ToString();
+                    TenNV = appointment.NHANVIEN.TenNV;
+                    TenBN = appointment.BENHNHAN.TenBN;
+                    Ngay = appointment.BENHNHAN.NgaySinh?.Day.ToString() ?? "N/A";
+                    Thang = appointment.BENHNHAN.NgaySinh?.Month.ToString() ?? "N/A";
+                    Nam = appointment.BENHNHAN.NgaySinh?.Year.ToString() ?? "N/A";
+                    NgayKham = appointment.NgayHen.Value.Day.ToString() ?? "N/A";
+                    ThangKham = appointment.NgayHen.Value.Day.ToString() ?? "N/A";
+                    NamKham = appointment.NgayHen.Value.Day.ToString() ?? "N/A";
+                    DiaChi = appointment.BENHNHAN.DiaChi;
+                    DienThoai = appointment.BENHNHAN.DienThoai;
+                    Gender = appointment.BENHNHAN.GioiTinh;
+                    Status = "Unpaid" ;
+                    Symtoms = appointment.PHIEUKHAM.TrieuChung;
+                    Result = appointment.PHIEUKHAM.KetQua;
+                    NgayHoanThanh = DateTime.Now;
                 });
             });
 
 
-            Messenger.Default.Register<LICHHEN>(this, (diagnosis) =>
+            Messenger.Default.Register<HOADON>(this, (diagnosis) =>
+            {
+                Application.Current.Dispatcher.Invoke(() =>
                 {
-                    Application.Current.Dispatcher.Invoke(() =>
-                    {
 
-                      //  TenNV = diagnosis.TenNV;
-                        //TenBN = diagnosis.TenBN;
-                        //DateTime dateOfBirth = diagnosis.NgaySinh.Value;
-                        //Ngay = dateOfBirth.Day.ToString();
-                        //Thang = dateOfBirth.Month.ToString();
-                        //Nam = dateOfBirth.Year.ToString();
-                        //DateTime dateTreat = diagnosis.NgayKham.Value;
-                        //NgayKham = dateTreat.Day.ToString();
-                        //ThangKham = dateTreat.Month.ToString();
-                        //NamKham = dateTreat.Year.ToString();
-
-                        //DiaChi = diagnosis.DiaChi;
-                        //DienThoai = diagnosis.DienThoai;
-                        //Gender = diagnosis.GioiTinh;
-                        //Status = (diagnosis.TrangThai == 1) ? "Available" : "Unavailable";
-                    });
                 });
-
-
+            });
 
         }
     }

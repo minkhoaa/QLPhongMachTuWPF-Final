@@ -21,6 +21,7 @@
         <AssociationConnector Association="QLPMTModel.FK__LICHHEN__MaNV__4E88ABD4" />
         <AssociationConnector Association="QLPMTModel.FK__LICHHEN__MaPK__5070F446" />
         <AssociationConnector Association="QLPMTModel.PK_MaNV_FK" />
+        <EntityTypeShape EntityType="QLPMTModel.QUIDINH" Width="1.5" PointX="8.125" PointY="1.375" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

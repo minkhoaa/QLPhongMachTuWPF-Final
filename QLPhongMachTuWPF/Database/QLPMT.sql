@@ -92,7 +92,7 @@ CREATE TABLE CTTT (
 
 -- Tạo bảng QUIDINH
 CREATE TABLE QUIDINH (
-    TienKham MONEY
+    TienKham MONEY primary key
 );
 
 -- Tạo bảng LICHHEN

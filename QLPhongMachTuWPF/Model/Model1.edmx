@@ -86,11 +86,12 @@
           <Property Name="KetQua" Type="nvarchar" MaxLength="80" />
           <Property Name="TrangThai" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="QUIDINH">
-          <Property Name="TienKham" Type="money" />
-        </EntityType>-->
+          <Key>
+            <PropertyRef Name="TienKham" />
+          </Key>
+          <Property Name="TienKham" Type="money" Nullable="false" />
+        </EntityType>
         <EntityType Name="THUOC">
           <Key>
             <PropertyRef Name="MaThuoc" />
@@ -125,7 +126,7 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__LICHHEN__MaBN__4F7CD00D">
+        <Association Name="FK__LICHHEN__MaBN__5070F446">
           <End Role="BENHNHAN" Type="Self.BENHNHAN" Multiplicity="1" />
           <End Role="LICHHEN" Type="Self.LICHHEN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -137,7 +138,7 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__LICHHEN__MaNV__4E88ABD4">
+        <Association Name="FK__LICHHEN__MaNV__4F7CD00D">
           <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="1" />
           <End Role="LICHHEN" Type="Self.LICHHEN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -149,7 +150,7 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__LICHHEN__MaPK__5070F446">
+        <Association Name="FK__LICHHEN__MaPK__5165187F">
           <End Role="PHIEUKHAM" Type="Self.PHIEUKHAM" Multiplicity="0..1" />
           <End Role="LICHHEN" Type="Self.LICHHEN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -205,6 +206,7 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
           <EntitySet Name="LICHHEN" EntityType="Self.LICHHEN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NHANVIEN" EntityType="Self.NHANVIEN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PHIEUKHAM" EntityType="Self.PHIEUKHAM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QUIDINH" EntityType="Self.QUIDINH" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="THUOC" EntityType="Self.THUOC" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="CTTT_MaPK_FK" Association="Self.CTTT_MaPK_FK">
             <End Role="PHIEUKHAM" EntitySet="PHIEUKHAM" />
@@ -214,15 +216,15 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
             <End Role="THUOC" EntitySet="THUOC" />
             <End Role="CTTT" EntitySet="CTTT" />
           </AssociationSet>
-          <AssociationSet Name="FK__LICHHEN__MaBN__4F7CD00D" Association="Self.FK__LICHHEN__MaBN__4F7CD00D">
+          <AssociationSet Name="FK__LICHHEN__MaBN__5070F446" Association="Self.FK__LICHHEN__MaBN__5070F446">
             <End Role="BENHNHAN" EntitySet="BENHNHAN" />
             <End Role="LICHHEN" EntitySet="LICHHEN" />
           </AssociationSet>
-          <AssociationSet Name="FK__LICHHEN__MaNV__4E88ABD4" Association="Self.FK__LICHHEN__MaNV__4E88ABD4">
+          <AssociationSet Name="FK__LICHHEN__MaNV__4F7CD00D" Association="Self.FK__LICHHEN__MaNV__4F7CD00D">
             <End Role="NHANVIEN" EntitySet="NHANVIEN" />
             <End Role="LICHHEN" EntitySet="LICHHEN" />
           </AssociationSet>
-          <AssociationSet Name="FK__LICHHEN__MaPK__5070F446" Association="Self.FK__LICHHEN__MaPK__5070F446">
+          <AssociationSet Name="FK__LICHHEN__MaPK__5165187F" Association="Self.FK__LICHHEN__MaPK__5165187F">
             <End Role="PHIEUKHAM" EntitySet="PHIEUKHAM" />
             <End Role="LICHHEN" EntitySet="LICHHEN" />
           </AssociationSet>
@@ -284,6 +286,7 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
             <End Role="NHANVIEN" EntitySet="NHANVIENs" />
             <End Role="PHIEUKHAM" EntitySet="PHIEUKHAMs" />
           </AssociationSet>
+          <EntitySet Name="QUIDINHs" EntityType="QLPMTModel.QUIDINH" />
         </EntityContainer>
         <EntityType Name="ACCOUNT">
           <Key>
@@ -488,6 +491,12 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="QUIDINH">
+          <Key>
+            <PropertyRef Name="TienKham" />
+          </Key>
+          <Property Name="TienKham" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -589,6 +598,13 @@ warning 6013: The table/view 'QLPMT.dbo.QUIDINH' does not have a primary key def
                 <ScalarProperty Name="DonViTinh" ColumnName="DonViTinh" />
                 <ScalarProperty Name="TenThuoc" ColumnName="TenThuoc" />
                 <ScalarProperty Name="MaThuoc" ColumnName="MaThuoc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QUIDINHs">
+            <EntityTypeMapping TypeName="QLPMTModel.QUIDINH">
+              <MappingFragment StoreEntitySet="QUIDINH">
+                <ScalarProperty Name="TienKham" ColumnName="TienKham" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
