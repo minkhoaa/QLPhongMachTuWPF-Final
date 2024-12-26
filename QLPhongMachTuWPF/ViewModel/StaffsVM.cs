@@ -69,7 +69,8 @@ namespace QLPhongMachTuWPF.ViewModel
                 if (staff == null) return;
 
                 // Tìm đối tượng trong danh sách hiện tại
-                var existingStaff = StaffList.FirstOrDefault(p => p.MaNV == staff.MaNV);
+                var existingStaff = StaffList.FirstOrDefault(p => p.MaNV == staff.MaNV || 
+                (p.TenNV == staff.TenNV && p.DienThoai == staff.DienThoai && p.DiaChi == staff.DiaChi && p.NgaySinh == staff.NgaySinh) );
                 if (existingStaff != null)
                 {
                     // Cập nhật thông tin
