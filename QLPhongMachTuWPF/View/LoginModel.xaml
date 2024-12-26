@@ -149,19 +149,22 @@
                     Width="170"
                    
                         IsDefault="True"
-                        Foreground="White">
+                        Foreground="White" Margin="0 10">
                     LOG IN
                 </Button>
-                <Button x:Name="btnRegister" Background="#1d6fc1"
-      Command="{Binding RegisterCommand}"
-      CommandParameter="{Binding ElementName=FormLogin}"
-      Style="{StaticResource MaterialDesignRaisedButton}"
-      Width="170"
-    
-          IsDefault="True"
-          Foreground="White">
-                   REGISTER
-                </Button>
+ 
+
+                <TextBlock Text="Not registered? " FontSize="12" HorizontalAlignment="Center" Margin="0 0 100 0"></TextBlock>
+                <Button
+                    Content="Create an account" 
+                    FontSize="12"  Background="Transparent"
+                    Foreground="#1d6fc1" HorizontalAlignment="Center"
+                    Margin="0 -24 -80 0"
+                     Command="{Binding RegisterCommand}"
+                     CommandParameter="{Binding ElementName=FormLogin}"
+                     Style="{StaticResource MaterialDesignRaisedButton}"
+                    BorderBrush="Transparent"
+                    ></Button>
 
             </StackPanel>
         </Border>

@@ -213,6 +213,9 @@
     <Compile Include="View\ModifyAppointment.xaml.cs">
       <DependentUpon>ModifyAppointment.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ModifyDetailInvoice.xaml.cs">
+      <DependentUpon>ModifyDetailInvoice.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ModifyDiagnosis.xaml.cs">
       <DependentUpon>ModifyDiagnosis.xaml</DependentUpon>
     </Compile>
@@ -330,6 +333,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ModifyAppointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ModifyDetailInvoice.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
