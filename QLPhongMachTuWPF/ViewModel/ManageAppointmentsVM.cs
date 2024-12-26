@@ -156,6 +156,7 @@ namespace QLPhongMachTuWPF.ViewModel
                 foreach (var appointment in appointments)
                 {
                     AppointmentList.Add(appointment);
+
                 }
             });
         }

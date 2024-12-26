@@ -50,7 +50,11 @@
 
         <DataGrid Grid.Row="1" Background="#eeeeee"
                   SelectedItem="{Binding SelectedItemCommand, UpdateSourceTrigger=PropertyChanged}"
-                  ItemsSource="{Binding FilteredPatients}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle2}" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="patientsDatagrid" Margin="0,0,0,10"
+                  ItemsSource="{Binding FilteredPatients}" 
+                  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle2}" 
+                  Style="{DynamicResource DataGridStyle1}"
+                  CellStyle="{DynamicResource DataGridCellStyle1}"  
+                  RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="patientsDatagrid" Margin="0,0,0,10"
               HorizontalScrollBarVisibility="Disabled" Grid.RowSpan="3"
                   Width="auto" Height="auto" VerticalScrollBarVisibility="Auto">
             <DataGrid.Columns>

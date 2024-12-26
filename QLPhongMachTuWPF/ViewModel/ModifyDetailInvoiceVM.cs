@@ -4,20 +4,15 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Dynamic;
 using System.Linq;
-using System.Net.Http.Headers;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Media.Animation;
 
 namespace QLPhongMachTuWPF.ViewModel
 {
-    public class DetailsInvoice : ViewModelBase
+    public class ModifyDetailInvoiceVM : ViewModelBase
     {
         #region ThuocTinh
         private string _TenBN { get; set; }
@@ -90,7 +85,7 @@ namespace QLPhongMachTuWPF.ViewModel
 
         private ObservableCollection<CTTT> _ListMedicine { get; set; }
 
-        public ObservableCollection<CTTT>  ListMedicine { get => _ListMedicine; set { _ListMedicine = value; OnPropertyChanged(); } }
+        public ObservableCollection<CTTT> ListMedicine { get => _ListMedicine; set { _ListMedicine = value; OnPropertyChanged(); } }
 
         public ICollectionView CollectionViewMedicine { get; set; }
 
@@ -266,11 +261,11 @@ namespace QLPhongMachTuWPF.ViewModel
         #endregion
 
 
-        private CTTT _SelectedMedicine {  get; set; }
+        private CTTT _SelectedMedicine { get; set; }
         public CTTT SelectedMedicine { get => _SelectedMedicine; set { _SelectedMedicine = value; OnPropertyChanged(); } }
 
 
-        public DetailsInvoice()
+        public ModifyDetailInvoiceVM()
         {
             // Khởi tạo danh sách thuốc ban đầu
             ListMedicine = new ObservableCollection<CTTT>();
@@ -281,7 +276,7 @@ namespace QLPhongMachTuWPF.ViewModel
             // Lắng nghe thông điệp từ Messenger
             Messenger.Default.Register<PHIEUKHAM>(this, (diagnosis) =>
             {
-                if (diagnosis == null) return; 
+                if (diagnosis == null) return;
                 ListMedicine.Clear(); // Đảm bảo danh sách không bị dữ liệu cũ
                 var medicines = DataProvider.Ins.db.CTTTs.Where(x => x.MaPK == diagnosis.MaPK).ToList();
                 foreach (var medicine in medicines)
@@ -290,14 +285,14 @@ namespace QLPhongMachTuWPF.ViewModel
                 }
 
                 CollectionViewMedicine.Refresh();
-                
-               
+
+
                 Application.Current.Dispatcher.Invoke(() =>
                 {
                     ID = diagnosis.MaPK.ToString();
                     TenNV = diagnosis.NHANVIEN.TenNV;
                     TenBN = diagnosis.BENHNHAN.TenBN;
-                    Ngay =  diagnosis.BENHNHAN.NgaySinh?.Day.ToString() ?? "N/A";
+                    Ngay = diagnosis.BENHNHAN.NgaySinh?.Day.ToString() ?? "N/A";
                     Thang = diagnosis.BENHNHAN.NgaySinh?.Month.ToString() ?? "N/A";
                     Nam = diagnosis.BENHNHAN.NgaySinh?.Year.ToString() ?? "N/A";
                     NgayKham = diagnosis.NgayKham?.Day.ToString() ?? "N/A";
@@ -339,7 +334,7 @@ namespace QLPhongMachTuWPF.ViewModel
                     DiaChi = appointment.BENHNHAN.DiaChi;
                     DienThoai = appointment.BENHNHAN.DienThoai;
                     Gender = appointment.BENHNHAN.GioiTinh;
-                    Status = "Unpaid" ;
+                    Status = "Unpaid";
                     Symtoms = appointment.PHIEUKHAM.TrieuChung;
                     Result = appointment.PHIEUKHAM.KetQua;
                     NgayHoanThanh = DateTime.Now;
@@ -366,7 +361,7 @@ namespace QLPhongMachTuWPF.ViewModel
                     {
                         ID = invoice.MaHD.ToString();
                         TenNV = invoice.PHIEUKHAM.NHANVIEN.TenNV;
-                        TenBN =  invoice.PHIEUKHAM.BENHNHAN.TenBN;
+                        TenBN = invoice.PHIEUKHAM.BENHNHAN.TenBN;
                         Ngay = invoice.PHIEUKHAM.BENHNHAN.NgaySinh.Value.Day.ToString() ?? "N/A";
                         Thang = invoice.PHIEUKHAM.BENHNHAN.NgaySinh.Value.Month.ToString() ?? "N/A";
                         Nam = invoice.PHIEUKHAM.BENHNHAN.NgaySinh.Value.Year.ToString() ?? "N/A";
@@ -383,7 +378,9 @@ namespace QLPhongMachTuWPF.ViewModel
                     });
                 });
             });
-            
+            DataProvider.Ins.db.SaveChanges();
+            Messenger.Default.Send("UpdateInvoiceList");
+
         }
     }
 }

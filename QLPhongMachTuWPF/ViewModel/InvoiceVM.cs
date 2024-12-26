@@ -38,7 +38,7 @@ namespace QLPhongMachTuWPF.ViewModel
         public InvoiceVM()
             {
                 InvoiceList = new ObservableCollection<HOADON>(DataProvider.Ins.db.HOADONs );
-            FilteredInvoice = CollectionViewSource.GetDefaultView(InvoiceList);
+                FilteredInvoice = CollectionViewSource.GetDefaultView(InvoiceList);
                 AddInvoiceCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
                 {
                     AddInvoice add = new AddInvoice();
@@ -79,16 +79,60 @@ namespace QLPhongMachTuWPF.ViewModel
                 diagnosis.ShowDialog();
             }
            );
-            VerifyCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            VerifyCommand = new RelayCommand<object>((p) => SelectedInvoice != null, (p) =>
             {
-                DetailInovice diagnosis = new DetailInovice();
-                Messenger.Default.Send(SelectedInvoice);
-                diagnosis.ShowDialog();
-            }
-         );
+                ModifyDetailInvoice diagnosis = new ModifyDetailInvoice();
+                Messenger.Default.Send(SelectedInvoice); // Gửi hóa đơn hiện tại đến form sửa đổi
+                diagnosis.ShowDialog(); // Hiển thị form sửa đổi
+
+                // Làm mới dữ liệu sau khi sửa đổi
+               
+            });
+            Messenger.Default.Register<string>(this, (message) =>
+            {
+                if (message == "RefreshInvoiceList")
+                {
+                    RefreshInvoiceList();
+                }
+            });
+
+
 
         }
+        private decimal CalculateTienThuoc(int MaPK)
+        {
+            // Lấy danh sách chi tiết thuốc cho hóa đơn
+            var chiTietThuocs = DataProvider.Ins.db.CTTTs.Where(x => x.MaPK == MaPK).ToList();
+
+            // Tính tổng tiền thuốc = ∑(Số lượng * Giá tiền)
+            return (decimal)chiTietThuocs.Sum(x => x.SoLuong * x.DonGia);
+        }
+
+        private void RefreshInvoiceList()
+        {
+            // Lấy danh sách hóa đơn từ cơ sở dữ liệu
+            var updatedInvoiceList = DataProvider.Ins.db.HOADONs.ToList();
+
+            // Cập nhật TienThuoc cho từng hóa đơn từ bảng CTTT
+            foreach (var invoice in updatedInvoiceList)
+            {
+                invoice.TienThuoc = CalculateTienThuoc(invoice.MaHD);
+            }
+
+            // Cập nhật danh sách InvoiceList
+            InvoiceList.Clear();
+            foreach (var invoice in updatedInvoiceList)
+            {
+                InvoiceList.Add(invoice);
+            }
+
+            // Làm mới CollectionView nếu cần
+            FilteredInvoice.Refresh();
+        }
+
+
+
     }
-    
+
 }
 

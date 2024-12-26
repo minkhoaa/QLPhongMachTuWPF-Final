@@ -156,6 +156,7 @@
     <Compile Include="ViewModel\ListsVM.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\ModifyAppointmentVM.cs" />
+    <Compile Include="ViewModel\ModifyDetailInvoiceVM.cs" />
     <Compile Include="ViewModel\ModifyDiagnosisVM.cs" />
     <Compile Include="ViewModel\ModifyMedicineVM.cs" />
     <Compile Include="ViewModel\ModifyPatientsVM.cs" />

@@ -144,19 +144,23 @@
                 
 
                     <DataGrid AutoGenerateColumns="False" HeadersVisibility="Column" 
-                  CanUserAddRows="False" IsReadOnly="True" 
-                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                  Margin="10" x:Name="datagrid" 
+                            CanUserAddRows="False" 
+                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                Margin="10" x:Name="datagrid" 
+                              SelectedItem="{Binding SelectedMedicine, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                ItemsSource="{Binding CollectionViewMedicine, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="#"   Width="0.5*" Binding="{Binding MaPK}"/>
                             <DataGridTextColumn Header="MEDICINE"  Width="*" Binding="{Binding MaThuoc}"/>
-                            <DataGridTextColumn Header="PRICE"  Width="*" Binding="{Binding DonGia}"/>
-                           
-                            <DataGridTextColumn Header="QUANTITY"  Width="1.5*" Binding="{Binding SoLuong}"/>
-                            <DataGridTextColumn Header="INSTRUCTION"  Width="*" Binding="{Binding CachDung}" ElementStyle="{StaticResource textBlockDatagrid}"/>
-                            <DataGridTextColumn Header="STATUS"  Width="*" Binding="{Binding TrangThai}"/>
+                            <DataGridTextColumn Header="QUANTITY"  Width="0.8*" Binding="{Binding SoLuong}"/>
+                            <DataGridTextColumn Header="INSTRUCTION"  Width="2*" Binding="{Binding CachDung}" ElementStyle="{StaticResource textBlockDatagrid}"/>
+                            <DataGridTextColumn Header="PRICE" IsReadOnly="True"  Width="*" Binding="{Binding DonGia}"/>
+
+
+
+
+
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>
