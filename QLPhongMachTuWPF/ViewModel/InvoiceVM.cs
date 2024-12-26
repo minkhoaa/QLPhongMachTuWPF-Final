@@ -25,6 +25,7 @@ namespace QLPhongMachTuWPF.ViewModel
             public ICommand AddInvoiceCommand { get; set; }
 
         public ICommand ModifyInvoiceCommand { get; set; }
+        public ICommand VerifyCommand { get; set; }
         private ObservableCollection<HOADON> _invoice;
         public ObservableCollection<HOADON> InvoiceList { get => _invoice; set { _invoice = value; OnPropertyChanged(); } }
 
@@ -78,6 +79,13 @@ namespace QLPhongMachTuWPF.ViewModel
                 diagnosis.ShowDialog();
             }
            );
+            VerifyCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                DetailInovice diagnosis = new DetailInovice();
+                Messenger.Default.Send(SelectedInvoice);
+                diagnosis.ShowDialog();
+            }
+         );
 
         }
     }
