@@ -31,9 +31,8 @@ namespace QLPhongMachTuWPF.ViewModel
         private ObservableCollection<HOADON> _invoice;
         public ObservableCollection<HOADON> InvoiceList { get => _invoice; set { _invoice = value; OnPropertyChanged(); } }
 
-        private ICollectionView _FilteredInvoice {  get; set; }
-        public ICollectionView FilteredInvoice { get => _FilteredInvoice; set { _FilteredInvoice = value; OnPropertyChanged(); } }
-
+        public ICollectionView FilteredInvoice {  get; set; }
+     
         private HOADON _SelectedInvoice { get; set; }
         public HOADON SelectedInvoice { get => _SelectedInvoice; set { _SelectedInvoice = value; OnPropertyChanged(); } }
 
@@ -115,42 +114,20 @@ namespace QLPhongMachTuWPF.ViewModel
             {
                 if (message == "RefreshInvoiceList")
                 {
-                   // RefreshInvoiceList();
+                    RefreshInvoiceList();
                 }
             });
 
-
-
         }
-        private decimal CalculateTienThuoc(int MaPK)
-        {
-            // Lấy danh sách chi tiết thuốc cho hóa đơn
-            var chiTietThuocs = DataProvider.Ins.db.CTTTs.Where(x => x.MaPK == MaPK).ToList();
-
-            // Tính tổng tiền thuốc = ∑(Số lượng * Giá tiền)
-            return (decimal)chiTietThuocs.Sum(x => x.SoLuong * x.DonGia);
-        }
-
         private void RefreshInvoiceList()
         {
-            // Lấy danh sách hóa đơn từ cơ sở dữ liệu
-            var updatedInvoiceList = DataProvider.Ins.db.HOADONs.ToList();
-
-            // Cập nhật TienThuoc cho từng hóa đơn từ bảng CTTT
-            foreach (var invoice in updatedInvoiceList)
+            Application.Current.Dispatcher.Invoke(() =>
             {
-                invoice.TienThuoc = CalculateTienThuoc(invoice.MaHD);
-            }
-
-            // Cập nhật danh sách InvoiceList
-            InvoiceList.Clear();
-            foreach (var invoice in updatedInvoiceList)
-            {
-                InvoiceList.Add(invoice);
-            }
-
-            // Làm mới CollectionView nếu cần
-            FilteredInvoice.Refresh();
+                InvoiceList.Clear(); // Xóa danh sách cũ
+                InvoiceList = new ObservableCollection<HOADON>(DataProvider.Ins.db.HOADONs);
+                FilteredInvoice = CollectionViewSource.GetDefaultView(InvoiceList);
+                FilteredInvoice.Refresh();
+            });
         }
 
 

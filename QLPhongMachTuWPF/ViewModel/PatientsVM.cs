@@ -149,40 +149,59 @@ namespace QLPhongMachTuWPF.ViewModel
                     MessageBox.Show("Vui lòng chọn một bệnh nhân để xóa.");
                     return;
                 }
+
+                foreach (var item in DataProvider.Ins.db.HOADONs)
+                {
+                    if (item.PHIEUKHAM.MaBN == SelectedItemCommand.MaBN)
+                    {
+                        DataProvider.Ins.db.HOADONs.Remove(item);
+                    }
+
+                }
+
                 foreach (var diagnosis in DataProvider.Ins.db.PHIEUKHAMs)
                 {
                     if (diagnosis.MaBN == SelectedItemCommand.MaBN)
                     {
-                        DataProvider.Ins.db.PHIEUKHAMs.Remove(diagnosis);
                         var appointment = DataProvider.Ins.db.LICHHENs.FirstOrDefault(x => x.MaPK == diagnosis.MaPK);
                         if (appointment != null)
                         {
                             DataProvider.Ins.db.LICHHENs.Remove(appointment);
                         }
+                       
+                        foreach (var item in DataProvider.Ins.db.CTTTs)
+                        {
+                            if (item.MaPK == diagnosis.MaPK)
+                            {
+                                DataProvider.Ins.db.CTTTs.Remove(item);
+                            }
+                        }
+                        DataProvider.Ins.db.PHIEUKHAMs.Remove(diagnosis);
                     }
                 }
-                DataProvider.Ins.db.SaveChanges();
+
                 DataProvider.Ins.db.BENHNHANs.Remove(SelectedItemCommand);
+                DataProvider.Ins.db.SaveChanges();
 
                 try
                 {
-                    DataProvider.Ins.db.SaveChanges(); // Lưu thay đổi vào cơ sở dữ liệu
-                  
-                    // Cập nhật danh sách `PHIEUKHAM`
+                    DataProvider.Ins.db.SaveChanges();
                     PatientsList.Remove(SelectedItemCommand);
-
-                    // Làm mới danh sách `LICHHEN`
-                    Messenger.Default.Send("Refresh", "RefreshAppointmentList");
-                    Messenger.Default.Send("Refresh", "RefreshDiagnosisList");
 
                     MessageBox.Show("Xóa thành công");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Xóa thất bại: " + ex.Message.ToString());
+                    MessageBox.Show("Xóa thất bại: " + ex.Message);
                 }
+  Messenger.Default.Send("Refresh", "RefreshInvoiceList");
+                Messenger.Default.Send("Refresh", "RefreshDiagnosisList");
+                Messenger.Default.Send("Refresh", "RefreshAppointmentList");
+              
+
                 FilteredPatients.Refresh();
             });
+
 
         }
         private void FilterPatients()

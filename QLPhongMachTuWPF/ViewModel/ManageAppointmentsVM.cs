@@ -104,6 +104,7 @@ namespace QLPhongMachTuWPF.ViewModel
 
             }
             );
+
             ModifyAppointmentCommand = new RelayCommand<object>((p) => SelectedItemCommand != null, (p) =>
             {
                 if (SelectedItemCommand == null)
@@ -117,6 +118,7 @@ namespace QLPhongMachTuWPF.ViewModel
                 modifyWindow.ShowDialog();
 
             });
+
             DeleteAppointmentCommand = new RelayCommand<object>((p) => { return true; } , (p) =>
             {
                 if (SelectedItemCommand == null)
@@ -136,12 +138,14 @@ namespace QLPhongMachTuWPF.ViewModel
                 DataProvider.Ins.db.SaveChanges();
 
             });
+
             Messenger.Default.Register<string>(this, "RefreshAppointmentList", (message) =>
             {
                 if (message == "Refresh")
                 {
                     RefreshAppointmentList();
                 }
+                
             });
 
 

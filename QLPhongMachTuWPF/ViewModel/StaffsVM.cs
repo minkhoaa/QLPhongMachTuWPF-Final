@@ -15,10 +15,10 @@ using System.Windows.Input;
 
 namespace QLPhongMachTuWPF.ViewModel
 {
-  
+
     public class StaffsVM : ViewModelBase
-    { 
-        public ICommand AddStaffCommand { get; set ; }
+    {
+        public ICommand AddStaffCommand { get; set; }
 
         public ICommand ModifyStaffsCommand { get; set; }
 
@@ -40,22 +40,24 @@ namespace QLPhongMachTuWPF.ViewModel
         }
 
 
-       
-        
-        private string _SearchKeyword {  get; set; }
 
-        public string SearchKeyword { get => _SearchKeyword; 
+
+        private string _SearchKeyword { get; set; }
+
+        public string SearchKeyword
+        {
+            get => _SearchKeyword;
             set
             {
                 _SearchKeyword = value;
-                OnPropertyChanged ();
-                FilterStaffs ();
+                OnPropertyChanged();
+                FilterStaffs();
             }
         }
 
-        public ICollectionView FilteredStaffs { get; set; } 
-        
-        
+        public ICollectionView FilteredStaffs { get; set; }
+
+
         private ObservableCollection<NHANVIEN> _staff;
         public ObservableCollection<NHANVIEN> StaffList { get => _staff; set { _staff = value; OnPropertyChanged(); } }
         public StaffsVM()
@@ -69,8 +71,8 @@ namespace QLPhongMachTuWPF.ViewModel
                 if (staff == null) return;
 
                 // Tìm đối tượng trong danh sách hiện tại
-                var existingStaff = StaffList.FirstOrDefault(p => p.MaNV == staff.MaNV || 
-                (p.TenNV == staff.TenNV && p.DienThoai == staff.DienThoai && p.DiaChi == staff.DiaChi && p.NgaySinh == staff.NgaySinh) );
+                var existingStaff = StaffList.FirstOrDefault(p => p.MaNV == staff.MaNV ||
+                (p.TenNV == staff.TenNV && p.DienThoai == staff.DienThoai && p.DiaChi == staff.DiaChi && p.NgaySinh == staff.NgaySinh));
                 if (existingStaff != null)
                 {
                     // Cập nhật thông tin
@@ -96,7 +98,7 @@ namespace QLPhongMachTuWPF.ViewModel
             AddStaffCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 AddStaff add = new AddStaff();
-                add.ShowDialog(); 
+                add.ShowDialog();
             }
             );
 
@@ -120,17 +122,40 @@ namespace QLPhongMachTuWPF.ViewModel
                     MessageBox.Show("Vui lòng chọn một nhân viên để xóa.");
                     return;
                 }
+                foreach (var item in DataProvider.Ins.db.HOADONs)
+                {
+                    if (item.PHIEUKHAM.MaNV == SelectedItemCommand.MaNV)
+                    {
+                        DataProvider.Ins.db.HOADONs.Remove(item);
+                    }
+
+                }
                 foreach (var diagnosis in DataProvider.Ins.db.PHIEUKHAMs)
                 {
-                    if (diagnosis.MaNV == SelectedItemCommand.MaNV) { 
-                        DataProvider.Ins.db.PHIEUKHAMs.Remove(diagnosis);
+                    if (diagnosis.MaNV == SelectedItemCommand.MaNV)
+                    {
+                        
                         var appointment = DataProvider.Ins.db.LICHHENs.FirstOrDefault(x => x.MaPK == diagnosis.MaPK);
                         if (appointment != null)
                         {
+
                             DataProvider.Ins.db.LICHHENs.Remove(appointment);
                         }
+                        foreach (var item in DataProvider.Ins.db.CTTTs)
+                        {
+                            if (item.MaPK == diagnosis.MaPK)
+                            {
+                                DataProvider.Ins.db.CTTTs.Remove(item);
+                            }
+
+                        }
+                      
+
+                        DataProvider.Ins.db.PHIEUKHAMs.Remove(diagnosis);
                     }
                 }
+
+
                 DataProvider.Ins.db.SaveChanges();
                 DataProvider.Ins.db.NHANVIENs.Remove(SelectedItemCommand);
 
@@ -144,8 +169,10 @@ namespace QLPhongMachTuWPF.ViewModel
                     // Làm mới danh sách `LICHHEN`
                     Messenger.Default.Send("Refresh", "RefreshAppointmentList");
                     Messenger.Default.Send("Refresh", "RefreshDiagnosisList");
+                    Messenger.Default.Send("Refresh", "RefreshInvoiceList");
 
                     MessageBox.Show("Xóa thành công");
+                    FilteredStaffs.Refresh(); 
                 }
                 catch (Exception ex)
                 {
@@ -153,15 +180,10 @@ namespace QLPhongMachTuWPF.ViewModel
                 }
                 FilteredStaffs.Refresh();
 
-
-
             });
 
-
-
-
-
         }
+ 
         void FilterStaffs()
         {
             if (FilteredStaffs == null)
