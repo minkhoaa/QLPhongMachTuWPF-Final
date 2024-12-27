@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.ExceptionServices;
+using System.Runtime.Remoting.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -96,6 +97,7 @@ namespace QLPhongMachTuWPF.ViewModel
                 MessageBox.Show("Vui lòng chọn một phiếu khám để xóa.");
                 return;
             }
+         
 
             // Tìm kiếm lịch hẹn liên quan đến phiếu khám
            foreach (var i in DataProvider.Ins.db.LICHHENs)
@@ -104,6 +106,10 @@ namespace QLPhongMachTuWPF.ViewModel
                     {
                         DataProvider.Ins.db.LICHHENs.Remove(i);
                     }
+                }
+                foreach (var item in DataProvider.Ins.db.HOADONs)
+                {
+                    if (item.MaPK == SelectedItemCommand.MaPK) DataProvider.Ins.db.HOADONs.Remove(item);
                 }
 
                 foreach (var i in DataProvider.Ins.db.CTTTs)
@@ -125,6 +131,8 @@ namespace QLPhongMachTuWPF.ViewModel
                     DiagnosisList.Remove(SelectedItemCommand);
 
                     // Làm mới danh sách `LICHHEN`
+                    Messenger.Default.Send("Refresh", "RefreshInvoiceList");
+                    Messenger.Default.Send("Refresh", "RefreshDiagnosisList");
                     Messenger.Default.Send("Refresh", "RefreshAppointmentList");
 
                     MessageBox.Show("Xóa thành công");

@@ -388,7 +388,6 @@ namespace QLPhongMachTuWPF.ViewModel
 
             SaveChangesCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                
                 tempInvoice.PHIEUKHAM.BENHNHAN.DiaChi = DiaChi;
                 tempInvoice.PHIEUKHAM.BENHNHAN.TenBN = TenBN;
                 tempInvoice.PHIEUKHAM.BENHNHAN.DienThoai = DienThoai;
