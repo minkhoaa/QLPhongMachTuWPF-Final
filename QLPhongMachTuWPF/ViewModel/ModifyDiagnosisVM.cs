@@ -463,11 +463,8 @@ namespace QLPhongMachTuWPF.ViewModel
                         CachDung = Instruction,
                         TrangThai = existingItem.TrangThai,
                     };
-
                     DataProvider.Ins.db.CTTTs.Add(MedicineDetails);
                     DataProvider.Ins.db.SaveChanges();
-
-
                     // Cập nhật ListChoice và xóa các trường nhập liệu
                     ListChoice.Add(MedicineChoice);
                     Instruction = string.Empty;
@@ -498,10 +495,9 @@ namespace QLPhongMachTuWPF.ViewModel
                     MaPK = Diagnosis.MaPK,
                     TienKham = (decimal)DataProvider.Ins.db.QUIDINHs.First().TienKham,
                     // Tính tổng DonGia theo MaPK
-                     TienThuoc  = DataProvider.Ins.db.CTTTs
+                    TienThuoc = DataProvider.Ins.db.CTTTs
                     .Where(cttt => cttt.MaPK == Diagnosis.MaPK)
-                    .Sum(cttt => cttt.DonGia), 
-
+                    .Sum(cttt => cttt.DonGia),
                     TongTien = DataProvider.Ins.db.CTTTs
                     .Where(cttt => cttt.MaPK == Diagnosis.MaPK)
                     .Sum(cttt => cttt.DonGia) + tempTienKham,
@@ -511,12 +507,8 @@ namespace QLPhongMachTuWPF.ViewModel
                 Messenger.Default.Send(newInvoice);
                 DataProvider.Ins.db.HOADONs.Add(newInvoice);
                 DataProvider.Ins.db.SaveChanges();
-
-                
-
-               
                 ModifyDetailInvoice detailInovice = new ModifyDetailInvoice();
-               Messenger.Default.Send(Diagnosis);
+                Messenger.Default.Send(Diagnosis);
                 detailInovice.ShowDialog();
                 Messenger.Default.Send("RefreshInvoiceList");
                 Application.Current.Windows

@@ -24,6 +24,9 @@ namespace QLPhongMachTuWPF.ViewModel
         private string _TenBN { get; set; }
 
         public string TenBN { get => _TenBN; set { _TenBN = value; OnPropertyChanged(); } }
+        private string _ThoiGian { get; set; }
+
+        public string ThoiGian { get => _ThoiGian; set { _ThoiGian = value; OnPropertyChanged(); } }
 
         private string _DiaChi { get; set; }
 
@@ -91,8 +94,8 @@ namespace QLPhongMachTuWPF.ViewModel
         public List<int> MonthsApp { get; set; }
         public List<int> YearsApp { get; set; }
 
-
-
+        public List<string> TimeSource { get; set; }
+     
         public List<string> GenderSource { get; set; }
         public List<string> StatusSource { get; set; }
 
@@ -172,6 +175,12 @@ namespace QLPhongMachTuWPF.ViewModel
 
         public void AddSource()
         {
+            TimeSource = new List<string>(); 
+            for (int i = 7; i <= 16; i++ )
+            {
+                if (i != 11 || i != 12)
+                    TimeSource.Add(i.ToString() + ":" + "30");
+            }
             SelectedYear = DateTime.Now.Year;
             SelectedMonth = DateTime.Now.Month;
             Years = new List<int>();
@@ -254,7 +263,13 @@ namespace QLPhongMachTuWPF.ViewModel
             AddSource(); 
             AddAppointmentCommand = new RelayCommand<object>((p) =>
             {
-                if (string.IsNullOrEmpty(TenBN)) return false;
+                if (string.IsNullOrEmpty(TenNV) || string.IsNullOrEmpty(TenBN)
+                || string.IsNullOrEmpty(DienThoai) || string.IsNullOrEmpty(DiaChi)
+                || string.IsNullOrEmpty(Gender) || string.IsNullOrEmpty(Ngay)
+                || string.IsNullOrEmpty(Thang) || string.IsNullOrEmpty(Nam)
+                || string.IsNullOrEmpty(NgayKham) || string.IsNullOrEmpty(ThangKham) || string.IsNullOrEmpty(NamKham)
+                || string.IsNullOrEmpty(ThoiGian)
+                ) return false;
                 return true;
             }, (p) => {
                 // Khởi tạo đối tượng mới
@@ -304,7 +319,7 @@ namespace QLPhongMachTuWPF.ViewModel
                     MaBN = newPatient.MaBN,
                     MaNV = SelectedItemCommand.MaNV,
                     NgayHen = new DateTime(int.Parse(NamKham), int.Parse(ThangKham), int.Parse(NgayKham)),
-                    GioHen = new TimeSpan(12, 0, 0),
+                    GioHen = TimeSpan.Parse(ThoiGian),
                     MaPK = newDiagnosis.MaPK
                 };
 

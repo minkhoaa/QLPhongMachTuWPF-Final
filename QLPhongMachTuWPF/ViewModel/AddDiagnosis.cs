@@ -330,7 +330,9 @@ namespace QLPhongMachTuWPF.ViewModel
             ListChoice = new ObservableCollection<string>();
             AddDiagnosisCommand = new RelayCommand<object>((p) =>
             {
-                if (string.IsNullOrEmpty(TenBN)) return false;
+                if (string.IsNullOrEmpty(TenBN) || string.IsNullOrEmpty(Ngay) || string.IsNullOrEmpty(Thang) || string.IsNullOrEmpty(Nam)
+                || string.IsNullOrEmpty(DiaChi) || string.IsNullOrEmpty(DienThoai) || string.IsNullOrEmpty(Gender)
+                )  return false;
                 return true;
             }, (p) => {
                 // Khởi tạo đối tượng mới

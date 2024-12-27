@@ -185,9 +185,9 @@ Grid.Column="1" Panel.ZIndex="1"
  FontSize="16" Margin="10 0 0 0"/>
                     <!--Gender-->
                     <ComboBox
-             Text="{Binding Time, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+             Text="{Binding ThoiGian, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         
-             ItemsSource="{Binding TimeSource  }"
+             ItemsSource="{Binding TimeSource }"
                         
               Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
          

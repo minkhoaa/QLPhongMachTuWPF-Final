@@ -179,8 +179,8 @@ SelectedItem="{Binding SelectedMonthApp}"
  FontSize="16" Margin="10 0 0 0"/>
                     <!--Gender-->
                     <ComboBox
-                        Text="{Binding Time}"
-                        ItemsSource="{Binding TimeSource  }"
+                        Text="{Binding ThoiGian, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        ItemsSource="{Binding   TimeSource  }"
                         Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
          
            FontSize="16" Margin="60 0 0 0"/>

@@ -70,6 +70,8 @@ namespace QLPhongMachTuWPF.ViewModel
         private string _NamKham { get; set; }
         public string NamKham { get => _NamKham; set { _NamKham = value; OnPropertyChanged(); } }
 
+        private string _ThoiGian { get; set; }
+        public string ThoiGian { get => _ThoiGian; set { _ThoiGian = value; OnPropertyChanged(); } }
 
         public string NamApp { get => _NamKham; set { _NamKham = value; OnPropertyChanged(); } }
         #endregion
@@ -84,6 +86,7 @@ namespace QLPhongMachTuWPF.ViewModel
         public List<int> YearsApp { get; set; }
 
 
+        public List<string> TimeSource { get; set; }
 
         public List<string> GenderSource { get; set; }
         public List<string> StatusSource { get; set; }
@@ -164,6 +167,13 @@ namespace QLPhongMachTuWPF.ViewModel
 
         public void AddSource()
         {
+            TimeSource = new List<string>();
+
+            for (int i = 7; i <= 16; i++)
+            {
+                if (i != 11 ||  i != 12)
+                TimeSource.Add(i.ToString() + ":" + "30");
+            }
             SelectedYear = DateTime.Now.Year;
             SelectedMonth = DateTime.Now.Month;
             Years = new List<int>();
@@ -177,7 +187,7 @@ namespace QLPhongMachTuWPF.ViewModel
 
 
             ListStaff = new ObservableCollection<NHANVIEN>(DataProvider.Ins.db.NHANVIENs.ToList());
-            GenderSource = new List<string> {"Nam", "Nữ" };
+            GenderSource = new List<string> { "Nam", "Nữ" };
             StatusSource = new List<string> { "Available", "Unavailable" };
 
             // Khởi tạo số ngày theo tháng và năm mặc định  a
@@ -240,6 +250,7 @@ namespace QLPhongMachTuWPF.ViewModel
             }
         }
         #endregion
+
         public ICollectionView FilteredAppointment { get; set; }
 
         public ICommand SaveChangesCommand { get; set; }
@@ -276,6 +287,8 @@ namespace QLPhongMachTuWPF.ViewModel
                     NgayApp = dueDate.Day.ToString();
                     ThangApp = dueDate.Month.ToString();
                     NamApp = dueDate.Year.ToString();
+                    ThoiGian = appointment.GioHen.ToString(); 
+                    
                     if (appointment.BENHNHAN.GioiTinh == "Female" || appointment.BENHNHAN.GioiTinh == "Male")
                     {
                         Gender = (appointment.BENHNHAN.GioiTinh == "Male") ? "Nam" : "Nữ";
@@ -294,7 +307,7 @@ namespace QLPhongMachTuWPF.ViewModel
                 LichHen.BENHNHAN.DienThoai = DienThoai;
                 LichHen.BENHNHAN.NgaySinh = new DateTime(int.Parse(Nam), int.Parse(Thang), int.Parse(Ngay));
                 LichHen.PHIEUKHAM.MaNV = SelectedItemCommand.MaNV;
-
+                LichHen.GioHen = TimeSpan.Parse(ThoiGian); 
                 LichHen.MaNV = SelectedItemCommand.MaNV;
                 LichHen.NgayHen = new DateTime(int.Parse(NamKham), int.Parse(ThangKham), int.Parse(NgayKham));
 
