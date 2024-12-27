@@ -30,6 +30,7 @@ namespace QLPhongMachTuWPF.ViewModel
         public string Confirmpassword { get => _confirmpassword; set { _confirmpassword = value; OnPropertyChanged(); } }
         public RegisterVM()
         {
+            try { 
             RegisterCommand = new RelayCommand<Window>((p) =>
             {
                 // Điều kiện để cho phép thực hiện lệnh
@@ -64,14 +65,17 @@ namespace QLPhongMachTuWPF.ViewModel
                 // Điều kiện để kích hoạt lệnh, nếu cần
                 return p != null;
             },
-   (p) =>
-   {
-       // Cập nhật giá trị ConfirmPassword từ PasswordBox
-       Confirmpassword = p.Password;
+           (p) =>
+            {
+                // Cập nhật giá trị ConfirmPassword từ PasswordBox
+                Confirmpassword = p.Password;
 
-       // Kiểm tra nếu cần
+                // Kiểm tra nếu cần
        
-   });
+            });
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+
         }
         private void OpenLoginForm()
         {

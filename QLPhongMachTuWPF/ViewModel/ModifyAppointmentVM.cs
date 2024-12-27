@@ -171,8 +171,8 @@ namespace QLPhongMachTuWPF.ViewModel
 
             for (int i = 7; i <= 16; i++)
             {
-                if (i != 11 ||  i != 12)
-                TimeSource.Add(i.ToString() + ":" + "30");
+                if (i != 11 || i != 12)
+                    TimeSource.Add(i.ToString() + ":" + "30");
             }
             SelectedYear = DateTime.Now.Year;
             SelectedMonth = DateTime.Now.Month;
@@ -266,63 +266,68 @@ namespace QLPhongMachTuWPF.ViewModel
         private BENHNHAN benhnhan { get; set; }
         public ModifyAppointmentVM()
         {
-            AddSource(); 
+            AddSource();
             AppointmentList = new ObservableCollection<LICHHEN>(DataProvider.Ins.db.LICHHENs);
             FilteredAppointment = CollectionViewSource.GetDefaultView(AppointmentList);
-
-            Messenger.Default.Register<LICHHEN>(this, (appointment) =>
+            try
             {
-                
-                Application.Current.Dispatcher.Invoke(() =>
+                Messenger.Default.Register<LICHHEN>(this, (appointment) =>
                 {
-                    LichHen = appointment;
-                    TenBN = appointment.BENHNHAN.TenBN;
-                    DiaChi = appointment.BENHNHAN.DiaChi;
-                    DienThoai = appointment.BENHNHAN.DienThoai;
-                    DateTime dateofBirth = appointment.BENHNHAN.NgaySinh.Value;
-                    Ngay = dateofBirth.Day.ToString();
-                    Thang = dateofBirth.Month.ToString();
-                    Nam = dateofBirth.Year.ToString();
-                    DateTime dueDate = appointment.NgayHen.Value;
-                    NgayApp = dueDate.Day.ToString();
-                    ThangApp = dueDate.Month.ToString();
-                    NamApp = dueDate.Year.ToString();
-                    ThoiGian = appointment.GioHen.ToString(); 
-                    
-                    if (appointment.BENHNHAN.GioiTinh == "Female" || appointment.BENHNHAN.GioiTinh == "Male")
+
+                    Application.Current.Dispatcher.Invoke(() =>
                     {
-                        Gender = (appointment.BENHNHAN.GioiTinh == "Male") ? "Nam" : "Nữ";
-                    }
-                    else { Gender = (appointment.BENHNHAN.GioiTinh); }
-                    Status = (appointment.BENHNHAN.TrangThai == 1) ? "Available" : "Unavailable";
-                    TenNV = appointment.NHANVIEN.TenNV; 
+                        LichHen = appointment;
+                        TenBN = appointment.BENHNHAN.TenBN;
+                        DiaChi = appointment.BENHNHAN.DiaChi;
+                        DienThoai = appointment.BENHNHAN.DienThoai;
+                        DateTime dateofBirth = appointment.BENHNHAN.NgaySinh.Value;
+                        Ngay = dateofBirth.Day.ToString();
+                        Thang = dateofBirth.Month.ToString();
+                        Nam = dateofBirth.Year.ToString();
+                        DateTime dueDate = appointment.NgayHen.Value;
+                        NgayApp = dueDate.Day.ToString();
+                        ThangApp = dueDate.Month.ToString();
+                        NamApp = dueDate.Year.ToString();
+                        ThoiGian = appointment.GioHen.ToString();
+
+                        if (appointment.BENHNHAN.GioiTinh == "Female" || appointment.BENHNHAN.GioiTinh == "Male")
+                        {
+                            Gender = (appointment.BENHNHAN.GioiTinh == "Male") ? "Nam" : "Nữ";
+                        }
+                        else { Gender = (appointment.BENHNHAN.GioiTinh); }
+                        Status = (appointment.BENHNHAN.TrangThai == 1) ? "Available" : "Unavailable";
+                        TenNV = appointment.NHANVIEN.TenNV;
+                    });
                 });
-            });
-            SaveChangesCommand = new RelayCommand<object>((p) =>
-            {
-                return true;
-            }, (p) => {
-                LichHen.BENHNHAN.TenBN = TenBN; 
-                LichHen.BENHNHAN.DiaChi = DiaChi;
-                LichHen.BENHNHAN.DienThoai = DienThoai;
-                LichHen.BENHNHAN.NgaySinh = new DateTime(int.Parse(Nam), int.Parse(Thang), int.Parse(Ngay));
-                LichHen.PHIEUKHAM.MaNV = SelectedItemCommand.MaNV;
-                LichHen.GioHen = TimeSpan.Parse(ThoiGian); 
-                LichHen.MaNV = SelectedItemCommand.MaNV;
-                LichHen.NgayHen = new DateTime(int.Parse(NamKham), int.Parse(ThangKham), int.Parse(NgayKham));
+                SaveChangesCommand = new RelayCommand<object>((p) =>
+                {
+                    return true;
+                }, (p) =>
+                {
+                    LichHen.BENHNHAN.TenBN = TenBN;
+                    LichHen.BENHNHAN.DiaChi = DiaChi;
+                    LichHen.BENHNHAN.DienThoai = DienThoai;
+                    LichHen.BENHNHAN.NgaySinh = new DateTime(int.Parse(Nam), int.Parse(Thang), int.Parse(Ngay));
+                    LichHen.PHIEUKHAM.MaNV = SelectedItemCommand.MaNV;
+                    LichHen.GioHen = TimeSpan.Parse(ThoiGian);
+                    LichHen.MaNV = SelectedItemCommand.MaNV;
+                    LichHen.NgayHen = new DateTime(int.Parse(NamKham), int.Parse(ThangKham), int.Parse(NgayKham));
 
-                DataProvider.Ins.db.SaveChanges();
+                    DataProvider.Ins.db.SaveChanges();
 
-                Messenger.Default.Send(LichHen);
+                    Messenger.Default.Send(LichHen);
 
-                Application.Current.Windows
-                .OfType<Window>()
-                .SingleOrDefault(w => w.IsActive)
-                ?.Close();
-});
+                    Application.Current.Windows
+                    .OfType<Window>()
+                    .SingleOrDefault(w => w.IsActive)
+                    ?.Close();
+                });
 
 
+            }
+
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
-
     }
 }
+

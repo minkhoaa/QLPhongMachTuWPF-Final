@@ -231,7 +231,8 @@ namespace QLPhongMachTuWPF.ViewModel
 
         public ModifyStaffVM()
         {
-            AddSource(); 
+            AddSource();
+            try {  
             Messenger.Default.Register<NHANVIEN>(this, (staff) =>
             {
                 Application.Current.Dispatcher.Invoke(() =>
@@ -271,6 +272,8 @@ namespace QLPhongMachTuWPF.ViewModel
                     .SingleOrDefault(w => w.IsActive)
                     ?.Close();
                 });
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
             
         

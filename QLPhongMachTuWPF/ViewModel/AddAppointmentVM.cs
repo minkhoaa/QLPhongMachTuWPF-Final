@@ -272,6 +272,7 @@ namespace QLPhongMachTuWPF.ViewModel
                 ) return false;
                 return true;
             }, (p) => {
+              
                 // Khởi tạo đối tượng mới
                 var newPatient = new BENHNHAN()
                 {
@@ -352,7 +353,6 @@ namespace QLPhongMachTuWPF.ViewModel
             TenBN = string.Empty;
             DiaChi = string.Empty;
             DienThoai = string.Empty;
-          
             TenNV = string.Empty;
         }
 

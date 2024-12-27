@@ -231,35 +231,35 @@ namespace QLPhongMachTuWPF.ViewModel
         LICHHEN lichhen { get; set; }
 
         PHIEUKHAM phieukham   { get; set; }
-   
+
         public ModifyPatientsVM()
         {
-            AddSource(); 
-           
-            // Đăng ký nhận thông báo về bệnh nhân
-            Messenger.Default.Register<BENHNHAN>(this, (patient) =>
-            {
-             //   lichhen = DataProvider.Ins.db.LICHHENs.FirstOrDefault(x => x.BENHNHAN.TenBN == patient.TenBN && x.ngay == patient.NgaySinh);
-                Application.Current.Dispatcher.Invoke(() =>
+            AddSource();
+            try {
+                // Đăng ký nhận thông báo về bệnh nhân
+                Messenger.Default.Register<BENHNHAN>(this, (patient) =>
                 {
-                    BenhNhan = patient;
-                    TenBN = patient.TenBN;
-                    DiaChi = patient.DiaChi;
-                    DienThoai = patient.DienThoai;
-                    Gender = patient.GioiTinh;
-                    Charged = (patient.TrangThai == 1) ? "Discharged" : "Under treatment" ;
-                    DateTime dateOfBirth = patient.NgaySinh.Value;
-                    Ngay = dateOfBirth.Day.ToString();
-                    Thang = dateOfBirth.Month.ToString();
-                    Nam = dateOfBirth.Year.ToString();
+                    //   lichhen = DataProvider.Ins.db.LICHHENs.FirstOrDefault(x => x.BENHNHAN.TenBN == patient.TenBN && x.ngay == patient.NgaySinh);
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        BenhNhan = patient;
+                        TenBN = patient.TenBN;
+                        DiaChi = patient.DiaChi;
+                        DienThoai = patient.DienThoai;
+                        Gender = patient.GioiTinh;
+                        Charged = (patient.TrangThai == 1) ? "Discharged" : "Under treatment";
+                        DateTime dateOfBirth = patient.NgaySinh.Value;
+                        Ngay = dateOfBirth.Day.ToString();
+                        Thang = dateOfBirth.Month.ToString();
+                        Nam = dateOfBirth.Year.ToString();
+                    });
                 });
-            });
 
-            SaveChangesCommand = new RelayCommand<object>((p) =>
-            {
-                return true;
-            }, (p) =>
-            {
+                SaveChangesCommand = new RelayCommand<object>((p) =>
+                {
+                    return true;
+                }, (p) =>
+                {
                     BenhNhan.TenBN = TenBN;
                     BenhNhan.DiaChi = DiaChi;
                     BenhNhan.GioiTinh = Gender;
@@ -273,11 +273,14 @@ namespace QLPhongMachTuWPF.ViewModel
 
                     // Đóng cửa sổ
                     Application.Current.Windows
-                        .OfType<Window>()
-                        .SingleOrDefault(w => w.IsActive)
-                        ?.Close();
-            });
+                    .OfType<Window>()
+                    .SingleOrDefault(w => w.IsActive)
+                    ?.Close();
+                });
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
+            
     }
     }
 

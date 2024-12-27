@@ -284,88 +284,15 @@ namespace QLPhongMachTuWPF.ViewModel
             CollectionViewMedicine = CollectionViewSource.GetDefaultView(ListMedicine);
 
             AddSource();
-
-            // Lắng nghe thông điệp từ Messenger
-            Messenger.Default.Register<PHIEUKHAM>(this, (diagnosis) =>
+            try
             {
-
-                if (diagnosis == null) return;
-                ListMedicine.Clear(); // Đảm bảo danh sách không bị dữ liệu cũ
-                var medicines = DataProvider.Ins.db.CTTTs.Where(x => x.MaPK == diagnosis.MaPK).ToList();
-                foreach (var medicine in medicines)
+                // Lắng nghe thông điệp từ Messenger
+                Messenger.Default.Register<PHIEUKHAM>(this, (diagnosis) =>
                 {
-                    ListMedicine.Add(medicine);
-                }
 
-                CollectionViewMedicine.Refresh();
-
-
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    tempInvoice = diagnosis.HOADONs.First(); 
-                    ID = diagnosis.MaPK.ToString();
-                    TenNV = diagnosis.NHANVIEN.TenNV;
-                    TenBN = diagnosis.BENHNHAN.TenBN;
-                    Ngay = diagnosis.BENHNHAN.NgaySinh?.Day.ToString() ?? "N/A";
-                    Thang = diagnosis.BENHNHAN.NgaySinh?.Month.ToString() ?? "N/A";
-                    Nam = diagnosis.BENHNHAN.NgaySinh?.Year.ToString() ?? "N/A";
-                    NgayKham = diagnosis.NgayKham?.Day.ToString() ?? "N/A";
-                    ThangKham = diagnosis.NgayKham?.Month.ToString() ?? "N/A";
-                    NamKham = diagnosis.NgayKham?.Year.ToString() ?? "N/A";
-                    DiaChi = diagnosis.BENHNHAN.DiaChi;
-                    DienThoai = diagnosis.BENHNHAN.DienThoai;
-                    Gender = diagnosis.BENHNHAN.GioiTinh;
-                    Status = (diagnosis.TrangThai == 1) ? "Available" : "Unavailable";
-                    Symtoms = diagnosis.TrieuChung;
-                    Result = diagnosis.KetQua;
-                    NgayHoanThanh = DateTime.Now;
-                });
-            });
-            Messenger.Default.Register<LICHHEN>(this, (appointment) =>
-            {
-                
-                if (appointment == null) return;
-                ListMedicine.Clear(); // Đảm bảo danh sách không bị dữ liệu cũ
-                var medicines = DataProvider.Ins.db.CTTTs.Where(x => x.MaPK == appointment.MaPK).ToList();
-                foreach (var medicine in medicines)
-                {
-                    ListMedicine.Add(medicine);
-                }
-
-                CollectionViewMedicine.Refresh();
-
-
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    ID = appointment.MaPK.ToString();
-                    TenNV = appointment.NHANVIEN.TenNV;
-                    TenBN = appointment.BENHNHAN.TenBN;
-                    Ngay = appointment.BENHNHAN.NgaySinh?.Day.ToString() ?? "N/A";
-                    Thang = appointment.BENHNHAN.NgaySinh?.Month.ToString() ?? "N/A";
-                    Nam = appointment.BENHNHAN.NgaySinh?.Year.ToString() ?? "N/A";
-                    NgayKham = appointment.NgayHen.Value.Day.ToString() ?? "N/A";
-                    ThangKham = appointment.NgayHen.Value.Day.ToString() ?? "N/A";
-                    NamKham = appointment.NgayHen.Value.Day.ToString() ?? "N/A";
-                    DiaChi = appointment.BENHNHAN.DiaChi;
-                    DienThoai = appointment.BENHNHAN.DienThoai;
-                    Gender = appointment.BENHNHAN.GioiTinh;
-                    Status = "Unpaid";
-                    Symtoms = appointment.PHIEUKHAM.TrieuChung;
-                    Result = appointment.PHIEUKHAM.KetQua;
-                    NgayHoanThanh = DateTime.Now;
-                });
-            });
-
-
-            Messenger.Default.Register<HOADON>(this, (invoice) =>
-            {
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    tempInvoice = invoice;
-
-                    if (invoice == null) return;
+                    if (diagnosis == null) return;
                     ListMedicine.Clear(); // Đảm bảo danh sách không bị dữ liệu cũ
-                    var medicines = DataProvider.Ins.db.CTTTs.Where(x => x.MaPK == invoice.MaPK).ToList();
+                    var medicines = DataProvider.Ins.db.CTTTs.Where(x => x.MaPK == diagnosis.MaPK).ToList();
                     foreach (var medicine in medicines)
                     {
                         ListMedicine.Add(medicine);
@@ -376,68 +303,145 @@ namespace QLPhongMachTuWPF.ViewModel
 
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                       
-                        ID = invoice.MaHD.ToString();
-                        TenNV = invoice.PHIEUKHAM.NHANVIEN.TenNV;
-                        TenBN = invoice.PHIEUKHAM.BENHNHAN.TenBN;
-                        Ngay = invoice.PHIEUKHAM.BENHNHAN.NgaySinh.Value.Day.ToString() ?? "N/A";
-                        Thang = invoice.PHIEUKHAM.BENHNHAN.NgaySinh.Value.Month.ToString() ?? "N/A";
-                        Nam = invoice.PHIEUKHAM.BENHNHAN.NgaySinh.Value.Year.ToString() ?? "N/A";
-                        NgayKham = invoice.NgayHD.Value.Day.ToString() ?? "N/A";
-                        ThangKham = invoice.NgayHD.Value.Day.ToString() ?? "N/A";
-                        NamKham = invoice.NgayHD.Value.Day.ToString() ?? "N/A";
-                        DiaChi = invoice.PHIEUKHAM.BENHNHAN.DiaChi;
-                        DienThoai = invoice.PHIEUKHAM.BENHNHAN.DienThoai;
-                        Gender = invoice.PHIEUKHAM.BENHNHAN.GioiTinh;
-                        Status = "Unpaid";
-                        Symtoms = invoice.PHIEUKHAM.TrieuChung;
-                        Result = invoice.PHIEUKHAM.KetQua;
+                        tempInvoice = diagnosis.HOADONs.First();
+                        ID = diagnosis.MaPK.ToString();
+                        TenNV = diagnosis.NHANVIEN.TenNV;
+                        TenBN = diagnosis.BENHNHAN.TenBN;
+                        Ngay = diagnosis.BENHNHAN.NgaySinh?.Day.ToString() ?? "N/A";
+                        Thang = diagnosis.BENHNHAN.NgaySinh?.Month.ToString() ?? "N/A";
+                        Nam = diagnosis.BENHNHAN.NgaySinh?.Year.ToString() ?? "N/A";
+                        NgayKham = diagnosis.NgayKham?.Day.ToString() ?? "N/A";
+                        ThangKham = diagnosis.NgayKham?.Month.ToString() ?? "N/A";
+                        NamKham = diagnosis.NgayKham?.Year.ToString() ?? "N/A";
+                        DiaChi = diagnosis.BENHNHAN.DiaChi;
+                        DienThoai = diagnosis.BENHNHAN.DienThoai;
+                        Gender = diagnosis.BENHNHAN.GioiTinh;
+                        Status = (diagnosis.TrangThai == 1) ? "Available" : "Unavailable";
+                        Symtoms = diagnosis.TrieuChung;
+                        Result = diagnosis.KetQua;
                         NgayHoanThanh = DateTime.Now;
                     });
                 });
-            });
-
-            SaveChangesCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
-            {
-
-                tempInvoice.PHIEUKHAM.BENHNHAN.DiaChi = DiaChi;
-                tempInvoice.PHIEUKHAM.BENHNHAN.TenBN = TenBN;
-                tempInvoice.PHIEUKHAM.BENHNHAN.DienThoai = DienThoai;
-                tempInvoice.PHIEUKHAM.BENHNHAN.GioiTinh = Gender;
-
-                foreach (var medicine in ListMedicine)
+                Messenger.Default.Register<LICHHEN>(this, (appointment) =>
                 {
-                    var dbMedicine = DataProvider.Ins.db.CTTTs.FirstOrDefault(x => x.MaPK == tempInvoice.MaPK && x.MaThuoc == medicine.MaThuoc);
-                    if (dbMedicine != null)
+
+                    if (appointment == null) return;
+                    ListMedicine.Clear(); // Đảm bảo danh sách không bị dữ liệu cũ
+                    var medicines = DataProvider.Ins.db.CTTTs.Where(x => x.MaPK == appointment.MaPK).ToList();
+                    foreach (var medicine in medicines)
                     {
-                        dbMedicine.CachDung = medicine.CachDung;
-                        dbMedicine.SoLuong = medicine.SoLuong; // Số lượng
-                        dbMedicine.DonGia = medicine.THUOC.Gia * medicine.SoLuong ;   // Đơn giá
-                      
+                        ListMedicine.Add(medicine);
                     }
+
+                    CollectionViewMedicine.Refresh();
+
+
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        ID = appointment.MaPK.ToString();
+                        TenNV = appointment.NHANVIEN.TenNV;
+                        TenBN = appointment.BENHNHAN.TenBN;
+                        Ngay = appointment.BENHNHAN.NgaySinh?.Day.ToString() ?? "N/A";
+                        Thang = appointment.BENHNHAN.NgaySinh?.Month.ToString() ?? "N/A";
+                        Nam = appointment.BENHNHAN.NgaySinh?.Year.ToString() ?? "N/A";
+                        NgayKham = appointment.NgayHen.Value.Day.ToString() ?? "N/A";
+                        ThangKham = appointment.NgayHen.Value.Day.ToString() ?? "N/A";
+                        NamKham = appointment.NgayHen.Value.Day.ToString() ?? "N/A";
+                        DiaChi = appointment.BENHNHAN.DiaChi;
+                        DienThoai = appointment.BENHNHAN.DienThoai;
+                        Gender = appointment.BENHNHAN.GioiTinh;
+                        Status = "Unpaid";
+                        Symtoms = appointment.PHIEUKHAM.TrieuChung;
+                        Result = appointment.PHIEUKHAM.KetQua;
+                        NgayHoanThanh = DateTime.Now;
+                    });
+                });
+
+
+                Messenger.Default.Register<HOADON>(this, (invoice) =>
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        tempInvoice = invoice;
+
+                        if (invoice == null) return;
+                        ListMedicine.Clear(); // Đảm bảo danh sách không bị dữ liệu cũ
+                        var medicines = DataProvider.Ins.db.CTTTs.Where(x => x.MaPK == invoice.MaPK).ToList();
+                        foreach (var medicine in medicines)
+                        {
+                            ListMedicine.Add(medicine);
+                        }
+
+                        CollectionViewMedicine.Refresh();
+
+
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+
+                            ID = invoice.MaHD.ToString();
+                            TenNV = invoice.PHIEUKHAM.NHANVIEN.TenNV;
+                            TenBN = invoice.PHIEUKHAM.BENHNHAN.TenBN;
+                            Ngay = invoice.PHIEUKHAM.BENHNHAN.NgaySinh.Value.Day.ToString() ?? "N/A";
+                            Thang = invoice.PHIEUKHAM.BENHNHAN.NgaySinh.Value.Month.ToString() ?? "N/A";
+                            Nam = invoice.PHIEUKHAM.BENHNHAN.NgaySinh.Value.Year.ToString() ?? "N/A";
+                            NgayKham = invoice.NgayHD.Value.Day.ToString() ?? "N/A";
+                            ThangKham = invoice.NgayHD.Value.Day.ToString() ?? "N/A";
+                            NamKham = invoice.NgayHD.Value.Day.ToString() ?? "N/A";
+                            DiaChi = invoice.PHIEUKHAM.BENHNHAN.DiaChi;
+                            DienThoai = invoice.PHIEUKHAM.BENHNHAN.DienThoai;
+                            Gender = invoice.PHIEUKHAM.BENHNHAN.GioiTinh;
+                            Status = "Unpaid";
+                            Symtoms = invoice.PHIEUKHAM.TrieuChung;
+                            Result = invoice.PHIEUKHAM.KetQua;
+                            NgayHoanThanh = DateTime.Now;
+                        });
+                    });
+                });
+
+                SaveChangesCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+                {
+
+                    tempInvoice.PHIEUKHAM.BENHNHAN.DiaChi = DiaChi;
+                    tempInvoice.PHIEUKHAM.BENHNHAN.TenBN = TenBN;
+                    tempInvoice.PHIEUKHAM.BENHNHAN.DienThoai = DienThoai;
+                    tempInvoice.PHIEUKHAM.BENHNHAN.GioiTinh = Gender;
+
+                    foreach (var medicine in ListMedicine)
+                    {
+                        var dbMedicine = DataProvider.Ins.db.CTTTs.FirstOrDefault(x => x.MaPK == tempInvoice.MaPK && x.MaThuoc == medicine.MaThuoc);
+                        if (dbMedicine != null)
+                        {
+                            dbMedicine.CachDung = medicine.CachDung;
+                            dbMedicine.SoLuong = medicine.SoLuong; // Số lượng
+                            dbMedicine.DonGia = medicine.THUOC.Gia * medicine.SoLuong;   // Đơn giá
+
+                        }
+                    }
+                    DataProvider.Ins.db.SaveChanges();
+                    Messenger.Default.Send("RefreshInvoiceList");
+
+                    Application.Current.Windows
+                  .OfType<Window>()
+                  .SingleOrDefault(w => w.IsActive)
+                  ?.Close();
+
+                });
+                PrintCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+                {
+                    tempInvoice.TrangThai = 1;
+                    Messenger.Default.Send(tempInvoice);
+                    DataProvider.Ins.db.SaveChanges();
+                    Messenger.Default.Send("RefreshInvoiceList");
+                    PrintInvoice();
+
+
                 }
+             );
+
                 DataProvider.Ins.db.SaveChanges();
                 Messenger.Default.Send("RefreshInvoiceList");
-
-                Application.Current.Windows
-              .OfType<Window>()
-              .SingleOrDefault(w => w.IsActive)
-              ?.Close();
-
-            });
-            PrintCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
-            {   tempInvoice.TrangThai = 1;
-                Messenger.Default.Send(tempInvoice); 
-                DataProvider.Ins.db.SaveChanges();
-                Messenger.Default.Send("RefreshInvoiceList");
-                PrintInvoice();
-                
-                
             }
-         );
-
-            DataProvider.Ins.db.SaveChanges();
-            Messenger.Default.Send("RefreshInvoiceList");
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
 
         }
         #region CreateInvoiceToPrint

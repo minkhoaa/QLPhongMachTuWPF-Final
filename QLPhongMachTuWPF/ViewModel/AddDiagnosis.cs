@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -335,68 +336,69 @@ namespace QLPhongMachTuWPF.ViewModel
                 )  return false;
                 return true;
             }, (p) => {
-                // Khởi tạo đối tượng mới
-                var newPatient = new BENHNHAN()
-                {
-                    TenBN = TenBN,
-                    DiaChi = DiaChi,
-                    DienThoai = DienThoai,
-                    NgaySinh = new DateTime(int.Parse(Nam), int.Parse(Thang), int.Parse(Ngay)),
-                    GioiTinh = Gender, 
-                    TrangThai = 0,
-                };
-
-                try
-                {
-                    var existingPatients = DataProvider.Ins.db.BENHNHANs.FirstOrDefault(a => a.TenBN == newPatient.TenBN && a.NgaySinh == newPatient.NgaySinh);
-                    if (existingPatients == null)
+                try {
+                    // Khởi tạo đối tượng mới
+                    var newPatient = new BENHNHAN()
                     {
-                        DataProvider.Ins.db.BENHNHANs.Add(newPatient);
+                        TenBN = TenBN,
+                        DiaChi = DiaChi,
+                        DienThoai = DienThoai,
+                        NgaySinh = new DateTime(int.Parse(Nam), int.Parse(Thang), int.Parse(Ngay)),
+                        GioiTinh = Gender,
+                        TrangThai = 0,
+                    };
+
+                    try
+                    {
+                        var existingPatients = DataProvider.Ins.db.BENHNHANs.FirstOrDefault(a => a.TenBN == newPatient.TenBN && a.NgaySinh == newPatient.NgaySinh);
+                        if (existingPatients == null)
+                        {
+                            DataProvider.Ins.db.BENHNHANs.Add(newPatient);
+                        }
+                        DataProvider.Ins.db.SaveChanges();
+                        Messenger.Default.Send(newPatient);
                     }
-                    DataProvider.Ins.db.SaveChanges();
-                    Messenger.Default.Send(newPatient);
-                }
-                catch
-                (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                var nhanVien = DataProvider.Ins.db.NHANVIENs.FirstOrDefault(nv => nv.TenNV == TenNV);
-                if (nhanVien == null)
-                {
-                    MessageBox.Show("Không tìm thấy nhân viên với tên này.");
-                    return;
-                }
+                    catch
+                    (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    var nhanVien = DataProvider.Ins.db.NHANVIENs.FirstOrDefault(nv => nv.TenNV == TenNV);
+                    if (nhanVien == null)
+                    {
+                        MessageBox.Show("Không tìm thấy nhân viên với tên này.");
+                        return;
+                    }
 
-                var benhNhan = DataProvider.Ins.db.BENHNHANs.FirstOrDefault(bn => bn.TenBN == TenBN);
-                if (benhNhan == null)
-                {
-                    MessageBox.Show("Không tìm thấy bệnh nhân với tên này.");
-                    return;
-                }
+                    var benhNhan = DataProvider.Ins.db.BENHNHANs.FirstOrDefault(bn => bn.TenBN == TenBN);
+                    if (benhNhan == null)
+                    {
+                        MessageBox.Show("Không tìm thấy bệnh nhân với tên này.");
+                        return;
+                    }
 
-                // Tạo đối tượng PHIEUKHAM và gửi
-                PHIEUKHAM newDiagnosis = new PHIEUKHAM()
-                {
-                    MaNV = nhanVien.MaNV,
-                    MaBN = benhNhan.MaBN,
-                    NgayKham = new DateTime(int.Parse(NamKham), int.Parse(ThangKham), int.Parse(NgayKham)),
-                    TrieuChung = Symtoms,
-                    KetQua = Result,
-                    TrangThai = (Status == "Available") ? 1 : 0,
-                    BENHNHAN = newPatient,
-                }; 
-                try
-                {
-                    // Đảm bảo Messenger đã được đăng ký và đối tượng DiagnosisVM đã sẵn sàng
-                    DataProvider.Ins.db.PHIEUKHAMs.Add(newDiagnosis);
-                    DataProvider.Ins.db.SaveChanges();
-                    Messenger.Default.Send(newDiagnosis);
-                    MessageBox.Show("Thêm phiếu khám thành công");
-                    //Messenger.Default.Send("NewAppointmentAdded");
+                    // Tạo đối tượng PHIEUKHAM và gửi
+                    PHIEUKHAM newDiagnosis = new PHIEUKHAM()
+                    {
+                        MaNV = nhanVien.MaNV,
+                        MaBN = benhNhan.MaBN,
+                        NgayKham = new DateTime(int.Parse(NamKham), int.Parse(ThangKham), int.Parse(NgayKham)),
+                        TrieuChung = Symtoms,
+                        KetQua = Result,
+                        TrangThai = (Status == "Available") ? 1 : 0,
+                        BENHNHAN = newPatient,
+                    };
+                   
+                        // Đảm bảo Messenger đã được đăng ký và đối tượng DiagnosisVM đã sẵn sàng
+                        DataProvider.Ins.db.PHIEUKHAMs.Add(newDiagnosis);
+                        DataProvider.Ins.db.SaveChanges();
+                        Messenger.Default.Send(newDiagnosis);
+                        MessageBox.Show("Thêm phiếu khám thành công");
+                        //Messenger.Default.Send("NewAppointmentAdded");
 
-                    ResetFields(); 
-                }
+                        ResetFields();
+                    
+                    }
                 catch (Exception ex) { MessageBox.Show(ex.Message); }
               
             });
@@ -405,6 +407,7 @@ namespace QLPhongMachTuWPF.ViewModel
                 return true;
             }, (p) =>
             {
+                
                 // Kiểm tra nếu thuốc đã tồn tại trong ListChoice
                 if (ListChoice.Contains(MedicineChoice))
                 {
@@ -414,40 +417,43 @@ namespace QLPhongMachTuWPF.ViewModel
                     SoLuong = null;
                     return;
                 }
-
-                // Kiểm tra xem thuốc có tồn tại trong cơ sở dữ liệu không
-                var existingItem = DataProvider.Ins.db.THUOCs.FirstOrDefault(x => x.TenThuoc == MedicineChoice);
-                if (existingItem == null)
+                try
                 {
-                    MessageBox.Show("Thuốc không tồn tại trong danh sách thuốc.");
+
+                    // Kiểm tra xem thuốc có tồn tại trong cơ sở dữ liệu không
+                    var existingItem = DataProvider.Ins.db.THUOCs.FirstOrDefault(x => x.TenThuoc == MedicineChoice);
+                    if (existingItem == null)
+                    {
+                        MessageBox.Show("Thuốc không tồn tại trong danh sách thuốc.");
+                        Instruction = string.Empty;
+                        MedicineChoice = null;
+                        SoLuong = null;
+                        return;
+                    }
+
+                    // Thêm thuốc mới vào cơ sở dữ liệu CTTT
+                    var MedicineDetails = new CTTT()
+                    {
+                        MaThuoc = existingItem.MaThuoc,
+                        MaPK = Diagnosis.MaPK,
+                        SoLuong = int.Parse(SoLuong),
+                        DonGia = existingItem.Gia,
+                        CachDung = Instruction,
+                        TrangThai = existingItem.TrangThai,
+                    };
+
+                    DataProvider.Ins.db.CTTTs.Add(MedicineDetails);
+                    DataProvider.Ins.db.SaveChanges();
+
+                    // Cập nhật ListChoice và xóa các trường nhập liệu
+                    ListChoice.Add(MedicineChoice);
                     Instruction = string.Empty;
                     MedicineChoice = null;
                     SoLuong = null;
-                    return;
-                }
-
-                // Thêm thuốc mới vào cơ sở dữ liệu CTTT
-                var MedicineDetails = new CTTT()
-                {
-                    MaThuoc = existingItem.MaThuoc,
-                    MaPK = Diagnosis.MaPK,
-                    SoLuong = int.Parse(SoLuong),
-                    DonGia = existingItem.Gia,
-                    CachDung = Instruction,
-                    TrangThai = existingItem.TrangThai,
-                };
-
-                DataProvider.Ins.db.CTTTs.Add(MedicineDetails);
-                DataProvider.Ins.db.SaveChanges();
-
-                // Cập nhật ListChoice và xóa các trường nhập liệu
-                ListChoice.Add(MedicineChoice);
-                Instruction = string.Empty;
-                MedicineChoice = null;
-                SoLuong = null;
-
-                MessageBox.Show("Thêm thuốc thành công!");
-            });
+                    MessageBox.Show("Thêm thuốc thành công!");
+                } 
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+            }); 
         } private void ResetFields()
             {
                 TenBN = string.Empty;

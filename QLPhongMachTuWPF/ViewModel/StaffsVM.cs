@@ -65,7 +65,7 @@ namespace QLPhongMachTuWPF.ViewModel
             StaffList = new ObservableCollection<NHANVIEN>(DataProvider.Ins.db.NHANVIENs);
 
             FilteredStaffs = CollectionViewSource.GetDefaultView(StaffList);
-
+            try { 
             Messenger.Default.Register<NHANVIEN>(this, (staff) =>
             {
                 if (staff == null) return;
@@ -174,6 +174,8 @@ namespace QLPhongMachTuWPF.ViewModel
 
                 FilteredStaffs.Refresh();
             });
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
 
         }
  

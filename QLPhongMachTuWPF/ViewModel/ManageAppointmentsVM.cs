@@ -57,6 +57,8 @@ namespace QLPhongMachTuWPF.ViewModel
 
             AppointmentList = new ObservableCollection<LICHHEN>(DataProvider.Ins.db.LICHHENs);
             FilteredAppointment = CollectionViewSource.GetDefaultView(AppointmentList);
+
+            try { 
             Messenger.Default.Register<LICHHEN>(this, (Appointment) =>
             {
                 if (Appointment == null) return;
@@ -148,7 +150,8 @@ namespace QLPhongMachTuWPF.ViewModel
                 
             });
 
-
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         public void RefreshAppointmentList()

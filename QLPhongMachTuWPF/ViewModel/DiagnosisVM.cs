@@ -37,8 +37,11 @@ namespace QLPhongMachTuWPF.ViewModel
             DiagnosisList = new ObservableCollection<PHIEUKHAM>(DataProvider.Ins.db.PHIEUKHAMs);
 
             FilteredDiagnosis = CollectionViewSource.GetDefaultView(DiagnosisList);
+
+            try { 
             Messenger.Default.Register<PHIEUKHAM>(this, (diagnosis) =>
-            {
+            { 
+                
 
                 if (diagnosis == null) return;
 
@@ -149,6 +152,8 @@ namespace QLPhongMachTuWPF.ViewModel
                     RefreshDiagnosisList();
                 }
             });
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
 
         }
         public void RefreshDiagnosisList()

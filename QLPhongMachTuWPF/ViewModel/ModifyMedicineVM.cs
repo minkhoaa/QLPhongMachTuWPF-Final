@@ -52,6 +52,7 @@ namespace QLPhongMachTuWPF.ViewModel
 
         public ModifyMedicineVM()
         {
+            try { 
             Messenger.Default.Register<THUOC>(this, (medicine) =>
             {
                 Application.Current.Dispatcher.Invoke(() =>
@@ -81,6 +82,8 @@ namespace QLPhongMachTuWPF.ViewModel
                 .SingleOrDefault(w => w.IsActive)
                 ?.Close();
             });
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
 

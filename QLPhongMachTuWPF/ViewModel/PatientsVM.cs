@@ -88,6 +88,7 @@ namespace QLPhongMachTuWPF.ViewModel
             // Khởi tạo bộ lọc
             FilteredPatients = CollectionViewSource.GetDefaultView(PatientsList);
 
+            try {  
             // Đăng ký nhận thông báo từ Messenger
             Messenger.Default.Register<BENHNHAN>(this, (patient) =>
             {
@@ -201,6 +202,8 @@ namespace QLPhongMachTuWPF.ViewModel
 
                 FilteredPatients.Refresh();
             });
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
 
 
         }

@@ -354,6 +354,8 @@ namespace QLPhongMachTuWPF.ViewModel
         {
 
             AddSource();
+
+            try { 
             ListStaff = new ObservableCollection<NHANVIEN>(DataProvider.Ins.db.NHANVIENs.ToList());
             ListMedicine = new ObservableCollection<THUOC>(DataProvider.Ins.db.THUOCs.ToList());
             ListChoice = new ObservableCollection<string>();
@@ -548,6 +550,8 @@ namespace QLPhongMachTuWPF.ViewModel
                     RefreshMedicineList();
                 }
             });
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
         public void RefreshMedicineList()
         {

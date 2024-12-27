@@ -36,6 +36,7 @@ namespace QLPhongMachTuWPF.ViewModel
         public string Password { get => _password; set { _password = value; OnPropertyChanged(); } }
         public LoginViewModel()
         {
+            try { 
             isLogin = false;
 
             /*  admin admin
@@ -54,7 +55,7 @@ namespace QLPhongMachTuWPF.ViewModel
                 register.ShowDialog();
 
             });
-              LoginCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+              LoginCommand = new RelayCommand<Window>((p) => { if (string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password)) return false; return true; ; }, (p) =>
             {
                 Login(p);
 
@@ -64,6 +65,8 @@ namespace QLPhongMachTuWPF.ViewModel
                 Application.Current.Shutdown();
 
             });
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
 

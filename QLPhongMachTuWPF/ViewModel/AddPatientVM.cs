@@ -228,11 +228,13 @@ namespace QLPhongMachTuWPF.ViewModel
             AddSource(); 
             AddPatientCommand = new RelayCommand<object>((p)=>  
             {
-                if(string.IsNullOrEmpty(TenBN)) return false;
+                if(string.IsNullOrEmpty(TenBN) || string.IsNullOrEmpty(Ngay) || string.IsNullOrEmpty(Thang) || string.IsNullOrEmpty(Nam)
+                || string.IsNullOrEmpty(DienThoai) || string.IsNullOrEmpty(DienThoai) || string.IsNullOrEmpty(Gender) || string.IsNullOrEmpty(Charged)
+                ) return false;
                 return true;    
             }, (p) => {
                 //  var normalizedNgaySinh = NormalizeDateTime(NgaySinh); // Chuẩn hóa giá trị
-
+                try { 
                 var newPatient = new BENHNHAN()
                 {  
                     TenBN = TenBN,
@@ -243,8 +245,7 @@ namespace QLPhongMachTuWPF.ViewModel
                     TrangThai = (Charged == "Discharged") ? 1 : 0
                 }; 
 
-                try
-                {
+               
                     // Lưu vào cơ sở dữ liệu
                     DataProvider.Ins.db.BENHNHANs.Add(newPatient);
                     DataProvider.Ins.db.SaveChanges();

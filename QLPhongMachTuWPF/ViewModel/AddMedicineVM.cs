@@ -37,9 +37,10 @@ namespace QLPhongMachTuWPF.ViewModel
         {
             AddMedicineCommand = new RelayCommand<object>((p) =>
             {
-                if (string.IsNullOrEmpty(Name)) return false;
+                if (string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(Unit) || string.IsNullOrEmpty(Price.ToString()) || string.IsNullOrEmpty(Status)) return false;
                 return true;
             }, (p) => {
+                try {  
                 //  var normalizedNgaySinh = NormalizeDateTime(NgaySinh); // Chuẩn hóa giá trị
 
                 var newMedicine = new THUOC()
@@ -51,8 +52,7 @@ namespace QLPhongMachTuWPF.ViewModel
 
                 };
 
-                try
-                {
+              
                     // Lưu vào cơ sở dữ liệu
                     DataProvider.Ins.db.THUOCs.Add(newMedicine);
                     DataProvider.Ins.db.SaveChanges();

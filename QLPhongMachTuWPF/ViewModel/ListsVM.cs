@@ -39,13 +39,26 @@ namespace QLPhongMachTuWPF.ViewModel
                 }
             }
         }
+        private string _SearchKeyword { get; set; }
+
+        public string SearchKeyword
+        {
+            get => _SearchKeyword;
+            set
+            {
+                _SearchKeyword = value;
+                OnPropertyChanged();
+                FilterMedicine();
+            }
+        }
+
 
         public ListsVM()
         {
             MedicineList = new ObservableCollection<THUOC>(DataProvider.Ins.db.THUOCs);
 
             FilteredMedicine = CollectionViewSource.GetDefaultView(MedicineList);
-
+            try { 
 
             Messenger.Default.Register<THUOC>(this, (medicine) =>
             {
@@ -126,7 +139,29 @@ namespace QLPhongMachTuWPF.ViewModel
                     MessageBox.Show("Xóa thất bại: " + ex.Message.ToString());
                 }
             });
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
 
+        }
+        void FilterMedicine()
+        {
+            if (FilteredMedicine == null)
+                return;
+
+            // Gán bộ lọc
+            FilteredMedicine.Filter = (obj) =>
+            {
+                if (obj is THUOC medicine)
+                {
+                    // Kiểm tra từ khóa tìm kiếm, không phân biệt chữ hoa/chữ thường
+                    return string.IsNullOrEmpty(SearchKeyword) ||
+                           medicine.TenThuoc?.IndexOf(SearchKeyword, StringComparison.OrdinalIgnoreCase) >= 0;
+                }
+                return false;
+            };
+
+            // Làm mới view để cập nhật kết quả lọc
+            FilteredMedicine.Refresh();
         }
     }
 }

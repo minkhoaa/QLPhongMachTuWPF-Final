@@ -231,11 +231,13 @@ namespace QLPhongMachTuWPF.ViewModel
 
             AddStaffsCommand = new RelayCommand<object>((p) =>
             {
-                if (string.IsNullOrEmpty(Ten)) return false;
+                if (string.IsNullOrEmpty(Ten) || string.IsNullOrEmpty(DienThoai) || string.IsNullOrEmpty(DiaChi) || string.IsNullOrEmpty(Ngay) || string.IsNullOrEmpty(Thang)
+                || string.IsNullOrEmpty(Nam) || string.IsNullOrEmpty(Gender) || string.IsNullOrEmpty(Status) || string.IsNullOrEmpty(Type)
+                 ) return false;
                 return true;
             }, (p) => {
                 //  var normalizedNgaySinh = NormalizeDateTime(NgaySinh); // Chuẩn hóa giá trị
-
+                try { 
                 var newStaff = new NHANVIEN()
                 {
                     TenNV = Ten,
@@ -247,8 +249,6 @@ namespace QLPhongMachTuWPF.ViewModel
                     TrangThai = (Status == "Discharged") ? 1 : 0
                 }; 
 
-                    try
-                    {
                         // Lưu vào cơ sở dữ liệu
                         DataProvider.Ins.db.NHANVIENs.Add(newStaff);
                         DataProvider.Ins.db.SaveChanges();
