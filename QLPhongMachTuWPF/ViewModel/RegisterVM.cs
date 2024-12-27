@@ -30,26 +30,33 @@ namespace QLPhongMachTuWPF.ViewModel
         public string Confirmpassword { get => _confirmpassword; set { _confirmpassword = value; OnPropertyChanged(); } }
         public RegisterVM()
         {
-            RegisterCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            RegisterCommand = new RelayCommand<Window>((p) =>
             {
-                if (Register(p))
-                {
-                    MessageBox.Show("Đăng kí thành công");
+                // Điều kiện để cho phép thực hiện lệnh
+                return !string.IsNullOrEmpty(Username) &&
+                       !string.IsNullOrEmpty(Password) &&
+                       !string.IsNullOrEmpty(Confirmpassword) &&
+                       Password == Confirmpassword &&
+                       !string.IsNullOrEmpty(Displayname);
+            },
+ (p) =>
+ {
+     if (Register(p))
+     {
+         MessageBox.Show("Đăng ký thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                    // Đóng form đăng ký
-                    if (p != null)
-                    {
-                        p.Close();
-                    }
+         // Đóng form đăng ký
+         p.Close();
 
-                    // Mở form đăng nhập
-                    OpenLoginForm();
-                }
-                else
-                {
-                    MessageBox.Show("Xác nhận mật khẩu không chính xác");
-                }
-            });
+         // Hiển thị lại form đăng nhập
+         OpenLoginForm();
+     }
+     else
+     {
+         MessageBox.Show("Đăng ký không thành công. Vui lòng kiểm tra lại!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+     }
+ });
+
 
             PasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; }, (p) => { Password = p.Password; });
             PasswordConfirmChangedCommand = new RelayCommand<PasswordBox>((p) =>
@@ -76,19 +83,39 @@ namespace QLPhongMachTuWPF.ViewModel
         bool Register(Window p)
         {
             if (p == null) return false;
-            if (Password != Confirmpassword) return false;
 
+            // Kiểm tra điều kiện
+            if (string.IsNullOrEmpty(Username) ||
+                string.IsNullOrEmpty(Password) ||
+                string.IsNullOrEmpty(Confirmpassword) ||
+                Password != Confirmpassword ||
+                string.IsNullOrEmpty(Displayname))
+            {
+                return false;
+            }
+
+            // Kiểm tra xem tên người dùng đã tồn tại hay chưa
+            var existingUser = DataProvider.Ins.db.ACCOUNTs.FirstOrDefault(x => x.UserName == Username);
+            if (existingUser != null)
+            {
+               
+                return false;
+            }
+
+            // Thêm tài khoản mới
             DataProvider.Ins.db.ACCOUNTs.Add(new ACCOUNT()
             {
                 DisPlayName = Displayname,
                 UserName = Username,
                 PassWord = HashPasswordWithSHA256(Password),
-                Type = 1
-            }); 
-            
+                Type = 1 // Đặt mặc định Type là 1 hoặc tùy chỉnh theo logic của bạn
+            });
+
+            // Lưu thay đổi
             DataProvider.Ins.db.SaveChanges();
 
             return true;
         }
+
     }
 }

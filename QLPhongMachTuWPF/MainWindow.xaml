@@ -118,7 +118,7 @@
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command ="{Binding LoadedWindowCommand}" CommandParameter="{Binding ElementName=mainWindow}"></i:InvokeCommandAction>
+            <i:InvokeCommandAction Command ="{Binding LoadedWindowCommand, UpdateSourceTrigger=PropertyChanged}" CommandParameter="{Binding ElementName=mainWindow}"></i:InvokeCommandAction>
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid>
@@ -415,7 +415,7 @@ Style="{StaticResource tt_style}"/>
 
                     <ListViewItem HorizontalAlignment="Left"
                     Margin="0 150 0 0" MouseEnter="ListViewItem_MouseEnter">
-                        <Button Background="Transparent" BorderBrush="Transparent" Height="45" Width="55" Padding="0">
+                        <Button Command="{Binding LogoutCommand}" CommandParameter="{Binding ElementName=mainWindow}" Background="Transparent" BorderBrush="Transparent" Height="45" Width="55" Padding="0">
                             <StackPanel Orientation="Horizontal"
                      Width="200">
 

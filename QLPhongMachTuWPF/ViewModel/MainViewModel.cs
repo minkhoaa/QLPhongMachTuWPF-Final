@@ -79,6 +79,8 @@ namespace QLPhongMachTuWPF.ViewModel
         public ICommand ListsCommand { get; set; }
         public ICommand InvoiceCommand { get; set; }
 
+        public ICommand LogoutCommand {  get; set; }
+
         // Các hàm Command
         private void HomePage(object obj)
         {
@@ -189,24 +191,32 @@ namespace QLPhongMachTuWPF.ViewModel
 
                 if (p == null) return;
 
-                p.Hide();
+                p.Hide(); // Chỉ ẩn cửa sổ, không đóng
 
                 LoginModel login = new LoginModel();
                 login.ShowDialog();
-                if (login.DataContext == null) return;
-                var isLogined = login.DataContext as LoginViewModel;
-                if (isLogined.isLogin)
+
+                if (login.DataContext is LoginViewModel loginVM && loginVM.isLogin)
                 {
-                    p.Show();
+                    p.Show(); // Hiển thị lại cửa sổ chính nếu đăng nhập thành công
                 }
                 else
                 {
-                    p.Close();
+                    Application.Current.Shutdown(); // Thoát hoàn toàn ứng dụng nếu không đăng nhập
                 }
             });
 
-            // Các Command khác
-            HomePageCommand = new RelayCommand(HomePage);
+            LogoutCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                Logout(p);
+            }); 
+        
+       
+       
+
+
+        // Các Command khác
+        HomePageCommand = new RelayCommand(HomePage);
             PatientsCommand = new RelayCommand(Patients);
             StaffsCommand = new RelayCommand(Staffs);
             ManageAppointmentCommand = new RelayCommand(ManageAppointment);
@@ -216,5 +226,35 @@ namespace QLPhongMachTuWPF.ViewModel
 
             CurrentView = new HomepageVM();
         }
+        private void Logout(object obj)
+        {
+            if (obj is Window mainWindow)
+            {
+                mainWindow.Hide(); // Ẩn cửa sổ chính thay vì đóng
+
+                // Hiển thị màn hình đăng nhập
+                LoginModel login = new LoginModel();
+                login.ShowDialog();
+
+                if (login.DataContext is LoginViewModel loginVM && loginVM.isLogin)
+                {
+                    try
+                    {
+                        mainWindow.Show();
+
+                    }catch
+                    {
+                        Application.Current?.Shutdown();
+                    }
+
+
+                }
+                else
+                {
+                    mainWindow.Close(); // Nếu không đăng nhập, đóng hoàn toàn ứng dụng
+                }
+            }
+        }
+
     }
 }

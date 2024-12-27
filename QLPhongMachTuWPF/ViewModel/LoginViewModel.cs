@@ -25,6 +25,7 @@ namespace QLPhongMachTuWPF.ViewModel
 
         public ICommand RegisterCommand { get; set; }
 
+        public ICommand CloseCommand { get; set; }
         private string _username;
 
         public string Username { get => _username; set { _username = value; OnPropertyChanged(); } }
@@ -51,6 +52,16 @@ namespace QLPhongMachTuWPF.ViewModel
             {
                 Register register = new Register();
                 register.ShowDialog();
+
+            });
+              LoginCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                Login(p);
+
+            });
+            CloseCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                Application.Current.Shutdown();
 
             });
         }

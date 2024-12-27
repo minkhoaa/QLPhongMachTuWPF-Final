@@ -18,7 +18,9 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Button x:Name="btnClose"
+        <Button 
+            Command="{Binding CloseCommand}"
+            x:Name="btnClose"
          BorderBrush="#3693ff"
         Grid.Column="1" Panel.ZIndex="1"
            Width="30"
@@ -26,7 +28,7 @@
            VerticalAlignment="Top"
            HorizontalAlignment="Right"
            Margin="0 13 13 0"
-           Click="btnClose_Click"
+         
             BorderThickness="0">
             <Button.Background >
                 <ImageBrush ImageSource="/Images/image.png"
