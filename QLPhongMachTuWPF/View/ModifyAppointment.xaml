@@ -155,7 +155,7 @@ Grid.Column="1" Panel.ZIndex="1"
                 </StackPanel>
 
                 <TextBlock Text="Appointment day" Margin="80 -50 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" FontSize="16" Foreground="Gray"/>
-                <TextBlock Text="Gender" Margin="390 -50 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontSize="16" Foreground="Gray"/>
+                <TextBlock Text="Time" Margin="390 -50 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontSize="16" Foreground="Gray"/>
 
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="80 250 0 0">
@@ -185,16 +185,16 @@ Grid.Column="1" Panel.ZIndex="1"
  FontSize="16" Margin="10 0 0 0"/>
                     <!--Gender-->
                     <ComboBox
-             Text="{Binding Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+             Text="{Binding Time, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         
-             ItemsSource="{Binding GenderSource  }"
+             ItemsSource="{Binding TimeSource  }"
                         
-             x:Name="cmbGender" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+              Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
          
 FontSize="16" Margin="60 0 0 0"/>
                 </StackPanel>
 
-                <TextBlock Text="Status" Margin="390 150 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontSize="16" Foreground="Gray"/>
+                <TextBlock Text="Gender" Margin="390 150 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontSize="16" Foreground="Gray"/>
                 <TextBlock Text="Staff's Name" Margin="80 150 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontSize="16" Foreground="Gray"/>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="20 350 0 0">
                     <ComboBox 
@@ -207,11 +207,15 @@ FontSize="16" Margin="60 0 0 0"/>
 FontSize="16"  Margin="60 0 0 0"/>
 
                     <ComboBox
-                       ItemsSource="{Binding StatusSource}"
-                        Text="{Binding Status}"
-                        x:Name="cmbStatus" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+             Text="{Binding Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        
+             ItemsSource="{Binding GenderSource  }"
+                        
+             x:Name="cmbGender" Width="250" Style="{StaticResource MaterialDesignOutlinedComboBox}"
          
 FontSize="16" Margin="60 0 0 0"/>
+
+                   
 
 
                 </StackPanel>

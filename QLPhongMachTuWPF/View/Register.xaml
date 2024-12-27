@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:QLPhongMachTuWPF.View" xmlns:viewmodel="clr-namespace:QLPhongMachTuWPF.ViewModel" xmlns:i="http://schemas.microsoft.com/xaml/behaviors" d:DataContext="{d:DesignInstance Type=viewmodel:RegisterVM}"
         mc:Ignorable="d"
         DataContext="{StaticResource RegisterVM}"
-        Title="Register" Height="450" Width="800"
+        Title="Register" Height="450" Width="500"
         x:Name="FormRegister"
         WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
     <Grid>
@@ -31,7 +31,7 @@
             </Button.Background>
         </Button>
 
-        <Border Background="#ffffff" Grid.Column="1" CornerRadius="10"  MouseDown="Border_MouseDown">
+        <Border Background="#ffffff" CornerRadius="10"  MouseDown="Border_MouseDown">
 
             <StackPanel VerticalAlignment="Center">
                 <TextBlock Text="Sign up" FontSize="32"
@@ -45,7 +45,7 @@
                        Opacity="0.8" Margin="20 5"/>
 
                 <!-- Name Input -->
-                <Border BorderBrush="#abc0af" BorderThickness="1" Margin="250 10" CornerRadius="5">
+                <Border BorderBrush="#abc0af" Width="300" BorderThickness="1" Margin="0 0 0 15" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="5">
                     <Grid Margin="7 9">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
@@ -56,21 +56,27 @@
                                FontSize="14"
                                Grid.Column="1"
                                Margin="10,0,0,0"
-                               Foreground="#696969"/>
+                               Foreground="#696969"
+                                x:Name="textDisplayName"
+                                   MouseDown="textDisplayName_MouseDown"
+                                   />
                         <TextBox
                             Text="{Binding Displayname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                            x:Name="txtName" 
+                            x:Name="txtDisplayName" 
                                  FontSize="14"
                                  Grid.Column="1"
                                  Margin="10,0,0,0"
                                  Foreground="Black"
                                  BorderBrush="Transparent"
-                                 BorderThickness="0"/>
+                                 BorderThickness="0"
+                                
+                                TextChanged="txtDisplayName_TextChanged"
+                            />
                     </Grid>
                 </Border>
 
                 <!-- Username Input -->
-                <Border BorderBrush="#abc0af" BorderThickness="1" Margin="250 10" CornerRadius="5">
+                <Border BorderBrush="#abc0af" Width="300" BorderThickness="1" Margin="0 0 0 15" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="5">
                     <Grid Margin="7 9">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
@@ -97,7 +103,7 @@
                 </Border>
 
                 <!-- Password Input -->
-                <Border BorderBrush="#abc0af" BorderThickness="1" Margin="250 10" CornerRadius="5">
+                <Border BorderBrush="#abc0af" BorderThickness="1" Width="300" Margin="0 0 0 15" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="5">
                     <Grid Margin="7 9">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
@@ -132,20 +138,22 @@
                 </Border>
 
                 <!-- Confirm Password Input -->
-                <Border BorderBrush="#abc0af" BorderThickness="1" Margin="250 10" CornerRadius="5">
+                <Border BorderBrush="#abc0af" BorderThickness="1" HorizontalAlignment="Center" Margin="0 0 0 15" VerticalAlignment="Center" CornerRadius="5">
                     <Grid Margin="7 9">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
                             <ColumnDefinition Width="284"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock x:Name="textconfirmPassword"  MouseDown="textPassword_MouseDown" 
+                        <TextBlock x:Name="textconfirmPassword"  MouseDown="textconfirmPassword_MouseDown"
                                    Text="Confirm Password"  FontSize="14"
                                 Grid.Column="1"
                                 Panel.ZIndex="1"
                                 Margin="10 0 0 0"
-                                Foreground="#696969"/>
-                        <PasswordBox x:Name="txtConfirmPass"  
+                                Foreground="#696969"
+                                  
+                                   />
+                        <PasswordBox x:Name="txtConfirmPass"  PasswordChanged="txtConfirmPass_PasswordChanged_1"
                              FontSize="14"
                              Grid.Column="1"
                              Margin="10 0 0 0"

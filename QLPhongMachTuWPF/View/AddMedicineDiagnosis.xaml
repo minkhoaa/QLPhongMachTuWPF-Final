@@ -180,7 +180,7 @@ FontSize="16" Margin="10 0 0 0"/>
                      SelectedItem="{Binding SelectedMonthApp}"
                     x:Name="cmbMonthApp" Width="70" Style="{StaticResource MaterialDesignOutlinedComboBox}"
         
-FontSize="16" Margin="10 0 0 0"/>
+FontSize="16" Margin="10 0 10 0"/>
 
                             <ComboBox Text="{Binding NamKham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      ItemsSource="{Binding YearsApp}"
@@ -252,10 +252,10 @@ Width="250" Height="150" FontSize="16" Margin="60 0 0 0"
                                           SelectedItem="{Binding SelectedItemCommand, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
            DisplayMemberPath="TenThuoc"
            Style="{StaticResource MaterialDesignOutlinedComboBox}"  FontSize="16"/>
-                                    <Button Content="Add" Command="{Binding AddMedicineTolist}"  Margin="10 50 0 0" Foreground="White" />
+                                    <Button Content="Add" Command="{Binding AddMedicineTolist}"  Margin="10 0 0 0" Foreground="White" />
                                 </StackPanel>
 
-                                <ComboBox Margin="0 10 0 0" Width="171" HorizontalAlignment="Left"
+                                <ComboBox Margin="0 10 0 0" Width="185" HorizontalAlignment="Left"
 
            Text="{Binding SoLuong}"
            ItemsSource="{Binding NumberSource}"

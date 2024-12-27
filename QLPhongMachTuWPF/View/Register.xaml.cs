@@ -116,5 +116,44 @@ namespace QLPhongMachTuWPF.View
                 textPassword.Visibility = Visibility.Visible;
             }
         }
+
+        private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void textDisplayName_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            txtDisplayName.Focus();
+        }
+
+        private void txtDisplayName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtDisplayName.Text) && txtDisplayName.Text.Length > 0)
+            {
+                textDisplayName.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                textDisplayName.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void textconfirmPassword_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            txtConfirmPass.Focus();
+        }
+
+        private void txtConfirmPass_PasswordChanged_1(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtConfirmPass.Password) && txtConfirmPass.Password.Length > 0)
+            {
+                textconfirmPassword.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                txtConfirmPass.Visibility = Visibility.Visible;
+            }
+        }
     }
 }
