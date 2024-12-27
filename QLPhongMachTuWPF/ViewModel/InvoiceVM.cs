@@ -22,12 +22,17 @@ namespace QLPhongMachTuWPF.ViewModel
    
         public class InvoiceVM : ViewModelBase
         {
-            public ICommand AddInvoiceCommand { get; set; }
+        public ICommand AddInvoiceCommand { get; set; }
 
         public ICommand ModifyInvoiceCommand { get; set; }
         public ICommand VerifyCommand { get; set; }
 
         public ICommand DeleteInvoiceCommand { get; set; }
+
+
+     
+
+
         private ObservableCollection<HOADON> _invoice;
         public ObservableCollection<HOADON> InvoiceList { get => _invoice; set { _invoice = value; OnPropertyChanged(); } }
 
@@ -35,6 +40,7 @@ namespace QLPhongMachTuWPF.ViewModel
      
         private HOADON _SelectedInvoice { get; set; }
         public HOADON SelectedInvoice { get => _SelectedInvoice; set { _SelectedInvoice = value; OnPropertyChanged(); } }
+
 
         public InvoiceVM()
             {
@@ -74,7 +80,7 @@ namespace QLPhongMachTuWPF.ViewModel
             });
             ModifyInvoiceCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                DetailInovice diagnosis = new DetailInovice();
+                ModifyDetailInvoice diagnosis = new ModifyDetailInvoice();
                 Messenger.Default.Send(SelectedInvoice);
                 diagnosis.ShowDialog();
             }

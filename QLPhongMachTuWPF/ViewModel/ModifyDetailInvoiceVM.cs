@@ -1,14 +1,18 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 using QLPhongMachTuWPF.Model;
 using QLPhongMachTuWPF.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 
@@ -271,6 +275,8 @@ namespace QLPhongMachTuWPF.ViewModel
 
         public ICommand PrintCommand { get; set; }
 
+       
+
         public ModifyDetailInvoiceVM()
         {
             // Khởi tạo danh sách thuốc ban đầu
@@ -282,6 +288,7 @@ namespace QLPhongMachTuWPF.ViewModel
             // Lắng nghe thông điệp từ Messenger
             Messenger.Default.Register<PHIEUKHAM>(this, (diagnosis) =>
             {
+
                 if (diagnosis == null) return;
                 ListMedicine.Clear(); // Đảm bảo danh sách không bị dữ liệu cũ
                 var medicines = DataProvider.Ins.db.CTTTs.Where(x => x.MaPK == diagnosis.MaPK).ToList();
@@ -295,6 +302,7 @@ namespace QLPhongMachTuWPF.ViewModel
 
                 Application.Current.Dispatcher.Invoke(() =>
                 {
+                    tempInvoice = diagnosis.HOADONs.First(); 
                     ID = diagnosis.MaPK.ToString();
                     TenNV = diagnosis.NHANVIEN.TenNV;
                     TenBN = diagnosis.BENHNHAN.TenBN;
@@ -315,6 +323,7 @@ namespace QLPhongMachTuWPF.ViewModel
             });
             Messenger.Default.Register<LICHHEN>(this, (appointment) =>
             {
+                
                 if (appointment == null) return;
                 ListMedicine.Clear(); // Đảm bảo danh sách không bị dữ liệu cũ
                 var medicines = DataProvider.Ins.db.CTTTs.Where(x => x.MaPK == appointment.MaPK).ToList();
@@ -353,6 +362,7 @@ namespace QLPhongMachTuWPF.ViewModel
                 Application.Current.Dispatcher.Invoke(() =>
                 {
                     tempInvoice = invoice;
+
                     if (invoice == null) return;
                     ListMedicine.Clear(); // Đảm bảo danh sách không bị dữ liệu cũ
                     var medicines = DataProvider.Ins.db.CTTTs.Where(x => x.MaPK == invoice.MaPK).ToList();
@@ -366,6 +376,7 @@ namespace QLPhongMachTuWPF.ViewModel
 
                     Application.Current.Dispatcher.Invoke(() =>
                     {
+                       
                         ID = invoice.MaHD.ToString();
                         TenNV = invoice.PHIEUKHAM.NHANVIEN.TenNV;
                         TenBN = invoice.PHIEUKHAM.BENHNHAN.TenBN;
@@ -388,6 +399,7 @@ namespace QLPhongMachTuWPF.ViewModel
 
             SaveChangesCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
+
                 tempInvoice.PHIEUKHAM.BENHNHAN.DiaChi = DiaChi;
                 tempInvoice.PHIEUKHAM.BENHNHAN.TenBN = TenBN;
                 tempInvoice.PHIEUKHAM.BENHNHAN.DienThoai = DienThoai;
@@ -414,26 +426,158 @@ namespace QLPhongMachTuWPF.ViewModel
 
             });
             PrintCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
-            {
-                tempInvoice.TrangThai = 1;
-
-
-
+            {   tempInvoice.TrangThai = 1;
+                Messenger.Default.Send(tempInvoice); 
                 DataProvider.Ins.db.SaveChanges();
                 Messenger.Default.Send("RefreshInvoiceList");
-
-                Application.Current.Windows
-              .OfType<Window>()
-              .SingleOrDefault(w => w.IsActive)
-              ?.Close();
-
+                PrintInvoice();
+                
+                
             }
          );
 
-
             DataProvider.Ins.db.SaveChanges();
-            Messenger.Default.Send("UpdateInvoiceList");
+            Messenger.Default.Send("RefreshInvoiceList");
 
         }
-    }
+        #region CreateInvoiceToPrint
+        public void PrintInvoice()
+        {
+            var receiptContent = GenerateReceiptFromView(tempInvoice);
+
+            // Hiển thị hộp thoại lưu file
+            var saveFileDialog = new Microsoft.Win32.SaveFileDialog
+            {
+                FileName = "Invoice_POS",
+                DefaultExt = ".pdf",
+                Filter = "PDF files (.pdf)|*.pdf"
+            };
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                SavePdfFile(receiptContent, saveFileDialog.FileName);
+                MessageBox.Show("Hóa đơn đã được lưu!");
+            }
+        }
+
+
+
+        public void SavePdfFile(string content, string filePath)
+        {
+            try
+            {
+                // Khởi tạo tài liệu PDF
+                Document document = new Document(PageSize.A4, 25, 25, 30, 30);
+                PdfWriter.GetInstance(document, new FileStream(filePath, FileMode.Create));
+
+                // Mở tài liệu để ghi
+                document.Open();
+
+                // Thêm tiêu đề
+                var titleFont = FontFactory.GetFont("Arial", 16, Font.BOLD, BaseColor.BLACK);
+                Paragraph title = new Paragraph("INVOICE", titleFont)
+                {
+                    Alignment = Element.ALIGN_CENTER
+                };
+                document.Add(title);
+
+                // Thêm thông tin khách hàng và ngày
+                var infoFont = FontFactory.GetFont("Arial", 12, Font.NORMAL, BaseColor.BLACK);
+                document.Add(new Paragraph($"Invoice Code: {tempInvoice.MaHD}", infoFont));
+                document.Add(new Paragraph($"Invoice Date: {tempInvoice.NgayHD:dd/MM/yyyy}", infoFont));
+                document.Add(new Paragraph("--------------------------------", infoFont));
+                document.Add(new Paragraph($"Customer Name: {tempInvoice.PHIEUKHAM.BENHNHAN.TenBN}", infoFont));
+                document.Add(new Paragraph($"Birthday: {tempInvoice.PHIEUKHAM.BENHNHAN.NgaySinh.ToString()}", infoFont));
+                document.Add(new Paragraph($"Phone Number: {tempInvoice.PHIEUKHAM.BENHNHAN.DienThoai}", infoFont));
+                document.Add(new Paragraph($"Address: {tempInvoice.PHIEUKHAM.BENHNHAN.DiaChi}", infoFont));
+                document.Add(new Paragraph($"Gender: {tempInvoice.PHIEUKHAM.BENHNHAN.GioiTinh}", infoFont));
+
+
+
+                document.Add(new Paragraph("--------------------------------", infoFont));
+                document.Add(new Paragraph("      ", infoFont));
+                // Thêm bảng các mặt hàng
+                PdfPTable table = new PdfPTable(4);  // 4 cột: Tên SP, SL, Đơn Giá, Thành Tiền
+                table.WidthPercentage = 100;  // Độ rộng của bảng
+
+                // Đặt tên các cột
+                table.AddCell("Product Name");
+                table.AddCell("Quantity");
+                table.AddCell("UnitPrice");
+                table.AddCell("Price");
+
+                foreach (var item in tempInvoice.PHIEUKHAM.CTTTs)
+                {
+                    table.AddCell(item.THUOC.TenThuoc);
+                    table.AddCell(item.SoLuong.ToString());
+                    table.AddCell(item.THUOC.Gia.ToString());
+                    table.AddCell((item.THUOC.Gia * item.SoLuong).ToString());
+                }
+
+                // Thêm bảng vào tài liệu PDF
+                document.Add(table);
+                document.Add(new Paragraph("--------------------------------", infoFont));
+
+                // Thêm tổng tiền
+                document.Add(new Paragraph($"Medical Fee: {tempInvoice.TienKham:C}", infoFont));
+                document.Add(new Paragraph("--------------------------------", infoFont));
+                document.Add(new Paragraph($"Total: {tempInvoice.TongTien:C}", infoFont));
+                document.Add(new Paragraph("--------------------------------", infoFont));
+                // Thêm dòng cảm ơn
+                document.Add(new Paragraph("Thank you!", infoFont));
+
+                // Đóng tài liệu
+                document.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Đã xảy ra lỗi khi lưu PDF: {ex.Message}");
+            }
+        }
+
+
+        public string GenerateReceiptFromView(HOADON invoice)
+        {
+        var builder = new StringBuilder();
+
+        builder.AppendLine("INVOICE");
+        builder.AppendLine("--------------------------------");
+
+        builder.AppendLine($"Customer Name: {invoice.PHIEUKHAM.BENHNHAN.TenBN}");
+        builder.AppendLine($"Adress: {invoice.PHIEUKHAM.BENHNHAN.DiaChi}");
+        builder.AppendLine($"Phone Number: {invoice.PHIEUKHAM.BENHNHAN.DienThoai}");
+        builder.AppendLine($"Birthday: {invoice.PHIEUKHAM.BENHNHAN.NgaySinh.ToString()}");
+        builder.AppendLine($"Gender: {invoice.PHIEUKHAM.BENHNHAN.GioiTinh}");
+
+
+
+
+        builder.AppendLine($"Invoice Code: {invoice.MaHD}");
+        builder.AppendLine($"Invoice Date: {invoice.NgayHD:dd/MM/yyyy}");
+       
+        builder.AppendLine("--------------------------------");
+        builder.AppendLine("Product Name        Quantity    Unit Price      Price");
+        builder.AppendLine("--------------------------------");
+
+        foreach (var item in invoice.PHIEUKHAM.CTTTs)
+        {
+            builder.AppendLine($"{item.THUOC.TenThuoc.PadRight(12)} {item.SoLuong.ToString().PadRight(5)} {item.THUOC.Gia.ToString().PadRight(8)} {item.THUOC.Gia.ToString()}");
+        }
+
+        builder.AppendLine("--------------------------------");
+        builder.AppendLine($"Total: {invoice.TongTien.ToString()}");
+        builder.AppendLine("--------------------------------");
+        builder.AppendLine("Thank you!");
+
+        return builder.ToString();
+}
+       
+
+        public void SavePosFile(string content, string filePath)
+            {
+                File.WriteAllText(filePath, content);
+            }
+ #endregion 
+        }
+   
 }

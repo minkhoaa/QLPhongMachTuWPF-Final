@@ -85,8 +85,8 @@ namespace QLPhongMachTuWPF.ViewModel
             VerifyCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
               
-                ModifyDiagnosis diagnosis = new ModifyDiagnosis();
-                Messenger.Default.Send(SelectedItemCommand);
+                ModifyDetailInvoice diagnosis = new ModifyDetailInvoice();
+                Messenger.Default.Send(SelectedItemCommand.HOADONs.First()); 
                 diagnosis.ShowDialog();
             }
            );

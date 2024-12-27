@@ -1,4 +1,5 @@
 ﻿using QLPhongMachTuWPF.View;
+using System;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -198,11 +199,25 @@ namespace QLPhongMachTuWPF.ViewModel
 
                 if (login.DataContext is LoginViewModel loginVM && loginVM.isLogin)
                 {
-                    p.Show(); // Hiển thị lại cửa sổ chính nếu đăng nhập thành công
+                    try
+                    {
+                        p.Show(); // Hiển thị lại cửa sổ chính nếu đăng nhập thành công
+                    }
+                    catch (Exception)
+                    {
+                        Application.Current.Shutdown();
+                    }
                 }
                 else
                 {
-                    Application.Current.Shutdown(); // Thoát hoàn toàn ứng dụng nếu không đăng nhập
+                    try
+                    {
+                        p.Close();
+                    }
+                    catch (Exception)
+                    {
+                        Application.Current.Shutdown(); // Thoát hoàn toàn ứng dụng nếu không đăng nhập
+                    }
                 }
             });
 

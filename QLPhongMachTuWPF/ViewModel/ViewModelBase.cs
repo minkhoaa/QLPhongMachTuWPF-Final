@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using System.Security.Cryptography;
+using System.IO;
 
 
 namespace QLPhongMachTuWPF.ViewModel
@@ -72,5 +73,10 @@ namespace QLPhongMachTuWPF.ViewModel
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }
         }
+
+
+
+
+       
     }
 }

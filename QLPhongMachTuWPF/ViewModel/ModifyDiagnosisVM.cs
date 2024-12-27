@@ -474,7 +474,7 @@ namespace QLPhongMachTuWPF.ViewModel
                     MedicineChoice = null;
                     SoLuong = null;
 
-                    MessageBox.Show("Thêm thuốc thành công!");
+                    
                 }catch (Exception ex) { MessageBox.Show(ex.Message.ToString());  }
             });
 
@@ -483,7 +483,7 @@ namespace QLPhongMachTuWPF.ViewModel
             {
                 return true;
             }, (p) => {
-
+                ConfirmCommand.Execute(p);
                 Diagnosis.MaNV = _SelectedItemCommandStaff.MaNV;
                 Diagnosis.MaBN = MaBN;
                 Diagnosis.TrieuChung = Symtoms;
@@ -513,10 +513,9 @@ namespace QLPhongMachTuWPF.ViewModel
                 DataProvider.Ins.db.SaveChanges();
 
                 
-                MessageBox.Show("Thêm hóa đơn thành công!");
 
                
-                DetailInovice detailInovice = new DetailInovice();
+                ModifyDetailInvoice detailInovice = new ModifyDetailInvoice();
                Messenger.Default.Send(Diagnosis);
                 detailInovice.ShowDialog();
                 Messenger.Default.Send("RefreshInvoiceList");
@@ -546,7 +545,7 @@ namespace QLPhongMachTuWPF.ViewModel
 
                 Messenger.Default.Send(Diagnosis);
                 DataProvider.Ins.db.SaveChanges();
-                MessageBox.Show("Thay đổi thông tin thành công");
+               
                 Messenger.Default.Send("RefreshInvoiceList");
               
             });

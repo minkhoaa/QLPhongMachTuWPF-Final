@@ -53,5 +53,7 @@ namespace QLPhongMachTuWPF.View
         {
 
         }
+
+      
     }
 }
