@@ -510,7 +510,7 @@ namespace QLPhongMachTuWPF.ViewModel
                 DataProvider.Ins.db.HOADONs.Add(newInvoice);
                 DataProvider.Ins.db.SaveChanges();
                 ModifyDetailInvoice detailInovice = new ModifyDetailInvoice();
-                Messenger.Default.Send(Diagnosis);
+                Messenger.Default.Send(newInvoice);
                 detailInovice.ShowDialog();
                 Messenger.Default.Send("RefreshInvoiceList");
                 Application.Current.Windows

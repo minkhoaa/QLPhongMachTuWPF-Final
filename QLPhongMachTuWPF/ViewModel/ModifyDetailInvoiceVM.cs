@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -303,7 +304,7 @@ namespace QLPhongMachTuWPF.ViewModel
 
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        tempInvoice = diagnosis.HOADONs.First();
+                        
                         ID = diagnosis.MaPK.ToString();
                         TenNV = diagnosis.NHANVIEN.TenNV;
                         TenBN = diagnosis.BENHNHAN.TenBN;
@@ -377,23 +378,25 @@ namespace QLPhongMachTuWPF.ViewModel
 
                         Application.Current.Dispatcher.Invoke(() =>
                         {
-
-                            ID = invoice.MaHD.ToString();
-                            TenNV = invoice.PHIEUKHAM.NHANVIEN.TenNV;
-                            TenBN = invoice.PHIEUKHAM.BENHNHAN.TenBN;
-                            Ngay = invoice.PHIEUKHAM.BENHNHAN.NgaySinh.Value.Day.ToString() ?? "N/A";
-                            Thang = invoice.PHIEUKHAM.BENHNHAN.NgaySinh.Value.Month.ToString() ?? "N/A";
-                            Nam = invoice.PHIEUKHAM.BENHNHAN.NgaySinh.Value.Year.ToString() ?? "N/A";
-                            NgayKham = invoice.NgayHD.Value.Day.ToString() ?? "N/A";
-                            ThangKham = invoice.NgayHD.Value.Day.ToString() ?? "N/A";
-                            NamKham = invoice.NgayHD.Value.Day.ToString() ?? "N/A";
-                            DiaChi = invoice.PHIEUKHAM.BENHNHAN.DiaChi;
-                            DienThoai = invoice.PHIEUKHAM.BENHNHAN.DienThoai;
-                            Gender = invoice.PHIEUKHAM.BENHNHAN.GioiTinh;
-                            Status = "Unpaid";
-                            Symtoms = invoice.PHIEUKHAM.TrieuChung;
-                            Result = invoice.PHIEUKHAM.KetQua;
-                            NgayHoanThanh = DateTime.Now;
+                            try
+                            {
+                                ID = invoice.MaHD.ToString();
+                                TenNV = invoice.PHIEUKHAM.NHANVIEN.TenNV;
+                                TenBN = invoice.PHIEUKHAM.BENHNHAN.TenBN;
+                                Ngay = invoice.PHIEUKHAM.BENHNHAN.NgaySinh.Value.Day.ToString() ?? "N/A";
+                                Thang = invoice.PHIEUKHAM.BENHNHAN.NgaySinh.Value.Month.ToString() ?? "N/A";
+                                Nam = invoice.PHIEUKHAM.BENHNHAN.NgaySinh.Value.Year.ToString() ?? "N/A";
+                                NgayKham = invoice.NgayHD.Value.Day.ToString() ?? "N/A";
+                                ThangKham = invoice.NgayHD.Value.Day.ToString() ?? "N/A";
+                                NamKham = invoice.NgayHD.Value.Day.ToString() ?? "N/A";
+                                DiaChi = invoice.PHIEUKHAM.BENHNHAN.DiaChi;
+                                DienThoai = invoice.PHIEUKHAM.BENHNHAN.DienThoai;
+                                Gender = invoice.PHIEUKHAM.BENHNHAN.GioiTinh;
+                                Status = "Unpaid";
+                                Symtoms = invoice.PHIEUKHAM.TrieuChung;
+                                Result = invoice.PHIEUKHAM.KetQua;
+                                NgayHoanThanh = DateTime.Now;
+                            } catch (Exception ex) { MessageBox.Show(ex.Message);  } 
                         });
                     });
                 });
@@ -487,14 +490,14 @@ namespace QLPhongMachTuWPF.ViewModel
 
                 // Thêm thông tin khách hàng và ngày
                 var infoFont = FontFactory.GetFont("Arial", 12, Font.NORMAL, BaseColor.BLACK);
-                document.Add(new Paragraph($"Invoice Code: {tempInvoice.MaHD}", infoFont));
+                document.Add(new Paragraph($"Invoice Code: #{tempInvoice.MaHD}", infoFont));
                 document.Add(new Paragraph($"Invoice Date: {tempInvoice.NgayHD:dd/MM/yyyy}", infoFont));
                 document.Add(new Paragraph("--------------------------------", infoFont));
-                document.Add(new Paragraph($"Customer Name: {tempInvoice.PHIEUKHAM.BENHNHAN.TenBN}", infoFont));
-                document.Add(new Paragraph($"Birthday: {tempInvoice.PHIEUKHAM.BENHNHAN.NgaySinh.ToString()}", infoFont));
+                document.Add(new Paragraph($"Customer Name: {RemoveDiacritics(tempInvoice.PHIEUKHAM.BENHNHAN.TenBN)}", infoFont));
+                document.Add(new Paragraph($"Birthday: {tempInvoice.PHIEUKHAM.BENHNHAN.NgaySinh:dd/MM/yyyy}", infoFont));
                 document.Add(new Paragraph($"Phone Number: {tempInvoice.PHIEUKHAM.BENHNHAN.DienThoai}", infoFont));
-                document.Add(new Paragraph($"Address: {tempInvoice.PHIEUKHAM.BENHNHAN.DiaChi}", infoFont));
-                document.Add(new Paragraph($"Gender: {tempInvoice.PHIEUKHAM.BENHNHAN.GioiTinh}", infoFont));
+                document.Add(new Paragraph($"Address: {RemoveDiacritics(tempInvoice.PHIEUKHAM.BENHNHAN.DiaChi)}", infoFont));
+                document.Add(new Paragraph($"Gender: {RemoveDiacritics(tempInvoice.PHIEUKHAM.BENHNHAN.GioiTinh)}", infoFont));
 
 
 
@@ -505,14 +508,14 @@ namespace QLPhongMachTuWPF.ViewModel
                 table.WidthPercentage = 100;  // Độ rộng của bảng
 
                 // Đặt tên các cột
-                table.AddCell("Product Name");
+                table.AddCell("Medicine Name");
                 table.AddCell("Quantity");
                 table.AddCell("UnitPrice");
                 table.AddCell("Price");
 
                 foreach (var item in tempInvoice.PHIEUKHAM.CTTTs)
                 {
-                    table.AddCell(item.THUOC.TenThuoc);
+                    table.AddCell(RemoveDiacritics((item.THUOC.TenThuoc)));
                     table.AddCell(item.SoLuong.ToString());
                     table.AddCell(item.THUOC.Gia.ToString());
                     table.AddCell((item.THUOC.Gia * item.SoLuong).ToString());
@@ -550,7 +553,8 @@ namespace QLPhongMachTuWPF.ViewModel
         builder.AppendLine($"Customer Name: {invoice.PHIEUKHAM.BENHNHAN.TenBN}");
         builder.AppendLine($"Adress: {invoice.PHIEUKHAM.BENHNHAN.DiaChi}");
         builder.AppendLine($"Phone Number: {invoice.PHIEUKHAM.BENHNHAN.DienThoai}");
-        builder.AppendLine($"Birthday: {invoice.PHIEUKHAM.BENHNHAN.NgaySinh.ToString()}");
+           
+        builder.AppendLine($"Birthday: {invoice.PHIEUKHAM.BENHNHAN.NgaySinh:dd/MM/yyyy}");
         builder.AppendLine($"Gender: {invoice.PHIEUKHAM.BENHNHAN.GioiTinh}");
 
 
@@ -560,12 +564,12 @@ namespace QLPhongMachTuWPF.ViewModel
         builder.AppendLine($"Invoice Date: {invoice.NgayHD:dd/MM/yyyy}");
        
         builder.AppendLine("--------------------------------");
-        builder.AppendLine("Product Name        Quantity    Unit Price      Price");
+        builder.AppendLine("Medicine Name        Quantity    Unit Price      Price");
         builder.AppendLine("--------------------------------");
 
         foreach (var item in invoice.PHIEUKHAM.CTTTs)
         {
-            builder.AppendLine($"{item.THUOC.TenThuoc.PadRight(12)} {item.SoLuong.ToString().PadRight(5)} {item.THUOC.Gia.ToString().PadRight(8)} {item.THUOC.Gia.ToString()}");
+            builder.AppendLine($"{RemoveDiacritics(item.THUOC.TenThuoc).PadRight(12)} {item.SoLuong.ToString().PadRight(5)} {item.THUOC.Gia.ToString().PadRight(8)} {item.THUOC.Gia.ToString()}");
         }
 
         builder.AppendLine("--------------------------------");
@@ -581,7 +585,30 @@ namespace QLPhongMachTuWPF.ViewModel
             {
                 File.WriteAllText(filePath, content);
             }
- #endregion 
+
+        static string RemoveDiacritics(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+                return text;
+
+            // Chuẩn hóa chuỗi thành dạng FormD
+            string normalizedString = text.Normalize(NormalizationForm.FormD);
+
+            // Duyệt qua từng ký tự trong chuỗi
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (char c in normalizedString)
+            {
+                UnicodeCategory unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c);
+                if (unicodeCategory != UnicodeCategory.NonSpacingMark) // Bỏ qua các ký tự dấu
+                {
+                    stringBuilder.Append(c);
+                }
+            }
+
+            // Chuẩn hóa chuỗi thành FormC (khôi phục lại các ký tự ghép)
+            return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
         }
+        #endregion
+    }
    
 }
