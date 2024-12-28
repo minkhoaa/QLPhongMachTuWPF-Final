@@ -24,10 +24,57 @@
 
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Width="250" HorizontalAlignment="Left" Margin="100,10 0 15" >
-            <Border BorderThickness="2" CornerRadius="5" BorderBrush="Black" Height="30" >
-                <DatePicker Background="#eeeeee" FontSize="16" Margin="8,0,8,0" />
-            </Border>
+
+        <Grid Grid.Row="0" HorizontalAlignment="Left" Margin="25,15,200,20">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+
+                <RowDefinition Height="Auto" />
+
+            </Grid.RowDefinitions>
+
+
+            <Grid Grid.Row="0" Margin="55,0,0,0" Width="355">
+                <TextBlock Margin="10,0,30,0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
+           Panel.ZIndex="1" Text="Search"
+           Visibility="{Binding ElementName=txtSearch, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" FontSize="20" />
+                <TextBox x:Name="txtSearch"
+         Text="{Binding SearchKeyword, UpdateSourceTrigger=PropertyChanged}"
+         Style="{StaticResource txtBoxSearch}" />
+                <Image Source="/Images/search.png" Width="20" Height="20" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" />
+            </Grid>
+
+
+            <Grid Grid.Row="1" HorizontalAlignment="Left">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+
+                    <ColumnDefinition Width="150" />
+
+                    <ColumnDefinition Width="Auto" />
+
+                    <ColumnDefinition Width="150" />
+
+                </Grid.ColumnDefinitions>
+
+
+                <TextBlock Text="From:" FontSize="20" VerticalAlignment="Center" Margin="0,0,10,0" Grid.Column="0" />
+
+
+                <Border BorderThickness="2" CornerRadius="5" BorderBrush="Black" Height="30" Grid.Column="1">
+                    <DatePicker Background="#eeeeee" FontSize="16" Margin="8,0,8,0" Width="125" />
+                </Border>
+
+
+                <TextBlock Text="To:" FontSize="20" VerticalAlignment="Center" Margin="20,0,10,0" Grid.Column="2" />
+
+
+                <Border BorderThickness="2" CornerRadius="5" BorderBrush="Black" Height="30" Grid.Column="3">
+                    <DatePicker Background="#eeeeee" FontSize="16" Margin="8,0,8,0" Width="125" />
+                </Border>
+            </Grid>
+
         </Grid>
 
         <Button Grid.Row="0" Command="{Binding AddDiagnosisCommand}"  Style="{StaticResource addBtn}" >
