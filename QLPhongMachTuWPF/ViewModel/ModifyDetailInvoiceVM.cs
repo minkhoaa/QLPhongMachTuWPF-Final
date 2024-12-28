@@ -557,9 +557,6 @@ namespace QLPhongMachTuWPF.ViewModel
         builder.AppendLine($"Birthday: {invoice.PHIEUKHAM.BENHNHAN.NgaySinh:dd/MM/yyyy}");
         builder.AppendLine($"Gender: {invoice.PHIEUKHAM.BENHNHAN.GioiTinh}");
 
-
-
-
         builder.AppendLine($"Invoice Code: {invoice.MaHD}");
         builder.AppendLine($"Invoice Date: {invoice.NgayHD:dd/MM/yyyy}");
        
@@ -586,6 +583,8 @@ namespace QLPhongMachTuWPF.ViewModel
                 File.WriteAllText(filePath, content);
             }
 
+   
+
         static string RemoveDiacritics(string text)
         {
             if (string.IsNullOrEmpty(text))
@@ -606,9 +605,28 @@ namespace QLPhongMachTuWPF.ViewModel
             }
 
             // Chuẩn hóa chuỗi thành FormC (khôi phục lại các ký tự ghép)
-            return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
-        }
-        #endregion
+            string result = stringBuilder.ToString().Normalize(NormalizationForm.FormC);
+
+            // Thay thế thủ công các ký tự đặc biệt
+            result = result.Replace("Đ", "D").Replace("đ", "d")
+                   .Replace("á", "a").Replace("à", "a").Replace("ả", "a").Replace("ã", "a").Replace("ạ", "a")
+                   .Replace("ă", "a").Replace("ắ", "a").Replace("ằ", "a").Replace("ẳ", "a").Replace("ẵ", "a").Replace("ặ", "a")
+                   .Replace("â", "a").Replace("ấ", "a").Replace("ầ", "a").Replace("ẩ", "a").Replace("ẫ", "a").Replace("ậ", "a")
+                   .Replace("é", "e").Replace("è", "e").Replace("ẻ", "e").Replace("ẽ", "e").Replace("ẹ", "e")
+                   .Replace("ê", "e").Replace("ế", "e").Replace("ề", "e").Replace("ể", "e").Replace("ễ", "e").Replace("ệ", "e")
+                   .Replace("í", "i").Replace("ì", "i").Replace("ỉ", "i").Replace("ĩ", "i").Replace("ị", "i")
+                   .Replace("ó", "o").Replace("ò", "o").Replace("ỏ", "o").Replace("õ", "o").Replace("ọ", "o")
+                   .Replace("ô", "o").Replace("ố", "o").Replace("ồ", "o").Replace("ổ", "o").Replace("ỗ", "o").Replace("ộ", "o")
+                   .Replace("ơ", "o").Replace("ớ", "o").Replace("ờ", "o").Replace("ở", "o").Replace("ỡ", "o").Replace("ợ", "o")
+                   .Replace("ú", "u").Replace("ù", "u").Replace("ủ", "u").Replace("ũ", "u").Replace("ụ", "u")
+                   .Replace("ư", "u").Replace("ứ", "u").Replace("ừ", "u").Replace("ử", "u").Replace("ữ", "u").Replace("ự", "u")
+                   .Replace("ý", "y").Replace("ỳ", "y").Replace("ỷ", "y").Replace("ỹ", "y").Replace("ỵ", "y");
+
+                    return result;
+            }
     }
-   
+
+    #endregion
 }
+   
+
