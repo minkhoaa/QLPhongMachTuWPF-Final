@@ -194,19 +194,28 @@ namespace QLPhongMachTuWPF.ViewModel
         {
             // Lọc dữ liệu từ cơ sở dữ liệu
             var filteredAppointments = DataProvider.Ins.db.LICHHENs
-                .Where(a => DbFunctions.TruncateTime(a.NgayHen) == DbFunctions.TruncateTime(date))
-                .Select(a => new Appointment
+                .Where(a => DbFunctions.TruncateTime(a.NgayHen) == DbFunctions.TruncateTime(date)) // Kiểm tra ngày
+                .Select(a => new
                 {
-
-                    PatientName = a.BENHNHAN.TenBN,
-                    AppointmentDate = (DateTime)a.NgayHen,
-
+                    a.BENHNHAN.TenBN,
+                    a.NgayHen,
+                    a.GioHen
                 })
                 .ToList();
 
+            // Kết hợp NgayHen và GioHen sau khi lấy dữ liệu từ DB
+            var appointmentsList = filteredAppointments.Select(a => new Appointment
+            {
+                PatientName = a.TenBN,
+                // Kết hợp NgayHen và GioHen thành AppointmentDate trong bộ nhớ
+                AppointmentDate = a.NgayHen.Value.Date.Add(a.GioHen.Value)
+            }).ToList();
+
             // Cập nhật danh sách
-            Appointments = new ObservableCollection<Appointment>(filteredAppointments);
+            Appointments = new ObservableCollection<Appointment>(appointmentsList);
         }
+
+
 
         private bool CanLoadChartData(object parameter)
         {
@@ -321,6 +330,6 @@ namespace QLPhongMachTuWPF.ViewModel
 
         public string PatientName { get; set; }
         public DateTime AppointmentDate { get; set; }
-
+        
     }
 }
