@@ -17,11 +17,12 @@
 
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+           
             <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="7*"/>
+            
         </Grid.RowDefinitions>
+
 
         <Grid Grid.Row="0" HorizontalAlignment="Left" Margin="25,15,200,20">
            
@@ -58,6 +59,7 @@
 
        
                 <TextBlock Text="From:" FontSize="20" VerticalAlignment="Center" Margin="0,0,10,0" Grid.Column="0" />
+
 
        
                 <Border BorderThickness="2" CornerRadius="5" BorderBrush="Black" Height="30" Grid.Column="1">
@@ -117,11 +119,16 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
+                                <Button   Command="{Binding DataContext.ModifyInvoice, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+Style="{StaticResource EditButton}" >
+                                    <materialDesign:PackIcon Kind="Pencil" Width="20" Height="20" Foreground="White" />
 
-                                <Button
+                                </Button>
+
+                                <Button 
                                   Command="{Binding DataContext.VerifyCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                   CommandParameter="{Binding}"
-                                  x:Name="btnVerify" Style="{StaticResource gridRemoveBtn}" Background="Green" Margin="0 0 5 0">             
+                                  x:Name="btnVerify" Style="{StaticResource CheckButton}" Margin="5 0 5 0">             
                                     <materialDesign:PackIcon Kind="CheckBold" Width="20" Height="20" Foreground="White"/>
                                 </Button>
                                 <Button 
