@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.ExceptionServices;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Runtime.Remoting.Metadata;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,29 @@ namespace QLPhongMachTuWPF.ViewModel
         public ICommand DeleteDiagnosisCommand { get; set; }
 
 
+        private DateTime? _FilterDateFrom = new DateTime(1990, 1, 1);
+        public DateTime? FilterDateFrom
+        {
+            get => _FilterDateFrom;
+            set
+            {
+                _FilterDateFrom = value;
+                OnPropertyChanged();
+                FilterDate();
+            }
+        }
+
+        private DateTime? _FilterDateTo = new DateTime(2030,1,1);
+        public DateTime? FilterDateTo
+        {
+            get => _FilterDateTo;
+            set
+            {
+                _FilterDateTo = value;
+                OnPropertyChanged();
+                FilterDate();
+            }
+        }
 
         public ICommand VerifyCommand { get; set; }
 
@@ -35,7 +59,6 @@ namespace QLPhongMachTuWPF.ViewModel
         public DiagnosisVM()
         {
             DiagnosisList = new ObservableCollection<PHIEUKHAM>(DataProvider.Ins.db.PHIEUKHAMs);
-
             FilteredDiagnosis = CollectionViewSource.GetDefaultView(DiagnosisList);
 
             try { 
@@ -134,6 +157,7 @@ namespace QLPhongMachTuWPF.ViewModel
                     DiagnosisList.Remove(SelectedItemCommand);
 
                     // Làm mới danh sách `LICHHEN`
+                    Messenger.Default.Send("Refresh", "RefreshMedicineList");
                     Messenger.Default.Send("Refresh", "RefreshInvoiceList");
                     Messenger.Default.Send("Refresh", "RefreshDiagnosisList");
                     Messenger.Default.Send("Refresh", "RefreshAppointmentList");
@@ -168,5 +192,29 @@ namespace QLPhongMachTuWPF.ViewModel
                 }
             });
         }
+        public void FilterDate()
+        {
+       
+
+            if (FilterDateFrom != null && FilterDateTo != null)
+            {
+                FilteredDiagnosis.Filter = (item) =>
+                {
+                    var diagnosis = item as PHIEUKHAM;
+                    if (diagnosis == null || diagnosis.NgayKham == null) return false;
+
+                    // So sánh ngày khám với khoảng thời gian được lọc
+                    return diagnosis.NgayKham >= FilterDateFrom && diagnosis.NgayKham <= FilterDateTo;
+                };
+                FilteredDiagnosis.Refresh();
+            }
+            else
+            {
+                // Nếu không có ngày lọc, loại bỏ bộ lọc
+                
+                FilteredDiagnosis.Refresh();
+            }
+        }
+
     }
-    }
+}

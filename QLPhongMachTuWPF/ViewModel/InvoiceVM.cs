@@ -88,7 +88,7 @@ namespace QLPhongMachTuWPF.ViewModel
                     diagnosis.ShowDialog();
                 }
                );
-                VerifyCommand = new RelayCommand<object>((p) => SelectedInvoice != null, (p) =>
+                VerifyCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
                 {
                     ModifyDetailInvoice diagnosis = new ModifyDetailInvoice();
                     Messenger.Default.Send(SelectedInvoice); // Gửi hóa đơn hiện tại đến form sửa đổi
@@ -113,7 +113,13 @@ namespace QLPhongMachTuWPF.ViewModel
                             MessageBox.Show("Xóa thành công");
 
                         }
+
+                        Messenger.Default.Send("Refresh", "RefreshMedicineList");
+                        Messenger.Default.Send("Refresh", "RefreshInvoiceList");
+                        Messenger.Default.Send("Refresh", "RefreshDiagnosisList");
+                        Messenger.Default.Send("Refresh", "RefreshAppointmentList");
                     }
+
                     catch (Exception ex) { MessageBox.Show("Xóa thất bại" + ex.Message.ToString()); }
                     DataProvider.Ins.db.SaveChanges();
                 });

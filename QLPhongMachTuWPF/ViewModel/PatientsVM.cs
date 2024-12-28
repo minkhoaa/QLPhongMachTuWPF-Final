@@ -130,7 +130,7 @@ namespace QLPhongMachTuWPF.ViewModel
                 addPatientWindow.ShowDialog();
             });
 
-            ModifyPatientCommand = new RelayCommand<object>((p) => SelectedItemCommand != null, (p) =>
+            ModifyPatientCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 if (SelectedItemCommand == null)
                 {
@@ -143,7 +143,7 @@ namespace QLPhongMachTuWPF.ViewModel
                 modifyWindow.ShowDialog();
 
             });
-            DeletePatientCommand = new RelayCommand<object>((p) => SelectedItemCommand != null, (p) =>
+            DeletePatientCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 if (SelectedItemCommand == null)
                 {
@@ -198,7 +198,7 @@ namespace QLPhongMachTuWPF.ViewModel
                 Messenger.Default.Send("Refresh", "RefreshInvoiceList");
                 Messenger.Default.Send("Refresh", "RefreshDiagnosisList");
                 Messenger.Default.Send("Refresh", "RefreshAppointmentList");
-              
+                
 
                 FilteredPatients.Refresh();
             });

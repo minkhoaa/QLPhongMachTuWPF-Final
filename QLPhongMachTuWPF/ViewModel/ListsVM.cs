@@ -89,7 +89,8 @@ namespace QLPhongMachTuWPF.ViewModel
 
             }
             );
-            ModifyMedicineCommand = new RelayCommand<object>((p) => SelectedItemCommand != null, (p) =>
+            ModifyMedicineCommand = new RelayCommand<object>((p) => { return true; }
+               , (p) =>
             {
                 if (SelectedItemCommand == null)
                 {
@@ -131,7 +132,9 @@ namespace QLPhongMachTuWPF.ViewModel
 
                     // Làm mới danh sách `LICHHEN`
                     Messenger.Default.Send("Refresh", "RefreshMedicineList");
-
+                    Messenger.Default.Send("Refresh", "RefreshInvoiceList");
+                    Messenger.Default.Send("Refresh", "RefreshDiagnosisList");
+                    Messenger.Default.Send("Refresh", "RefreshAppointmentList");
                     MessageBox.Show("Xóa thành công");
                 }
                 catch (Exception ex)

@@ -62,6 +62,7 @@ namespace QLPhongMachTuWPF.ViewModel
         public ObservableCollection<NHANVIEN> StaffList { get => _staff; set { _staff = value; OnPropertyChanged(); } }
         public StaffsVM()
         {
+           
             StaffList = new ObservableCollection<NHANVIEN>(DataProvider.Ins.db.NHANVIENs);
 
             FilteredStaffs = CollectionViewSource.GetDefaultView(StaffList);
@@ -102,7 +103,7 @@ namespace QLPhongMachTuWPF.ViewModel
             }
             );
 
-            ModifyStaffsCommand = new RelayCommand<object>((p) => SelectedItemCommand != null, (p) =>
+            ModifyStaffsCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 if (SelectedItemCommand == null)
                 {
@@ -115,7 +116,7 @@ namespace QLPhongMachTuWPF.ViewModel
                 modifyWindow.ShowDialog();
 
             });
-            DeleteStaffCommand = new RelayCommand<object>((p) => SelectedItemCommand != null, (p) =>
+            DeleteStaffCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 if (SelectedItemCommand == null)
                 {
