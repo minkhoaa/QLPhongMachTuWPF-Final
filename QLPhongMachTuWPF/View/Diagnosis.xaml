@@ -24,9 +24,9 @@
 
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Width="175" HorizontalAlignment="Left" Margin="70 30 400 35" >
+        <Grid Grid.Row="0" Width="250" HorizontalAlignment="Left" Margin="100 30 400 35" >
             <Border BorderThickness="2" CornerRadius="5" BorderBrush="Black" Height="30" >
-                <DatePicker Background="#eeeeee" Width="150"  ></DatePicker>
+                <DatePicker Background="#eeeeee" FontSize="16" Margin="8,0,8,0" />
             </Border>
         </Grid>
 
@@ -44,7 +44,7 @@
                   HorizontalScrollBarVisibility="Disabled" Grid.RowSpan="2" 
     HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
     Width="auto" Height="auto" VerticalScrollBarVisibility="Auto">
-          
+
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Diagnosis ID" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding MaPK , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Header="Staff ID" IsReadOnly="True" CanUserResize="False" Width="0.8*" Binding="{Binding MaNV, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
@@ -64,9 +64,9 @@
                                     Style="{StaticResource gridRemoveBtn}" Background="Green">
                                     <materialDesign:PackIcon Kind="CheckBold" Width="20" Height="20" Foreground="White"/>
                                 </Button>
-                                
-                                
-                               <!--Button delete-->
+
+
+                                <!--Button delete-->
                                 <Button 
                                      Command="{Binding DataContext.DeleteDiagnosisCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
     CommandParameter="{Binding}"
