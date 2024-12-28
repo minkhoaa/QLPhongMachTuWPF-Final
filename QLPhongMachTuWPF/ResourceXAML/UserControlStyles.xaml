@@ -139,8 +139,8 @@
         <Setter Property="HorizontalAlignment" Value="Right"/>
         <Setter Property="Margin" Value="0 20 0 0"/>
         <Setter Property="FontSize" Value="13"/>
-        <Setter Property="Margin" Value="534,33,0,33"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="10 10 100 10"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
 
         <Setter Property="Template">
             <Setter.Value>
@@ -165,22 +165,84 @@
 
 
     <!--datagrid-->
-    <Style  x:Key="gridEditBtn" TargetType="Button">
+    <Style x:Key="CheckButton" TargetType="Button">
         <Setter Property="Background" Value="Transparent"/>
-
-        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="FontSize" Value="13"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Background" Value="LightGray"/>
+        <!-- Thay đổi con trỏ khi rê chuột -->
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Background="{TemplateBinding Background}" CornerRadius="5" Padding="5" BorderThickness="0" BorderBrush="{TemplateBinding BorderBrush}">
+                    <Border x:Name="ButtonBorder" 
+            Background="{TemplateBinding Background}" 
+            CornerRadius="5" 
+            Padding="5" 
+            BorderThickness="0" 
+            BorderBrush="{TemplateBinding BorderBrush}">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <!-- Hover trạng thái -->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="ButtonBorder" Property="Background" Value="green"/>
+                            <!-- Màu nền khi hover -->
+                            <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="green"/>
+                            <!-- Đường viền khi hover -->
+                        </Trigger>
+
+                        <!-- Pressed trạng thái -->
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="ButtonBorder" Property="Background" Value="green"/>
+                            <!-- Màu nền khi nhấn -->
+                            <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="green"/>
+                            <!-- Đường viền khi nhấn -->
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
 
+    <Style x:Key="EditButton" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Background" Value="LightGray"/>
+        <!-- Thay đổi con trỏ khi rê chuột -->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="ButtonBorder" 
+                Background="{TemplateBinding Background}" 
+                CornerRadius="5" 
+                Padding="5" 
+                BorderThickness="0" 
+                BorderBrush="{TemplateBinding BorderBrush}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <!-- Hover trạng thái -->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="ButtonBorder" Property="Background" Value="#1ca7ec"/>
+                            <!-- Màu nền khi hover -->
+                            <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="#1ca7ec"/>
+                            <!-- Đường viền khi hover -->
+                        </Trigger>
+
+                        <!-- Pressed trạng thái -->
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="ButtonBorder" Property="Background" Value="#1ca7ec"/>
+                            <!-- Màu nền khi nhấn -->
+                            <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="#1ca7ec"/>
+                            <!-- Đường viền khi nhấn -->
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="gridRemoveBtn" TargetType="Button">

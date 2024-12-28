@@ -20,14 +20,14 @@
 
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="55*"/>
-            <RowDefinition Height="247*"/>
-            <RowDefinition Height="auto"/>
+           
+            <RowDefinition Height="*"/>
+            
+            <RowDefinition Height="7*"/>
+            
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Width="250" HorizontalAlignment="Left" Margin="100,30,0,35">
+        <Grid Grid.Row="0" Width="250" HorizontalAlignment="Left" Margin="100,10 0 15">
             <TextBlock Margin="20,0,30,0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
        Panel.ZIndex="1" Text="Search" Visibility="{Binding ElementName=txtSearch, Path=Text.IsEmpty,Converter={StaticResource BoolToVis}}" FontSize="20"/>
 
@@ -90,14 +90,20 @@
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
 
+                                <Button   Command="{Binding DataContext.ModifyPatientCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+Style="{StaticResource EditButton}" >
+                                    <materialDesign:PackIcon Kind="Pencil" Width="20" Height="20" Foreground="White" />
 
+                                </Button>
 
                                 <Button  Command="{Binding DataContext.DeletePatientCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
 CommandParameter="{Binding}"
-Style="{StaticResource gridRemoveBtn}" >
+Style="{StaticResource gridRemoveBtn}" Margin="5 0 0 0">
                                     <materialDesign:PackIcon Kind="TrashCan" Width="20" Height="20" Foreground="White" />
                                     
                                 </Button>
+
+                                
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -106,11 +112,7 @@ Style="{StaticResource gridRemoveBtn}" >
 
             </DataGrid.Columns>
         </DataGrid>
-        <Button Grid.Row="0" Command="{Binding ModifyPatientCommand}"  Style="{StaticResource anotherAddBtn}">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Modify Patient" FontSize="15" FontWeight="Bold"/>
-            </StackPanel>
-        </Button>
+        
        
     </Grid>
 </UserControl>
