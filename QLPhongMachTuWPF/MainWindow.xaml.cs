@@ -13,7 +13,10 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GalaSoft.MvvmLight.Messaging;
 using QLPhongMachTuWPF.View;
+using QLPhongMachTuWPF.ViewModel;
+using static QLPhongMachTuWPF.ViewModel.LoginViewModel;
 
 namespace QLPhongMachTuWPF
 {
@@ -22,14 +25,18 @@ namespace QLPhongMachTuWPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        
+        private int _role;
         public MainWindow()
         {
 
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
-
+            Messenger.Default.Register<AccountType>(this, message =>
+            {
+                // Apply the account information as needed
+                ApplyAccountInfo(message);
+            });
         }
         private void ListViewItem_MouseEnter(object sender, MouseEventArgs e)
         {
@@ -90,8 +97,9 @@ namespace QLPhongMachTuWPF
                 WindowState = WindowState.Maximized;
                 WindowStyle = WindowStyle.None;
                 WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                logOut.Margin = new Thickness(0, 500, 0, 0);
-
+                if(_role == 0)
+                logOut.Margin = new Thickness(0, 530, 0, 0);
+                else logOut.Margin = new Thickness(0, 580, 0, 0);
 
                 var animation = new DoubleAnimation
                 {
@@ -108,7 +116,35 @@ namespace QLPhongMachTuWPF
             }
         }
 
-        
+        public void ApplyRole(int role)
+        {
+            Console.WriteLine($"Role received: {role}");
+            if (role == 1)
+            {
+                StaffIcon.Visibility = Visibility.Collapsed;
+                logOut.Margin = new Thickness(0,210,0,0);
+            }
+            else
+            {
+                StaffIcon.Visibility = Visibility.Visible;
+                logOut.Margin = new Thickness(0, 150, 0, 0);
+            }
+        }
+
+        private void ApplyAccountInfo(AccountType message)
+        {
+            // Use the account info (e.g., username and role) to update the UI
+            Console.WriteLine($"Logged in as: {message.UserName}, Role: {message.Type}");
+            int role = message.Type;
+            _role = role;
+            ApplyRole(role);
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            Messenger.Default.Unregister<AccountType>(this);
+        }
 
         private void CloseWindow_Click(object sender, RoutedEventArgs e)
         {
@@ -121,6 +157,7 @@ namespace QLPhongMachTuWPF
                 this.DragMove();
             }
         }
+        
     }
 
 }
