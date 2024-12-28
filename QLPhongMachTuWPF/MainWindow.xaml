@@ -420,11 +420,8 @@ Style="{StaticResource tt_style}"/>
                      Width="200">
 
                                 <materialDesign:PackIcon Kind="LockOpen"  Width="30" Height="30" Foreground="White" Margin="12 0 0 0"/>
+                                <TextBlock Text="Logout" Margin="25 0 0 0"/>
 
-
-                                <TextBlock Text="Logout"
-                        Margin="25 0 0 0"
-                        Style="{StaticResource font_style}"/>
                             </StackPanel>
                         </Button>
                         <!--ToolTip-->
@@ -503,7 +500,11 @@ Style="{StaticResource tt_style}"/>
 
         <!-- Nội dung chính nằm ở cột thứ hai -->
         <Grid Grid.Column="1" >
-            <ContentControl x:Name="Pages" Content="{Binding CurrentView}"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="43*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <ContentControl x:Name="Pages" Content="{Binding CurrentView}" Grid.RowSpan="2"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 3 0 0"  Panel.ZIndex="10">
 
                 <!-- Nút Phóng to -->
