@@ -54,6 +54,26 @@ namespace QLPhongMachTuWPF.ViewModel
                 FilterStaffs();
             }
         }
+        void FilterStaffs()
+        {
+            if (FilteredStaffs == null)
+                return;
+
+            // Gán bộ lọc
+            FilteredStaffs.Filter = (obj) =>
+            {
+                if (obj is NHANVIEN staffs)
+                {
+                    // Kiểm tra từ khóa tìm kiếm, không phân biệt chữ hoa/chữ thường
+                    return string.IsNullOrEmpty(SearchKeyword) ||
+                           staffs.TenNV?.IndexOf(SearchKeyword, StringComparison.OrdinalIgnoreCase) >= 0;
+                }
+                return false;
+            };
+
+            // Làm mới view để cập nhật kết quả lọc
+            FilteredStaffs.Refresh();
+        }
 
         public ICollectionView FilteredStaffs { get; set; }
 
@@ -168,10 +188,10 @@ namespace QLPhongMachTuWPF.ViewModel
                 {
                     MessageBox.Show("Xóa thất bại: " + ex.Message);
                 }
+                Messenger.Default.Send("Refresh", "RefreshMedicineList");
                 Messenger.Default.Send("Refresh", "RefreshInvoiceList");
                 Messenger.Default.Send("Refresh", "RefreshDiagnosisList");
                 Messenger.Default.Send("Refresh", "RefreshAppointmentList");
-
 
                 FilteredStaffs.Refresh();
             });
@@ -180,25 +200,5 @@ namespace QLPhongMachTuWPF.ViewModel
 
         }
  
-        void FilterStaffs()
-        {
-            if (FilteredStaffs == null)
-                return;
-
-            // Gán bộ lọc
-            FilteredStaffs.Filter = (obj) =>
-            {
-                if (obj is NHANVIEN staffs)
-                {
-                    // Kiểm tra từ khóa tìm kiếm, không phân biệt chữ hoa/chữ thường
-                    return string.IsNullOrEmpty(SearchKeyword) ||
-                           staffs.TenNV?.IndexOf(SearchKeyword, StringComparison.OrdinalIgnoreCase) >= 0;
-                }
-                return false;
-            };
-
-            // Làm mới view để cập nhật kết quả lọc
-            FilteredStaffs.Refresh();
-        }
     }
 }

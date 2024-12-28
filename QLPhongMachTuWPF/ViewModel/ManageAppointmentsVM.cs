@@ -51,7 +51,89 @@ namespace QLPhongMachTuWPF.ViewModel
         private ObservableCollection<LICHHEN> _Appointment;
         public ObservableCollection<LICHHEN> AppointmentList { get => _Appointment; set { _Appointment = value; OnPropertyChanged(); } }
 
-        
+        #region Filter
+
+        private DateTime? _FilterDateFrom = new DateTime(2000,1,1);
+        public DateTime? FilterDateFrom
+        {
+            get => _FilterDateFrom;
+            set
+            {
+                _FilterDateFrom = value;
+                OnPropertyChanged();
+                FilterDate();
+            }
+        }
+
+        private DateTime? _FilterDateTo = new DateTime(2030, 1, 1);
+        public DateTime? FilterDateTo
+        {
+            get => _FilterDateTo;
+            set
+            {
+                _FilterDateTo = value;
+                OnPropertyChanged();
+                FilterDate();
+            }
+        }
+        public void FilterDate()
+        {
+
+
+            if (FilterDateFrom != null && FilterDateTo != null)
+            {
+                FilteredAppointment.Filter = (item) =>
+                {
+                    var diagnosis = item as LICHHEN;
+                    if (diagnosis == null || diagnosis.NgayHen == null) return false;
+
+                    // So sánh ngày khám với khoảng thời gian được lọc
+                    return diagnosis.NgayHen >= FilterDateFrom && diagnosis.NgayHen <= FilterDateTo;
+                };
+                FilteredAppointment.Refresh();
+            }
+            else
+            {
+                // Nếu không có ngày lọc, loại bỏ bộ lọc
+
+                FilteredAppointment.Refresh();
+            }
+        }
+
+        private string _SearchKeyword { get; set; }
+
+        public string SearchKeyword
+        {
+            get => _SearchKeyword;
+            set
+            {
+                _SearchKeyword = value;
+                OnPropertyChanged();
+                FilterStaffs();
+            }
+        }
+        void FilterStaffs()
+        {
+            if (FilteredAppointment == null)
+                return;
+
+
+            // Gán bộ lọc
+            FilteredAppointment.Filter = (obj) =>
+            {
+                if (obj is PHIEUKHAM staffs)
+                {
+                    // Kiểm tra từ khóa tìm kiếm, không phân biệt chữ hoa/chữ thường
+                    return string.IsNullOrEmpty(SearchKeyword) ||
+                           staffs.BENHNHAN.TenBN?.IndexOf(SearchKeyword, StringComparison.OrdinalIgnoreCase) >= 0;
+                }
+                return false;
+            };
+
+            // Làm mới view để cập nhật kết quả lọc
+            FilteredAppointment.Refresh();
+        }
+        #endregion
         public ManageAppointmentsVM()
         {
 
@@ -138,7 +220,10 @@ namespace QLPhongMachTuWPF.ViewModel
                     } }
                 catch (Exception ex) { MessageBox.Show("Xóa thất bại" + ex.Message.ToString());  }
                 DataProvider.Ins.db.SaveChanges();
-
+                Messenger.Default.Send("Refresh", "RefreshMedicineList");
+                Messenger.Default.Send("Refresh", "RefreshInvoiceList");
+                Messenger.Default.Send("Refresh", "RefreshDiagnosisList");
+                Messenger.Default.Send("Refresh", "RefreshAppointmentList");
             });
 
             Messenger.Default.Register<string>(this, "RefreshAppointmentList", (message) =>

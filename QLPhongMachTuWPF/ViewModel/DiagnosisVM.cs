@@ -26,8 +26,9 @@ namespace QLPhongMachTuWPF.ViewModel
 
         public ICommand DeleteDiagnosisCommand { get; set; }
 
+        #region Filter
 
-        private DateTime? _FilterDateFrom = new DateTime(1990, 1, 1);
+        private DateTime? _FilterDateFrom = new DateTime(2000, 1, 1);
         public DateTime? FilterDateFrom
         {
             get => _FilterDateFrom;
@@ -50,6 +51,30 @@ namespace QLPhongMachTuWPF.ViewModel
                 FilterDate();
             }
         }
+        public void FilterDate()
+        {
+
+
+            if (FilterDateFrom != null && FilterDateTo != null)
+            {
+                FilteredDiagnosis.Filter = (item) =>
+                {
+                    var diagnosis = item as PHIEUKHAM;
+                    if (diagnosis == null || diagnosis.NgayKham == null) return false;
+
+                    // So sánh ngày khám với khoảng thời gian được lọc
+                    return diagnosis.NgayKham >= FilterDateFrom && diagnosis.NgayKham <= FilterDateTo;
+                };
+                FilteredDiagnosis.Refresh();
+            }
+            else
+            {
+                // Nếu không có ngày lọc, loại bỏ bộ lọc
+
+                FilteredDiagnosis.Refresh();
+            }
+        }
+        #endregion
 
         public ICommand VerifyCommand { get; set; }
 
@@ -191,29 +216,6 @@ namespace QLPhongMachTuWPF.ViewModel
                     DiagnosisList.Add(appointment);
                 }
             });
-        }
-        public void FilterDate()
-        {
-       
-
-            if (FilterDateFrom != null && FilterDateTo != null)
-            {
-                FilteredDiagnosis.Filter = (item) =>
-                {
-                    var diagnosis = item as PHIEUKHAM;
-                    if (diagnosis == null || diagnosis.NgayKham == null) return false;
-
-                    // So sánh ngày khám với khoảng thời gian được lọc
-                    return diagnosis.NgayKham >= FilterDateFrom && diagnosis.NgayKham <= FilterDateTo;
-                };
-                FilteredDiagnosis.Refresh();
-            }
-            else
-            {
-                // Nếu không có ngày lọc, loại bỏ bộ lọc
-                
-                FilteredDiagnosis.Refresh();
-            }
         }
 
     }

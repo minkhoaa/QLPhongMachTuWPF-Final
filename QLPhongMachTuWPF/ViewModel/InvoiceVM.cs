@@ -41,7 +41,55 @@ namespace QLPhongMachTuWPF.ViewModel
         private HOADON _SelectedInvoice { get; set; }
         public HOADON SelectedInvoice { get => _SelectedInvoice; set { _SelectedInvoice = value; OnPropertyChanged(); } }
 
+        #region Filter
 
+        private DateTime? _FilterDateFrom = new DateTime(2000,1,1);
+        public DateTime? FilterDateFrom
+        {
+            get => _FilterDateFrom;
+            set
+            {
+                _FilterDateFrom = value;
+                OnPropertyChanged();
+                FilterDate();
+            }
+        }
+
+        private DateTime? _FilterDateTo = new DateTime(2030, 1, 1);
+        public DateTime? FilterDateTo
+        {
+            get => _FilterDateTo;
+            set
+            {
+                _FilterDateTo = value;
+                OnPropertyChanged();
+                FilterDate();
+            }
+        }
+        public void FilterDate()
+        {
+
+
+            if (FilterDateFrom != null && FilterDateTo != null)
+            {
+                FilteredInvoice.Filter = (item) =>
+                {
+                    var diagnosis = item as HOADON;
+                    if (diagnosis == null || diagnosis.NgayHD == null) return false;
+
+                    // So sánh ngày khám với khoảng thời gian được lọc
+                    return diagnosis.NgayHD >= FilterDateFrom && diagnosis.NgayHD <= FilterDateTo;
+                };
+                FilteredInvoice.Refresh();
+            }
+            else
+            {
+                // Nếu không có ngày lọc, loại bỏ bộ lọc
+
+                FilteredInvoice.Refresh();
+            }
+        }
+        #endregion
         public InvoiceVM()
             {
                 InvoiceList = new ObservableCollection<HOADON>(DataProvider.Ins.db.HOADONs );
@@ -114,14 +162,15 @@ namespace QLPhongMachTuWPF.ViewModel
 
                         }
 
-                        Messenger.Default.Send("Refresh", "RefreshMedicineList");
-                        Messenger.Default.Send("Refresh", "RefreshInvoiceList");
-                        Messenger.Default.Send("Refresh", "RefreshDiagnosisList");
-                        Messenger.Default.Send("Refresh", "RefreshAppointmentList");
+                        
                     }
 
                     catch (Exception ex) { MessageBox.Show("Xóa thất bại" + ex.Message.ToString()); }
                     DataProvider.Ins.db.SaveChanges();
+                    Messenger.Default.Send("Refresh", "RefreshMedicineList");
+                    Messenger.Default.Send("Refresh", "RefreshInvoiceList");
+                    Messenger.Default.Send("Refresh", "RefreshDiagnosisList");
+                    Messenger.Default.Send("Refresh", "RefreshAppointmentList");
                 });
 
                 Messenger.Default.Register<string>(this, "RefreshInvoiceList", (message) =>

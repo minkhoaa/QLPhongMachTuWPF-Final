@@ -62,7 +62,23 @@
 
 
                 <Border BorderThickness="2" CornerRadius="5" BorderBrush="Black" Height="30" Grid.Column="1">
-                    <DatePicker Background="#eeeeee" FontSize="16" Margin="8,0,8,0" Width="125" />
+                    <DatePicker SelectedDate="{Binding FilterDateFrom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+                        <DatePicker.Resources>
+                            <Style TargetType="DatePickerTextBox">
+                                <Setter Property="Control.Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="DatePickerTextBox">
+                                            <TextBox Text="{Binding Path=SelectedDate, 
+                                                RelativeSource={RelativeSource AncestorType=DatePicker}, 
+                                                StringFormat=dd/MM/yyyy, 
+                                                Mode=TwoWay}" />
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </DatePicker.Resources>
+                    </DatePicker>
+
                 </Border>
 
 
@@ -70,7 +86,23 @@
 
 
                 <Border BorderThickness="2" CornerRadius="5" BorderBrush="Black" Height="30" Grid.Column="3">
-                    <DatePicker Background="#eeeeee" FontSize="16" Margin="8,0,8,0" Width="125" />
+                    <DatePicker SelectedDate="{Binding FilterDateTo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+                        <DatePicker.Resources>
+                            <Style TargetType="DatePickerTextBox">
+                                <Setter Property="Control.Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="DatePickerTextBox">
+                                            <TextBox Text="{Binding Path=SelectedDate, 
+                                                RelativeSource={RelativeSource AncestorType=DatePicker}, 
+                                                StringFormat=dd/MM/yyyy, 
+                                                Mode=TwoWay}" />
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </DatePicker.Resources>
+                    </DatePicker>
+
                 </Border>
             </Grid>
 
