@@ -115,7 +115,7 @@ Style="{StaticResource EditButton}" >
                                 <Button Margin="5 0 0 0"
                                      Command="{Binding DataContext.ModifyDiagnosis, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                         CommandParameter="{Binding}"
-                                    Style="{StaticResource gridRemoveBtn}" Background="Green">
+                                    Style="{StaticResource CheckButton}" >
                                     <materialDesign:PackIcon Kind="CheckBold" Width="20" Height="20" Foreground="White"/>
                                 </Button>
 
