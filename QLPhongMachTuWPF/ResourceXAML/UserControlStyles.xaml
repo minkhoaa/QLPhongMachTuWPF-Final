@@ -188,6 +188,7 @@
         <Setter Property="FontSize" Value="13"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Background" Value="LightGray"/>
         <!-- Thay đổi con trỏ khi rê chuột -->
         <Setter Property="Template">
             <Setter.Value>
@@ -203,17 +204,17 @@
                     <ControlTemplate.Triggers>
                         <!-- Hover trạng thái -->
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="ButtonBorder" Property="Background" Value="#D3D3D3"/>
+                            <Setter TargetName="ButtonBorder" Property="Background" Value="red"/>
                             <!-- Màu nền khi hover -->
-                            <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="#A9A9A9"/>
+                            <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="red"/>
                             <!-- Đường viền khi hover -->
                         </Trigger>
 
                         <!-- Pressed trạng thái -->
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="ButtonBorder" Property="Background" Value="#B0B0B0"/>
+                            <Setter TargetName="ButtonBorder" Property="Background" Value="red"/>
                             <!-- Màu nền khi nhấn -->
-                            <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="#808080"/>
+                            <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="red"/>
                             <!-- Đường viền khi nhấn -->
                         </Trigger>
                     </ControlTemplate.Triggers>
