@@ -70,7 +70,7 @@
                                 <Button 
                                      Command="{Binding DataContext.DeleteDiagnosisCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
     CommandParameter="{Binding}"
-     Style="{StaticResource gridRemoveBtn}" Background="Red" Margin="5 0 0 0 ">
+     Style="{StaticResource gridRemoveBtn}" Margin="5 0 0 0 ">
                                     <materialDesign:PackIcon Kind="TrashCan" Width="20" Height="20" Foreground="White" />
                                 </Button>
                             </StackPanel>

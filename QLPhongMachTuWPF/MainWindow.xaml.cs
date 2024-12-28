@@ -69,7 +69,7 @@ namespace QLPhongMachTuWPF
                 WindowState = WindowState.Normal;
                 WindowStyle = WindowStyle.None;
                 WindowStartupLocation = WindowStartupLocation.CenterScreen;
-
+                logOut.Margin = new Thickness(0,150,0 ,0);
              
                 var animation = new DoubleAnimation
                 {
@@ -90,8 +90,9 @@ namespace QLPhongMachTuWPF
                 WindowState = WindowState.Maximized;
                 WindowStyle = WindowStyle.None;
                 WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                logOut.Margin = new Thickness(0, 500, 0, 0);
 
-               
+
                 var animation = new DoubleAnimation
                 {
                     From = 0,
