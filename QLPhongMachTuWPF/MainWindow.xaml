@@ -22,7 +22,8 @@
         Name="mainWindow"
          WindowStyle="None"
         MouseDown="Window_MouseDown"
-        AllowsTransparency="True">
+        AllowsTransparency="True"
+         >
 
 
     <Window.Resources>
@@ -113,6 +114,8 @@
             </Setter>
 
         </Style>
+
+        
 
     </Window.Resources>
 
@@ -245,7 +248,7 @@
                 <ListView x:Name="LV"
                           Background="Transparent"
                           BorderBrush="Transparent"
-                          ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                    
                         <!-- Homepage-->
                     
@@ -272,7 +275,7 @@
                     </ListViewItem>
 
                     <!--Patients-->
-                    <ListViewItem HorizontalAlignment="Left"
+                    <ListViewItem HorizontalAlignment="Left" 
                      Margin="0 0 0 10" MouseEnter="ListViewItem_MouseEnter">
                         <Border Background="{Binding PatientBackground}" CornerRadius="10">
                             <Button Background="Transparent" BorderBrush="Transparent" Height="45" Width="200" Padding="0" Command="{Binding PatientsCommand}">
@@ -296,8 +299,9 @@
                     </ListViewItem>
 
                     <!--Staffs-->
-                    <ListViewItem HorizontalAlignment="Left"
-                     Margin="0 0 0 10" MouseEnter="ListViewItem_MouseEnter" >
+                    <ListViewItem HorizontalAlignment="Left" x:Name="StaffIcon"
+                     Margin="0 0 0 10" MouseEnter="ListViewItem_MouseEnter">
+                       
                         <Border Background="{Binding StaffBackground}" CornerRadius="10">
                             <Button Background="Transparent" BorderBrush="Transparent" Height="45" Width="200" Padding="0" Command="{Binding StaffsCommand}">
                                 <StackPanel Orientation="Horizontal" Width="200">
@@ -507,7 +511,7 @@ Style="{StaticResource tt_style}"/>
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
             <ContentControl x:Name="Pages" Content="{Binding CurrentView}" Grid.RowSpan="2"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 3 0 0"  Panel.ZIndex="10">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10"  Panel.ZIndex="10">
 
                 <!-- Nút Phóng to -->
                 <Button Width="25" Height="25"  Click="MinimizeWindow_Click" Background="#3693ff">
