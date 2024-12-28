@@ -1,4 +1,5 @@
-﻿using QLPhongMachTuWPF.Model;
+﻿using GalaSoft.MvvmLight.Messaging;
+using QLPhongMachTuWPF.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,8 @@ namespace QLPhongMachTuWPF.ViewModel
         public string Confirmpassword { get => _confirmpassword; set { _confirmpassword = value; OnPropertyChanged(); } }
         public RegisterVM()
         {
+
+
             try { 
             RegisterCommand = new RelayCommand<Window>((p) =>
             {
@@ -40,23 +43,23 @@ namespace QLPhongMachTuWPF.ViewModel
                        Password == Confirmpassword &&
                        !string.IsNullOrEmpty(Displayname);
             },
- (p) =>
- {
-     if (Register(p))
-     {
-         MessageBox.Show("Đăng ký thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-
-         // Đóng form đăng ký
-         p.Close();
-
-         // Hiển thị lại form đăng nhập
-         OpenLoginForm();
-     }
-     else
-     {
-         MessageBox.Show("Đăng ký không thành công. Vui lòng kiểm tra lại!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-     }
- });
+            (p) =>
+                {
+                    if (Register(p))
+                    {
+                        MessageBox.Show("Đăng ký thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                       
+                        // Đóng form đăng ký
+                        p.Close();
+                        Messenger.Default.Send("Refresh", "RefreshAccountList");
+                        
+                    }
+                    else
+                    {
+                        MessageBox.Show("Đăng ký không thành công. Vui lòng kiểm tra lại!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    Messenger.Default.Send("Refresh", "RefreshAccountList");
+                });
 
 
             PasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; }, (p) => { Password = p.Password; });
@@ -75,7 +78,7 @@ namespace QLPhongMachTuWPF.ViewModel
             });
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
-
+            Messenger.Default.Send("Refresh", "RefreshAccountList");
         }
         private void OpenLoginForm()
         {
@@ -117,7 +120,7 @@ namespace QLPhongMachTuWPF.ViewModel
 
             // Lưu thay đổi
             DataProvider.Ins.db.SaveChanges();
-
+            
             return true;
         }
 

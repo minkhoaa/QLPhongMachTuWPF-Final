@@ -14,6 +14,8 @@ using System.Windows.Input;
 using QLPhongMachTuWPF.Model;
 using System.Diagnostics.Eventing.Reader;
 using System.Security.Cryptography;
+using System.Collections.ObjectModel;
+using GalaSoft.MvvmLight.Messaging;
 namespace QLPhongMachTuWPF.ViewModel
 {
     public class LoginViewModel : ViewModelBase
@@ -34,9 +36,13 @@ namespace QLPhongMachTuWPF.ViewModel
         private string _password;
 
         public string Password { get => _password; set { _password = value; OnPropertyChanged(); } }
+
+       public ObservableCollection<ACCOUNT> listAccounts { get; set; } 
+
         public LoginViewModel()
         {
-            try { 
+            listAccounts = new ObservableCollection<ACCOUNT>(DataProvider.Ins.db.ACCOUNTs.ToList()); 
+            
             isLogin = false;
 
             /*  admin admin
@@ -51,9 +57,10 @@ namespace QLPhongMachTuWPF.ViewModel
             PasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; }, (p) => { Password = p.Password; });
             RegisterCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
+               
                 Register register = new Register();
                 register.ShowDialog();
-
+              
             });
               LoginCommand = new RelayCommand<Window>((p) => { if (string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password)) return false; return true; ; }, (p) =>
             {
@@ -65,8 +72,17 @@ namespace QLPhongMachTuWPF.ViewModel
                 Application.Current.Shutdown();
 
             });
-            }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+                Messenger.Default.Register<string>(this, "RefreshAccountList", (message) =>
+                {
+                    if (message == "Refresh")
+                    {
+                        RefreshAccountList();
+                    }
+
+                });
+           
+
+         
         }
 
 
@@ -83,7 +99,7 @@ namespace QLPhongMachTuWPF.ViewModel
         {
             if (p == null) return;
             string hashedPassword = HashPasswordWithSHA256(Password);
-            var count = DataProvider.Ins.db.ACCOUNTs
+            var count = listAccounts
       .Where(x => x.UserName == Username && x.PassWord == hashedPassword)
       .Count();
 
@@ -100,6 +116,20 @@ namespace QLPhongMachTuWPF.ViewModel
             }
 
         }
-     
+
+
+        public void RefreshAccountList()
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                listAccounts.Clear(); // Xóa danh sách cũ
+                var Medicine = new ObservableCollection<ACCOUNT>(DataProvider.Ins.db.ACCOUNTs.ToList()); // Lấy danh sách mới từ DB
+                foreach (var item in Medicine)
+                {
+                    listAccounts.Add(item);
+                }
+            });
+        }
+
     } 
 }

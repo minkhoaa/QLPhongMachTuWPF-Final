@@ -316,7 +316,9 @@ namespace QLPhongMachTuWPF.ViewModel
                     DataProvider.Ins.db.SaveChanges();
 
                     Messenger.Default.Send(LichHen);
-
+                    Messenger.Default.Send("Refresh", "RefreshInvoiceList");
+                    Messenger.Default.Send("Refresh", "RefreshDiagnosisList");
+                    Messenger.Default.Send("Refresh", "RefreshAppointmentList");
                     Application.Current.Windows
                     .OfType<Window>()
                     .SingleOrDefault(w => w.IsActive)
