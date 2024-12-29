@@ -230,6 +230,7 @@
     <Compile Include="Model\THUOC.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\AccountType.cs" />
     <Compile Include="ViewModel\AddAppointmentVM.cs" />
     <Compile Include="ViewModel\AddDiagnosis.cs" />
     <Compile Include="ViewModel\AddInvoiceVM.cs" />
