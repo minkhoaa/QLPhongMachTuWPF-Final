@@ -5,23 +5,23 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="427e6ceac36b476c897bc938e9c754ca" Name="Diagram1" ZoomLevel="88">
-        <EntityTypeShape EntityType="QLPMTModel.ACCOUNT" Width="1.5" PointX="3.625" PointY="1.375" />
-        <EntityTypeShape EntityType="QLPMTModel.BENHNHAN" Width="1.5" PointX="0.75" PointY="4.875" />
-        <EntityTypeShape EntityType="QLPMTModel.CTTT" Width="1.5" PointX="8.25" PointY="5" />
-        <EntityTypeShape EntityType="QLPMTModel.HOADON" Width="1.5" PointX="8.25" PointY="8.25" />
-        <EntityTypeShape EntityType="QLPMTModel.LICHHEN" Width="1.5" PointX="3" PointY="4.875" />
-        <EntityTypeShape EntityType="QLPMTModel.NHANVIEN" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="QLPMTModel.PHIEUKHAM" Width="1.5" PointX="6" PointY="4.5" />
-        <EntityTypeShape EntityType="QLPMTModel.THUOC" Width="1.5" PointX="6" PointY="1.125" />
-        <AssociationConnector Association="QLPMTModel.FK__LICHHEN__MaBN__4F7CD00D" />
+        <EntityTypeShape EntityType="QLPMTModel.ACCOUNT" Width="1.5" PointX="8.75" PointY="0.875" />
+        <EntityTypeShape EntityType="QLPMTModel.BENHNHAN" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="QLPMTModel.CTTT" Width="1.5" PointX="8.25" PointY="4.875" />
+        <EntityTypeShape EntityType="QLPMTModel.HOADON" Width="1.5" PointX="5.25" PointY="9.125" />
+        <EntityTypeShape EntityType="QLPMTModel.LICHHEN" Width="1.5" PointX="5.25" PointY="4.75" />
+        <EntityTypeShape EntityType="QLPMTModel.NHANVIEN" Width="1.5" PointX="0.75" PointY="4.625" />
+        <EntityTypeShape EntityType="QLPMTModel.PHIEUKHAM" Width="1.5" PointX="3" PointY="4.5" />
+        <EntityTypeShape EntityType="QLPMTModel.QUIDINH" Width="1.5" PointX="0.75" PointY="8.875" />
+        <EntityTypeShape EntityType="QLPMTModel.THUOC" Width="1.5" PointX="6" PointY="1" />
+        <AssociationConnector Association="QLPMTModel.FK__LICHHEN__MaBN__5165187F" />
         <AssociationConnector Association="QLPMTModel.PK_MaBN_FK" />
         <AssociationConnector Association="QLPMTModel.CTTT_MaPK_FK" />
         <AssociationConnector Association="QLPMTModel.CTTT_TenThuoc_FK" />
         <AssociationConnector Association="QLPMTModel.HD_MaPK_FK" />
-        <AssociationConnector Association="QLPMTModel.FK__LICHHEN__MaNV__4E88ABD4" />
-        <AssociationConnector Association="QLPMTModel.FK__LICHHEN__MaPK__5070F446" />
+        <AssociationConnector Association="QLPMTModel.FK__LICHHEN__MaNV__5070F446" />
+        <AssociationConnector Association="QLPMTModel.FK__LICHHEN__MaPK__52593CB8" />
         <AssociationConnector Association="QLPMTModel.PK_MaNV_FK" />
-        <EntityTypeShape EntityType="QLPMTModel.QUIDINH" Width="1.5" PointX="8.125" PointY="1.375" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

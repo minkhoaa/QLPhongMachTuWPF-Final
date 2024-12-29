@@ -27,5 +27,6 @@
     <viewmodel:DetailsInvoice x:Key="DetailsInvoice"></viewmodel:DetailsInvoice>
     <viewmodel:RegisterVM x:Key="RegisterVM"></viewmodel:RegisterVM>
     <viewmodel:ModifyDetailInvoiceVM x:Key="ModifyDetailInvoiceVM"></viewmodel:ModifyDetailInvoiceVM>
+    <viewmodel:ForgotPassword x:Key="ForgotPassword"></viewmodel:ForgotPassword>
 </ResourceDictionary> 
     
