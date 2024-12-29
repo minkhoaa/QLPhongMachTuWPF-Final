@@ -10,6 +10,7 @@ SET DATEFORMAT DMY;
 CREATE TABLE ACCOUNT (
     UserName NVARCHAR(100) COLLATE SQL_Latin1_General_CP1_CS_AS PRIMARY KEY,
     DisPlayName NVARCHAR(100) NOT NULL DEFAULT 'Account',
+	Email varchar(100) not null Default 'Trống', 
     PassWord NVARCHAR(1000) NOT NULL DEFAULT 'Trống',
     Type INT NOT NULL DEFAULT 0
 );
@@ -177,6 +178,6 @@ INSERT INTO QUIDINH (TienKham)
 VALUES (100000)
 
 
-INSERT INTO ACCOUNT( UserName, DisPlayName, PassWord, Type) values ('admin' , 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 0)
-INSERT INTO ACCOUNT( UserName, DisPlayName, PassWord, Type) values ('employer' , 'employer', '8efdf55724c97710333b1e6e7ad03e1b61c9c4206a35ca33898058c6e15c9c42', 1)
+INSERT INTO ACCOUNT( UserName, DisPlayName,Email, PassWord, Type) values ('admin' , 'admin','tukhoa040505@gmail.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 0)
+INSERT INTO ACCOUNT( UserName, DisPlayName,Email, PassWord, Type) values ('employer' , 'employer','23520757@gmail.com', '8efdf55724c97710333b1e6e7ad03e1b61c9c4206a35ca33898058c6e15c9c42', 1)
 

@@ -32,7 +32,7 @@ namespace QLPhongMachTuWPF.Model
         public virtual DbSet<LICHHEN> LICHHENs { get; set; }
         public virtual DbSet<NHANVIEN> NHANVIENs { get; set; }
         public virtual DbSet<PHIEUKHAM> PHIEUKHAMs { get; set; }
-        public virtual DbSet<THUOC> THUOCs { get; set; }
         public virtual DbSet<QUIDINH> QUIDINHs { get; set; }
+        public virtual DbSet<THUOC> THUOCs { get; set; }
     }
 }

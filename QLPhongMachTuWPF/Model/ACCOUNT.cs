@@ -16,6 +16,7 @@ namespace QLPhongMachTuWPF.Model
     {
         public string UserName { get; set; }
         public string DisPlayName { get; set; }
+        public string Email { get; set; }
         public string PassWord { get; set; }
         public int Type { get; set; }
     }

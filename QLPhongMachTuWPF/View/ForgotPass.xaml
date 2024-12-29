@@ -3,8 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:QLPhongMachTuWPF.View"
+        xmlns:local="clr-namespace:QLPhongMachTuWPF.View" xmlns:viewmodel="clr-namespace:QLPhongMachTuWPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ForgotPassword}"
         mc:Ignorable="d"
+        DataContext="{StaticResource ForgotPassword}"
         Title="ForgotPass" Height="450" Width="500"
         WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
     <Grid>
@@ -59,7 +60,7 @@
                                />
                         <TextBox
                        
-                        
+                            Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              FontSize="14"
                              Grid.Column="1"
                              Margin="10,0,0,0"
@@ -88,11 +89,11 @@
            Panel.ZIndex="1"
            Margin="10,0,0,0"
            Foreground="#696969" Grid.ColumnSpan="2"/>
-                        <TextBox
+                        <TextBox Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         x:Name="txtUser" TextChanged="txtUser_TextChanged" 
          FontSize="14"
          Grid.Column="1"
-         Text="{Binding Username}"
+      
          Margin="10,0,0,0"
          Foreground="Black"
          BorderBrush="Transparent"
@@ -103,7 +104,7 @@
 
 
                 <Button x:Name="btnLogin" Background="#1d6fc1"
-                Command="{Binding RegisterCommand}"
+                Command="{Binding ResetPassword}"
     CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
                 Style="{StaticResource MaterialDesignRaisedButton}"
                 Width="170"

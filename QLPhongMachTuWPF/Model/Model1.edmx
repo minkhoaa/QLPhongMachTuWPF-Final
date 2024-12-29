@@ -11,6 +11,7 @@
           </Key>
           <Property Name="UserName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="DisPlayName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="PassWord" Type="nvarchar" MaxLength="1000" Nullable="false" />
           <Property Name="Type" Type="int" Nullable="false" />
         </EntityType>
@@ -126,7 +127,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__LICHHEN__MaBN__5070F446">
+        <Association Name="FK__LICHHEN__MaBN__5165187F">
           <End Role="BENHNHAN" Type="Self.BENHNHAN" Multiplicity="1" />
           <End Role="LICHHEN" Type="Self.LICHHEN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -138,7 +139,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__LICHHEN__MaNV__4F7CD00D">
+        <Association Name="FK__LICHHEN__MaNV__5070F446">
           <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="1" />
           <End Role="LICHHEN" Type="Self.LICHHEN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -150,7 +151,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__LICHHEN__MaPK__5165187F">
+        <Association Name="FK__LICHHEN__MaPK__52593CB8">
           <End Role="PHIEUKHAM" Type="Self.PHIEUKHAM" Multiplicity="0..1" />
           <End Role="LICHHEN" Type="Self.LICHHEN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -216,15 +217,15 @@
             <End Role="THUOC" EntitySet="THUOC" />
             <End Role="CTTT" EntitySet="CTTT" />
           </AssociationSet>
-          <AssociationSet Name="FK__LICHHEN__MaBN__5070F446" Association="Self.FK__LICHHEN__MaBN__5070F446">
+          <AssociationSet Name="FK__LICHHEN__MaBN__5165187F" Association="Self.FK__LICHHEN__MaBN__5165187F">
             <End Role="BENHNHAN" EntitySet="BENHNHAN" />
             <End Role="LICHHEN" EntitySet="LICHHEN" />
           </AssociationSet>
-          <AssociationSet Name="FK__LICHHEN__MaNV__4F7CD00D" Association="Self.FK__LICHHEN__MaNV__4F7CD00D">
+          <AssociationSet Name="FK__LICHHEN__MaNV__5070F446" Association="Self.FK__LICHHEN__MaNV__5070F446">
             <End Role="NHANVIEN" EntitySet="NHANVIEN" />
             <End Role="LICHHEN" EntitySet="LICHHEN" />
           </AssociationSet>
-          <AssociationSet Name="FK__LICHHEN__MaPK__5165187F" Association="Self.FK__LICHHEN__MaPK__5165187F">
+          <AssociationSet Name="FK__LICHHEN__MaPK__52593CB8" Association="Self.FK__LICHHEN__MaPK__52593CB8">
             <End Role="PHIEUKHAM" EntitySet="PHIEUKHAM" />
             <End Role="LICHHEN" EntitySet="LICHHEN" />
           </AssociationSet>
@@ -253,8 +254,9 @@
           <EntitySet Name="LICHHENs" EntityType="QLPMTModel.LICHHEN" />
           <EntitySet Name="NHANVIENs" EntityType="QLPMTModel.NHANVIEN" />
           <EntitySet Name="PHIEUKHAMs" EntityType="QLPMTModel.PHIEUKHAM" />
+          <EntitySet Name="QUIDINHs" EntityType="QLPMTModel.QUIDINH" />
           <EntitySet Name="THUOCs" EntityType="QLPMTModel.THUOC" />
-          <AssociationSet Name="FK__LICHHEN__MaBN__4F7CD00D" Association="QLPMTModel.FK__LICHHEN__MaBN__4F7CD00D">
+          <AssociationSet Name="FK__LICHHEN__MaBN__5165187F" Association="QLPMTModel.FK__LICHHEN__MaBN__5165187F">
             <End Role="BENHNHAN" EntitySet="BENHNHANs" />
             <End Role="LICHHEN" EntitySet="LICHHENs" />
           </AssociationSet>
@@ -274,11 +276,11 @@
             <End Role="PHIEUKHAM" EntitySet="PHIEUKHAMs" />
             <End Role="HOADON" EntitySet="HOADONs" />
           </AssociationSet>
-          <AssociationSet Name="FK__LICHHEN__MaNV__4E88ABD4" Association="QLPMTModel.FK__LICHHEN__MaNV__4E88ABD4">
+          <AssociationSet Name="FK__LICHHEN__MaNV__5070F446" Association="QLPMTModel.FK__LICHHEN__MaNV__5070F446">
             <End Role="NHANVIEN" EntitySet="NHANVIENs" />
             <End Role="LICHHEN" EntitySet="LICHHENs" />
           </AssociationSet>
-          <AssociationSet Name="FK__LICHHEN__MaPK__5070F446" Association="QLPMTModel.FK__LICHHEN__MaPK__5070F446">
+          <AssociationSet Name="FK__LICHHEN__MaPK__52593CB8" Association="QLPMTModel.FK__LICHHEN__MaPK__52593CB8">
             <End Role="PHIEUKHAM" EntitySet="PHIEUKHAMs" />
             <End Role="LICHHEN" EntitySet="LICHHENs" />
           </AssociationSet>
@@ -286,7 +288,6 @@
             <End Role="NHANVIEN" EntitySet="NHANVIENs" />
             <End Role="PHIEUKHAM" EntitySet="PHIEUKHAMs" />
           </AssociationSet>
-          <EntitySet Name="QUIDINHs" EntityType="QLPMTModel.QUIDINH" />
         </EntityContainer>
         <EntityType Name="ACCOUNT">
           <Key>
@@ -294,6 +295,7 @@
           </Key>
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="DisPlayName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="PassWord" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="Type" Type="Int32" Nullable="false" />
         </EntityType>
@@ -308,7 +310,7 @@
           <Property Name="DienThoai" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="GioiTinh" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="TrangThai" Type="Int32" />
-          <NavigationProperty Name="LICHHENs" Relationship="QLPMTModel.FK__LICHHEN__MaBN__4F7CD00D" FromRole="BENHNHAN" ToRole="LICHHEN" />
+          <NavigationProperty Name="LICHHENs" Relationship="QLPMTModel.FK__LICHHEN__MaBN__5165187F" FromRole="BENHNHAN" ToRole="LICHHEN" />
           <NavigationProperty Name="PHIEUKHAMs" Relationship="QLPMTModel.PK_MaBN_FK" FromRole="BENHNHAN" ToRole="PHIEUKHAM" />
         </EntityType>
         <EntityType Name="CTTT">
@@ -348,9 +350,9 @@
           <Property Name="NgayHen" Type="DateTime" Precision="0" />
           <Property Name="GioHen" Type="Time" Precision="7" />
           <Property Name="MaPK" Type="Int32" />
-          <NavigationProperty Name="BENHNHAN" Relationship="QLPMTModel.FK__LICHHEN__MaBN__4F7CD00D" FromRole="LICHHEN" ToRole="BENHNHAN" />
-          <NavigationProperty Name="NHANVIEN" Relationship="QLPMTModel.FK__LICHHEN__MaNV__4E88ABD4" FromRole="LICHHEN" ToRole="NHANVIEN" />
-          <NavigationProperty Name="PHIEUKHAM" Relationship="QLPMTModel.FK__LICHHEN__MaPK__5070F446" FromRole="LICHHEN" ToRole="PHIEUKHAM" />
+          <NavigationProperty Name="BENHNHAN" Relationship="QLPMTModel.FK__LICHHEN__MaBN__5165187F" FromRole="LICHHEN" ToRole="BENHNHAN" />
+          <NavigationProperty Name="NHANVIEN" Relationship="QLPMTModel.FK__LICHHEN__MaNV__5070F446" FromRole="LICHHEN" ToRole="NHANVIEN" />
+          <NavigationProperty Name="PHIEUKHAM" Relationship="QLPMTModel.FK__LICHHEN__MaPK__52593CB8" FromRole="LICHHEN" ToRole="PHIEUKHAM" />
         </EntityType>
         <EntityType Name="NHANVIEN">
           <Key>
@@ -364,7 +366,7 @@
           <Property Name="GioiTinh" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="LoaiNV" Type="Int32" />
           <Property Name="TrangThai" Type="Int32" />
-          <NavigationProperty Name="LICHHENs" Relationship="QLPMTModel.FK__LICHHEN__MaNV__4E88ABD4" FromRole="NHANVIEN" ToRole="LICHHEN" />
+          <NavigationProperty Name="LICHHENs" Relationship="QLPMTModel.FK__LICHHEN__MaNV__5070F446" FromRole="NHANVIEN" ToRole="LICHHEN" />
           <NavigationProperty Name="PHIEUKHAMs" Relationship="QLPMTModel.PK_MaNV_FK" FromRole="NHANVIEN" ToRole="PHIEUKHAM" />
         </EntityType>
         <EntityType Name="PHIEUKHAM">
@@ -381,8 +383,14 @@
           <NavigationProperty Name="BENHNHAN" Relationship="QLPMTModel.PK_MaBN_FK" FromRole="PHIEUKHAM" ToRole="BENHNHAN" />
           <NavigationProperty Name="CTTTs" Relationship="QLPMTModel.CTTT_MaPK_FK" FromRole="PHIEUKHAM" ToRole="CTTT" />
           <NavigationProperty Name="HOADONs" Relationship="QLPMTModel.HD_MaPK_FK" FromRole="PHIEUKHAM" ToRole="HOADON" />
-          <NavigationProperty Name="LICHHENs" Relationship="QLPMTModel.FK__LICHHEN__MaPK__5070F446" FromRole="PHIEUKHAM" ToRole="LICHHEN" />
+          <NavigationProperty Name="LICHHENs" Relationship="QLPMTModel.FK__LICHHEN__MaPK__52593CB8" FromRole="PHIEUKHAM" ToRole="LICHHEN" />
           <NavigationProperty Name="NHANVIEN" Relationship="QLPMTModel.PK_MaNV_FK" FromRole="PHIEUKHAM" ToRole="NHANVIEN" />
+        </EntityType>
+        <EntityType Name="QUIDINH">
+          <Key>
+            <PropertyRef Name="TienKham" />
+          </Key>
+          <Property Name="TienKham" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
         </EntityType>
         <EntityType Name="THUOC">
           <Key>
@@ -395,7 +403,7 @@
           <Property Name="TrangThai" Type="Int32" />
           <NavigationProperty Name="CTTTs" Relationship="QLPMTModel.CTTT_TenThuoc_FK" FromRole="THUOC" ToRole="CTTT" />
         </EntityType>
-        <Association Name="FK__LICHHEN__MaBN__4F7CD00D">
+        <Association Name="FK__LICHHEN__MaBN__5165187F">
           <End Type="QLPMTModel.BENHNHAN" Role="BENHNHAN" Multiplicity="1" />
           <End Type="QLPMTModel.LICHHEN" Role="LICHHEN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -455,7 +463,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__LICHHEN__MaNV__4E88ABD4">
+        <Association Name="FK__LICHHEN__MaNV__5070F446">
           <End Type="QLPMTModel.NHANVIEN" Role="NHANVIEN" Multiplicity="1" />
           <End Type="QLPMTModel.LICHHEN" Role="LICHHEN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -467,7 +475,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__LICHHEN__MaPK__5070F446">
+        <Association Name="FK__LICHHEN__MaPK__52593CB8">
           <End Type="QLPMTModel.PHIEUKHAM" Role="PHIEUKHAM" Multiplicity="0..1" />
           <End Type="QLPMTModel.LICHHEN" Role="LICHHEN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -491,12 +499,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="QUIDINH">
-          <Key>
-            <PropertyRef Name="TienKham" />
-          </Key>
-          <Property Name="TienKham" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -508,6 +510,7 @@
               <MappingFragment StoreEntitySet="ACCOUNT">
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="DisPlayName" ColumnName="DisPlayName" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
               </MappingFragment>
@@ -590,6 +593,13 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="QUIDINHs">
+            <EntityTypeMapping TypeName="QLPMTModel.QUIDINH">
+              <MappingFragment StoreEntitySet="QUIDINH">
+                <ScalarProperty Name="TienKham" ColumnName="TienKham" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="THUOCs">
             <EntityTypeMapping TypeName="QLPMTModel.THUOC">
               <MappingFragment StoreEntitySet="THUOC">
@@ -598,13 +608,6 @@
                 <ScalarProperty Name="DonViTinh" ColumnName="DonViTinh" />
                 <ScalarProperty Name="TenThuoc" ColumnName="TenThuoc" />
                 <ScalarProperty Name="MaThuoc" ColumnName="MaThuoc" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="QUIDINHs">
-            <EntityTypeMapping TypeName="QLPMTModel.QUIDINH">
-              <MappingFragment StoreEntitySet="QUIDINH">
-                <ScalarProperty Name="TienKham" ColumnName="TienKham" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -230,7 +230,6 @@
     <Compile Include="Model\THUOC.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\AccountType.cs" />
     <Compile Include="ViewModel\AddAppointmentVM.cs" />
     <Compile Include="ViewModel\AddDiagnosis.cs" />
     <Compile Include="ViewModel\AddInvoiceVM.cs" />
@@ -240,6 +239,7 @@
     <Compile Include="ViewModel\ControlBarViewModel.cs" />
     <Compile Include="ViewModel\DetailsInvoice.cs" />
     <Compile Include="ViewModel\DiagnosisVM.cs" />
+    <Compile Include="ViewModel\ForgotPassword.cs" />
     <Compile Include="ViewModel\HomepageVM.cs" />
     <Compile Include="ViewModel\InvoiceVM.cs" />
     <Compile Include="ViewModel\ListsVM.cs" />
