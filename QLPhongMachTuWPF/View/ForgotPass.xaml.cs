@@ -23,5 +23,73 @@ namespace QLPhongMachTuWPF.View
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void PasswordBox_KeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void textUser_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            txtUser.Focus();
+
+        }
+
+        private void txtUser_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtUser.Text) && txtUser.Text.Length > 0)
+            {
+                textUser.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                textUser.Visibility = Visibility.Visible;
+            }
+        }
+
+        //private void textPassword_MouseDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    txtPass.Focus();
+        //}
+
+        //private void txtPass_TextChanged(object sender, RoutedEventArgs e)
+        //{
+        //    if (!string.IsNullOrEmpty(txtPass.Password) && txtPass.Password.Length > 0)
+        //    {
+        //        textPassword.Visibility = Visibility.Collapsed;
+        //    }
+        //    else
+        //    {
+        //        textPassword.Visibility = Visibility.Visible;
+        //    }
+        //}
+
+        private void Image_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void Border_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
+            }
+        }
+
+
+
+
+
+
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current?.Shutdown();
+        }
     }
 }

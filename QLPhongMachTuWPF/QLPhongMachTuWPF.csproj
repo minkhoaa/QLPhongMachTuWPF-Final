@@ -269,11 +269,17 @@
     <Compile Include="View\AddStaff.xaml.cs">
       <DependentUpon>AddStaff.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Conformation.xaml.cs">
+      <DependentUpon>Conformation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ControlBarUC.xaml.cs">
       <DependentUpon>ControlBarUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DetailInovice.xaml.cs">
       <DependentUpon>DetailInovice.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ForgotPass.xaml.cs">
+      <DependentUpon>ForgotPass.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LoginModel.xaml.cs">
       <DependentUpon>LoginModel.xaml</DependentUpon>
@@ -326,6 +332,9 @@
     </Compile>
     <Compile Include="View\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ResetPass.xaml.cs">
+      <DependentUpon>ResetPass.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Staffs.xaml.cs">
       <DependentUpon>Staffs.xaml</DependentUpon>
@@ -390,6 +399,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Conformation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\ControlBarUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -397,6 +410,10 @@
     <Page Include="View\DetailInovice.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ForgotPass.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\LoginModel.xaml">
       <SubType>Designer</SubType>
@@ -455,6 +472,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Register.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ResetPass.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

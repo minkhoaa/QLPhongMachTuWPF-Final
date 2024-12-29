@@ -63,7 +63,7 @@
                             Foreground="Black"
                             BorderBrush="Transparent"
                             BorderThickness="0"
-                            PasswordChanged="txtPass_PasswordChanged"
+                            
                             KeyDown="PasswordBox_KeyDown">
                             <!--<i:Interaction.Triggers >
                                 <i:EventTrigger EventName="PasswordChanged">
@@ -86,7 +86,7 @@
                             <ColumnDefinition Width="284"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock x:Name="textconfirmPassword"  MouseDown="textconfirmPassword_MouseDown"
+                        <TextBlock x:Name="textconfirmPassword" 
                                Text="Confirm Password"  FontSize="14"
                             Grid.Column="1"
                             Panel.ZIndex="1"
@@ -94,7 +94,7 @@
                             Foreground="#696969"
                               
                                />
-                        <PasswordBox x:Name="txtConfirmPass"  PasswordChanged="txtConfirmPass_PasswordChanged_1"
+                        <PasswordBox x:Name="txtConfirmPass" 
                          FontSize="14"
                          Grid.Column="1"
                          Margin="10 0 0 0"
