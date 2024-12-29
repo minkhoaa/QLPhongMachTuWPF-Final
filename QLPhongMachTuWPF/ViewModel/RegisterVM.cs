@@ -80,12 +80,7 @@ namespace QLPhongMachTuWPF.ViewModel
             catch (Exception ex) { MessageBox.Show(ex.Message); }
             Messenger.Default.Send("Refresh", "RefreshAccountList");
         }
-        private void OpenLoginForm()
-        {
-            // Giả sử bạn có một form đăng nhập tên là LoginWindow
-            LoginModel loginWindow = new LoginModel();
-            loginWindow.Show();
-        }
+      
 
         bool Register(Window p)
         {

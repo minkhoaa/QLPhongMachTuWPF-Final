@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 using QLPhongMachTuWPF.Model;
+using QLPhongMachTuWPF.View;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Windows;
 using System.Windows.Input;
+using System.Xml;
 
 namespace QLPhongMachTuWPF.ViewModel
 {
@@ -52,7 +54,12 @@ namespace QLPhongMachTuWPF.ViewModel
                     // Generate and send OTP
                     Otp = GenerateRandomCode();
                     SendOTP(Email, Otp);
-                   // Close the current form
+                    Conformation conformation = new Conformation();
+                    Messenger.Default.Send(Otp, "ConfirmOtp");
+                    Messenger.Default.Send(Username, "Username");
+                    p.Hide(); 
+                    conformation.ShowDialog();
+                    p.Close();
                 }
                 else
                 {
@@ -61,7 +68,7 @@ namespace QLPhongMachTuWPF.ViewModel
             });
 
             // Command to close the form
-            CloseCommand = new RelayCommand<Window>((p) => true, (p) => p?.Close());
+            CloseCommand = new RelayCommand<Window>((p) => true, (p) => p.Close());
         }
 
         private static string GenerateRandomCode()

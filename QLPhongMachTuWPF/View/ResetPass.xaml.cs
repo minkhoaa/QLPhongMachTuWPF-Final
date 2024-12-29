@@ -58,14 +58,7 @@ namespace QLPhongMachTuWPF.View
 
         private void txtPass_TextChanged(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtPass.Password) && txtPass.Password.Length > 0)
-            {
-                textPassword.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                textPassword.Visibility = Visibility.Visible;
-            }
+        
         }
 
         private void Image_MouseUp(object sender, MouseButtonEventArgs e)

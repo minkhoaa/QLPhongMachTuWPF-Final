@@ -34,6 +34,10 @@ namespace QLPhongMachTuWPF.ViewModel
         public ICommand RegisterCommand { get; set; }
         public ICommand CloseCommand { get; set; }
 
+
+        public ICommand ForgotPasswordCommand { get; set; }
+
+
         private string _username;
         public string Username { get => _username; set { _username = value; OnPropertyChanged(); } }
 
@@ -43,13 +47,31 @@ namespace QLPhongMachTuWPF.ViewModel
         public string Type { get => _type; set { _type = value; OnPropertyChanged(); } }
         public ObservableCollection<ACCOUNT> listAccounts { get; set; }
 
-        
+        public void LoadAccountList()
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                listAccounts.Clear(); // Xóa danh sách cũ
+                var appointments = DataProvider.Ins.db.ACCOUNTs.ToList(); // Lấy danh sách mới từ DB
+                foreach (var appointment in appointments)
+                {
+                    listAccounts.Add(appointment);
+
+                }
+            });
+        }
 
         public LoginViewModel()
         {
             listAccounts = new ObservableCollection<ACCOUNT>(DataProvider.Ins.db.ACCOUNTs.ToList());
             isLogin = false;
-
+            Messenger.Default.Register<string>(this, "LoadAccountList", (message) =>
+            {
+                if (message == "Refresh")
+                {
+                    LoadAccountList(); 
+                }
+            });
             // Đăng ký các lệnh
             LoginCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
@@ -63,6 +85,22 @@ namespace QLPhongMachTuWPF.ViewModel
             {
                 Register register = new Register();
                 register.ShowDialog();
+            });
+            Messenger.Default.Register<string>(this, "Done", (message) =>
+            {
+                if (message == "Done")
+                {
+                    LoginModel loginModel = new LoginModel();
+                    loginModel.ShowDialog();
+                }
+            });
+            ForgotPasswordCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                ForgotPass conformation = new ForgotPass();
+               
+                conformation.ShowDialog();
+               
+                
             });
 
             CloseCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>

@@ -237,6 +237,7 @@
     <Compile Include="ViewModel\AddMedicineVM.cs" />
     <Compile Include="ViewModel\AddPatientVM.cs" />
     <Compile Include="ViewModel\AddStaffsVM.cs" />
+    <Compile Include="ViewModel\ConfirmationVM.cs" />
     <Compile Include="ViewModel\ControlBarViewModel.cs" />
     <Compile Include="ViewModel\DetailsInvoice.cs" />
     <Compile Include="ViewModel\DiagnosisVM.cs" />
@@ -252,6 +253,7 @@
     <Compile Include="ViewModel\ModifyPatientsVM.cs" />
     <Compile Include="ViewModel\ModifyStaffVM.cs" />
     <Compile Include="ViewModel\RegisterVM.cs" />
+    <Compile Include="ViewModel\ResetPasswordVM.cs" />
     <Compile Include="View\AddAppointment.xaml.cs">
       <DependentUpon>AddAppointment.xaml</DependentUpon>
     </Compile>

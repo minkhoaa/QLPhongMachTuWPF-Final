@@ -3,8 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:QLPhongMachTuWPF.View"
+        xmlns:local="clr-namespace:QLPhongMachTuWPF.View" xmlns:viewmodel="clr-namespace:QLPhongMachTuWPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ConfirmationVM}"
         mc:Ignorable="d"
+        Name="Confirmation"
+        DataContext="{StaticResource ConfirmationVM}"
         Title="Conformation" Height="450" Width="500"
         WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
     <Grid>
@@ -13,6 +15,7 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Button x:Name="btnClose"
+        Command="{Binding CloseCommand }" CommandParameter="{Binding ElementName=Confirmation}"
      BorderBrush="White"
     Grid.Column="1" Panel.ZIndex="1"
        Width="30"
@@ -20,7 +23,7 @@
        VerticalAlignment="Top"
        HorizontalAlignment="Right"
        Margin="0 13 13 0"
-       Click="btnClose_Click"
+     
         BorderThickness="0">
             <Button.Background >
                 <ImageBrush ImageSource="/Images/image.png"
@@ -58,7 +61,7 @@
                             
                                />
                         <TextBox
-                       
+                             Text="{Binding ConfirmOtp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              FontSize="14"
                              Grid.Column="1"
                              Margin="10,0,0,0"
@@ -75,8 +78,8 @@
                     <TextBlock Text="5:00" x:Name="textExpiration" FontWeight="Bold"/>
                 </StackPanel>
                 <Button x:Name="btnLogin" Background="#1d6fc1" Margin="0 10 0 0"
-                Command="{Binding RegisterCommand}"
-    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                Command="{Binding VerifyCommand}"
+    CommandParameter="{Binding ElementName=Confirmation}"
                 Style="{StaticResource MaterialDesignRaisedButton}"
                 Width="170"
                Click="Button_Click"

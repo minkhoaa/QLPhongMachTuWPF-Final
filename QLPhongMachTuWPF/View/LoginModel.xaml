@@ -148,7 +148,7 @@
                 FontSize="10"  Background="Transparent" 
                 Foreground="#1d6fc1" HorizontalAlignment="Center" Height="23"
                 Margin="0 0 -300 0"
-                 Command="{Binding RegisterCommand}"
+                 Command="{Binding ForgotPasswordCommand }"
                  CommandParameter="{Binding ElementName=FormLogin}"
                  Style="{StaticResource MaterialDesignRaisedButton}"
                 BorderBrush="Transparent"
