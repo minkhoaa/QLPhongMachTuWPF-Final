@@ -62,13 +62,13 @@
                     <TextBlock Text="C" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
                     <TextBlock Text="E" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
                     <TextBlock Text=" " Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
-                    <TextBlock Text="D" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
+                    <TextBlock Text="P" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
+                    <TextBlock Text="R" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
                     <TextBlock Text="E" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
-                    <TextBlock Text="T" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
-                    <TextBlock Text="A" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
+                    <TextBlock Text="V" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
                     <TextBlock Text="I" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
-                    <TextBlock Text="L" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
-                    <TextBlock Text="S" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
+                    <TextBlock Text="E" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
+                    <TextBlock Text="W" Foreground="White" FontSize="32" FontWeight="Bold" TextAlignment="Center"/>
 
                 </StackPanel>
             </Grid>
