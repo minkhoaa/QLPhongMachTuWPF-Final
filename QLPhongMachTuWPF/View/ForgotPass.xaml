@@ -55,8 +55,7 @@
                            Grid.Column="1"
                            Margin="10,0,0,0"
                            Foreground="#696969"
-                            x:Name="textDisplayName"
-                               MouseDown="textDisplayName_MouseDown"
+                           
                                />
                         <TextBox
                        

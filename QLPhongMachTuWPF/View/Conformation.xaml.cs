@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Threading;
 
 namespace QLPhongMachTuWPF.View
@@ -43,5 +45,46 @@ namespace QLPhongMachTuWPF.View
         {
             textExpiration.Text = time.ToString(@"mm\:ss");
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void PasswordBox_KeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
+
+       
+        
+
+       
+       
+
+        private void Image_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void Border_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
+            }
+        }
+
+
+
+
+
+
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current?.Shutdown();
+        }
     }
+
+
 }
