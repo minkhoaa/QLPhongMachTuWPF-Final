@@ -151,17 +151,12 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <Button   Command="{Binding DataContext.ModifyInvoice, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-Style="{StaticResource EditButton}" >
-                                    <materialDesign:PackIcon Kind="Pencil" Width="20" Height="20" Foreground="White" />
-
-                                </Button>
-
+                                
                                 <Button 
                                   Command="{Binding DataContext.VerifyCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                   CommandParameter="{Binding}"
                                   x:Name="btnVerify" Style="{StaticResource CheckButton}" Margin="5 0 5 0">             
-                                    <materialDesign:PackIcon Kind="CheckBold" Width="20" Height="20" Foreground="White"/>
+                                    <materialDesign:PackIcon Kind="Printer" Width="20" Height="20" Foreground="White"/>
                                 </Button>
                                 <Button 
                                     Command="{Binding DataContext.DeleteInvoiceCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
