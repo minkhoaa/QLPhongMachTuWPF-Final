@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:QLPhongMachTuWPF.View" xmlns:viewmodel="clr-namespace:QLPhongMachTuWPF.ViewModel" xmlns:i="http://schemas.microsoft.com/xaml/behaviors" d:DataContext="{d:DesignInstance Type=viewmodel:RegisterVM}"
         mc:Ignorable="d"
         DataContext="{StaticResource RegisterVM}"
-        Title="Register" Height="450" Width="500"
+        Title="Register" Height="500" Width="500"
         x:Name="FormRegister"
         WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
     <Grid>
@@ -99,6 +99,33 @@
                              Foreground="Black"
                              BorderBrush="Transparent"
                              BorderThickness="0" Grid.ColumnSpan="2"/>
+                    </Grid>
+                </Border>
+
+                <!-- Username Input -->
+                <Border BorderBrush="#abc0af" Width="300" BorderThickness="1" Margin="0 0 0 15" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="5">
+                    <Grid Margin="7 9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="72*"/>
+                            <ColumnDefinition Width="19*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock   Text="Email" 
+               FontSize="14"
+               Grid.Column="1"
+               Panel.ZIndex="1"
+               Margin="10,0,0,0"
+               Foreground="#696969" Grid.ColumnSpan="2"/>
+                        <TextBox
+             
+             FontSize="14"
+             Grid.Column="1"
+             
+             Margin="10,0,0,0"
+             Foreground="Black"
+             BorderBrush="Transparent"
+             BorderThickness="0" Grid.ColumnSpan="2"/>
                     </Grid>
                 </Border>
 
