@@ -184,12 +184,6 @@ namespace QLPhongMachTuWPF.ViewModel
                     }
 
 
-                    var appointment = DataProvider.Ins.db.LICHHENs.FirstOrDefault(x => x.PHIEUKHAM.MaPK == SelectedInvoice.PHIEUKHAM.MaPK);
-                    if (appointment != null)
-                    {
-                        DataProvider.Ins.db.LICHHENs.Remove(appointment);
-                        DataProvider.Ins.db.SaveChanges(); 
-                    }
 
                     DataProvider.Ins.db.HOADONs.Remove(SelectedInvoice);
                     try
@@ -197,6 +191,7 @@ namespace QLPhongMachTuWPF.ViewModel
                         if (InvoiceList.Remove(SelectedInvoice))
                         {
                             MessageBox.Show("Xóa thành công");
+                          
 
                         }
 

@@ -432,9 +432,24 @@ namespace QLPhongMachTuWPF.ViewModel
                 PrintCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
                 {
                     tempInvoice.TrangThai = 1;
+                    tempInvoice.PHIEUKHAM.TrangThai = 1;
+                    tempInvoice.PHIEUKHAM.BENHNHAN.TrangThai = 1; 
+
+                    var appoinment = DataProvider.Ins.db.LICHHENs.FirstOrDefault(x => x.PHIEUKHAM.MaPK == tempInvoice.PHIEUKHAM.MaPK);
+                    if (appoinment != null)
+                    {
+                        DataProvider.Ins.db.LICHHENs.Remove(appoinment);
+                        DataProvider.Ins.db.SaveChanges();
+                    }
+
                     Messenger.Default.Send(tempInvoice);
                     DataProvider.Ins.db.SaveChanges();
+
+
                     Messenger.Default.Send("RefreshInvoiceList");
+                    Messenger.Default.Send("Refresh", "RefreshInvoiceList");
+                    Messenger.Default.Send("Refresh", "RefreshDiagnosisList");
+                    Messenger.Default.Send("Refresh", "RefreshAppointmentList");
                     PrintInvoice();
 
 
