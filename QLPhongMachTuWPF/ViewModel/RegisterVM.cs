@@ -19,6 +19,8 @@ namespace QLPhongMachTuWPF.ViewModel
 
         public ICommand PasswordChangedCommand { get; set; }
         public ICommand PasswordConfirmChangedCommand { get; set; }
+        public ICommand CloseCommand { get; set; }
+
         public string Displayname { get => _displayname; set { _displayname = value; OnPropertyChanged(); } }
         private string _username;
 
@@ -63,9 +65,12 @@ namespace QLPhongMachTuWPF.ViewModel
                     }
                     Messenger.Default.Send("Refresh", "LoadAccountList");
                 });
+                CloseCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+                {
+                    p.Close();
+                });
 
-
-            PasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; }, (p) => { Password = p.Password; });
+                PasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; }, (p) => { Password = p.Password; });
             PasswordConfirmChangedCommand = new RelayCommand<PasswordBox>((p) =>
             {
                 // Điều kiện để kích hoạt lệnh, nếu cần
