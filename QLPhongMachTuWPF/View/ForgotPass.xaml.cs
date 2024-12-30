@@ -91,5 +91,22 @@ namespace QLPhongMachTuWPF.View
         {
             Application.Current?.Shutdown();
         }
+
+        private void textEmail_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            txtEmail.Focus();
+        }
+
+        private void txtEmail_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtEmail.Text) && txtEmail.Text.Length > 0)
+            {
+                textEmail.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                textEmail.Visibility = Visibility.Visible;
+            }
+        }
     }
 }
