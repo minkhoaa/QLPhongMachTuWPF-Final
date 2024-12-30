@@ -463,6 +463,11 @@ namespace QLPhongMachTuWPF.ViewModel
 
         }
         #region CreateInvoiceToPrint
+        public string FormatCurrency(decimal amount)
+        {
+            return string.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:#,##0}", amount) + " VND";
+        }
+
         public void PrintInvoice()
         {
             var receiptContent = GenerateReceiptFromView(tempInvoice);
@@ -532,8 +537,9 @@ namespace QLPhongMachTuWPF.ViewModel
                 {
                     table.AddCell(RemoveDiacritics((item.THUOC.TenThuoc)));
                     table.AddCell(item.SoLuong.ToString());
-                    table.AddCell(item.THUOC.Gia.ToString());
-                    table.AddCell((item.THUOC.Gia * item.SoLuong).ToString());
+                    table.AddCell(FormatCurrency((decimal)item.THUOC.Gia));
+                    table.AddCell(FormatCurrency((decimal)(item.THUOC.Gia * item.SoLuong)));
+
                 }
 
                 // Thêm bảng vào tài liệu PDF
@@ -541,9 +547,9 @@ namespace QLPhongMachTuWPF.ViewModel
                 document.Add(new Paragraph("--------------------------------", infoFont));
 
                 // Thêm tổng tiền
-                document.Add(new Paragraph($"Medical Fee: {tempInvoice.TienKham} VND", infoFont));
+                document.Add(new Paragraph($"Medical Fee: {FormatCurrency((decimal)tempInvoice.TienKham)} VND", infoFont));
                 document.Add(new Paragraph("--------------------------------", infoFont));
-                document.Add(new Paragraph($"Total: {tempInvoice.TongTien} VND", infoFont));
+                document.Add(new Paragraph($"Total: {FormatCurrency((decimal)tempInvoice.TongTien)} VND", infoFont));
                 document.Add(new Paragraph("--------------------------------", infoFont));
                 // Thêm dòng cảm ơn
                 document.Add(new Paragraph("Thank you!", infoFont));
@@ -585,8 +591,9 @@ namespace QLPhongMachTuWPF.ViewModel
         }
 
         builder.AppendLine("--------------------------------");
-        builder.AppendLine($"Total: {invoice.TongTien.ToString()}");
-        builder.AppendLine("--------------------------------");
+            builder.AppendLine($"Total: {FormatCurrency((decimal)invoice.TongTien).ToString()}");
+
+            builder.AppendLine("--------------------------------");
         builder.AppendLine("Thank you!");
 
         return builder.ToString();
