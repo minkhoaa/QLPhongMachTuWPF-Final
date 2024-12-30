@@ -181,3 +181,4 @@ VALUES (100000)
 INSERT INTO ACCOUNT( UserName, DisPlayName,Email, PassWord, Type) values ('admin' , 'admin','tukhoa040505@gmail.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 0)
 INSERT INTO ACCOUNT( UserName, DisPlayName,Email, PassWord, Type) values ('employer' , 'employer','23520757@gmail.com', '8efdf55724c97710333b1e6e7ad03e1b61c9c4206a35ca33898058c6e15c9c42', 1)
 
+
