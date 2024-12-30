@@ -109,7 +109,7 @@
 
         </Grid>
 
-        <Button Grid.Row="0" Command="{Binding AddDiagnosisCommand}"  Style="{StaticResource addBtn}" >
+        <Button Grid.Row="0" Command="{Binding AddDiagnosisCommand}"  Style="{StaticResource addBtn}"  Margin="0 0 120 0">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Add Diagnosis" FontSize="15" FontWeight="Bold"/>
             </StackPanel>
@@ -137,11 +137,7 @@
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
 
-                                <Button   Command="{Binding DataContext.ModifyDiagnosis, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-Style="{StaticResource EditButton}" >
-                                    <materialDesign:PackIcon Kind="Pencil" Width="20" Height="20" Foreground="White" />
-
-                                </Button>
+                                
 
                                 <!--Button Check-->
                                 <Button Margin="5 0 0 0"

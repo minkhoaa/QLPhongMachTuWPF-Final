@@ -63,7 +63,8 @@
                             Panel.ZIndex="1"
                             Margin="10 0 0 0"
                             Foreground="#696969"
-                              
+                              Text="Password"
+                            MouseDown="textPassword_MouseDown_1"
                                />
                         <TextBox
                             Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -72,9 +73,9 @@
                          Grid.Column="1"
                          Margin="10 0 0 0"
                          Foreground="Black"
-                         BorderBrush="Transparent"
+                         BorderBrush="Transparent" TextChanged="txtPass_TextChanged_1"
                          BorderThickness="0">
-
+                           
                         </TextBox>
                     </Grid>
                 </Border>
@@ -94,7 +95,8 @@
                             Panel.ZIndex="1"
                             Margin="10 0 0 0"
                             Foreground="#696969"
-                              
+                            Text="Confirm Password"
+                             MouseDown="textconfirmPassword_MouseDown"
                                />
                         <TextBox
                             Text="{Binding ConfirmPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -103,7 +105,7 @@
                          Grid.Column="1"
                          Margin="10 0 0 0"
                          Foreground="Black"
-                         BorderBrush="Transparent"
+                         BorderBrush="Transparent" TextChanged="txtConfirmPass_TextChanged"
                          BorderThickness="0">
                           
                         </TextBox>
