@@ -418,18 +418,18 @@ Style="{StaticResource tt_style}"/>
                     <!--Log out-->
 
                     <ListViewItem HorizontalAlignment="Left"
-                    MouseEnter="ListViewItem_MouseEnter" x:Name="logOut" Margin="0 150 0 0">
-                        
-                        <Button Command="{Binding LogoutCommand}" CommandParameter="{Binding ElementName=mainWindow}" Background="Transparent" BorderBrush="Transparent" Height="45" Width="55" Padding="0">
-                            <StackPanel Orientation="Horizontal" 
+                    MouseEnter="ListViewItem_MouseEnter"  x:Name="logOut">
+                        <Border Background="{Binding LogoutBackground}" CornerRadius="10">
+                            <Button Command="{Binding LogoutCommand}" CommandParameter="{Binding ElementName=mainWindow}" Background="Transparent" BorderBrush="Transparent" Height="45" Width="200" Padding="0">
+                                <StackPanel Orientation="Horizontal" 
                      Width="200">
 
-                                <materialDesign:PackIcon Kind="LockOpen"  Width="30" Height="30" Foreground="White" Margin="12 0 0 0"/>
-                                <TextBlock Text="Logout" Margin="25 0 0 0"/>
+                                    <materialDesign:PackIcon Kind="LockOpen"  Width="30" Height="30" Foreground="White" Margin="12 0 0 0"/>
+                                    <TextBlock Text="Logout" Margin="25 0 0 0" Style="{StaticResource font_style}"/>
 
-                            </StackPanel>
-                        </Button>
-                        
+                                </StackPanel>
+                            </Button>
+                        </Border>
                         <!--ToolTip-->
                         <ListViewItem.ToolTip>
 
