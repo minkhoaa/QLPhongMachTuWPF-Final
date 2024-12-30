@@ -509,6 +509,8 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="Database\Create.bat" />
+    <None Include="Database\SQLCMD.rll" />
     <None Include="Model\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </None>
@@ -522,10 +524,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Database\QLPMT.sql" />
+    <Content Include="Database\batchparser.dll" />
+    <Content Include="Database\Data.sql" />
     <Resource Include="Images\minus.png" />
     <Resource Include="Images\max.png" />
     <Resource Include="Images\close.png" />
+    <Content Include="Database\SQLCMD.EXE" />
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
