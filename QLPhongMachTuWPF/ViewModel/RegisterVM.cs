@@ -51,17 +51,17 @@ namespace QLPhongMachTuWPF.ViewModel
                     if (Register(p))
                     {
                         MessageBox.Show("Đăng ký thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-                       
+                        Messenger.Default.Send("Refresh", "RefreshAccountList");
                         // Đóng form đăng ký
                         p.Close();
-                        Messenger.Default.Send("Refresh", "RefreshAccountList");
+                       
                         
                     }
                     else
                     {
                         MessageBox.Show("Đăng ký không thành công. Vui lòng kiểm tra lại!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
-                    Messenger.Default.Send("Refresh", "RefreshAccountList");
+                    Messenger.Default.Send("Refresh", "LoadAccountList");
                 });
 
 
@@ -104,7 +104,6 @@ namespace QLPhongMachTuWPF.ViewModel
             var existingUser = DataProvider.Ins.db.ACCOUNTs.FirstOrDefault(x => x.UserName == Username);
             if (existingUser != null)
             {
-               
                 return false;
             }
 
