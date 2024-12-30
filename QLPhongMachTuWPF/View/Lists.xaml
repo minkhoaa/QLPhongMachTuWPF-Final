@@ -50,7 +50,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" IsReadOnly="True" CanUserResize="False" Width="0.8*" Binding="{Binding TenThuoc }" />
                 <DataGridTextColumn Header="Unit" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1*" Binding="{Binding DonViTinh}"/>
-                <DataGridTextColumn Header="Price" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="2*" Binding="{Binding Gia}"/>
+                <DataGridTextColumn Header="Price" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="2*" Binding="{Binding Gia , StringFormat='{}{0:#,##0 ₫}'}"/>
 
                 <DataGridTemplateColumn Header="Status" CanUserResize="False"  Width="*">
                     <DataGridTemplateColumn.CellTemplate>

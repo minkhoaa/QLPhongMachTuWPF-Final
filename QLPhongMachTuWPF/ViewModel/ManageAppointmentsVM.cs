@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Configuration;
+using System.Data.Entity;
 using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
 using System.Linq.Expressions;
@@ -50,8 +51,6 @@ namespace QLPhongMachTuWPF.ViewModel
 
         private ObservableCollection<LICHHEN> _Appointment;
         public ObservableCollection<LICHHEN> AppointmentList { get => _Appointment; set { _Appointment = value; OnPropertyChanged(); } }
-
-     
 
         #region Filter
 
@@ -136,6 +135,7 @@ namespace QLPhongMachTuWPF.ViewModel
             FilteredAppointment.Refresh();
         }
         #endregion
+    
         public ManageAppointmentsVM()
         {
 

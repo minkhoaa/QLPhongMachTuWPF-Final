@@ -24,5 +24,7 @@ namespace QLPhongMachTuWPF.Model
         public virtual BENHNHAN BENHNHAN { get; set; }
         public virtual NHANVIEN NHANVIEN { get; set; }
         public virtual PHIEUKHAM PHIEUKHAM { get; set; }
+
+
     }
 }
