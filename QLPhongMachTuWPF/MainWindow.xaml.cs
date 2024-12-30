@@ -76,8 +76,10 @@ namespace QLPhongMachTuWPF
                 WindowState = WindowState.Normal;
                 WindowStyle = WindowStyle.None;
                 WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                if(_role == 0)
                 logOut.Margin = new Thickness(0,150,0 ,0);
-             
+                else
+                    logOut.Margin = new Thickness(0, 200, 0, 0);
                 var animation = new DoubleAnimation
                 {
                     From = 0,
