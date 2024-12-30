@@ -287,7 +287,7 @@ namespace QLPhongMachTuWPF.ViewModel
                         DienThoai = DienThoai,
                         NgaySinh = new DateTime(int.Parse(Nam), int.Parse(Thang), int.Parse(Ngay)),
                         GioiTinh = Gender,
-                        TrangThai = (Status == "Discharged") ? 1 : 0
+                        TrangThai = 0
                     };
                     try
                     {
@@ -308,7 +308,7 @@ namespace QLPhongMachTuWPF.ViewModel
                         NgayKham = new DateTime(int.Parse(NamKham), int.Parse(ThangKham), int.Parse(NgayKham)),
                         TrieuChung = "",
                         KetQua = "",
-                        TrangThai = 1,
+                        TrangThai = 0,LICHHENs
                     };
                     try
                     {
