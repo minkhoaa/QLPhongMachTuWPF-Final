@@ -270,9 +270,13 @@ namespace QLPhongMachTuWPF.ViewModel
                 || string.IsNullOrEmpty(NgayKham) || string.IsNullOrEmpty(ThangKham) || string.IsNullOrEmpty(NamKham)
                 || string.IsNullOrEmpty(ThoiGian)
                 ) return false;
+               
+
                 return true;
             }, (p) => {
-              
+                DateTime ngayHen = new DateTime(int.Parse(NamKham), int.Parse(ThangKham), int.Parse(NgayKham));
+                if (ngayHen < DateTime.Now)
+                    MessageBox.Show("Ngày đặt lịch phải lớn hơn ngày hiện tại"); 
                 // Khởi tạo đối tượng mới
                 var newPatient = new BENHNHAN()
                 {
@@ -323,6 +327,7 @@ namespace QLPhongMachTuWPF.ViewModel
                     GioHen = TimeSpan.Parse(ThoiGian),
                     MaPK = newDiagnosis.MaPK
                 };
+                
 
                 // Tạo đối tượng PHIEUKHAM và gửi
               

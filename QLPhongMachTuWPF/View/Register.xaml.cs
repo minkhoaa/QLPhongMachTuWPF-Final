@@ -172,5 +172,10 @@ namespace QLPhongMachTuWPF.View
                 textEmail.Visibility = Visibility.Visible;
             }
         }
+
+        private void textEmail_MouseDown_1(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }
