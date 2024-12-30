@@ -119,10 +119,10 @@
                Foreground="#696969" Grid.ColumnSpan="2"/>
                         <TextBox
                             Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-             
+             TextChanged="txtEmail_TextChanged"
              FontSize="14"
              Grid.Column="1"
-             
+             x:Name="txtEmail"
              Margin="10,0,0,0"
              Foreground="Black"
              BorderBrush="Transparent"

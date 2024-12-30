@@ -60,7 +60,8 @@
                            Grid.Column="1"
                            Margin="10,0,0,0"
                            Foreground="#696969"
-                           
+                           x:Name="textEmail"
+                                   MouseDown="textEmail_MouseDown"
                                />
                         <TextBox
                        
@@ -71,7 +72,8 @@
                              Foreground="Black"
                              BorderBrush="Transparent"
                              BorderThickness="0"
-                            
+                            x:Name="txtEmail"
+                            TextChanged="txtEmail_TextChanged"
                             
                         />
                     </Grid>
