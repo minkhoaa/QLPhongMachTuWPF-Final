@@ -308,7 +308,7 @@ namespace QLPhongMachTuWPF.ViewModel
                         NgayKham = new DateTime(int.Parse(NamKham), int.Parse(ThangKham), int.Parse(NgayKham)),
                         TrieuChung = "",
                         KetQua = "",
-                        TrangThai = 0,LICHHENs
+                        TrangThai = 0,
                     };
                     try
                     {
