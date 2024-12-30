@@ -60,7 +60,6 @@ namespace QLPhongMachTuWPF.ViewModel
                         account.PassWord = HashPasswordWithSHA256(Password);
                         DataProvider.Ins.db.SaveChanges();
                         Messenger.Default.Send("Refresh", "LoadAccountList");
-
                         MessageBox.Show("Thay đổi thành công");
                      
                         p.Close();

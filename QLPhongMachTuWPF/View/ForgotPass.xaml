@@ -25,7 +25,7 @@
        VerticalAlignment="Top"
        HorizontalAlignment="Right"
        Margin="0 13 13 0"
-       Click="btnClose_Click"
+       
         BorderThickness="0">
             <Button.Background >
                 <ImageBrush ImageSource="/Images/image.png"

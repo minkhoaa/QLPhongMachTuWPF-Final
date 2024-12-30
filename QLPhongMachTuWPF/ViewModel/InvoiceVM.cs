@@ -89,6 +89,39 @@ namespace QLPhongMachTuWPF.ViewModel
                 FilteredInvoice.Refresh();
             }
         }
+        private string _SearchKeyword { get; set; }
+
+        public string SearchKeyword
+        {
+            get => _SearchKeyword;
+            set
+            {
+                _SearchKeyword = value;
+                OnPropertyChanged();
+                FilterStaffs();
+            }
+        }
+        void FilterStaffs()
+        {
+            if (FilteredInvoice == null)
+                return;
+
+
+            // Gán bộ lọc
+            FilteredInvoice.Filter = (obj) =>
+            {
+                if (obj is HOADON staffs)
+                {
+                    // Kiểm tra từ khóa tìm kiếm, không phân biệt chữ hoa/chữ thường
+                    return string.IsNullOrEmpty(SearchKeyword) ||
+                           staffs.PHIEUKHAM.BENHNHAN.TenBN?.IndexOf(SearchKeyword, StringComparison.OrdinalIgnoreCase) >= 0;
+                }
+                return false;
+            };
+
+            // Làm mới view để cập nhật kết quả lọc
+            FilteredInvoice.Refresh();
+        }
         #endregion
         public InvoiceVM()
             {

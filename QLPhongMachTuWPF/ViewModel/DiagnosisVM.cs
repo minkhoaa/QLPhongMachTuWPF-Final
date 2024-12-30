@@ -74,6 +74,39 @@ namespace QLPhongMachTuWPF.ViewModel
                 FilteredDiagnosis.Refresh();
             }
         }
+        private string _SearchKeyword { get; set; }
+
+        public string SearchKeyword
+        {
+            get => _SearchKeyword;
+            set
+            {
+                _SearchKeyword = value;
+                OnPropertyChanged();
+                FilterStaffs();
+            }
+        }
+        void FilterStaffs()
+        {
+            if (FilteredDiagnosis == null)
+                return;
+
+
+            // Gán bộ lọc
+            FilteredDiagnosis.Filter = (obj) =>
+            {
+                if (obj is PHIEUKHAM staffs)
+                {
+                    // Kiểm tra từ khóa tìm kiếm, không phân biệt chữ hoa/chữ thường
+                    return string.IsNullOrEmpty(SearchKeyword) ||
+                           staffs.BENHNHAN.TenBN?.IndexOf(SearchKeyword, StringComparison.OrdinalIgnoreCase) >= 0;
+                }
+                return false;
+            };
+
+            // Làm mới view để cập nhật kết quả lọc
+            FilteredDiagnosis.Refresh();
+        }
         #endregion
 
         public ICommand VerifyCommand { get; set; }
@@ -217,6 +250,7 @@ namespace QLPhongMachTuWPF.ViewModel
                 }
             });
         }
+     
 
     }
 }

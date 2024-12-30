@@ -51,6 +51,8 @@ namespace QLPhongMachTuWPF.ViewModel
         private ObservableCollection<LICHHEN> _Appointment;
         public ObservableCollection<LICHHEN> AppointmentList { get => _Appointment; set { _Appointment = value; OnPropertyChanged(); } }
 
+     
+
         #region Filter
 
         private DateTime? _FilterDateFrom = new DateTime(2000,1,1);
@@ -121,7 +123,7 @@ namespace QLPhongMachTuWPF.ViewModel
             // Gán bộ lọc
             FilteredAppointment.Filter = (obj) =>
             {
-                if (obj is PHIEUKHAM staffs)
+                if (obj is LICHHEN staffs)
                 {
                     // Kiểm tra từ khóa tìm kiếm, không phân biệt chữ hoa/chữ thường
                     return string.IsNullOrEmpty(SearchKeyword) ||
@@ -252,6 +254,7 @@ namespace QLPhongMachTuWPF.ViewModel
                 }
             });
         }
+    
 
     }
 }
