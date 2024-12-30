@@ -1,4 +1,4 @@
-Mở thư mục Database, sau đó chạy file QLPMT.sql
+Mở thư mục Database, sau đó chạy file Create.bat
 Sau đó chạy file QLPhongMachTuWPF.sln
 Tiếp theo, build và run chương trình
 Đăng nhập với username: admin và password: admin 
