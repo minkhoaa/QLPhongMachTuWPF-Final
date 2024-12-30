@@ -27,6 +27,9 @@ namespace QLPhongMachTuWPF.ViewModel
 
         private string _password;
         public string Password { get => _password; set { _password = value; OnPropertyChanged(); } }
+
+        private string _Email { get; set; }
+        public string Email { get => _Email; set { _Email = value; OnPropertyChanged(); } }
         private string _confirmpassword;
         public string Confirmpassword { get => _confirmpassword; set { _confirmpassword = value; OnPropertyChanged(); } }
         public RegisterVM()
@@ -91,7 +94,8 @@ namespace QLPhongMachTuWPF.ViewModel
                 string.IsNullOrEmpty(Password) ||
                 string.IsNullOrEmpty(Confirmpassword) ||
                 Password != Confirmpassword ||
-                string.IsNullOrEmpty(Displayname))
+                string.IsNullOrEmpty(Displayname) || string.IsNullOrEmpty(Email))
+                
             {
                 return false;
             }
@@ -110,12 +114,13 @@ namespace QLPhongMachTuWPF.ViewModel
                 DisPlayName = Displayname,
                 UserName = Username,
                 PassWord = HashPasswordWithSHA256(Password),
-                Type = 1 // Đặt mặc định Type là 1 hoặc tùy chỉnh theo logic của bạn
+                Email = Email,
+                Type = 1 
             });
 
             // Lưu thay đổi
             DataProvider.Ins.db.SaveChanges();
-            
+            Messenger.Default.Send("Refresh", "RefreshAccountList");
             return true;
         }
 
