@@ -181,17 +181,42 @@ namespace QLPhongMachTuWPF.ViewModel
             }
             );
 
-            VerifyCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
-            {
-                var exisitedDiagnosis = DataProvider.Ins.db.PHIEUKHAMs.Where(x => x.MaPK == SelectedItemCommand.MaPK && x.MaBN == SelectedItemCommand.MaBN).FirstOrDefault() as PHIEUKHAM;
-                ModifyDiagnosis diagnosis = new ModifyDiagnosis();
-                Messenger.Default.Send(exisitedDiagnosis);
-                diagnosis.ShowDialog();
+                VerifyCommand = new RelayCommand<object>((p) => true, async (p) =>
+                {
+                    try
+                    {
+                        // Thực hiện truy vấn bất đồng bộ
+                        var exisitedDiagnosis = await Task.Run(() =>
+                        {
+                            return DataProvider.Ins.db.PHIEUKHAMs
+                                .FirstOrDefault(x => x.MaPK == SelectedItemCommand.MaPK);
+                        });
 
-            }
-            );
+                        if (exisitedDiagnosis != null)
+                        {
+                            // Cập nhật UI trên thread chính
+                            await Application.Current.Dispatcher.InvokeAsync(() =>
+                            {
+                               
+                                ModifyDiagnosis diagnosis = new ModifyDiagnosis();
+                                Messenger.Default.Send(exisitedDiagnosis);
+                                diagnosis.ShowDialog();
+                            });
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // Hiển thị lỗi trên UI
+                        await Application.Current.Dispatcher.InvokeAsync(() =>
+                        {
+                            MessageBox.Show($"Lỗi khi truy vấn dữ liệu: {ex.Message}");
+                        });
+                    }
+                });
 
-            ModifyAppointmentCommand = new RelayCommand<object>((p) => SelectedItemCommand != null, (p) =>
+
+
+                ModifyAppointmentCommand = new RelayCommand<object>((p) => SelectedItemCommand != null, (p) =>
             {
                 if (SelectedItemCommand == null)
                 {

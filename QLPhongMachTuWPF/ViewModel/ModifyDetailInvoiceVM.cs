@@ -359,36 +359,52 @@ namespace QLPhongMachTuWPF.ViewModel
                 });
 
 
-                Messenger.Default.Register<HOADON>(this, (invoice) =>
+                Messenger.Default.Register<HOADON>(this, async (invoice) =>
                 {
-                    Application.Current.Dispatcher.Invoke(() =>
+                    try
                     {
-                        tempInvoice = invoice;
-
-                        if (invoice == null) return;
-                        ListMedicine.Clear(); // Đảm bảo danh sách không bị dữ liệu cũ
-                        var medicines = DataProvider.Ins.db.CTTTs.Where(x => x.MaPK == invoice.MaPK).ToList();
-                        foreach (var medicine in medicines)
+                        if (invoice == null)
                         {
-                            ListMedicine.Add(medicine);
+                            // Nếu invoice null, dọn sạch dữ liệu
+                            await Application.Current.Dispatcher.InvokeAsync(() =>
+                            {
+                                ListMedicine.Clear();
+                                CollectionViewMedicine.Refresh();
+                            });
+                            return;
                         }
 
-                        CollectionViewMedicine.Refresh();
+                        // Truy vấn dữ liệu bất đồng bộ
+                        var medicines = await Task.Run(() =>
+                        {
+                            return DataProvider.Ins.db.CTTTs
+                                .Where(x => x.MaPK == invoice.MaPK)
+                                .ToList();
+                        });
 
-
-                        Application.Current.Dispatcher.Invoke(() =>
+                        // Cập nhật giao diện
+                        await Application.Current.Dispatcher.InvokeAsync(() =>
                         {
                             try
                             {
+                                tempInvoice = invoice;
+                                ListMedicine.Clear();
+                                foreach (var medicine in medicines)
+                                {
+                                    ListMedicine.Add(medicine);
+                                }
+                                CollectionViewMedicine.Refresh();
+
+                                // Cập nhật thông tin hóa đơn
                                 ID = invoice.MaHD.ToString();
                                 TenNV = invoice.PHIEUKHAM.NHANVIEN.TenNV;
                                 TenBN = invoice.PHIEUKHAM.BENHNHAN.TenBN;
-                                Ngay = invoice.PHIEUKHAM.BENHNHAN.NgaySinh.Value.Day.ToString() ?? "N/A";
-                                Thang = invoice.PHIEUKHAM.BENHNHAN.NgaySinh.Value.Month.ToString() ?? "N/A";
-                                Nam = invoice.PHIEUKHAM.BENHNHAN.NgaySinh.Value.Year.ToString() ?? "N/A";
-                                NgayKham = invoice.NgayHD.Value.Day.ToString() ?? "N/A";
-                                ThangKham = invoice.NgayHD.Value.Day.ToString() ?? "N/A";
-                                NamKham = invoice.NgayHD.Value.Day.ToString() ?? "N/A";
+                                Ngay = invoice.PHIEUKHAM.BENHNHAN.NgaySinh?.Day.ToString() ?? "N/A";
+                                Thang = invoice.PHIEUKHAM.BENHNHAN.NgaySinh?.Month.ToString() ?? "N/A";
+                                Nam = invoice.PHIEUKHAM.BENHNHAN.NgaySinh?.Year.ToString() ?? "N/A";
+                                NgayKham = invoice.NgayHD?.Day.ToString() ?? "N/A";
+                                ThangKham = invoice.NgayHD?.Month.ToString() ?? "N/A";
+                                NamKham = invoice.NgayHD?.Year.ToString() ?? "N/A";
                                 DiaChi = invoice.PHIEUKHAM.BENHNHAN.DiaChi;
                                 DienThoai = invoice.PHIEUKHAM.BENHNHAN.DienThoai;
                                 Gender = invoice.PHIEUKHAM.BENHNHAN.GioiTinh;
@@ -396,10 +412,24 @@ namespace QLPhongMachTuWPF.ViewModel
                                 Symtoms = invoice.PHIEUKHAM.TrieuChung;
                                 Result = invoice.PHIEUKHAM.KetQua;
                                 NgayHoanThanh = DateTime.Now;
-                            } catch (Exception ex) { MessageBox.Show(ex.Message);  } 
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show($"Lỗi khi cập nhật giao diện: {ex.Message}");
+                            }
                         });
-                    });
+                    }
+                    catch (Exception ex)
+                    {
+                        // Xử lý lỗi trên UI thread
+                        await Application.Current.Dispatcher.InvokeAsync(() =>
+                        {
+                            MessageBox.Show($"Lỗi khi truy vấn dữ liệu: {ex.Message}");
+                        });
+                    }
                 });
+
+
 
                 SaveChangesCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
                 {
