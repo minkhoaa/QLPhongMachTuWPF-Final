@@ -541,9 +541,9 @@ namespace QLPhongMachTuWPF.ViewModel
                 document.Add(new Paragraph("--------------------------------", infoFont));
 
                 // Thêm tổng tiền
-                document.Add(new Paragraph($"Medical Fee: {tempInvoice.TienKham:C}", infoFont));
+                document.Add(new Paragraph($"Medical Fee: {tempInvoice.TienKham} VND", infoFont));
                 document.Add(new Paragraph("--------------------------------", infoFont));
-                document.Add(new Paragraph($"Total: {tempInvoice.TongTien:C}", infoFont));
+                document.Add(new Paragraph($"Total: {tempInvoice.TongTien} VND", infoFont));
                 document.Add(new Paragraph("--------------------------------", infoFont));
                 // Thêm dòng cảm ơn
                 document.Add(new Paragraph("Thank you!", infoFont));
