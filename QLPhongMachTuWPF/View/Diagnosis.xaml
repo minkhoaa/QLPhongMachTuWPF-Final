@@ -125,12 +125,12 @@
     Width="auto" Height="auto" VerticalScrollBarVisibility="Auto">
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Diagnosis ID" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding MaPK , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <DataGridTextColumn Header="Staff ID" IsReadOnly="True" CanUserResize="False" Width="0.8*" Binding="{Binding MaNV, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="ID" IsReadOnly="True" CanUserResize="False" Width="0.5*" Binding="{Binding MaPK , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Staff ID" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding MaNV, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <DataGridTextColumn Header="Patient ID" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding MaBN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTextColumn Header="Date" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding NgayKham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='dd/MM/yyyy'}"/>
+                <DataGridTextColumn Header="Date" IsReadOnly="True" CanUserResize="False" Width="1.3*" Binding="{Binding NgayKham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='dd/MM/yyyy'}"/>
                 <DataGridTextColumn Header="Symptom" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="2*" Binding="{Binding TrieuChung, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <DataGridTextColumn Header ="Result" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding KetQua, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header ="Result" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="2*" Binding="{Binding KetQua, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Header="Status" Binding="{Binding TrangThai, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ElementStyle="{StaticResource textBlockDatagrid}" IsReadOnly="True" CanUserResize="False" Width="1*" />
                 <DataGridTemplateColumn Header="" Width="1.5*" CanUserResize="False">
                     <DataGridTemplateColumn.CellTemplate>
