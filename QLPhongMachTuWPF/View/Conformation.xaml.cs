@@ -37,7 +37,7 @@ namespace QLPhongMachTuWPF.View
             else
             {
                 timer.Stop();
-                MessageBox.Show("Code has expired. Please request a new code.");
+                //MessageBox.Show("Code has expired. Please request a new code.");
             }
         }
 

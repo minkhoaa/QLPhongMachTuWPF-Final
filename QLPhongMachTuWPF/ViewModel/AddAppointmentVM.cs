@@ -270,84 +270,92 @@ namespace QLPhongMachTuWPF.ViewModel
                 || string.IsNullOrEmpty(NgayKham) || string.IsNullOrEmpty(ThangKham) || string.IsNullOrEmpty(NamKham)
                 || string.IsNullOrEmpty(ThoiGian)
                 ) return false;
+               
+
                 return true;
             }, (p) => {
-              
-                // Khởi tạo đối tượng mới
-                var newPatient = new BENHNHAN()
+                DateTime ngayHen = new DateTime(int.Parse(NamKham), int.Parse(ThangKham), int.Parse(NgayKham));
+                if (ngayHen < DateTime.Now)
+                    MessageBox.Show("Ngày đặt lịch phải lớn hơn ngày hiện tại");
+                else
                 {
-                    TenBN = TenBN,
-                    DiaChi = DiaChi,
-                    DienThoai = DienThoai,
-                    NgaySinh = new DateTime(int.Parse(Nam), int.Parse(Thang), int.Parse(Ngay)),
-                    GioiTinh = Gender,
-                    TrangThai = (Status == "Discharged") ? 1 : 0
-                };
-                try
-                {
-                    DataProvider.Ins.db.BENHNHANs.Add(newPatient);
-                    DataProvider.Ins.db.SaveChanges();
-                    Messenger.Default.Send(newPatient);
-                }
-                catch
-                (Exception )
-                {
-                    MessageBox.Show("fail to add patient");
-                }
-                PHIEUKHAM newDiagnosis = new PHIEUKHAM()
-                {
-                    MaNV = SelectedItemCommand.MaNV,
-                    MaBN = newPatient.MaBN,
+                    // Khởi tạo đối tượng mới
+                    var newPatient = new BENHNHAN()
+                    {
+                        TenBN = TenBN,
+                        DiaChi = DiaChi,
+                        DienThoai = DienThoai,
+                        NgaySinh = new DateTime(int.Parse(Nam), int.Parse(Thang), int.Parse(Ngay)),
+                        GioiTinh = Gender,
+                        TrangThai = (Status == "Discharged") ? 1 : 0
+                    };
+                    try
+                    {
+                        DataProvider.Ins.db.BENHNHANs.Add(newPatient);
+                        DataProvider.Ins.db.SaveChanges();
+                        Messenger.Default.Send(newPatient);
+                    }
+                    catch
+                    (Exception)
+                    {
+                        MessageBox.Show("fail to add patient");
+                    }
+                    PHIEUKHAM newDiagnosis = new PHIEUKHAM()
+                    {
+                        MaNV = SelectedItemCommand.MaNV,
+                        MaBN = newPatient.MaBN,
 
-                    NgayKham = new DateTime(int.Parse(NamKham), int.Parse(ThangKham), int.Parse(NgayKham)),
-                    TrieuChung = "",
-                    KetQua = "",
-                    TrangThai = 1,
-                };
-                try
-                {
-                    // Đảm bảo Messenger đã được đăng ký và đối tượng DiagnosisVM đã sẵn sàng
-                    DataProvider.Ins.db.PHIEUKHAMs.Add(newDiagnosis);
-                    DataProvider.Ins.db.SaveChanges();
-                    Messenger.Default.Send(newDiagnosis);
+                        NgayKham = new DateTime(int.Parse(NamKham), int.Parse(ThangKham), int.Parse(NgayKham)),
+                        TrieuChung = "",
+                        KetQua = "",
+                        TrangThai = 1,
+                    };
+                    try
+                    {
+                        // Đảm bảo Messenger đã được đăng ký và đối tượng DiagnosisVM đã sẵn sàng
+                        DataProvider.Ins.db.PHIEUKHAMs.Add(newDiagnosis);
+                        DataProvider.Ins.db.SaveChanges();
+                        Messenger.Default.Send(newDiagnosis);
 
-                }
-                catch (Exception ex) { MessageBox.Show(ex.Message); }
+                    }
+                    catch (Exception ex) { MessageBox.Show(ex.Message); }
 
-                // Tạo lịch hẹn mới
-                var newAppointment = new LICHHEN()
-                {
-                    MaBN = newPatient.MaBN,
-                    MaNV = SelectedItemCommand.MaNV,
-                    NgayHen = new DateTime(int.Parse(NamKham), int.Parse(ThangKham), int.Parse(NgayKham)),
-                    GioHen = TimeSpan.Parse(ThoiGian),
-                    MaPK = newDiagnosis.MaPK
-                };
+                    // Tạo lịch hẹn mới
+                    var newAppointment = new LICHHEN()
+                    {
+                        MaBN = newPatient.MaBN,
+                        MaNV = SelectedItemCommand.MaNV,
+                        NgayHen = new DateTime(int.Parse(NamKham), int.Parse(ThangKham), int.Parse(NgayKham)),
+                        GioHen = TimeSpan.Parse(ThoiGian),
+                        MaPK = newDiagnosis.MaPK
+                    };
 
-                // Tạo đối tượng PHIEUKHAM và gửi
-              
-                try
-                {
-                    // Lưu vào cơ sở dữ liệu
-                    
-                    DataProvider.Ins.db.LICHHENs.Add(newAppointment);
-                    DataProvider.Ins.db.SaveChanges();
-                    Messenger.Default.Send(newAppointment);
-                    MessageBox.Show("Thêm lịch hẹn thành công!");
-                    Messenger.Default.Send("NewAppointmentAdded");
-                    Messenger.Default.Send("Refresh", "RefreshInvoiceList");
-                    Messenger.Default.Send("Refresh", "RefreshDiagnosisList");
-                    Messenger.Default.Send("Refresh", "RefreshAppointmentList");
-                    ResetFields();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Lỗi khi thêm lịch hẹn: {ex.Message}");
-                }
-                Application.Current.Windows
-              .OfType<Window>()
-              .SingleOrDefault(w => w.IsActive)
-              ?.Close();
+
+                    // Tạo đối tượng PHIEUKHAM và gửi
+
+                    try
+                    {
+                        // Lưu vào cơ sở dữ liệu
+
+                        DataProvider.Ins.db.LICHHENs.Add(newAppointment);
+                        DataProvider.Ins.db.SaveChanges();
+                        Messenger.Default.Send(newAppointment);
+                        MessageBox.Show("Thêm lịch hẹn thành công!");
+                        Messenger.Default.Send("NewAppointmentAdded");
+                        Messenger.Default.Send("Refresh", "RefreshInvoiceList");
+                        Messenger.Default.Send("Refresh", "RefreshDiagnosisList");
+                        Messenger.Default.Send("Refresh", "RefreshAppointmentList");
+                        ResetFields();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Lỗi khi thêm lịch hẹn: {ex.Message}");
+                    }
+                    Application.Current.Windows
+     .OfType<Window>()
+     .SingleOrDefault(w => w.IsActive)
+     ?.Close();
+                } 
             });
         }
         private void ResetFields()

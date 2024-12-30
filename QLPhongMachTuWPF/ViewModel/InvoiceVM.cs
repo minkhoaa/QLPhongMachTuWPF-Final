@@ -30,9 +30,6 @@ namespace QLPhongMachTuWPF.ViewModel
         public ICommand DeleteInvoiceCommand { get; set; }
 
 
-     
-
-
         private ObservableCollection<HOADON> _invoice;
         public ObservableCollection<HOADON> InvoiceList { get => _invoice; set { _invoice = value; OnPropertyChanged(); } }
 
@@ -184,6 +181,14 @@ namespace QLPhongMachTuWPF.ViewModel
                     {
                         MessageBox.Show("Vui lòng chọn một hóa đơn để xóa.");
                         return;
+                    }
+
+
+                    var appointment = DataProvider.Ins.db.LICHHENs.FirstOrDefault(x => x.PHIEUKHAM.MaPK == SelectedInvoice.PHIEUKHAM.MaPK);
+                    if (appointment != null)
+                    {
+                        DataProvider.Ins.db.LICHHENs.Remove(appointment);
+                        DataProvider.Ins.db.SaveChanges(); 
                     }
 
                     DataProvider.Ins.db.HOADONs.Remove(SelectedInvoice);
