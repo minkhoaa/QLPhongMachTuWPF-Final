@@ -1,4 +1,4 @@
-Mở thư mục Database, sau đó chạy file Create.bat - nếu chạy thành công thì mở file setup.exe và cài ứng dụng như bình thường, ứng dụng sẽ hiển thị ngoài Desktop với tên Clinic Management
+Mở thư mục Installer, sau đó chạy file Create.bat - nếu chạy thành công thì mở file setup.exe và cài ứng dụng như bình thường, ứng dụng sẽ hiển thị ngoài Desktop với tên Clinic Management
 - Nếu chạy file Create.bat không thành công(không thể kết nối với cơ sở dữ liệu) thì vui lòng mở file QLPMT.sql trong Database và chạy nó trong SQL Server trên máy
 Sau đó chạy file QLPhongMachTuWPF.sln
 Tiếp theo, build và run chương trình
