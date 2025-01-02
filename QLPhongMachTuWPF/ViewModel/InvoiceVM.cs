@@ -122,7 +122,10 @@ namespace QLPhongMachTuWPF.ViewModel
         #endregion
         public InvoiceVM()
             {
-                InvoiceList = new ObservableCollection<HOADON>(DataProvider.Ins.db.HOADONs );
+            Messenger.Default.Send("Refresh", "RefreshInvoiceList");
+            Messenger.Default.Send("Refresh", "RefreshDiagnosisList");
+            Messenger.Default.Send("Refresh", "RefreshAppointmentList");
+            InvoiceList = new ObservableCollection<HOADON>(DataProvider.Ins.db.HOADONs );
                 FilteredInvoice = CollectionViewSource.GetDefaultView(InvoiceList);
 
             try
@@ -156,11 +159,17 @@ namespace QLPhongMachTuWPF.ViewModel
                    }
                    DataProvider.Ins.db.SaveChanges();
                    FilteredInvoice.Refresh();
+                    Messenger.Default.Send("Refresh", "RefreshInvoiceList");
+                    Messenger.Default.Send("Refresh", "RefreshDiagnosisList");
+                    Messenger.Default.Send("Refresh", "RefreshAppointmentList");
 
-               });
+                        });
                    });
                 ModifyInvoiceCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
                 {
+                    Messenger.Default.Send("Refresh", "RefreshInvoiceList");
+                    Messenger.Default.Send("Refresh", "RefreshDiagnosisList");
+                    Messenger.Default.Send("Refresh", "RefreshAppointmentList");
                     ModifyDetailInvoice diagnosis = new ModifyDetailInvoice();
                     Messenger.Default.Send(SelectedInvoice);
                     diagnosis.ShowDialog();

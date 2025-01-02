@@ -375,12 +375,7 @@ namespace QLPhongMachTuWPF.ViewModel
                         }
 
                         // Truy vấn dữ liệu bất đồng bộ
-                        var medicines = await Task.Run(() =>
-                        {
-                            return DataProvider.Ins.db.CTTTs
-                                .Where(x => x.MaPK == invoice.MaPK)
-                                .ToList();
-                        });
+                    
 
                         // Cập nhật giao diện
                         await Application.Current.Dispatcher.InvokeAsync(() =>
@@ -389,7 +384,8 @@ namespace QLPhongMachTuWPF.ViewModel
                             {
                                 tempInvoice = invoice;
                                 ListMedicine.Clear();
-                                foreach (var medicine in medicines)
+                               
+                                foreach (var medicine in DataProvider.Ins.db.CTTTs.Where( x => x.MaPK == invoice.MaPK))
                                 {
                                     ListMedicine.Add(medicine);
                                 }
@@ -419,10 +415,8 @@ namespace QLPhongMachTuWPF.ViewModel
                             }
                         });
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        // Xử lý lỗi trên UI thread
-                     
                     }
                 });
 
@@ -448,8 +442,9 @@ namespace QLPhongMachTuWPF.ViewModel
                         }
                     }
                     DataProvider.Ins.db.SaveChanges();
-                    Messenger.Default.Send("RefreshInvoiceList");
-
+                    Messenger.Default.Send("Refresh", "RefreshInvoiceList");
+                    Messenger.Default.Send("Refresh", "RefreshDiagnosisList");
+                    Messenger.Default.Send("Refresh", "RefreshAppointmentList");
                     Application.Current.Windows
                   .OfType<Window>()
                   .SingleOrDefault(w => w.IsActive)

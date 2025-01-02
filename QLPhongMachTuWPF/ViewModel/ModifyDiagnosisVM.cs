@@ -512,7 +512,9 @@ namespace QLPhongMachTuWPF.ViewModel
                 ModifyDetailInvoice detailInovice = new ModifyDetailInvoice();
                 Messenger.Default.Send(newInvoice);
                 detailInovice.ShowDialog();
-                Messenger.Default.Send("Refresh", "RefreshInvoiceList"); 
+                Messenger.Default.Send("Refresh", "RefreshInvoiceList");
+                Messenger.Default.Send("Refresh", "RefreshDiagnosisList");
+                Messenger.Default.Send("Refresh", "RefreshAppointmentList");
                 Application.Current.Windows
               .OfType<Window>()
               .SingleOrDefault(w => w.IsActive)
