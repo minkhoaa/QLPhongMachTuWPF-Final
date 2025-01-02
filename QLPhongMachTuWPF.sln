@@ -5,6 +5,8 @@ VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QLPhongMachTuWPF", "QLPhongMachTuWPF\QLPhongMachTuWPF.csproj", "{1DF26999-AE33-4BE5-A21A-9BD0C8CCE1C6}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Clinic Mangement", "Clinic Mangement\Clinic Mangement.vdproj", "{D3C5628C-6742-4DC4-8B81-6C6DA31E5CBF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,6 +20,9 @@ Global
 		{1DF26999-AE33-4BE5-A21A-9BD0C8CCE1C6}.DefaultBuild|Any CPU.Build.0 = Debug|Any CPU
 		{1DF26999-AE33-4BE5-A21A-9BD0C8CCE1C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DF26999-AE33-4BE5-A21A-9BD0C8CCE1C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3C5628C-6742-4DC4-8B81-6C6DA31E5CBF}.Debug|Any CPU.ActiveCfg = Debug
+		{D3C5628C-6742-4DC4-8B81-6C6DA31E5CBF}.DefaultBuild|Any CPU.ActiveCfg = Debug
+		{D3C5628C-6742-4DC4-8B81-6C6DA31E5CBF}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
