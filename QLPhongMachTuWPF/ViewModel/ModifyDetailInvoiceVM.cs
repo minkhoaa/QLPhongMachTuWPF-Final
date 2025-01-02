@@ -409,9 +409,9 @@ namespace QLPhongMachTuWPF.ViewModel
                                 Result = invoice.PHIEUKHAM.KetQua;
                                 NgayHoanThanh = DateTime.Now;
                             }
-                            catch (Exception ex)
+                            catch (Exception)
                             {
-                                MessageBox.Show($"Lỗi khi cập nhật giao diện: {ex.Message}");
+                              
                             }
                         });
                     }
