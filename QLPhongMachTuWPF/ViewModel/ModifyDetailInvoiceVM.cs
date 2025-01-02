@@ -422,10 +422,7 @@ namespace QLPhongMachTuWPF.ViewModel
                     catch (Exception ex)
                     {
                         // Xử lý lỗi trên UI thread
-                        await Application.Current.Dispatcher.InvokeAsync(() =>
-                        {
-                            MessageBox.Show($"Lỗi khi truy vấn dữ liệu: {ex.Message}");
-                        });
+                     
                     }
                 });
 
