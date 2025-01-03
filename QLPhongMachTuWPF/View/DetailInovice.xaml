@@ -124,20 +124,20 @@
                     </StackPanel>
               
                     
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Top" Width="auto" Height="auto" Margin="0 -100 150 0">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Top" Width="auto" Height="auto" Margin="0 -120 150 0">
                         <TextBlock Text= "INVOICE CODE:" Foreground="Black" Style="{StaticResource titleTextDateAndInvoice}" HorizontalAlignment="Left" Margin="10" FontSize="14"/>
                         <TextBlock Text="INVOICE DATE:" Style="{StaticResource textDateAndInvoice}" HorizontalAlignment="Left" Margin="10 0 0 0" FontSize="14"/>
-
+                        <TextBlock Text="STAFF:" Style="{StaticResource textDateAndInvoice}" HorizontalAlignment="Left" Margin="10 10 0 0" FontSize="14"/>
                     </StackPanel>
 
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Top" Width="auto" Height="auto" Margin="0 -100 50 0">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Top" Width="auto" Height="auto" Margin="0 -120 50 0">
                         <TextBox Text="{Binding ID, Mode=TwoWay}" Foreground="Black" 
                                        Style="{StaticResource txtTextBox}" FontWeight="Normal"
                                        VerticalAlignment="Top" HorizontalAlignment="Left" 
                                        Margin="-10 10" FontSize="14" BorderBrush="Transparent"/>
                         <TextBox Text="{Binding NgayHoanThanh, Mode=TwoWay, StringFormat='dd/MM/yyyy'}" Style="{StaticResource txtTextBox}" HorizontalAlignment="Left" FontWeight="Normal" Margin="-10 0 0 0" FontSize="14" BorderBrush="Transparent"/>
-
-                        </StackPanel>
+                        <TextBox Text="Khoa" Style="{StaticResource txtTextBox}" HorizontalAlignment="Left" FontWeight="Normal" Margin="-10 0 0 0" FontSize="14" BorderBrush="Transparent"/>
+                    </StackPanel>
                     
 
                     
